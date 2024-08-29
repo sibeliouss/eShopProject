@@ -16,12 +16,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\" />
-      <Folder Include="Services\Repositories\" />
+      <Folder Include="Features\Auth\" />
+      <Folder Include="Features\Customers\" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Persistence\Persistence.csproj" />
+      <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
 </Project>

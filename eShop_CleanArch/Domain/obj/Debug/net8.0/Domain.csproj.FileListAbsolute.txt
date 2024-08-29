@@ -1,0 +1,13 @@
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/bin/Debug/net8.0/Domain.deps.json
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/bin/Debug/net8.0/Domain.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/bin/Debug/net8.0/Domain.pdb
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/obj/Debug/net8.0/Domain.csproj.AssemblyReference.cache
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/obj/Debug/net8.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/obj/Debug/net8.0/Domain.AssemblyInfoInputs.cache
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/obj/Debug/net8.0/Domain.AssemblyInfo.cs
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/obj/Debug/net8.0/Domain.csproj.CoreCompileInputs.cache
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/obj/Debug/net8.0/Domain.sourcelink.json
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/obj/Debug/net8.0/Domain.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/obj/Debug/net8.0/refint/Domain.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/obj/Debug/net8.0/Domain.pdb
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/Domain/obj/Debug/net8.0/ref/Domain.dll
