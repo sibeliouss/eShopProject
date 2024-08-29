@@ -145,3 +145,13 @@
 /Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/obj/Debug/net8.0/WebApi.pdb
 /Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/obj/Debug/net8.0/WebApi.genruntimeconfig.cache
 /Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/obj/Debug/net8.0/ref/WebApi.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/AutoMapper.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/FluentValidation.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/FluentValidation.DependencyInjectionExtensions.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/Application.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/Application.pdb
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/MediatR.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/MediatR.Contracts.dll

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "H43iL9mD9WaRimQN6RUOi6ZgvypHu3GujJuGVcTx7kJpJalvwWwSAYUVGoyORinf/FhhOreECe6s/3L4MMWZ5A==",
+  "dgSpecHash": "M93jI0eorr36Qse4vRL+tDo7VHnaDZE1/kKUXNPSh2un12wDvUO/dCwDF0iWTP/JUhmyIYvsE2AbjEQTLHQG9Q==",
   "success": true,
   "projectFilePath": "/Users/sozey/Projects/eShopProject/eShop_CleanArch/Application/Application.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "/Users/sozey/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/Users/sozey/.nuget/packages/fluentvalidation/11.9.2/fluentvalidation.11.9.2.nupkg.sha512",
     "/Users/sozey/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.9.2/fluentvalidation.dependencyinjectionextensions.11.9.2.nupkg.sha512",
+    "/Users/sozey/.nuget/packages/mediatr/12.4.0/mediatr.12.4.0.nupkg.sha512",
+    "/Users/sozey/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/Users/sozey/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.6/microsoft.aspnetcore.authentication.jwtbearer.8.0.6.nupkg.sha512",
     "/Users/sozey/.nuget/packages/microsoft.aspnetcore.cryptography.internal/8.0.6/microsoft.aspnetcore.cryptography.internal.8.0.6.nupkg.sha512",
     "/Users/sozey/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/8.0.6/microsoft.aspnetcore.cryptography.keyderivation.8.0.6.nupkg.sha512",

@@ -1,5 +1,6 @@
 using Application;
 using Persistence;
+using WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,5 +26,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+ExtensionsMiddleware.AutoMigration(app);
+ExtensionsMiddleware.CreateFirstUser(app);
 
 app.Run();

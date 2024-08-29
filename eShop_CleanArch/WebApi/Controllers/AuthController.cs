@@ -1,12 +1,30 @@
+using Application.Features.Auth.Login;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
 
 public class AuthController : Controller
 {
-    // GET
-    public IActionResult Index()
+    private readonly IMediator _mediator;
+
+    public AuthController(IMediator mediator)
     {
-        return View();
+        _mediator = mediator;
     }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginCommand command)
+    {
+        try
+        {
+            var token = await _mediator.Send(command);
+            return Ok(new { Token = token });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { Error = ex.Message });
+        }
+    }
+
 }

@@ -1,6 +1,10 @@
+using Domain.Entities;
+
 namespace Application.Services.Repositories;
 
-public class ICustomerRepository
+
+public interface ICustomerRepository: IRepository<Customer>
 {
-    
+ 
+   
 }
