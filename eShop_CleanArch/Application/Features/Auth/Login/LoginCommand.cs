@@ -20,7 +20,8 @@ public class LoginCommand : IRequest<LoginResponse>
         private readonly SignInManager<User> _signInManager;
         private readonly JwtService _jwtService;
 
-        public LoginCommandHandler(AuthBusinessRules authBusinessRules,UserManager<User> userManager, SignInManager<User> signInManager,
+        public LoginCommandHandler(AuthBusinessRules authBusinessRules, UserManager<User> userManager,
+            SignInManager<User> signInManager,
             JwtService jwtService)
         {
             _authBusinessRules = authBusinessRules;
@@ -28,41 +29,35 @@ public class LoginCommand : IRequest<LoginResponse>
             _signInManager = signInManager;
             _jwtService = jwtService;
         }
-
         public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var appUserByUsername =
-                await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.UserNameOrEmail, cancellationToken: cancellationToken);
-            var appUserByEmail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.UserNameOrEmail, cancellationToken: cancellationToken);
+                await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.UserNameOrEmail,
+                    cancellationToken: cancellationToken);
+            var appUserByEmail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.UserNameOrEmail,
+                cancellationToken: cancellationToken);
             var appUser = appUserByUsername ?? appUserByEmail;
+            //Business Rule 1
             await _authBusinessRules.UserShouldBeExistsWhenSelected(appUser);
+            //Business Rule 2
+            if (appUser != null)
+                await _authBusinessRules.UserShouldHaveCorrectPassword(appUser, request.Password);
 
-            var passwordHasher = new PasswordHasher<User>();
             if (appUser != null)
             {
-                var passwordVerificationResult =
-                    passwordHasher.VerifyHashedPassword(appUser, appUser.PasswordHash!, request.Password);
+                var result = await _signInManager.CheckPasswordSignInAsync(appUser, request.Password, true);
 
-                if (passwordVerificationResult == PasswordVerificationResult.Failed)
+                if (result.IsLockedOut)
                 {
-                    throw new Exception("Şifreniz yanlış!");
+                    var timeSpan = appUser.LockoutEnd - DateTime.UtcNow;
+                    if (timeSpan is not null)
+                    {
+                        throw new Exception(
+                            $"Kullanıcı art arda 3 kere yanlış şifre girişinden dolayı sistem {Math.Ceiling(timeSpan.Value.TotalMinutes)} dakika kilitlenmiştir.");
+                    }
                 }
             }
-
-            var result = await _signInManager.CheckPasswordSignInAsync(appUser, request.Password, true);
-
-            if (result.IsLockedOut)
-            {
-                var timeSpan = appUser.LockoutEnd - DateTime.UtcNow;
-                if (timeSpan is not null)
-                {
-                    throw new Exception(
-                        $"Kullanıcı art arda 3 kere yanlış şifre girişinden dolayı sistem {Math.Ceiling(timeSpan.Value.TotalMinutes)} dakika kilitlenmiştir.");
-                }
-            }
-
             var token = _jwtService.CreateToken(appUser, null, request.RememberMe);
-            
             return new LoginResponse
             {
                 Token = token,
@@ -71,6 +66,5 @@ public class LoginCommand : IRequest<LoginResponse>
                 Expiration = DateTime.UtcNow.AddHours(1)
             };
         }
-
-    }
+    } 
 }

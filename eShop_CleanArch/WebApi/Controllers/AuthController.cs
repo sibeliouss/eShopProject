@@ -1,4 +1,6 @@
 using Application.Features.Auth.Login;
+using Application.Features.Auth.Register;
+using Application.Features.Customers.Dtos;
 using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -31,6 +33,30 @@ public class AuthController : ApiController
         {
             var token = await _mediator.Send(command, cancellationToken);
             return Ok(new { Info = token });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { Error = ex.Message });
+        }
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Register([FromBody] RegisterDto registerDto, CancellationToken cancellationToken)
+    {
+        RegisterCommandValidator validator = new();
+        var validationResult = await validator.ValidateAsync(registerDto, cancellationToken);
+
+        if (!validationResult.IsValid)
+        {
+            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
+        }
+
+        var command = new RegisterCommand { RegisterDto = registerDto };
+
+        try
+        {
+            await _mediator.Send(command, cancellationToken);
+            return Ok(new { Message = "Kullanıcı başarıyla kayıt oldu." });
         }
         catch (Exception ex)
         {
