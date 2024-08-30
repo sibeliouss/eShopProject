@@ -1,4 +1,5 @@
 using System.Text;
+using Application.Features.Auth.Rules;
 using Application.Services.Auth;
 using Domain.Entities;
 using FluentValidation;
@@ -16,6 +17,7 @@ public static class ApplicationServiceRegistration
         services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
         services.AddValidatorsFromAssembly(assembly);
       
+        services.AddScoped<AuthBusinessRules>();
         
         #region JWT
         services.AddAuthentication().AddJwtBearer(options =>

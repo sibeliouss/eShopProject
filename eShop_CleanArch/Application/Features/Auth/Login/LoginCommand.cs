@@ -1,3 +1,4 @@
+using Application.Features.Auth.Rules;
 using Application.Services.Auth;
 using Domain.Entities;
 using MediatR;
@@ -14,13 +15,15 @@ public class LoginCommand : IRequest<LoginResponse>
 
     public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse>
     {
+        private readonly AuthBusinessRules _authBusinessRules;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly JwtService _jwtService;
 
-        public LoginCommandHandler(UserManager<User> userManager, SignInManager<User> signInManager,
+        public LoginCommandHandler(AuthBusinessRules authBusinessRules,UserManager<User> userManager, SignInManager<User> signInManager,
             JwtService jwtService)
         {
+            _authBusinessRules = authBusinessRules;
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtService = jwtService;
@@ -31,21 +34,19 @@ public class LoginCommand : IRequest<LoginResponse>
             var appUserByUsername =
                 await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.UserNameOrEmail, cancellationToken: cancellationToken);
             var appUserByEmail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.UserNameOrEmail, cancellationToken: cancellationToken);
-
             var appUser = appUserByUsername ?? appUserByEmail;
-
-            if (appUser is null)
-            {
-                throw new Exception("Kullanıcı bulunamadı!");
-            }
+            await _authBusinessRules.UserShouldBeExistsWhenSelected(appUser);
 
             var passwordHasher = new PasswordHasher<User>();
-            var passwordVerificationResult =
-                passwordHasher.VerifyHashedPassword(appUser, appUser.PasswordHash!, request.Password);
-
-            if (passwordVerificationResult == PasswordVerificationResult.Failed)
+            if (appUser != null)
             {
-                throw new Exception("Şifreniz yanlış!");
+                var passwordVerificationResult =
+                    passwordHasher.VerifyHashedPassword(appUser, appUser.PasswordHash!, request.Password);
+
+                if (passwordVerificationResult == PasswordVerificationResult.Failed)
+                {
+                    throw new Exception("Şifreniz yanlış!");
+                }
             }
 
             var result = await _signInManager.CheckPasswordSignInAsync(appUser, request.Password, true);
