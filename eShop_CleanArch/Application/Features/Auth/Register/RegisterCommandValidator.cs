@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Application.Features.Auth.Register;
 
-public class RegisterCommandValidator: AbstractValidator<RegisterDto>
+public class RegisterCommandValidator: AbstractValidator<RegisterCommand>
 {
     public RegisterCommandValidator()
     {
@@ -13,7 +13,7 @@ public class RegisterCommandValidator: AbstractValidator<RegisterDto>
         RuleFor(p => p.LastName).NotEmpty().WithMessage("Soyadı boş olamaz!");
         RuleFor(p => p.LastName).MinimumLength(3).WithMessage("Geçerli bir soyad girin!");
 
-        RuleFor(p => p.Email).NotEmpty().WithMessage("E-posta boş olamaz!");
+        RuleFor(p => p.Email).NotEmpty().WithMessage("E-posta alanı boş olamaz!");
         RuleFor(p => p.Email).MinimumLength(3).WithMessage("Geçerli bir e-posta adresi girin");
         RuleFor(p => p.Email).Matches(".+@.+").WithMessage("E-posta adresi '@' işareti içermelidir");
 

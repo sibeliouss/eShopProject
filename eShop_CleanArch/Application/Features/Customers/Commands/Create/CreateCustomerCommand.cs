@@ -8,14 +8,6 @@ public class CreateCustomerCommand : IRequest<CreatedCustomerResponse>
 {
     public CreateCustomerDto CreateCustomerDto { get; set; }
     
-    private readonly ICustomerService _customerService;
-
-    public CreateCustomerCommand(ICustomerService customerService)
-    {
-        _customerService = customerService;
-    }
-
-    
     public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, CreatedCustomerResponse>
     {
         private readonly ICustomerService _customerService;

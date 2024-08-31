@@ -37,11 +37,11 @@ public class LoginCommand : IRequest<LoginResponse>
             var appUserByEmail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.UserNameOrEmail,
                 cancellationToken: cancellationToken);
             var appUser = appUserByUsername ?? appUserByEmail;
-            //Business Rule 1
+            //Rule 1
             await _authBusinessRules.UserShouldBeExistsWhenSelected(appUser);
-            //Business Rule 2
+            //Rule 2
             if (appUser != null)
-                await _authBusinessRules.UserShouldHaveCorrectPassword(appUser, request.Password);
+                await AuthBusinessRules.UserShouldHaveCorrectPassword(appUser, request.Password);
 
             if (appUser != null)
             {

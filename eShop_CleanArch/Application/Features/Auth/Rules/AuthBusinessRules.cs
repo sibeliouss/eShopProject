@@ -17,19 +17,24 @@ public class AuthBusinessRules
             await ThrowBusinessException(AuthMessages.UserDontExists);
     }
     
-    public async Task UserShouldHaveCorrectPassword(User appUser, string enteredPassword)
+    public static async Task UserShouldHaveCorrectPassword(User user, string enteredPassword)
     {
         var passwordHasher = new PasswordHasher<User>();
-        var passwordVerificationResult = passwordHasher.VerifyHashedPassword(appUser, appUser.PasswordHash!, enteredPassword);
+        var passwordVerificationResult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash!, enteredPassword);
 
         if (passwordVerificationResult == PasswordVerificationResult.Failed)
         {
             await ThrowBusinessException(AuthMessages.PasswordIncorrect); 
         }
     }
-    
-    
-
+   
+    public async Task PasswordsShouldMatch(string password, string confirmedPassword)
+    {
+        if (password != confirmedPassword)
+        {
+            await ThrowBusinessException(AuthMessages.PasswordsDoNotMatch);
+        }
+    }
     
 }
 
