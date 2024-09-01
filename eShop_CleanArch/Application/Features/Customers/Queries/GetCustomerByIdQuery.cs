@@ -1,25 +1,34 @@
+using Application.Features.Customers.Dtos;
 using Application.Services.Repositories;
 using Domain.Entities;
 using MediatR;
+using AutoMapper;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace Application.Features.Customers.Queries;
-
-public class GetCustomerByIdQuery : IRequest<Customer?>
+namespace Application.Features.Customers.Queries
 {
-    public Guid CustomerId { get; set; }
-}
-
-public class GetCustomerByIdQueryHandler : IRequestHandler<GetCustomerByIdQuery, Customer?>
-{
-    private readonly ICustomerRepository _customerRepository;
-
-    public GetCustomerByIdQueryHandler(ICustomerRepository customerRepository)
+    public class GetCustomerByIdQuery : IRequest<CustomerDto>
     {
-        _customerRepository = customerRepository;
+        public Guid CustomerId { get; set; }
     }
 
-    public async Task<Customer?> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
+    public class GetCustomerByIdQueryHandler : IRequestHandler<GetCustomerByIdQuery, CustomerDto>
     {
-        return await _customerRepository.GetByIdAsync(request.CustomerId);
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IMapper _mapper;
+
+        public GetCustomerByIdQueryHandler(ICustomerRepository customerRepository, IMapper mapper)
+        {
+            _customerRepository = customerRepository;
+            _mapper = mapper;
+        }
+
+        public async Task<CustomerDto> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
+        {
+            var customer = await _customerRepository.GetByIdAsync(request.CustomerId);
+            return _mapper.Map<CustomerDto>(customer); 
+        }
     }
 }

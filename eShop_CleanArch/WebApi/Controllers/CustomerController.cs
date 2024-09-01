@@ -1,7 +1,9 @@
+using Application.Features.Customers.Commands.Delete;
 using Application.Features.Customers.Commands.Update.UpdateCustomerInformation;
 using Application.Features.Customers.Commands.Update.UpdateCustomerPassword;
 using Application.Features.Customers.Dtos;
-using FluentValidation.Results;
+using Application.Features.Customers.Queries;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Abstract;
@@ -66,5 +68,59 @@ public class CustomerController : ApiController
                 return BadRequest(new { error = ex.Message });
         }
     }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetCustomerById(Guid id)
+    {
+           var query = new GetCustomerByIdQuery
+            {
+                CustomerId = id
+            };
+
+            var customer = await _mediator.Send(query);
+            return Ok(customer); // Müşteri bulunduysa 200 OK döner
+        
+    }
+    
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<CustomerDto>>> GetAll()
+    {
+        var query = new GetAllCustomersQuery();
+        var customers = await _mediator.Send(query);
+
+        if (!customers.Any())
+        {
+            return NotFound("No customers found.");
+        }
+
+        return Ok(customers);
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteCustomer(Guid id, [FromBody] string password)
+    {
+        if (id == Guid.Empty)
+        {
+            return BadRequest("Geçersiz müşteri ID.");
+        }
+
+        try
+        {
+            var command = new DeleteCustomerCommand
+            {
+                CustomerId = id,
+                Password = password
+            };
+
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }
+
+
 

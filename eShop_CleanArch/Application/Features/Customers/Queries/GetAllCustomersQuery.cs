@@ -1,24 +1,33 @@
+using Application.Features.Customers.Dtos;
 using Application.Services.Repositories;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace Application.Features.Customers.Queries;
-
-public class GetAllCustomersQuery : IRequest<IEnumerable<Customer>>
+namespace Application.Features.Customers.Queries
 {
-}
-
-public class GetAllCustomersQueryHandler : IRequestHandler<GetAllCustomersQuery, IEnumerable<Customer>>
-{
-    private readonly ICustomerRepository _customerRepository;
-
-    public GetAllCustomersQueryHandler(ICustomerRepository customerRepository)
+    public class GetAllCustomersQuery : IRequest<IEnumerable<CustomerDto>>
     {
-        _customerRepository = customerRepository;
     }
 
-    public async Task<IEnumerable<Customer>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
+    public class GetAllCustomersQueryHandler : IRequestHandler<GetAllCustomersQuery, IEnumerable<CustomerDto>>
     {
-        return await _customerRepository.GetAllAsync();
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IMapper _mapper;
+
+        public GetAllCustomersQueryHandler(ICustomerRepository customerRepository, IMapper mapper)
+        {
+            _customerRepository = customerRepository;
+            _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<CustomerDto>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
+        {
+            var customers = await _customerRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<CustomerDto>>(customers);
+        }
     }
 }
