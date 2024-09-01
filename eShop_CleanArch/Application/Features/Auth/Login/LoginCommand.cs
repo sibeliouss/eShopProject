@@ -1,5 +1,6 @@
 using Application.Features.Auth.Rules;
 using Application.Services.Auth;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,7 @@ public class LoginCommand : IRequest<LoginResponse>
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly JwtService _jwtService;
+       
 
         public LoginCommandHandler(AuthBusinessRules authBusinessRules, UserManager<User> userManager,
             SignInManager<User> signInManager,
@@ -32,10 +34,8 @@ public class LoginCommand : IRequest<LoginResponse>
         public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var appUserByUsername =
-                await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.UserNameOrEmail,
-                    cancellationToken: cancellationToken);
-            var appUserByEmail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.UserNameOrEmail,
-                cancellationToken: cancellationToken);
+                await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.UserNameOrEmail);
+            var appUserByEmail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.UserNameOrEmail);
             var appUser = appUserByUsername ?? appUserByEmail;
             //Rule 1
             await _authBusinessRules.UserShouldBeExistsWhenSelected(appUser);
@@ -56,15 +56,16 @@ public class LoginCommand : IRequest<LoginResponse>
                             $"Kullanıcı art arda 3 kere yanlış şifre girişinden dolayı sistem {Math.Ceiling(timeSpan.Value.TotalMinutes)} dakika kilitlenmiştir.");
                     }
                 }
-            }
+            } 
             var token = _jwtService.CreateToken(appUser, null, request.RememberMe);
-            return new LoginResponse
-            {
-                Token = token,
-                UserName = appUser.UserName,
-                UserId = appUser.Id,
-                Expiration = DateTime.UtcNow.AddHours(1)
-            };
+                return new LoginResponse
+                {
+                    Token = token,
+                    UserName = appUser.UserName,
+                    UserId = appUser.Id,
+                    Expiration = DateTime.UtcNow
+                };
+                
         }
     } 
 }

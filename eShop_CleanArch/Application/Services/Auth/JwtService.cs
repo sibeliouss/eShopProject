@@ -25,8 +25,8 @@ public class JwtService
             issuer: "Sibel Öztürk",
             audience: "eShop Project",
             claims: claims,
-            notBefore: DateTime.UtcNow.AddHours(3), //şu andan itibaren kullan. 3 saat ile sınırla
-            expires: expires,
+            notBefore: DateTime.UtcNow,
+            expires: DateTime.UtcNow.AddHours(3), //şu andan itibaren kullan. 3 saat ile sınırla
             signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("StrongAndSecretKeyStrongAndSecretKeyStrongAndSecretKeyStrongAndSecretKey")), SecurityAlgorithms.HmacSha512));
 
         JwtSecurityTokenHandler handler = new();

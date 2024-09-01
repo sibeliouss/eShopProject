@@ -1,3 +1,5 @@
+using System.Net.WebSockets;
+
 namespace Application.Features.Customers.Dtos;
 
 public record CreateCustomerDto(
@@ -7,4 +9,4 @@ public record CreateCustomerDto(
     Guid UserId,
     string UserName, 
     string PasswordHash
-    );
+);

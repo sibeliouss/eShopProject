@@ -30,8 +30,9 @@ public class AuthController : ApiController
 
         try
         {
-            var token = await _mediator.Send(command, cancellationToken);
-            return Ok(new { Info = token });
+            var response = await _mediator.Send(command, cancellationToken);
+            return Ok(new { Info = response });
+            /*return Created(uri: "", response);*/
         }
         catch (Exception ex)
         {
@@ -60,5 +61,5 @@ public class AuthController : ApiController
         }
     }
 
-    }
+}
 

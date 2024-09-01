@@ -1,4 +1,4 @@
-namespace Application.Features.Customers.Commands.Update;
+namespace Application.Features.Customers.Commands.Update.UpdateCustomerInformation;
 
 public class UpdateCustomerInformationResponse
 {

@@ -48,35 +48,26 @@ public class RegisterCommand : IRequest
                 var hashedPassword = passwordHasher.HashPassword(null, request.Password);
 
                 var user = _mapper.Map<User>(request);
-                /*var user = new User
-                {
-                    FirstName = request.FirstName,
-                    LastName = request.LastName,
-                    Email = request.Email,
-                    EmailConfirmed = true,
-                    UserName = request.UserName,
-                    PasswordHash = hashedPassword
-                };*/
-
                 var result = await _userManager.CreateAsync(user, request.Password);
 
                 if (result.Succeeded)
                 {
-                    /*var customerDto = new CreateCustomerDto(
+                    var customerDto = new CreateCustomerDto(
                         user.FirstName,
                         user.LastName,
                         user.Email,
                         user.Id,
                         user.UserName,
                         user.PasswordHash
-                    );*/
-                    var customerDto = _mapper.Map<CreateCustomerDto>(user);
+                    );
                     await _customerService.CreateCustomerAsync(customerDto);
                 }
                 else
                 {
+                    await _userManager.DeleteAsync(user);
                     throw new Exception("Kullanıcı oluşturulurken bir hata oluştu.");
                 }
+                
             }
         }
     

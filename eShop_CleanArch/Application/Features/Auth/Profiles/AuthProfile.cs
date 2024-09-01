@@ -1,3 +1,4 @@
+using Application.Features.Auth.Login;
 using Application.Features.Auth.Register;
 using Application.Features.Customers.Dtos;
 using AutoMapper;
@@ -13,7 +14,7 @@ public class AuthProfile : Profile
             .ForMember(dest => dest.PasswordHash, opt => opt.Ignore()).ReverseMap(); 
 
         CreateMap<User, CreateCustomerDto>()
-            .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.PasswordHash)).ReverseMap(); 
+            .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.PasswordHash)).ReverseMap();
 
     }
 }

@@ -21,10 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Customers\Commands\Delete\" />
       <Folder Include="Features\Customers\Constants\" />
       <Folder Include="Features\Customers\Profile\" />
-      <Folder Include="Features\Customers\Queries\" />
       <Folder Include="Features\Customers\Rules\" />
     </ItemGroup>
 

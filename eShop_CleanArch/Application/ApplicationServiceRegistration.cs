@@ -17,8 +17,11 @@ public static class ApplicationServiceRegistration
         var assembly = typeof(ApplicationServiceRegistration).Assembly;
         services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
         services.AddValidatorsFromAssembly(assembly);
+        services.AddAutoMapper(typeof(ApplicationServiceRegistration).Assembly);
         services.AddScoped<AuthBusinessRules>();
         services.AddScoped<ICustomerService, CustomerService>();
+        
+        
         #region JWT
         services.AddAuthentication().AddJwtBearer(options =>
         {

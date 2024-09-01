@@ -1,7 +1,7 @@
 using Application.Features.Customers.Dtos;
 using FluentValidation;
 
-namespace Application.Features.Customers.Commands.Update;
+namespace Application.Features.Customers.Commands.Update.UpdateCustomerInformation;
 
 public class UpdateCustomerInformationCommandValidator: AbstractValidator<UpdateCustomerInformationDto>
 {
