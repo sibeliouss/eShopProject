@@ -1,5 +1,6 @@
 using Application.Features.Customers.Dtos;
 using Application.Services.Customers;
+using AutoMapper;
 using MediatR;
 
 namespace Application.Features.Customers.Commands.Create;
@@ -11,10 +12,12 @@ public class CreateCustomerCommand : IRequest<CreatedCustomerResponse>
     public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, CreatedCustomerResponse>
     {
         private readonly ICustomerService _customerService;
+        private readonly IMapper _mapper;
 
-        public CreateCustomerCommandHandler(ICustomerService customerService)
+        public CreateCustomerCommandHandler(ICustomerService customerService, IMapper mapper)
         {
             _customerService = customerService;
+            _mapper = mapper;
         }
 
         public async Task<CreatedCustomerResponse> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
@@ -29,16 +32,8 @@ public class CreateCustomerCommand : IRequest<CreatedCustomerResponse>
                 throw new Exception("Müşteri oluşturulamadı.");
             }
 
-            return new CreatedCustomerResponse
-            {
-                Id = createdCustomer.Id,
-                FirstName = createdCustomer.FirstName,
-                LastName = createdCustomer.LastName,
-                Email = createdCustomer.Email,
-                UserName = createdCustomer.UserName,
-                UserId = createdCustomer.UserId,
-                PasswordHash = createdCustomer.PasswordHash
-            };
+            var response = _mapper.Map<CreatedCustomerResponse>(createdCustomer);
+            return response;
         }
     }
 

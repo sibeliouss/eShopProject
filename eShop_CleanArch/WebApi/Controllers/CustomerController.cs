@@ -45,7 +45,7 @@ public class CustomerController : ApiController
     }
     
     [HttpPut]
-    public async Task<IActionResult> UpdatePassword([FromBody] UpdateCustomerPasswordDto updateCustomerPasswordDto,CancellationToken cancellationToken)
+    public async Task<IActionResult> UpdateCustomerPassword([FromBody] UpdateCustomerPasswordDto updateCustomerPasswordDto,CancellationToken cancellationToken)
     {
         UpdateCustomerPasswordCommandValidator validator = new();
         var validationResult = await validator.ValidateAsync(updateCustomerPasswordDto, cancellationToken);
@@ -58,16 +58,11 @@ public class CustomerController : ApiController
         {
             UpdateCustomerPasswordDto = updateCustomerPasswordDto
         };
-        try
-        {
-                await _mediator.Send(command, cancellationToken);
-                return Ok("Şifre başarıyla değiştirildi.");
-        }
-        catch (Exception ex)
-        {
-                return BadRequest(new { error = ex.Message });
-        }
+       
+        await _mediator.Send(command, cancellationToken);
+        return Ok("Şifre başarıyla değiştirildi.");
     }
+    
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCustomerById(Guid id)
     {
@@ -77,7 +72,7 @@ public class CustomerController : ApiController
             };
 
             var customer = await _mediator.Send(query);
-            return Ok(customer); // Müşteri bulunduysa 200 OK döner
+            return Ok(customer); 
         
     }
     
@@ -89,24 +84,19 @@ public class CustomerController : ApiController
 
         if (!customers.Any())
         {
-            return NotFound("No customers found.");
+            return NotFound("Müşteri bulunmadı.");
         }
 
         return Ok(customers);
     }
     
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteCustomer(Guid id, [FromBody] string password)
+    public async Task<IActionResult> DeleteCustomer(Guid id, [FromQuery] string password)
     {
-        if (id == Guid.Empty)
-        {
-            return BadRequest("Geçersiz müşteri ID.");
-        }
-
-        try
-        {
+        
             var command = new DeleteCustomerCommand
             {
+                
                 CustomerId = id,
                 Password = password
             };
@@ -114,11 +104,6 @@ public class CustomerController : ApiController
             await _mediator.Send(command);
 
             return NoContent();
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
     }
 }
 

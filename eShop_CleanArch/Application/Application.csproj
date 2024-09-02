@@ -20,9 +20,4 @@
       <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Features\Customers\Constants\" />
-      <Folder Include="Features\Customers\Rules\" />
-    </ItemGroup>
-
 </Project>

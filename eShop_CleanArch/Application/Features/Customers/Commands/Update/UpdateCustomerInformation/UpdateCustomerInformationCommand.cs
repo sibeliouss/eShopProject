@@ -28,7 +28,7 @@ namespace Application.Features.Customers.Commands.Update.UpdateCustomerInformati
         public async Task<UpdateCustomerInformationResponse> Handle(UpdateCustomerInformationCommand request,
             CancellationToken cancellationToken)
         {
-            // Customer'ı güncelle
+            // Customer
             var customer = await _customerRepository.GetByIdAsync(request.UpdateCustomerInformationDto.Id);
             if (customer == null)
             {

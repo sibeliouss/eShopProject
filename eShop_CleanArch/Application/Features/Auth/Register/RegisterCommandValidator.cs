@@ -7,8 +7,8 @@ public class RegisterCommandValidator: AbstractValidator<RegisterCommand>
 {
     public RegisterCommandValidator()
     {
-        RuleFor(p => p.FirstName).NotEmpty().WithMessage("İsim alanı boş alamz!");
-        RuleFor(p => p.FirstName).MinimumLength(3).WithMessage("Kullanıcı adı en az 3 karakter olmalıdır");
+        RuleFor(p => p.FirstName).NotEmpty().WithMessage("İsim alanı boş olamaz!");
+        RuleFor(p => p.FirstName).MinimumLength(3).WithMessage("En az 3 karakter olmalıdır");
 
         RuleFor(p => p.LastName).NotEmpty().WithMessage("Soyadı boş olamaz!");
         RuleFor(p => p.LastName).MinimumLength(3).WithMessage("Geçerli bir soyad girin!");
