@@ -1,5 +1,6 @@
 using System.Text;
 using Application.Features.Auth.Rules;
+using Application.Features.Customers.Rules;
 using Application.Services.Auth;
 using Application.Services.Customers;
 using Domain.Entities;
@@ -19,6 +20,8 @@ public static class ApplicationServiceRegistration
         services.AddValidatorsFromAssembly(assembly);
         services.AddAutoMapper(typeof(ApplicationServiceRegistration).Assembly);
         services.AddScoped<AuthBusinessRules>();
+        services.AddScoped<CustomerBusinessRules>();
+
         services.AddScoped<ICustomerService, CustomerService>();
         
         
