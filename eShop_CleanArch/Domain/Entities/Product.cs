@@ -11,8 +11,6 @@ public class Product : Entity<Guid>
     public int Stock { get; set; }
     public string Barcode { get; set; }
     public bool IsActive { get; set; } = true;
-    public Guid CategoryId { get; set; }
-    public Category? Category { get; set; }
     public bool IsFeatured { get; set; } = false;
     public bool IsDeleted { get; set; } = false;
     public ICollection<ProductCategory>? ProductCategories { get; set; }

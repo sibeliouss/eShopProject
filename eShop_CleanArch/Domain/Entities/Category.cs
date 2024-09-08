@@ -9,4 +9,6 @@ public class Category : Entity<Guid>
     public bool IsActive { get; set; } = false;
     public bool IsDeleted { get; set; } = false;
     public ICollection<ProductCategory>? ProductCategories { get; set; }
+
+
 }

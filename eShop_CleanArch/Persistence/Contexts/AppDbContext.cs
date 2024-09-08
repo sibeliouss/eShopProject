@@ -27,7 +27,7 @@ public class AppDbContext : DbContext
         
         builder.Entity<ProductCategory>()
             .HasKey(pc => new { pc.ProductId, pc.CategoryId });
-        builder.Entity<BillingAddress>()
+        /*builder.Entity<BillingAddress>()
             .HasOne(b => b.Customer)
             .WithOne() // BillingAddress, Customer'ın tek bir adresine sahip olabilir
             .HasForeignKey<BillingAddress>(b => b.CustomerId)
@@ -50,6 +50,7 @@ public class AppDbContext : DbContext
             .WithMany(c => c.ProductCategories)
             .HasForeignKey(pc => pc.CategoryId)
             .OnDelete(DeleteBehavior.Restrict); // veya .OnDelete(DeleteBehavior.NoAction)
+            */
 
     }
 }
