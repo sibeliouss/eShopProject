@@ -1,5 +1,6 @@
 using Application.Features.Customers.Dtos;
 using Application.Services.Repositories;
+using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 
@@ -12,11 +13,12 @@ public class CustomerService: ICustomerService
     public CustomerService(ICustomerRepository customerRepository)
     {
         _customerRepository = customerRepository;
+       
     }
 
     public async Task CreateCustomerAsync(CreateCustomerDto createCustomerDto)
     {
-        var customer = new Customer
+        var customer = new Customer 
         {
             FirstName = createCustomerDto.FirstName,
             LastName = createCustomerDto.LastName,

@@ -20,4 +20,12 @@
       <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\Addresses\Commands\" />
+      <Folder Include="Features\Addresses\Constants\" />
+      <Folder Include="Features\Addresses\Profiles\" />
+      <Folder Include="Features\Addresses\Queries\" />
+      <Folder Include="Features\Addresses\Rules\" />
+    </ItemGroup>
+
 </Project>

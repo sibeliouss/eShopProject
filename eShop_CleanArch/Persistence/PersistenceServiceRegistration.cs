@@ -17,7 +17,6 @@ public static class PersistenceServiceRegistration
         {
             opt.UseSqlServer(configuration.GetConnectionString("eShopProject"));
         });
-        
         #region Identity
 //AddIdentity: Identity kütüphanesinin DbContext ile bağlı olduğunu bildirmek için:
         services.AddIdentity<User, AppRole>(opt =>
@@ -30,7 +29,6 @@ public static class PersistenceServiceRegistration
 
         }).AddEntityFrameworkStores<AppDbContext>();
         #endregion
-
         services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 
