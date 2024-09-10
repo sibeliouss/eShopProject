@@ -27,6 +27,7 @@ public class AuthController : ApiController
         {
             return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
         }
+        
 
         try
         {
@@ -42,6 +43,7 @@ public class AuthController : ApiController
     [HttpPost]
     public async Task<IActionResult> Register([FromBody] RegisterCommand command, CancellationToken cancellationToken)
     {
+        
         RegisterCommandValidator validator = new();
         var validationResult = await validator.ValidateAsync(command, cancellationToken);
 

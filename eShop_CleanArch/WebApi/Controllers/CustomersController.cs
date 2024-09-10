@@ -10,10 +10,10 @@ using WebApi.Controllers.Abstract;
 
 namespace WebApi.Controllers;
 
-public class CustomerController : ApiController
+public class CustomersController : ApiController
 {
     private readonly IMediator _mediator;
-    public CustomerController(IMediator mediator)
+    public CustomersController(IMediator mediator)
     {
         _mediator = mediator;
     } 

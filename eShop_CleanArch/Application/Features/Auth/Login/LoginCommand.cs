@@ -34,8 +34,8 @@ public class LoginCommand : IRequest<LoginResponse>
         public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var appUserByUsername =
-                await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.UserNameOrEmail);
-            var appUserByEmail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.UserNameOrEmail);
+                await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.UserNameOrEmail, cancellationToken: cancellationToken);
+            var appUserByEmail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.UserNameOrEmail, cancellationToken: cancellationToken);
             var appUser = appUserByUsername ?? appUserByEmail;
             //Rule 1
             await _authBusinessRules.UserShouldBeExistsWhenSelected(appUser);

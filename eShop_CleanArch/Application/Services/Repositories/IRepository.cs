@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+
 namespace Application.Services.Repositories;
 
 public interface IRepository<T> where T : class
@@ -7,4 +9,5 @@ public interface IRepository<T> where T : class
     Task AddAsync(T entity);
     Task UpdateAsync(T entity);
     Task DeleteAsync(T entity);
+    Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
 }

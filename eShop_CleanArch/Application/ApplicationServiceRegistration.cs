@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text;
 using Application.Features.Auth.Rules;
 using Application.Features.Customers.Rules;
@@ -17,7 +18,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<JwtService>();
         var assembly = typeof(ApplicationServiceRegistration).Assembly;
         services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
-        services.AddValidatorsFromAssembly(assembly);
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddAutoMapper(typeof(ApplicationServiceRegistration).Assembly);
         services.AddScoped<AuthBusinessRules>();
         services.AddScoped<CustomerBusinessRules>();

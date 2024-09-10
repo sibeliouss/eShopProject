@@ -30,7 +30,7 @@ public static class PersistenceServiceRegistration
         }).AddEntityFrameworkStores<AppDbContext>();
         #endregion
         services.AddScoped<ICustomerRepository, CustomerRepository>();
-
+        services.AddScoped<IAddressRepository, AddressRepository>();
 
     } 
 }

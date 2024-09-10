@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Application.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,6 +39,11 @@ public class Repository<T, TContext> : IRepository<T> where T : class  where TCo
     {
         _context.Set<T>().Remove(entity);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+    {
+        return await _context.Set<T>().AnyAsync(predicate);
     }
 }
 
