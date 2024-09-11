@@ -1,4 +1,5 @@
 using Application.Features.Addresses.Commands.Create;
+using Application.Features.Addresses.Commands.Update;
 using AutoMapper;
 using Domain.Entities;
 
@@ -9,7 +10,8 @@ public class AddressProfile : Profile
     public AddressProfile()
     {
         CreateMap<Address, CreatedAddressResponse>().ReverseMap();
-
         CreateMap<CreateAddressCommand, Address>().ReverseMap();
+        CreateMap<UpdateAddressCommand, Address>().ReverseMap();
+        CreateMap<UpdatedAddressResponse, Address>().ReverseMap();
     }
 }

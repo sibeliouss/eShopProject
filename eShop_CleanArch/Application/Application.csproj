@@ -21,11 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Addresses\Commands\Delete\" />
-      <Folder Include="Features\Addresses\Commands\Update\" />
-      <Folder Include="Features\Addresses\Constants\" />
       <Folder Include="Features\Addresses\Queries\" />
-      <Folder Include="Features\Addresses\Rules\" />
     </ItemGroup>
 
 </Project>

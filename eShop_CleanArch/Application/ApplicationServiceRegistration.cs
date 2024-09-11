@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text;
+using Application.Features.Addresses.Rules;
 using Application.Features.Auth.Rules;
 using Application.Features.Customers.Rules;
 using Application.Services.Auth;
@@ -22,7 +23,7 @@ public static class ApplicationServiceRegistration
         services.AddAutoMapper(typeof(ApplicationServiceRegistration).Assembly);
         services.AddScoped<AuthBusinessRules>();
         services.AddScoped<CustomerBusinessRules>();
-
+        services.AddScoped<AddressBusinessRules>();
         services.AddScoped<ICustomerService, CustomerService>();
         
         
