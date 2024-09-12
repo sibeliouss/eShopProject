@@ -1,6 +1,7 @@
 using Application.Features.Addresses.Commands.Create;
 using Application.Features.Addresses.Commands.Delete;
 using Application.Features.Addresses.Commands.Update;
+using Application.Features.Addresses.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Abstract;
@@ -48,6 +49,17 @@ public class AddressesController : ApiController
         var command = new DeleteAddressCommand { Id = id };
         await _mediator.Send(command);
         return NoContent();
+    }
+
+    [HttpGet("{customerId}")]
+    public async Task<IActionResult> Get(Guid customerId)
+    {
+        var query = new GetAddressQuery()
+        {
+            CustomerId = customerId
+        };
+       var response= await _mediator.Send(query);
+       return Ok(response);
     }
 
 }

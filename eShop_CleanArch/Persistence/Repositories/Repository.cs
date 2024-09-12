@@ -45,5 +45,10 @@ public class Repository<T, TContext> : IRepository<T> where T : class  where TCo
     {
         return await _context.Set<T>().AnyAsync(predicate);
     }
+
+    public IQueryable<T> Query()
+    {
+        return _context.Set<T>().AsQueryable();
+    }
 }
 

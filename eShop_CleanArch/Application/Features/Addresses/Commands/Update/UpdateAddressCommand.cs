@@ -28,19 +28,12 @@ public class UpdateAddressCommand : IRequest<UpdatedAddressResponse>
             _mapper = mapper;
             _addressBusinessRules = addressBusinessRules;
         }
-        
         public async Task<UpdatedAddressResponse> Handle(UpdateAddressCommand request, CancellationToken cancellationToken)
         {
             var address = await _addressRepository.GetByIdAsync(request.Id);
             await _addressBusinessRules.AddressShouldExistWhenSelected(address);
 
             address = _mapper.Map(request, address);
-            /*address.CustomerId = request.CustomerId;
-            address.Country = request.Country;
-            address.City = request.City;
-            address.ZipCode = request.ZipCode;
-            address.ContactName = request.ContactName;
-            address.Description = request.Description;*/
 
             if (address != null) await _addressRepository.UpdateAsync(address);
 

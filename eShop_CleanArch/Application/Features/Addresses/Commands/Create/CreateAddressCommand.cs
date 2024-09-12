@@ -31,13 +31,6 @@ public class CreateAddressCommand : IRequest<CreatedAddressResponse>
         public async Task<CreatedAddressResponse> Handle(CreateAddressCommand request, CancellationToken cancellationToken)
         {
             await _addressBusinessRules.AddressShouldNotExistForCustomer(request.CustomerId);
-
-            /*var addressExists = await _addressRepository.AnyAsync(a => a.CustomerId == request.CustomerId);
-
-            if (addressExists)
-            {
-                throw new Exception("Kullanıcıya ait adres kaydı zaten var.");
-            }*/
             
             Address address = _mapper.Map<Address>(request);
             
