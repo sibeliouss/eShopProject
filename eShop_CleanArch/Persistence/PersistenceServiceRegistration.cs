@@ -31,6 +31,7 @@ public static class PersistenceServiceRegistration
         #endregion
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IAddressRepository, AddressRepository>();
+        services.AddScoped<IBillingAddressRepository, BillingAddressRepository>();
 
     } 
 }

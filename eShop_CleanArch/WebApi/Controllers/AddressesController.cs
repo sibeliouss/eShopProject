@@ -2,6 +2,10 @@ using Application.Features.Addresses.Commands.Create;
 using Application.Features.Addresses.Commands.Delete;
 using Application.Features.Addresses.Commands.Update;
 using Application.Features.Addresses.Queries;
+using Application.Features.BillingAddresses.Commands.Create;
+using Application.Features.BillingAddresses.Commands.Delete;
+using Application.Features.BillingAddresses.Commands.Update;
+using Application.Features.BillingAddresses.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Abstract;
@@ -61,5 +65,47 @@ public class AddressesController : ApiController
        var response= await _mediator.Send(query);
        return Ok(response);
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> CreateBillingAddress(CreateBillingAddressDto createBillingAddressDto)
+    {
+        var validationResult = await new CreateBillingAddressCommandValidator().ValidateAsync(createBillingAddressDto);
+        if (!validationResult.IsValid)
+        {
+            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
+        }
+        
+        var command = new CreateBillingAddressCommand
+        {
+            CreateBillingAddressDto = createBillingAddressDto
+        };
 
+        var response= await _mediator.Send(command);
+        return Ok(response);
+    }
+    
+    [HttpPut]
+    public async Task<IActionResult> UpdateBillingAddress(UpdateBillingAddressDto updateCustomerPasswordDto)
+    {
+        var validationResult = await new UpdateBillingAddressCommandValidator().ValidateAsync(updateCustomerPasswordDto);
+        if (!validationResult.IsValid)
+        {
+            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
+        }
+        var command = new  UpdateBillingAddressCommand
+        {
+            UpdateBillingAddressDto = updateCustomerPasswordDto
+        };
+
+        var response = await _mediator.Send(command);
+        return Ok(response);
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteBillingAddress([FromRoute] Guid id)
+    {
+        var command = new DeleteBillingAddressCommand() { Id = id };
+        await _mediator.Send(command);
+        return NoContent();
+    }
 }

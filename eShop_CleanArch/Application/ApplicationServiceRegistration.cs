@@ -5,7 +5,6 @@ using Application.Features.Auth.Rules;
 using Application.Features.Customers.Rules;
 using Application.Services.Auth;
 using Application.Services.Customers;
-using Domain.Entities;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
