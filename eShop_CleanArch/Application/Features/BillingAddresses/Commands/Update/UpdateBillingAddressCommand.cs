@@ -38,24 +38,6 @@ public class UpdateBillingAddressCommand : IRequest<UpdatedBillingAddressRespons
 
             return response;
             
-            /*billingAddress.ContactName = billingAddressDto.ContactName;
-            billingAddress.Description = billingAddressDto.Description;
-            billingAddress.City = billingAddressDto.City;
-            billingAddress.ZipCode = billingAddressDto.ZipCode;
-            billingAddress.Country = billingAddressDto.Country;*/
-            
-            /*return new UpdatedBillingAddressResponse()
-            {
-                Id= billingAddress.Id,
-                CustomerId = billingAddress.CustomerId,
-                Country = billingAddress.Country,
-                City = billingAddress.City,
-                ZipCode = billingAddress.ZipCode,
-                ContactName = billingAddress.ContactName,
-                Description = billingAddress.Description
-            };*/
-
-
         }
     }
 }

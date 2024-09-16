@@ -17,9 +17,7 @@ public class ProductCategoryConfiguration : IEntityTypeConfiguration<ProductCate
         
         builder.HasQueryFilter(cb => !cb.DeletedAt.HasValue);
         
-        //composite key, çoka çok ilişki
+        //composite key
         builder.HasKey(pc => new { pc.ProductId, pc.CategoryId });
-
-
     }
 }

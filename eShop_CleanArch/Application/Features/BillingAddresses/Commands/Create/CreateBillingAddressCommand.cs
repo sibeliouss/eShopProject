@@ -27,33 +27,16 @@ namespace Application.Features.BillingAddresses.Commands.Create
             public async Task<CreatedBillingAddressResponse> Handle(CreateBillingAddressCommand request, CancellationToken cancellationToken)
             {
                 var billingAddressDto = request.CreateBillingAddressDto;
-                var billingAddress = _mapper.Map<BillingAddress>(billingAddressDto);
-
-                /*var billingAddress = new BillingAddress()
+                var addressExists = await _billingAddressRepository.AnyAsync(a => a.CustomerId == billingAddressDto.CustomerId);
+                if (addressExists)
                 {
-                    CustomerId = billingAddressDto.CustomerId,
-                    City = billingAddressDto.City,
-                    Country = billingAddressDto.Country,
-                    ContactName = billingAddressDto.ContactName,
-                    Description = billingAddressDto.Description,
-                    ZipCode = billingAddressDto.ZipCode
-                };*/
+                    throw new Exception("Fatura adresi zaten mevcut");
+                }
+                var billingAddress = _mapper.Map<BillingAddress>(billingAddressDto);
 
                 await _billingAddressRepository.AddAsync(billingAddress);
                 
                 var response = _mapper.Map<CreatedBillingAddressResponse>(billingAddress);
-
-                /*
-                var response = new CreatedBillingAddressResponse
-                {
-                    Id = billingAddress.Id,
-                    CustomerId = billingAddress.CustomerId,
-                    Country = billingAddress.Country,
-                    City = billingAddress.City,
-                    ZipCode = billingAddress.ZipCode,
-                    ContactName = billingAddress.ContactName,
-                    Description = billingAddress.Description
-                };*/
                 
                 return response;
             }

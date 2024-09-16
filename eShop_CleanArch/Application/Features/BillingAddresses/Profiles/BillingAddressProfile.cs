@@ -1,3 +1,4 @@
+using Application.Features.Addresses.Queries;
 using Application.Features.BillingAddresses.Commands.Create;
 using Application.Features.BillingAddresses.Commands.Update;
 using Application.Features.BillingAddresses.Dtos;
@@ -14,5 +15,6 @@ public class BillingAddressProfile : Profile
       CreateMap<BillingAddress, CreatedBillingAddressResponse>().ReverseMap();
       CreateMap<BillingAddress, UpdateBillingAddressDto>().ReverseMap();
       CreateMap<BillingAddress, UpdatedBillingAddressResponse>().ReverseMap();
+      CreateMap<BillingAddress, GetAddressQueryResponse>().ReverseMap();
    } 
 }

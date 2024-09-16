@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\BillingAddresses\Queries\" />
+      <Folder Include="Features\Products\" />
     </ItemGroup>
 
 </Project>

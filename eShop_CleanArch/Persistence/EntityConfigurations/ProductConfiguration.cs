@@ -14,6 +14,13 @@ public class ProductConfiguration :IEntityTypeConfiguration<Product>
         builder.Property(p => p.Brand).HasColumnName("Product Brand").HasMaxLength(30).IsRequired();
         builder.Property(p => p.CreateAt).HasColumnName("Create Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
         builder.Property(p => p.UpdateAt).HasColumnName("Update Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
+        
+        //Value Object
+        builder.OwnsOne(p => p.Price, price =>
+        {
+            price.Property(p => p.Value).HasColumnType("money");
+            price.Property(p => p.Currency).HasMaxLength(5);
+        });
 
     }
 }
