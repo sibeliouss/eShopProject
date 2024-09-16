@@ -1,6 +1,7 @@
 using Application.Features.Addresses.Commands.Update;
 using Application.Features.BillingAddresses.Dtos;
 using Application.Services.Repositories;
+using AutoMapper;
 using MediatR;
 
 namespace Application.Features.BillingAddresses.Commands.Update;
@@ -12,10 +13,12 @@ public class UpdateBillingAddressCommand : IRequest<UpdatedBillingAddressRespons
     public class UpdateBillingAddressCommandHandler : IRequestHandler<UpdateBillingAddressCommand, UpdatedBillingAddressResponse>
     {
         private readonly IBillingAddressRepository _billingAddressRepository;
+        private readonly IMapper _mapper;
 
-        public UpdateBillingAddressCommandHandler(IBillingAddressRepository billingAddressRepository)
+        public UpdateBillingAddressCommandHandler(IBillingAddressRepository billingAddressRepository, IMapper mapper)
         {
             _billingAddressRepository = billingAddressRepository;
+            _mapper = mapper;
         }
 
         public async Task<UpdatedBillingAddressResponse> Handle(UpdateBillingAddressCommand request,
@@ -27,16 +30,21 @@ public class UpdateBillingAddressCommand : IRequest<UpdatedBillingAddressRespons
             {
                 throw new Exception("Fatura adresi bulunamadı.");
             }
+            _mapper.Map(billingAddressDto, billingAddress);
             
-            billingAddress.ContactName = billingAddressDto.ContactName;
+            await _billingAddressRepository.UpdateAsync(billingAddress);
+            
+            var response = _mapper.Map<UpdatedBillingAddressResponse>(billingAddress);
+
+            return response;
+            
+            /*billingAddress.ContactName = billingAddressDto.ContactName;
             billingAddress.Description = billingAddressDto.Description;
             billingAddress.City = billingAddressDto.City;
             billingAddress.ZipCode = billingAddressDto.ZipCode;
-            billingAddress.Country = billingAddressDto.Country;
-
-            await _billingAddressRepository.UpdateAsync(billingAddress);
-
-            return new UpdatedBillingAddressResponse()
+            billingAddress.Country = billingAddressDto.Country;*/
+            
+            /*return new UpdatedBillingAddressResponse()
             {
                 Id= billingAddress.Id,
                 CustomerId = billingAddress.CustomerId,
@@ -45,7 +53,7 @@ public class UpdateBillingAddressCommand : IRequest<UpdatedBillingAddressRespons
                 ZipCode = billingAddress.ZipCode,
                 ContactName = billingAddress.ContactName,
                 Description = billingAddress.Description
-            };
+            };*/
 
 
         }

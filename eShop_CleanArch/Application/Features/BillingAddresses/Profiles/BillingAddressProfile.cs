@@ -1,0 +1,18 @@
+using Application.Features.BillingAddresses.Commands.Create;
+using Application.Features.BillingAddresses.Commands.Update;
+using Application.Features.BillingAddresses.Dtos;
+using AutoMapper;
+using Domain.Entities;
+
+namespace Application.Features.BillingAddresses.Profiles;
+
+public class BillingAddressProfile : Profile
+{
+   public BillingAddressProfile()
+   {
+      CreateMap<BillingAddress, CreateBillingAddressDto>().ReverseMap();
+      CreateMap<BillingAddress, CreatedBillingAddressResponse>().ReverseMap();
+      CreateMap<BillingAddress, UpdateBillingAddressDto>().ReverseMap();
+      CreateMap<BillingAddress, UpdatedBillingAddressResponse>().ReverseMap();
+   } 
+}
