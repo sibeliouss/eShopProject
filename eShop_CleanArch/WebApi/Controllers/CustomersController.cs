@@ -19,10 +19,10 @@ public class CustomersController : ApiController
     } 
     
     [HttpPut]
-    public async Task<IActionResult> UpdateCustomerInformation([FromBody] UpdateCustomerInformationDto updateCustomerInformationDto , CancellationToken cancellationToken)
+    public async Task<IActionResult> UpdateCustomerInformation([FromBody] UpdateCustomerInformationDto updateCustomerInformationDto)
     { 
         UpdateCustomerInformationCommandValidator validator = new();
-        var validationResult = await validator.ValidateAsync(updateCustomerInformationDto, cancellationToken);
+        var validationResult = await validator.ValidateAsync(updateCustomerInformationDto);
 
         if (!validationResult.IsValid)
         {
@@ -35,7 +35,7 @@ public class CustomersController : ApiController
         
         try
         { 
-            await _mediator.Send(command, cancellationToken);
+            await _mediator.Send(command);
             return Ok("Müşteri bilgileri başarıyla güncellendi.");
         }
         catch (Exception ex)
@@ -45,10 +45,10 @@ public class CustomersController : ApiController
     }
     
     [HttpPut]
-    public async Task<IActionResult> UpdateCustomerPassword([FromBody] UpdateCustomerPasswordDto updateCustomerPasswordDto,CancellationToken cancellationToken)
+    public async Task<IActionResult> UpdateCustomerPassword([FromBody] UpdateCustomerPasswordDto updateCustomerPasswordDto)
     {
         UpdateCustomerPasswordCommandValidator validator = new();
-        var validationResult = await validator.ValidateAsync(updateCustomerPasswordDto, cancellationToken);
+        var validationResult = await validator.ValidateAsync(updateCustomerPasswordDto);
 
         if (!validationResult.IsValid)
         {
@@ -59,7 +59,7 @@ public class CustomersController : ApiController
             UpdateCustomerPasswordDto = updateCustomerPasswordDto
         };
        
-        await _mediator.Send(command, cancellationToken);
+        await _mediator.Send(command);
         return Ok("Şifre başarıyla değiştirildi.");
     }
     
