@@ -58,7 +58,7 @@ public class CategoriesController : ApiController
         return Ok(categories);
     }
     
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
         var command = new DeleteCategoryCommand() { Id = id };

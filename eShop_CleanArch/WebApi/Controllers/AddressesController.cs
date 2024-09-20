@@ -47,7 +47,7 @@ public class AddressesController : ApiController
         return Ok(response);
     }
     
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
         var command = new DeleteAddressCommand { Id = id };
@@ -101,7 +101,7 @@ public class AddressesController : ApiController
         return Ok(response);
     }
     
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:guid}")]
     public async Task<IActionResult> DeleteBillingAddress([FromRoute] Guid id)
     {
         var command = new DeleteBillingAddressCommand() { Id = id };

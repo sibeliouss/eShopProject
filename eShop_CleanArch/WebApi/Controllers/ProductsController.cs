@@ -1,4 +1,5 @@
 using Application.Features.Products.Commands.Create;
+using Application.Features.Products.Commands.Delete;
 using Application.Features.Products.Commands.Update;
 using Application.Features.Products.Dtos;
 using MediatR;
@@ -19,11 +20,6 @@ public class ProductsController : ApiController
     [HttpPost]
     public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto createProductDto)
     {
-        if (createProductDto == null)
-        {
-            return BadRequest("Ürün bilgileri eksik.");
-        }
-
         var command = new CreateProductCommand
         {
             CreateProductDto = createProductDto
@@ -56,6 +52,14 @@ public class ProductsController : ApiController
         {
             return StatusCode(500, new { Message = "Ürün güncellenirken bir hata oluştu.", Details = ex.Message });
         }
+    }
+    
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
+    {
+        var command = new DeleteProductCommand() { Id = id };
+        await _mediator.Send(command);
+        return NoContent();
     }
 
 }
