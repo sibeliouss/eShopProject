@@ -6,9 +6,7 @@ public record CreateProductDto(
  string Name, 
  string Brand,
  string Img,
- string Description,
+ Guid ProductDetailId,
  Money Price,
- int Stock,
- string Barcode,
  bool IsFeatured,
 List<Guid> CategoryIds);

@@ -2,6 +2,7 @@ using Application.Features.Products.Commands.Create;
 using Application.Features.Products.Commands.Delete;
 using Application.Features.Products.Commands.Update;
 using Application.Features.Products.Dtos;
+using Application.Features.Products.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Abstract;
@@ -52,6 +53,36 @@ public class ProductsController : ApiController
         {
             return StatusCode(500, new { Message = "Ürün güncellenirken bir hata oluştu.", Details = ex.Message });
         }
+    }
+    
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetProductDetailById(Guid id)
+    {
+        var query = new GetProductDetailByIdQuery { Id = id };
+        var product = await _mediator.Send(query);
+        return Ok(product);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetAllProducts([FromQuery] RequestDto requestDto)
+    {
+        try
+        {
+            var query = new GetListProductQuery(requestDto);
+            var productsResponse = await _mediator.Send(query);
+            return Ok(productsResponse); 
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = ex.Message });
+        }
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetProducts()
+    {
+        var products = await _mediator.Send(new GetProductsQuery());
+        return Ok(products);
     }
     
     [HttpDelete("{id:guid}")]

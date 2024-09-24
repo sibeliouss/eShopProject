@@ -32,22 +32,21 @@ public class UpdateProductCommand :IRequest<UpdatedProductResponse>
             }
             product.Name = updateProductDto.Name;
             product.Brand = updateProductDto.Brand;
-            product.Barcode = updateProductDto.Barcode;
-            product.Description = updateProductDto.Description;
+            product.ProductDetailId = updateProductDto.ProductDetailId;
             product.Img = updateProductDto.Img;
             product.Price = updateProductDto.Price;
-            product.Stock = updateProductDto.Stock;
             product.IsFeatured = updateProductDto.IsFeatured;
             
             //Kategoriyi gümcelleme
             if (updateProductDto.CategoryIds is not null)
             {
                 //mevcut kategorileri sil
-                foreach (var existingCategory in product.ProductCategories.ToList())
-                {
-                    await _productCategoryRepository.DeleteAsync(existingCategory);
-                }
-                
+                if (product.ProductCategories != null)
+                    foreach (var existingCategory in product.ProductCategories.ToList())
+                    {
+                        await _productCategoryRepository.DeleteAsync(existingCategory);
+                    }
+
                 //yeni kategori
                 foreach (var categoryId in updateProductDto.CategoryIds)
                 {
@@ -61,18 +60,14 @@ public class UpdateProductCommand :IRequest<UpdatedProductResponse>
                 }
             }
             await _productRepository.UpdateAsync(product);
-
-            // Güncellenmiş ürün bilgilerini döndürme
+            
             return new UpdatedProductResponse
             {
                 Id = product.Id,
                 Name = product.Name,
                 Brand = product.Brand,
-                Barcode = product.Barcode,
-                Description = product.Description,
                 Img = product.Img,
                 Price = product.Price,
-                Stock = product.Stock,
                 IsFeatured = product.IsFeatured,
               
             };

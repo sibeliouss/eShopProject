@@ -9,10 +9,7 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductDto>
     {
         RuleFor(p => p.Name).NotEmpty();
         RuleFor(p => p.Brand).NotEmpty();
-        RuleFor(p => p.Barcode).NotEmpty();
         RuleFor(p => p.Img).NotEmpty();
         RuleFor(p => p.Price).NotEmpty();
-        RuleFor(p => p.Price).NotEmpty();
-      
     }
 }

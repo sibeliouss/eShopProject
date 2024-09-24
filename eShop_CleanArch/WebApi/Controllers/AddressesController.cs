@@ -58,7 +58,7 @@ public class AddressesController : ApiController
     [HttpGet("{customerId}")]
     public async Task<IActionResult> Get(Guid customerId)
     {
-        var query = new GetAddressQuery()
+        var query = new GetListAddressQuery()
         {
             CustomerId = customerId
         };

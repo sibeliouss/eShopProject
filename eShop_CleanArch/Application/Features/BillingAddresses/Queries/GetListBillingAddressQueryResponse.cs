@@ -1,6 +1,6 @@
 namespace Application.Features.BillingAddresses.Queries;
 
-public class GetBillingAddressQueryResponse
+public class GetListBillingAddressQueryResponse
 {
     public Guid Id { get; set; }
     public Guid CustomerId { get; set; }

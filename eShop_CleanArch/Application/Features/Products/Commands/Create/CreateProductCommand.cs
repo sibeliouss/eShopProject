@@ -3,13 +3,10 @@ using Application.Services.Repositories;
 using Domain.Entities;
 using Domain.Entities.ValueObjects;
 using MediatR;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Application.Features.Products.Commands.Create
-{
+
+namespace Application.Features.Products.Commands.Create;
+
     public class CreateProductCommand : IRequest<CreatedProductResponse>
     {
         public CreateProductDto CreateProductDto { get; set; }
@@ -30,14 +27,13 @@ namespace Application.Features.Products.Commands.Create
         {
             var productDto = request.CreateProductDto;
             
-            // Ürün mevcut mu kontrol et
             var productExists = await _productRepository.AnyAsync(p => p.Name == productDto.Name);
             if (productExists)
             {
                 throw new Exception("Bu ürün zaten eklenmiş.");
             }
 
-            // Transaction başlat
+            // Transaction
             await _productRepository.BeginTransactionAsync(cancellationToken);
 
             try
@@ -45,12 +41,10 @@ namespace Application.Features.Products.Commands.Create
                 var product = new Product
                 {
                     Name = productDto.Name,
+                    ProductDetailId = productDto.ProductDetailId,
                     Brand = productDto.Brand,
                     Img = productDto.Img,
-                    Description = productDto.Description,
                     Price = new Money(productDto.Price.Value, productDto.Price.Currency),
-                    Stock = productDto.Stock,
-                    Barcode = productDto.Barcode,
                     IsFeatured = productDto.IsFeatured
                 };
 
@@ -80,9 +74,6 @@ namespace Application.Features.Products.Commands.Create
                     Name = product.Name,
                     Brand = product.Brand,
                     Price = product.Price,
-                    Stock = productDto.Stock,
-                    Description = productDto.Description,
-                    Barcode = productDto.Barcode,
                     Img = productDto.Img,
                     IsFeatured = product.IsFeatured
                     
@@ -96,4 +87,4 @@ namespace Application.Features.Products.Commands.Create
             }
         }
     }
-}
+

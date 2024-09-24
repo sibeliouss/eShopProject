@@ -1,6 +1,6 @@
 namespace Application.Features.Addresses.Queries;
 
-public class GetAddressQueryResponse
+public class GetListAddressQueryResponse
 {
    public Guid Id { get; set; }
    public Guid CustomerId { get; set; }

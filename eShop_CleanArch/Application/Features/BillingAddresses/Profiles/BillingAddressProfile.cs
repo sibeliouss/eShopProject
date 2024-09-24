@@ -15,6 +15,6 @@ public class BillingAddressProfile : Profile
       CreateMap<BillingAddress, CreatedBillingAddressResponse>().ReverseMap();
       CreateMap<BillingAddress, UpdateBillingAddressDto>().ReverseMap();
       CreateMap<BillingAddress, UpdatedBillingAddressResponse>().ReverseMap();
-      CreateMap<BillingAddress, GetAddressQueryResponse>().ReverseMap();
+      CreateMap<BillingAddress, GetListAddressQueryResponse>().ReverseMap();
    } 
 }

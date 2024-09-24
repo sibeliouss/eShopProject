@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Addresses.Queries;
 
-public class GetAddressQuery : IRequest<GetAddressQueryResponse>
+public class GetListAddressQuery : IRequest<GetListAddressQueryResponse>
 {
     public Guid CustomerId { get; set; }
 
-    public class GetAddressQueryHandler : IRequestHandler<GetAddressQuery, GetAddressQueryResponse>
+    public class GetAddressQueryHandler : IRequestHandler<GetListAddressQuery, GetListAddressQueryResponse>
     {
         private readonly IAddressRepository _addressRepository;
         private readonly AddressBusinessRules _addressBusinessRules;
@@ -24,13 +24,13 @@ public class GetAddressQuery : IRequest<GetAddressQueryResponse>
             _mapper = mapper;
         }
 
-        public async Task<GetAddressQueryResponse> Handle(GetAddressQuery request, CancellationToken cancellationToken)
+        public async Task<GetListAddressQueryResponse> Handle(GetListAddressQuery request, CancellationToken cancellationToken)
         {
             var address = await _addressRepository.Query().Where(a => a.CustomerId == request.CustomerId)
                 .FirstOrDefaultAsync(cancellationToken);
 
             await _addressBusinessRules.AddressShouldExistWhenSelected(address);
-            return _mapper.Map<GetAddressQueryResponse>(address);
+            return _mapper.Map<GetListAddressQueryResponse>(address);
            
         }
     }

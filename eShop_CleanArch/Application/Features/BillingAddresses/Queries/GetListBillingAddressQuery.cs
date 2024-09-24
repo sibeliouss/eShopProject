@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.BillingAddresses.Queries;
 
-public class GetBillingAddressQuery  : IRequest<GetBillingAddressQueryResponse>
+public class GetListBillingAddressQuery  : IRequest<GetListBillingAddressQueryResponse>
 {
     public Guid CustomerId { get; set; }
 
-    public class GetAddressQueryHandler : IRequestHandler<GetBillingAddressQuery, GetBillingAddressQueryResponse>
+    public class GetAddressQueryHandler : IRequestHandler<GetListBillingAddressQuery, GetListBillingAddressQueryResponse>
     {
         private readonly IBillingAddressRepository _billingAddressRepository;
         private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ public class GetBillingAddressQuery  : IRequest<GetBillingAddressQueryResponse>
             _mapper = mapper;
         }
 
-        public async Task<GetBillingAddressQueryResponse> Handle(GetBillingAddressQuery request, CancellationToken cancellationToken)
+        public async Task<GetListBillingAddressQueryResponse> Handle(GetListBillingAddressQuery request, CancellationToken cancellationToken)
         {
             var address = await _billingAddressRepository.Query().Where(a => a.CustomerId == request.CustomerId)
                 .FirstOrDefaultAsync(cancellationToken);
@@ -29,7 +29,7 @@ public class GetBillingAddressQuery  : IRequest<GetBillingAddressQueryResponse>
                 throw new Exception("Fatura adresi bulunamadı.");
             }
             
-            return _mapper.Map<GetBillingAddressQueryResponse>(address);
+            return _mapper.Map<GetListBillingAddressQueryResponse>(address);
         }
     }
 }

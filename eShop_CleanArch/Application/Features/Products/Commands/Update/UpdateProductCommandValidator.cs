@@ -9,10 +9,9 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductDto>
     {
         RuleFor(p => p.Name).NotEmpty();
         RuleFor(p => p.Brand).NotEmpty();
-        RuleFor(p => p.Barcode).NotEmpty();
         RuleFor(p => p.Img).NotEmpty();
         RuleFor(p => p.Price).NotEmpty();
-        RuleFor(p => p.Price).NotEmpty();
+     
       
     }
 }

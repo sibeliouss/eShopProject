@@ -14,6 +14,6 @@ public class AddressProfile : Profile
         CreateMap<CreateAddressCommand, Address>().ReverseMap();
         CreateMap<UpdateAddressCommand, Address>().ReverseMap();
         CreateMap<UpdatedAddressResponse, Address>().ReverseMap();
-        CreateMap<GetAddressQueryResponse, Address>().ReverseMap();
+        CreateMap<GetListAddressQueryResponse, Address>().ReverseMap();
     }
 }
