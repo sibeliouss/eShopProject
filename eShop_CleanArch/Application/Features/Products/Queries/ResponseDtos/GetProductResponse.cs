@@ -1,8 +1,8 @@
 using Domain.Entities.ValueObjects;
 
-namespace Application.Features.Products.Commands.Create;
+namespace Application.Features.Products.Queries.ResponseDtos;
 
-public class CreatedProductResponse
+public class GetProductResponse
 {
     public Guid Id { get; set; }
     public Guid DetailId { get; set; }
@@ -11,6 +11,5 @@ public class CreatedProductResponse
     public string Img { get; set; }
     public Money Price { get; set; } = new(0, "₺");
     public bool IsFeatured { get; set; }
-    
-    public bool IsActive { get; set; } = true;
+    public DateTime CreateAt { get; set; } = DateTime.Now;
 }

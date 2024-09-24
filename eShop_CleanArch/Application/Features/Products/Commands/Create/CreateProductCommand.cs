@@ -71,6 +71,7 @@ namespace Application.Features.Products.Commands.Create;
                 return new CreatedProductResponse
                 {
                     Id = product.Id,
+                    DetailId = product.ProductDetailId,
                     Name = product.Name,
                     Brand = product.Brand,
                     Price = product.Price,
