@@ -21,12 +21,6 @@ public class CategoriesController : ApiController
     [HttpPost]
     public async Task<IActionResult> Create(CreateCategoryCommand command)
     {
-        var validationResult = await new CreateCategoryCommandValidator().ValidateAsync(command);
-        if (!validationResult.IsValid)
-        {
-            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
-        }
-
         var response= await _mediator.Send(command);
         return Ok(response);
     }
@@ -34,12 +28,6 @@ public class CategoriesController : ApiController
     [HttpPut]
     public async Task<IActionResult> Update(UpdateCategoryCommand command)
     {
-        var validationResult = await new UpdateCategoryCommandValidator().ValidateAsync(command);
-        if (!validationResult.IsValid)
-        {
-            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
-        }
-
         var response = await _mediator.Send(command);
         return Ok(response);
     }

@@ -3,6 +3,7 @@ using Application.Features.Customers.Dtos;
 using Application.Services.Customers;
 using AutoMapper;
 using Domain.Entities;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,15 +26,23 @@ public class RegisterCommand : IRequest
             private readonly ICustomerService _customerService;
             private readonly AuthBusinessRules _authBusinessRules;
             private readonly IMapper _mapper;
-            public RegisterCommandHandler(AuthBusinessRules authBusinessRules, UserManager<User> userManager, ICustomerService customerService, IMapper mapper)
+            private readonly IValidator<RegisterCommand> _validator;
+            public RegisterCommandHandler(AuthBusinessRules authBusinessRules, UserManager<User> userManager, ICustomerService customerService, IMapper mapper, IValidator<RegisterCommand> validator)
             {
                 _authBusinessRules = authBusinessRules;
                 _userManager = userManager;
                 _customerService = customerService;
                 _mapper = mapper;
+                _validator = validator;
             }
             public async Task Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
+                var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+                if (!validationResult.IsValid)
+                {
+                    throw new ValidationException(validationResult.Errors);
+                }
+                
                 var userNameExist = await _userManager.Users.AnyAsync(p => p.UserName == request.UserName, cancellationToken: cancellationToken);
                 var emailExist = await _userManager.Users.AnyAsync(p => p.Email == request.Email, cancellationToken: cancellationToken);
 

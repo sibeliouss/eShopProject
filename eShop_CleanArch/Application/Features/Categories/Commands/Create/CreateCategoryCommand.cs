@@ -1,6 +1,8 @@
+using Application.Features.Categories.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,37 +21,32 @@ public class CreateCategoryCommand : IRequest<CreatedCategoryResponse>
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
+        private readonly IValidator<CreateCategoryCommand> _validator;
+        private readonly CategoryBusinessRules _categoryBusinessRules;
 
-        public CreateCategoryCommandHandler(ICategoryRepository categoryRepository, IMapper mapper)
+        public CreateCategoryCommandHandler(ICategoryRepository categoryRepository, IMapper mapper, IValidator<CreateCategoryCommand> validator, CategoryBusinessRules categoryBusinessRules)
         {
             _categoryRepository = categoryRepository;
             _mapper = mapper;
+            _validator = validator;
+            _categoryBusinessRules = categoryBusinessRules;
         }
         public async Task<CreatedCategoryResponse> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var categoryExists = await _categoryRepository.AnyAsync(c => c.Name == request.Name);
-            if (categoryExists)
+            var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+            if (!validationResult.IsValid)
             {
-                throw new Exception("Bu kategori zaten mevcut!");
+                throw new ValidationException(validationResult.Errors);
             }
 
-            var category = new Category
-            {
-                Name = request.Name,
-                IconImgUrl = request.IconImgUrl,
-                IsActive = true,
-                IsDeleted = false
-            };
+            await _categoryBusinessRules.CategoryNameAlreadyExists(request.Name);
+
+            var category= _mapper.Map<Category>(request);
 
             await _categoryRepository.AddAsync(category);
-
-            // var response = _mapper.Map<CreatedCategoryResponse>(category);
-            var response = new CreatedCategoryResponse()
-            {
-                Id = category.Id,
-                Name = category.Name,
-                IconImgUrl = category.IconImgUrl
-            };
+            
+            var response = _mapper.Map<CreatedCategoryResponse>(category);
+           
             return response;
         }
     }

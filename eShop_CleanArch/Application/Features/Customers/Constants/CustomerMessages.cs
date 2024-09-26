@@ -1,6 +1,6 @@
 namespace Application.Features.Customers.Constants;
 
-public class CustomerMessages
+public static class CustomerMessages
 {
     public const string PasswordIncorrect = "Şifre yanlış!";
     public const string CustomerDontExists = "Müşteri bulunmadı.";

@@ -2,6 +2,7 @@ using Application.Features.Auth.Rules;
 using Application.Services.Auth;
 using AutoMapper;
 using Domain.Entities;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -20,19 +21,27 @@ public class LoginCommand : IRequest<LoginResponse>
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly JwtService _jwtService;
+        private readonly IValidator<LoginCommand> _validator;
        
 
         public LoginCommandHandler(AuthBusinessRules authBusinessRules, UserManager<User> userManager,
             SignInManager<User> signInManager,
-            JwtService jwtService)
+            JwtService jwtService, IValidator<LoginCommand> validator)
         {
             _authBusinessRules = authBusinessRules;
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtService = jwtService;
+            _validator = validator;
         }
         public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
+            var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
+            
             var appUserByUsername =
                 await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.UserNameOrEmail, cancellationToken: cancellationToken);
             var appUserByEmail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.UserNameOrEmail, cancellationToken: cancellationToken);

@@ -1,5 +1,9 @@
+using Application.Features.Products.Constants;
 using Application.Features.Products.Dtos;
+using Application.Features.Products.Rules;
+using Application.Services.ProductCategories;
 using Application.Services.Repositories;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -13,12 +17,16 @@ public class UpdateProductCommand :IRequest<UpdatedProductResponse>
     public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, UpdatedProductResponse>
     {
         private readonly IProductRepository _productRepository;
-        private readonly IProductCategoryRepository _productCategoryRepository;
+        private readonly IProductCategoryService _productCategoryService;
+        private readonly IMapper _mapper;
+        private readonly ProductBusinessRules _productBusinessRules;
 
-        public UpdateProductCommandHandler(IProductRepository productRepository, IProductCategoryRepository productCategoryRepository)
+        public UpdateProductCommandHandler(IProductRepository productRepository, IProductCategoryService productCategoryService, IMapper mapper, ProductBusinessRules productBusinessRules)
         {
             _productRepository = productRepository;
-            _productCategoryRepository = productCategoryRepository;
+            _productCategoryService = productCategoryService;
+            _mapper = mapper;
+            _productBusinessRules = productBusinessRules;
         }
         public async Task<UpdatedProductResponse> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
@@ -28,49 +36,24 @@ public class UpdateProductCommand :IRequest<UpdatedProductResponse>
 
             if (product is null)
             {
-                throw new Exception("ürün bulunamadı!");
+                throw new Exception(ProductMessages.ProductNotFound);
             }
-            product.Name = updateProductDto.Name;
-            product.Brand = updateProductDto.Brand;
-            product.ProductDetailId = updateProductDto.ProductDetailId;
-            product.Img = updateProductDto.Img;
-            product.Price = updateProductDto.Price;
-            product.IsFeatured = updateProductDto.IsFeatured;
+
+            _mapper.Map(product, updateProductDto);
             
             //Kategoriyi gümcelleme
             if (updateProductDto.CategoryIds is not null)
             {
-                //mevcut kategorileri sil
-                if (product.ProductCategories != null)
-                    foreach (var existingCategory in product.ProductCategories.ToList())
-                    {
-                        await _productCategoryRepository.DeleteAsync(existingCategory);
-                    }
+                await _productCategoryService.RemoveAllCategoriesFromProductAsync(product.Id);
+                
+                await _productCategoryService.AddCategoriesToProductAsync(product.Id, updateProductDto.CategoryIds);
 
-                //yeni kategori
-                foreach (var categoryId in updateProductDto.CategoryIds)
-                {
-                    var productCategory = new ProductCategory()
-                    {
-                        Id = Guid.NewGuid(),
-                        ProductId = product.Id,
-                        CategoryId = categoryId
-                    };
-                    await _productCategoryRepository.AddAsync(productCategory);
-                }
             }
             await _productRepository.UpdateAsync(product);
+
+            return _mapper.Map<UpdatedProductResponse>(product);
+
             
-            return new UpdatedProductResponse
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Brand = product.Brand,
-                Img = product.Img,
-                Price = product.Price,
-                IsFeatured = product.IsFeatured,
-              
-            };
 
         }
     }

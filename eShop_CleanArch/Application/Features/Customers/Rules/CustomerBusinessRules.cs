@@ -27,7 +27,7 @@ public class CustomerBusinessRules
                 passwordHasher.VerifyHashedPassword(customer, customer.PasswordHash, password);
             if (passwordVerificationResult != PasswordVerificationResult.Success)
             {
-                throw new BusinessException("Şifre yanlış!");
+                throw new BusinessException(CustomerMessages.PasswordIncorrect);
             }
         }
     }

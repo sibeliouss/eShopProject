@@ -1,7 +1,12 @@
+using Application.Features.Products.Constants;
 using Application.Features.Products.Dtos;
+using Application.Features.Products.Rules;
+using Application.Services.ProductCategories;
 using Application.Services.Repositories;
+using AutoMapper;
 using Domain.Entities;
 using Domain.Entities.ValueObjects;
+using FluentValidation;
 using MediatR;
 
 
@@ -15,77 +20,55 @@ namespace Application.Features.Products.Commands.Create;
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, CreatedProductResponse>
     {
         private readonly IProductRepository _productRepository;
-        private readonly IProductCategoryRepository _productCategoryRepository;
+        private readonly IProductCategoryService _productCategoryService;
+        private readonly IMapper _mapper;
+        private readonly ProductBusinessRules _productBusinessRules;
+        private readonly IValidator<CreateProductDto> _validator;
 
-        public CreateProductCommandHandler(IProductRepository productRepository, IProductCategoryRepository productCategoryRepository)
+        public CreateProductCommandHandler(IProductRepository productRepository, IProductCategoryService productCategoryService, IMapper mapper, ProductBusinessRules productBusinessRules, IValidator<CreateProductDto> validator)
         {
             _productRepository = productRepository;
-            _productCategoryRepository = productCategoryRepository;
-        }
-
+            _productCategoryService = productCategoryService;
+            _mapper = mapper;
+            _productBusinessRules = productBusinessRules;
+            _validator = validator;
+        } 
         public async Task<CreatedProductResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+       {
+         var productDto = request.CreateProductDto;
+         
+         var validationResult = await _validator.ValidateAsync(productDto, cancellationToken);
+         if (!validationResult.IsValid)
+         {
+             throw new ValidationException(validationResult.Errors);
+         }
+         
+         await _productBusinessRules.ProductNameAlreadyExists(productDto.Name);
+
+        // Transaction
+        await _productRepository.BeginTransactionAsync(cancellationToken);
+
+        try
         {
-            var productDto = request.CreateProductDto;
+            var product = _mapper.Map<Product>(productDto);
+
+            await _productRepository.AddAsync(product);
             
-            var productExists = await _productRepository.AnyAsync(p => p.Name == productDto.Name);
-            if (productExists)
+            if (productDto.CategoryIds is not null && productDto.CategoryIds.Any())
             {
-                throw new Exception("Bu ürün zaten eklenmiş.");
+                await _productCategoryService.AddCategoriesToProductAsync(product.Id, productDto.CategoryIds);
             }
+            
+            await _productRepository.CommitTransactionAsync(cancellationToken);
 
-            // Transaction
-            await _productRepository.BeginTransactionAsync(cancellationToken);
-
-            try
-            {
-                var product = new Product
-                {
-                    Name = productDto.Name,
-                    ProductDetailId = productDto.ProductDetailId,
-                    Brand = productDto.Brand,
-                    Img = productDto.Img,
-                    Price = new Money(productDto.Price.Value, productDto.Price.Currency),
-                    IsFeatured = productDto.IsFeatured
-                };
-
-                await _productRepository.AddAsync(product);
-
-                // Kategori ekleme
-                if (productDto.CategoryIds is not null && productDto.CategoryIds.Any())
-                {
-                    foreach (var categoryId in productDto.CategoryIds)
-                    {
-                        var productCategory = new ProductCategory
-                        {
-                            Id = Guid.NewGuid(),
-                            ProductId = product.Id,
-                            CategoryId = categoryId
-                        };
-                        await _productCategoryRepository.AddAsync(productCategory);
-                    }
-                }
-
-                // Veritabanına kaydet ve transaction'ı commit et
-                await _productRepository.CommitTransactionAsync(cancellationToken);
-
-                return new CreatedProductResponse
-                {
-                    Id = product.Id,
-                    DetailId = product.ProductDetailId,
-                    Name = product.Name,
-                    Brand = product.Brand,
-                    Price = product.Price,
-                    Img = productDto.Img,
-                    IsFeatured = product.IsFeatured
-                    
-                };
-            }
-            catch (Exception ex)
-            {
-                // Eğer bir hata olursa rollback yap
-                await _productRepository.RollbackTransactionAsync(cancellationToken);
-                throw new Exception("Ürün oluşturulurken bir hata meydana geldi.", ex);
-            }
+            return _mapper.Map<CreatedProductResponse>(product);
         }
+        catch (Exception ex)
+        {
+            await _productRepository.RollbackTransactionAsync(cancellationToken);
+            throw new Exception(ProductMessages.ProductCreationError, ex);
+        }
+       }
+
     }
 

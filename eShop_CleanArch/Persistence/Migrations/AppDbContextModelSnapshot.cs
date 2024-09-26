@@ -286,9 +286,6 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("ProductName");
 
-                    b.Property<Guid>("ProductDetailId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime?>("UpdateAt")
                         .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime2")
@@ -351,7 +348,6 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Color")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 

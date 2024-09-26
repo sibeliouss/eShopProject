@@ -18,7 +18,6 @@ public class AddressBusinessRules
         throw new BusinessException(message);
     }
 
- 
     public async Task AddressShouldNotExistForCustomer(Guid customerId)
     {
         var addressExists = await _addressRepository.AnyAsync(a => a.CustomerId == customerId);
@@ -27,7 +26,6 @@ public class AddressBusinessRules
             ThrowBusinessException(AddressMessages.AddressAlreadyExistsForCustomer);
         }
     }
-    
     public async Task AddressShouldExistWhenSelected(Address? address)
     {
         if (address == null)

@@ -2,9 +2,14 @@ using System.Reflection;
 using System.Text;
 using Application.Features.Addresses.Rules;
 using Application.Features.Auth.Rules;
+using Application.Features.BillingAddresses.Rules;
+using Application.Features.Categories.Constants;
+using Application.Features.Categories.Rules;
 using Application.Features.Customers.Rules;
+using Application.Features.Products.Rules;
 using Application.Services.Auth;
 using Application.Services.Customers;
+using Application.Services.ProductCategories;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -20,11 +25,16 @@ public static class ApplicationServiceRegistration
         services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddAutoMapper(typeof(ApplicationServiceRegistration).Assembly);
+        
         services.AddScoped<AuthBusinessRules>();
         services.AddScoped<CustomerBusinessRules>();
         services.AddScoped<AddressBusinessRules>();
-        services.AddScoped<ICustomerService, CustomerService>();
+        services.AddScoped<ProductBusinessRules>();
+        services.AddScoped<BillingAddressBusinessRules>();
+        services.AddScoped<CategoryBusinessRules>();
         
+        services.AddScoped<ICustomerService, CustomerService>();
+        services.AddScoped<IProductCategoryService, ProductCategoryService>();
         
         #region JWT
         services.AddAuthentication().AddJwtBearer(options =>

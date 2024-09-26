@@ -27,7 +27,6 @@ namespace Application.Features.Products.Queries;
                 .Select(product => new GetProductResponse()
                 {
                     Id = product.Id,
-                    DetailId = product.ProductDetailId,
                     Name = product.Name,
                     Brand = product.Brand,
                     Price = product.Price,

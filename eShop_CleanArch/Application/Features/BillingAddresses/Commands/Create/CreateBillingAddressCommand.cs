@@ -4,7 +4,9 @@ using Domain.Entities;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Features.BillingAddresses.Rules;
 using AutoMapper;
+using FluentValidation;
 
 namespace Application.Features.BillingAddresses.Commands.Create
 {
@@ -17,21 +19,30 @@ namespace Application.Features.BillingAddresses.Commands.Create
         {
             private readonly IBillingAddressRepository _billingAddressRepository;
             private readonly IMapper _mapper;
+            private readonly IValidator<CreateBillingAddressDto> _validator;
+            private readonly BillingAddressBusinessRules _billingAddressBusinessRules;
 
-            public CreateBillingAddressCommandHandler(IBillingAddressRepository billingAddressRepository, IMapper mapper)
+            public CreateBillingAddressCommandHandler(IBillingAddressRepository billingAddressRepository, IMapper mapper, IValidator<CreateBillingAddressDto> validator, BillingAddressBusinessRules billingAddressBusinessRules)
             {
                 _billingAddressRepository = billingAddressRepository;
                 _mapper = mapper;
+                _validator = validator;
+                _billingAddressBusinessRules = billingAddressBusinessRules;
             }
 
             public async Task<CreatedBillingAddressResponse> Handle(CreateBillingAddressCommand request, CancellationToken cancellationToken)
             {
                 var billingAddressDto = request.CreateBillingAddressDto;
-                var addressExists = await _billingAddressRepository.AnyAsync(a => a.CustomerId == billingAddressDto.CustomerId);
-                if (addressExists)
+                
+                var validationResult = await _validator.ValidateAsync(billingAddressDto, cancellationToken);
+                if (!validationResult.IsValid)
                 {
-                    throw new Exception("Fatura adresi zaten mevcut");
+                    throw new ValidationException(validationResult.Errors);
                 }
+
+                await _billingAddressBusinessRules.BillingAddressShouldNotExistForCustomer(
+                    billingAddressDto.CustomerId);
+                
                 var billingAddress = _mapper.Map<BillingAddress>(billingAddressDto);
 
                 await _billingAddressRepository.AddAsync(billingAddress);

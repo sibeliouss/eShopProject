@@ -1,7 +1,7 @@
+using Application.Features.ProductDetails.Constants;
 using Application.Features.ProductDetails.Dtos;
 using Application.Services.Repositories;
 using Domain.Entities;
-using FluentValidation;
 using MediatR;
 
 namespace Application.Features.ProductDetails.Commands.Create;
@@ -9,63 +9,55 @@ namespace Application.Features.ProductDetails.Commands.Create;
 public class CreateProductDetailCommand : IRequest<CreatedProductDetailResponse>
 {
     public CreateProductDetailDto CreateProductDetailDto { get; set; }
-    
+}
 
-    public class CreateProductDetailCommandHandler : IRequestHandler<CreateProductDetailCommand, CreatedProductDetailResponse>
+public class CreateProductDetailCommandHandler : IRequestHandler<CreateProductDetailCommand, CreatedProductDetailResponse>
+{
+    private readonly IProductDetailRepository _productDetailRepository;
+
+    public CreateProductDetailCommandHandler(IProductDetailRepository productDetailRepository)
     {
-        private readonly IProductDetailRepository _productDetailRepository;
-        private readonly CreateProductDetailCommandValidator _validator;
-        
+        _productDetailRepository = productDetailRepository;
+    }
 
-        public CreateProductDetailCommandHandler(IProductDetailRepository productDetailRepository, CreateProductDetailCommandValidator validator)
+    public async Task<CreatedProductDetailResponse> Handle(CreateProductDetailCommand request, CancellationToken cancellationToken)
+    {
+        var detailDto = request.CreateProductDetailDto;
+
+        var findProductDetail = await _productDetailRepository.AnyAsync(pd => pd.ProductId == detailDto.ProductId);
+        if (findProductDetail)
         {
-            _productDetailRepository = productDetailRepository;
-            _validator = validator;
+            throw new Exception(ProductDetailMessages.ProductDetailAlreadyExists);
         }
-        public async Task<CreatedProductDetailResponse> Handle(CreateProductDetailCommand request, CancellationToken cancellationToken)
+        
+        var productDetail = new ProductDetail
         {
-            //Validasyon
-            var validationResult = await _validator.ValidateAsync(request.CreateProductDetailDto, cancellationToken);
-            if (!validationResult.IsValid)
-            {
-                throw new ValidationException(validationResult.Errors);
-            }
-            
-            var productDetailDto = request.CreateProductDetailDto;
-            var productDetail = await _productDetailRepository.AnyAsync(pd => pd.ProductId == productDetailDto.ProductId);
-            if (productDetail)
-            {
-                throw new Exception("Bu ürüne ait bilgi zaten bulunuyor!");
-            }
- 
-            var detail = new ProductDetail
-            {
-                ProductId = productDetailDto.ProductId,
-                Barcode =  productDetailDto.Barcode,
-                Color = productDetailDto.Color,
-                Fit = productDetailDto.Fit,
-                Stock = productDetailDto.Stock,
-                Size = productDetailDto.Size,
-                Material = productDetailDto.Material,
-                Description = productDetailDto.Description,
-                Brand = productDetailDto.Brand,
-                
-            };
-            await _productDetailRepository.AddAsync(detail);
+            ProductId = detailDto.ProductId,
+            Description = detailDto.Description,
+            Stock = detailDto.Stock,
+            Barcode = detailDto.Barcode,
+            Material = detailDto.Material,
+            Size = detailDto.Size,
+            Color = detailDto.Color,
+            Fit = detailDto.Fit,
+            Brand = detailDto.Brand
+        };
 
-            return new CreatedProductDetailResponse()
-            {
-                Id = detail.Id,
-                ProductId = detail.ProductId,
-                Barcode = detail.Barcode,
-                Color = detail.Color,
-                Material = detail.Material,
-                Fit = detail.Fit,
-                Size = detail.Size,
-                Description = detail.Description,
-                Stock = detail.Stock,
-                Brand = detail.Brand
-            };
-        } 
+        
+        await _productDetailRepository.AddAsync(productDetail);
+
+        return new CreatedProductDetailResponse
+        {
+            Id = productDetail.Id,
+            ProductId = productDetail.ProductId,
+            Description = productDetail.Description,
+            Stock = productDetail.Stock,
+            Barcode = productDetail.Barcode,
+            Material = productDetail.Material,
+            Size = productDetail.Size,
+            Color = productDetail.Color,
+            Fit = productDetail.Fit,
+            Brand = productDetail.Brand
+        };
     }
 }

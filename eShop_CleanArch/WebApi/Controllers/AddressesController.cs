@@ -24,12 +24,6 @@ public class AddressesController : ApiController
     [HttpPost]
     public async Task<IActionResult> Create(CreateAddressCommand command)
     {
-        var validationResult = await new CreateAddressCommandValidator().ValidateAsync(command);
-        if (!validationResult.IsValid)
-        {
-            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
-        }
-
         var response= await _mediator.Send(command);
         return Ok(response);
     }
@@ -37,12 +31,6 @@ public class AddressesController : ApiController
     [HttpPut]
     public async Task<IActionResult> Update(UpdateAddressCommand command)
     {
-        var validationResult = await new UpdateAddressCommandValidator().ValidateAsync(command);
-        if (!validationResult.IsValid)
-        {
-            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
-        }
-
         var response = await _mediator.Send(command);
         return Ok(response);
     }
@@ -69,12 +57,6 @@ public class AddressesController : ApiController
     [HttpPost]
     public async Task<IActionResult> CreateBillingAddress(CreateBillingAddressDto createBillingAddressDto)
     {
-        var validationResult = await new CreateBillingAddressCommandValidator().ValidateAsync(createBillingAddressDto);
-        if (!validationResult.IsValid)
-        {
-            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
-        }
-        
         var command = new CreateBillingAddressCommand
         {
             CreateBillingAddressDto = createBillingAddressDto
@@ -87,11 +69,7 @@ public class AddressesController : ApiController
     [HttpPut]
     public async Task<IActionResult> UpdateBillingAddress(UpdateBillingAddressDto updateCustomerPasswordDto)
     {
-        var validationResult = await new UpdateBillingAddressCommandValidator().ValidateAsync(updateCustomerPasswordDto);
-        if (!validationResult.IsValid)
-        {
-            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
-        }
+       
         var command = new  UpdateBillingAddressCommand
         {
             UpdateBillingAddressDto = updateCustomerPasswordDto

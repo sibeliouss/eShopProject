@@ -20,15 +20,6 @@ public class AuthController : ApiController
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginCommand command, CancellationToken cancellationToken)
     {
-        LoginCommandValidator validator = new();
-        ValidationResult validationResult = await validator.ValidateAsync(command, cancellationToken);
-
-        if (!validationResult.IsValid)
-        {
-            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
-        }
-        
-
         try
         {
             var response = await _mediator.Send(command, cancellationToken);
@@ -43,14 +34,6 @@ public class AuthController : ApiController
     [HttpPost]
     public async Task<IActionResult> Register([FromBody] RegisterCommand command, CancellationToken cancellationToken)
     {
-        
-        RegisterCommandValidator validator = new();
-        var validationResult = await validator.ValidateAsync(command, cancellationToken);
-
-        if (!validationResult.IsValid)
-        {
-            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
-        }
 
         try
         {

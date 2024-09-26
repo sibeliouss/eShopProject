@@ -25,17 +25,11 @@ public class ProductsController : ApiController
         {
             CreateProductDto = createProductDto
         };
-
-        try
-        {
-            var response = await _mediator.Send(command);
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { Message = "Ürün oluşturulurken bir hata meydana geldi.", Details = ex.Message });
-        }
+        
+        var response = await _mediator.Send(command);
+        return Ok(response);
     }
+    
     [HttpPut]
     public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductDto updateProductDto)
     {

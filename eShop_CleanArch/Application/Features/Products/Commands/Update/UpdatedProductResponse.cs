@@ -10,5 +10,5 @@ public class UpdatedProductResponse
     public string Img { get; set; }
     public Money Price { get; set; } = new(0, "₺");
     public bool IsFeatured { get; set; }
-    public bool IsActive { get; set; } = true;
+   
 }
