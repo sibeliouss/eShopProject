@@ -1,4 +1,5 @@
 using Application.Features.Products.Dtos;
+using Application.Services.ProductCategories;
 using Application.Services.Repositories;
 using Domain.Entities;
 using MediatR;
@@ -18,12 +19,12 @@ public class GetListProductQuery: IRequest<ResponseDto<List<ProductDto>>>
     public class GetListProductQueryHandler : IRequestHandler<GetListProductQuery, ResponseDto<List<ProductDto>>>
 {
     private readonly IProductRepository _productRepository;
-    private readonly IProductCategoryRepository _productCategoryRepository;
+    private readonly IProductCategoryService _productCategoryService;
 
-    public GetListProductQueryHandler(IProductRepository productRepository, IProductCategoryRepository productCategoryRepository)
+    public GetListProductQueryHandler(IProductRepository productRepository, IProductCategoryService productCategoryService)
     {
         _productRepository = productRepository;
-        _productCategoryRepository = productCategoryRepository;
+        _productCategoryService = productCategoryService;
     }
 
     public async Task<ResponseDto<List<ProductDto>>> Handle(GetListProductQuery request, CancellationToken cancellationToken)
@@ -76,15 +77,15 @@ public class GetListProductQuery: IRequest<ResponseDto<List<ProductDto>>>
                 CreateAt = product.CreateAt,
                 Img = product.Img,
                 Price = product.Price,
-                ProductCategories = _productCategoryRepository.Query()
+                ProductCategories = _productCategoryService.Query()
                                         .Where(p => p.ProductId == product.Id)
                                         .Select(s => new ProductCategoryDto
                                         {
                                             CategoryId = s.CategoryId,
                                             CategoryName = s.Category.Name
                                         })
-                                        .ToList() // async çağrılar kullanılabilir
-            }).ToListAsync(cancellationToken); // ToListAsync ile async desteklenir.
+                                        .ToList() 
+            }).ToListAsync(cancellationToken); 
 
        
         response.Data = productsDto;

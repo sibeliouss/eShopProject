@@ -40,7 +40,6 @@ public class CreateProductDetailCommandHandler : IRequestHandler<CreateProductDe
             Size = detailDto.Size,
             Color = detailDto.Color,
             Fit = detailDto.Fit,
-            Brand = detailDto.Brand
         };
 
         
@@ -57,7 +56,6 @@ public class CreateProductDetailCommandHandler : IRequestHandler<CreateProductDe
             Size = productDetail.Size,
             Color = productDetail.Color,
             Fit = productDetail.Fit,
-            Brand = productDetail.Brand
         };
     }
 }

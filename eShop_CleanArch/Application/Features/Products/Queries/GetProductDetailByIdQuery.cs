@@ -1,4 +1,5 @@
 using Application.Features.Products.Dtos;
+using Application.Services.ProductCategories;
 using Application.Services.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,12 +13,13 @@ public class GetProductDetailByIdQuery:IRequest<ProductDto>
     public class GetProductDetailByIdQueryHandler: IRequestHandler<GetProductDetailByIdQuery,ProductDto>
     {
         private readonly IProductRepository _productRepository;
-        private readonly IProductCategoryRepository _productCategoryRepository;
+        private readonly IProductCategoryService _productCategoryService;
 
-        public GetProductDetailByIdQueryHandler(IProductRepository productRepository, IProductCategoryRepository productCategoryRepository)
+        public GetProductDetailByIdQueryHandler(IProductRepository productRepository, IProductCategoryService productCategoryService)
         {
             _productRepository = productRepository;
-            _productCategoryRepository = productCategoryRepository;
+            _productCategoryService = productCategoryService;
+
         }
         public async Task<ProductDto> Handle(GetProductDetailByIdQuery request, CancellationToken cancellationToken)
         {
@@ -37,7 +39,6 @@ public class GetProductDetailByIdQuery:IRequest<ProductDto>
                 {
                     Id = product.ProductDetail!.Id,
                     ProductId = product.Id,
-                    Brand = product.ProductDetail.Brand,
                     Barcode = product.ProductDetail.Barcode,
                     Stock = product.ProductDetail.Stock,
                     Description = product.ProductDetail.Description,
@@ -49,7 +50,7 @@ public class GetProductDetailByIdQuery:IRequest<ProductDto>
                 Img = product.Img,
                 Price = product.Price,
                 CreateAt = product.CreateAt,
-                ProductCategories = await _productCategoryRepository.Query().Where(pc=>pc.ProductId==product.Id).Select(pc=>new ProductCategoryDto()
+                ProductCategories = await _productCategoryService.Query().Where(pc=>pc.ProductId==product.Id).Select(pc=>new ProductCategoryDto()
                     {
                         CategoryId = pc.CategoryId,
                         CategoryName = pc.Category.Name

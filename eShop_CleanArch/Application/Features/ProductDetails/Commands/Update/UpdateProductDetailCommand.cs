@@ -28,8 +28,7 @@ public class UpdateProductDetailCommand :IRequest<UpdatedProductDetailResponse>
                 throw new Exception(ProductDetailMessages.ProductDetailNotFound);
             }
 
-
-            productDetail.Brand = productDetailDto.Brand;
+            
             productDetail.Barcode = productDetailDto.Barcode;
             productDetail.Color = productDetailDto.Color;
             productDetail.Description = productDetailDto.Description;
@@ -44,7 +43,6 @@ public class UpdateProductDetailCommand :IRequest<UpdatedProductDetailResponse>
             return new UpdatedProductDetailResponse()
             {
              Id= productDetail.Id,
-             Brand = productDetail.Brand,
              Barcode = productDetail.Barcode,
              Color=productDetail.Color,
              Description = productDetail.Description,

@@ -18,7 +18,6 @@ public class ProductDetailConfiguration :IEntityTypeConfiguration<ProductDetail>
         builder.Property(p => p.Size).IsRequired().HasMaxLength(50);
         builder.Property(p => p.Color).HasMaxLength(50);
         builder.Property(p => p.Fit).HasMaxLength(10);
-        builder.Property(p => p.Brand).IsRequired().HasMaxLength(100);
         builder.Property(pc => pc.CreateAt).HasColumnName("Create Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
         builder.Property(pc => pc.UpdateAt).HasColumnName("Update Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
 

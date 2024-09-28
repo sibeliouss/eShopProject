@@ -33,7 +33,7 @@ public class CategoriesController : ApiController
     }
     
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<GetListCategoryDto>>> GetAll()
+    public async Task<ActionResult<IEnumerable<GetListCategoryDto>>> GetAllCategories()
     {
         var query = new GetAllCategoriesQuery();
         var categories = await _mediator.Send(query);

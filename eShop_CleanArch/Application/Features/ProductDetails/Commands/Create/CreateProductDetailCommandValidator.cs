@@ -13,7 +13,6 @@ public class CreateProductDetailCommandValidator : AbstractValidator<CreateProdu
         RuleFor(x => x.Stock).GreaterThanOrEqualTo(0).WithMessage("Stok miktarı negatif olamaz.");
         RuleFor(x => x.Size).NotEmpty().WithMessage("Beden bilgisi boş olamaz.");
         RuleFor(x => x.Description).NotEmpty().WithMessage("Açıklama boş olamaz.");
-        RuleFor(x => x.Brand).NotEmpty().WithMessage("Marka boş olamaz.");
         RuleFor(x => x.Material).NotEmpty();
     }
 }
