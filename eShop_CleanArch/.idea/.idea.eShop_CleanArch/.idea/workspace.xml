@@ -9,37 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a9e287f-a911-4a4e-b33c-f35739142e19" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Application/Features/ProductDetails/Profiles/ProductDetailProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Features/ProductDiscounts/Commands/Create/CreateProductDiscountCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Features/ProductDiscounts/Commands/Create/CreateProductDiscountCommandValidator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Features/ProductDiscounts/Commands/Create/CreatedProductDiscountResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Features/ProductDiscounts/Commands/Delete/DeleteProductDisountCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Features/ProductDiscounts/Commands/Update/UpdateProductDiscountCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Features/ProductDiscounts/Commands/Update/UpdateProductDiscountCommandValidator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Features/ProductDiscounts/Commands/Update/UpdatedProductDiscountResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Features/ProductDiscounts/Constants/ProductDiscountMessages.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Features/ProductDiscounts/Dtos/ProductDiscountDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Features/ProductDiscounts/Profiles/ProductDiscountProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Products/IProductService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Products/ProductService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Repositories/IProductDiscountRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Persistence/Repositories/ProductDiscountRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApi/Controllers/ProductDiscountsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.eShop_CleanArch/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.eShop_CleanArch/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.eShop_CleanArch/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.eShop_CleanArch/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.eShop_CleanArch/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/ProductDetails/Commands/Create/CreateProductDetailCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/ProductDetails/Commands/Create/CreateProductDetailCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/ProductDetails/Commands/Update/UpdateProductDetailCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/ProductDetails/Commands/Update/UpdateProductDetailCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/ProductDetails/Commands/Update/UpdatedProductDetailResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/ProductDetails/Commands/Update/UpdatedProductDetailResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/ProductDetails/Dtos/UpdateProductDetailDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/ProductDetails/Dtos/UpdateProductDetailDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/ProductDetails/Queries/GetAllProductDetailQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/ProductDetails/Queries/GetAllProductDetailQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/ProductDetails/Queries/GetAllProductDetailResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/ProductDetails/Queries/GetAllProductDetailResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/Products/Profiles/ProductProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/Products/Profiles/ProductProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/Products/Queries/GetProductDetailByIdQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/Products/Queries/GetProductDetailByIdQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/Products/Queries/GetProductsQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/Products/Queries/GetProductsQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.eShop_CleanArch/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.eShop_CleanArch/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/ApplicationServiceRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/ApplicationServiceRegistration.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/bin/Debug/net8.0/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Application/bin/Debug/net8.0/Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/bin/Debug/net8.0/Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Application/bin/Debug/net8.0/Application.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/bin/Debug/net8.0/Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Application/bin/Debug/net8.0/Domain.dll" afterDir="false" />
@@ -53,8 +24,6 @@
       <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net8.0/Application.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net8.0/Application.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net8.0/ref/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net8.0/ref/Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net8.0/refint/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net8.0/refint/Application.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Domain/bin/Debug/net8.0/Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/bin/Debug/net8.0/Domain.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Domain/bin/Debug/net8.0/Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/bin/Debug/net8.0/Domain.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Domain/obj/Debug/net8.0/Domain.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/Debug/net8.0/Domain.AssemblyInfo.cs" afterDir="false" />
@@ -64,12 +33,6 @@
       <change beforePath="$PROJECT_DIR$/Domain/obj/Debug/net8.0/Domain.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/Debug/net8.0/Domain.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Domain/obj/Debug/net8.0/ref/Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/Debug/net8.0/ref/Domain.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Domain/obj/Debug/net8.0/refint/Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/Debug/net8.0/refint/Domain.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistence/EntityConfigurations/ProductDetailConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/EntityConfigurations/ProductDetailConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistence/EntityConfigurations/ProductDiscountConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/EntityConfigurations/ProductDiscountConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistence/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/Migrations/AppDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistence/PersistenceServiceRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/PersistenceServiceRegistration.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Persistence/bin/Debug/net8.0/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/bin/Debug/net8.0/Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Persistence/bin/Debug/net8.0/Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/bin/Debug/net8.0/Application.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Persistence/bin/Debug/net8.0/Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/bin/Debug/net8.0/Domain.dll" afterDir="false" />
@@ -85,8 +48,7 @@
       <change beforePath="$PROJECT_DIR$/Persistence/obj/Debug/net8.0/Persistence.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/obj/Debug/net8.0/Persistence.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Persistence/obj/Debug/net8.0/ref/Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/obj/Debug/net8.0/ref/Persistence.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Persistence/obj/Debug/net8.0/refint/Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/obj/Debug/net8.0/refint/Persistence.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistence/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistence/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/Controllers/ProductDiscountsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Controllers/ProductDiscountsController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/bin/Debug/net8.0/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/bin/Debug/net8.0/Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/bin/Debug/net8.0/Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/bin/Debug/net8.0/Application.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/bin/Debug/net8.0/Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/bin/Debug/net8.0/Domain.dll" afterDir="false" />
@@ -98,14 +60,12 @@
       <change beforePath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/WebApi.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/ref/WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/ref/WebApi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/refint/WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/obj/Debug/net8.0/refint/WebApi.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eShop_CleanArch.sln" beforeDir="false" afterPath="$PROJECT_DIR$/eShopServer.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,7 +225,7 @@
       <workItem from="1727435478879" duration="3249000" />
       <workItem from="1727540389573" duration="10194000" />
       <workItem from="1727593082044" duration="2577000" />
-      <workItem from="1727682387514" duration="3415000" />
+      <workItem from="1727682387514" duration="4797000" />
     </task>
     <servers />
   </component>

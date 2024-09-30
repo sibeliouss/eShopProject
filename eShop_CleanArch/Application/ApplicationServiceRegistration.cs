@@ -10,6 +10,8 @@ using Application.Features.Products.Rules;
 using Application.Services.Auth;
 using Application.Services.Customers;
 using Application.Services.ProductCategories;
+using Application.Services.Products;
+using Application.Services.Repositories;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -35,6 +37,7 @@ public static class ApplicationServiceRegistration
         
         services.AddScoped<ICustomerService, CustomerService>();
         services.AddScoped<IProductCategoryService, ProductCategoryService>();
+        services.AddScoped<IProductService, ProductService>();
         
         #region JWT
         services.AddAuthentication().AddJwtBearer(options =>

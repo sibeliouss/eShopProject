@@ -16,8 +16,7 @@ public class ProductDiscountConfiguration : IEntityTypeConfiguration<ProductDisc
             .HasDefaultValue(0);
         builder.HasIndex(pd => new { pd.ProductId, pd.StartDate, pd.EndDate })
             .IsUnique(); // Aynı ürün için aynı dönemde birden fazla indirim olmasın
-        builder.Property(pd => pd.CreateAt).HasColumnName("CreateDate").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
-        builder.Property(pd => pd.UpdateAt).HasColumnName("UpdateDate").HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
+       
 
     }
 }

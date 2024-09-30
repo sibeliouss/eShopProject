@@ -25,4 +25,3 @@ public class ProductDiscountsController : ApiController
         return CreatedAtAction(nameof(CreateProductDiscount), new { id = response.Id }, response);
     }
 }
-}
