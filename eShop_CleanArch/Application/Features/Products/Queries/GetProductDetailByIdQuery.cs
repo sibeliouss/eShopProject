@@ -1,3 +1,4 @@
+using Application.Features.Products.Constants;
 using Application.Features.Products.Dtos;
 using Application.Services.ProductCategories;
 using Application.Services.Repositories;
@@ -27,7 +28,7 @@ public class GetProductDetailByIdQuery:IRequest<ProductDto>
                 .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
             if (product is null)
             {
-                throw new Exception("Ürün bulunmadı!");
+                throw new Exception(ProductMessages.ProductNotFound);
             }
 
             var productDto = new ProductDto()

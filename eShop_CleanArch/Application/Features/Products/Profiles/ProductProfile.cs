@@ -1,6 +1,7 @@
 using Application.Features.Products.Commands.Create;
 using Application.Features.Products.Commands.Update;
 using Application.Features.Products.Dtos;
+using Application.Features.Products.Queries.ResponseDtos;
 using AutoMapper;
 using Domain.Entities;
 
@@ -14,5 +15,6 @@ public class ProductProfile : Profile
         CreateMap<CreatedProductResponse, Product>().ReverseMap();
         CreateMap<UpdateProductDto, Product>().ReverseMap();
         CreateMap<UpdatedProductResponse, Product>().ReverseMap();
+        CreateMap<Product, GetProductResponse>().ReverseMap();
     }
 }

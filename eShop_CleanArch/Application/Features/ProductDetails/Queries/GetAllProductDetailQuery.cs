@@ -1,4 +1,5 @@
 using Application.Services.Repositories;
+using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,27 +11,19 @@ public class GetAllProductDetailQuery : IRequest<List<GetAllProductDetailRespons
     public class GetAllProductDetailQueryHandler : IRequestHandler<GetAllProductDetailQuery, List<GetAllProductDetailResponse>>
     {
         private readonly IProductDetailRepository _detailRepository;
+        private readonly IMapper _mapper;
 
-        public GetAllProductDetailQueryHandler(IProductDetailRepository detailRepository)
+        public GetAllProductDetailQueryHandler(IProductDetailRepository detailRepository, IMapper mapper)
         {
             _detailRepository = detailRepository;
+            _mapper = mapper;
         }
+
         public async Task<List<GetAllProductDetailResponse>> Handle(GetAllProductDetailQuery request, CancellationToken cancellationToken)
         {
-            var productDetail = await _detailRepository.Query().AsNoTracking().Select(pd => new GetAllProductDetailResponse
-                {
-                    Id = pd.Id,
-                    Barcode = pd.Barcode,
-                    Description = pd.Description,
-                    Color = pd.Color,
-                    Fit = pd.Fit,
-                    Size = pd.Size,
-                    Stock = pd.Stock,
-                    Material = pd.Material
-                })
-                .ToListAsync(cancellationToken);
-
-            return productDetail;
+            var productDetails = await _detailRepository.Query().AsNoTracking().ToListAsync(cancellationToken);
+            var response = _mapper.Map<List<GetAllProductDetailResponse>>(productDetails);
+            return response;
         }
     }
 }

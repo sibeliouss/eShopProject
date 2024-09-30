@@ -1,6 +1,7 @@
 using Application.Features.ProductDetails.Constants;
 using Application.Features.ProductDetails.Dtos;
 using Application.Services.Repositories;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
@@ -13,12 +14,14 @@ public class UpdateProductDetailCommand :IRequest<UpdatedProductDetailResponse>
     public class UpdateProductDetailCommandHandler: IRequestHandler<UpdateProductDetailCommand, UpdatedProductDetailResponse>
     {
         private readonly IProductDetailRepository _productDetailRepository;
+        private readonly IMapper _mapper;
 
-        public UpdateProductDetailCommandHandler(IProductDetailRepository productDetailRepository)
+        public UpdateProductDetailCommandHandler(IProductDetailRepository productDetailRepository, IMapper mapper)
         {
             _productDetailRepository = productDetailRepository;
+            _mapper = mapper;
         }
-        
+
         public async Task<UpdatedProductDetailResponse> Handle(UpdateProductDetailCommand request, CancellationToken cancellationToken)
         {
             var productDetailDto = request.UpdateProductDetailDto;
@@ -28,30 +31,12 @@ public class UpdateProductDetailCommand :IRequest<UpdatedProductDetailResponse>
                 throw new Exception(ProductDetailMessages.ProductDetailNotFound);
             }
 
-            
-            productDetail.Barcode = productDetailDto.Barcode;
-            productDetail.Color = productDetailDto.Color;
-            productDetail.Description = productDetailDto.Description;
-            productDetail.Fit = productDetailDto.Fit;
-            productDetail.Material = productDetailDto.Material;
-            productDetail.Size = productDetailDto.Size;
-            productDetail.Stock = productDetailDto.Stock;
-           
+            _mapper.Map(productDetailDto, productDetail);
 
             await _productDetailRepository.UpdateAsync(productDetail);
 
-            return new UpdatedProductDetailResponse()
-            {
-             Id= productDetail.Id,
-             Barcode = productDetail.Barcode,
-             Color=productDetail.Color,
-             Description = productDetail.Description,
-             Fit = productDetail.Fit,
-             Material = productDetail.Material,
-             Stock = productDetail.Stock,
-             Size = productDetail.Size
-            };
-
+            return _mapper.Map<UpdatedProductDetailResponse>(productDetail);
+            
         }
     }
 }

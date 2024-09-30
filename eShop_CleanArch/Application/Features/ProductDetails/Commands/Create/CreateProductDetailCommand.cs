@@ -1,6 +1,7 @@
 using Application.Features.ProductDetails.Constants;
 using Application.Features.ProductDetails.Dtos;
 using Application.Services.Repositories;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
@@ -14,10 +15,12 @@ public class CreateProductDetailCommand : IRequest<CreatedProductDetailResponse>
 public class CreateProductDetailCommandHandler : IRequestHandler<CreateProductDetailCommand, CreatedProductDetailResponse>
 {
     private readonly IProductDetailRepository _productDetailRepository;
+    private readonly IMapper _mapper;
 
-    public CreateProductDetailCommandHandler(IProductDetailRepository productDetailRepository)
+    public CreateProductDetailCommandHandler(IProductDetailRepository productDetailRepository, IMapper mapper)
     {
         _productDetailRepository = productDetailRepository;
+        _mapper = mapper;
     }
 
     public async Task<CreatedProductDetailResponse> Handle(CreateProductDetailCommand request, CancellationToken cancellationToken)
@@ -29,33 +32,12 @@ public class CreateProductDetailCommandHandler : IRequestHandler<CreateProductDe
         {
             throw new Exception(ProductDetailMessages.ProductDetailAlreadyExists);
         }
-        
-        var productDetail = new ProductDetail
-        {
-            ProductId = detailDto.ProductId,
-            Description = detailDto.Description,
-            Stock = detailDto.Stock,
-            Barcode = detailDto.Barcode,
-            Material = detailDto.Material,
-            Size = detailDto.Size,
-            Color = detailDto.Color,
-            Fit = detailDto.Fit,
-        };
 
-        
+        var productDetail = _mapper.Map<ProductDetail>(detailDto);
+
         await _productDetailRepository.AddAsync(productDetail);
 
-        return new CreatedProductDetailResponse
-        {
-            Id = productDetail.Id,
-            ProductId = productDetail.ProductId,
-            Description = productDetail.Description,
-            Stock = productDetail.Stock,
-            Barcode = productDetail.Barcode,
-            Material = productDetail.Material,
-            Size = productDetail.Size,
-            Color = productDetail.Color,
-            Fit = productDetail.Fit,
-        };
+        return _mapper.Map<CreatedProductDetailResponse>(productDetail);
+        
     }
 }
