@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Application.Features.ProductDiscounts.Commands.Create;
 
-public class CreateProductDiscountCommandValidator : AbstractValidator<ProductDiscountDto>
+public class CreateProductDiscountCommandValidator : AbstractValidator<CreateProductDiscountDto>
 {
     public CreateProductDiscountCommandValidator()
     {

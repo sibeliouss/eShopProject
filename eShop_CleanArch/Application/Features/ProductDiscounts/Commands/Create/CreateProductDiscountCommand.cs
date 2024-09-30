@@ -9,7 +9,7 @@ namespace Application.Features.ProductDiscounts.Commands.Create;
 
 public class CreateProductDiscountCommand : IRequest<CreatedProductDiscountResponse>
 {
-    public ProductDiscountDto ProductDiscountDto { get; set; }
+    public CreateProductDiscountDto CreateProductDiscountDto { get; set; }
     
     public class CreateProductDiscountCommandHandler : IRequestHandler<CreateProductDiscountCommand, CreatedProductDiscountResponse>
     {
@@ -25,7 +25,7 @@ public class CreateProductDiscountCommand : IRequest<CreatedProductDiscountRespo
         public async Task<CreatedProductDiscountResponse> Handle(CreateProductDiscountCommand request, CancellationToken cancellationToken)
         {
             var existingDiscount = await _productDiscountRepository.Query()
-                .Where(pd => pd.ProductId == request.ProductDiscountDto.ProductId)
+                .Where(pd => pd.ProductId == request.CreateProductDiscountDto.ProductId)
                 .FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
             if (existingDiscount is not null)
@@ -34,7 +34,7 @@ public class CreateProductDiscountCommand : IRequest<CreatedProductDiscountRespo
             }
 
             var productPrice = await _productService.Query()
-                .Where(p => p.Id == request.ProductDiscountDto.ProductId)
+                .Where(p => p.Id == request.CreateProductDiscountDto.ProductId)
                 .AsNoTracking()
                 .Select(p => p.Price)
                 .FirstOrDefaultAsync(cancellationToken: cancellationToken);
@@ -42,16 +42,16 @@ public class CreateProductDiscountCommand : IRequest<CreatedProductDiscountRespo
             if (productPrice is null)
                 throw new Exception("Ürün fiyatı bulunamadı.");
             
-            var discountPrice = request.ProductDiscountDto.DiscountPercentage == 0
+            var discountPrice = request.CreateProductDiscountDto.DiscountPercentage == 0
                 ? productPrice.Value
-                : productPrice.Value - (productPrice.Value * request.ProductDiscountDto.DiscountPercentage / 100);
+                : productPrice.Value - (productPrice.Value * request.CreateProductDiscountDto.DiscountPercentage / 100);
 
             var productDiscount = new ProductDiscount
             {
-                ProductId = request.ProductDiscountDto.ProductId,
-                DiscountPercentage = request.ProductDiscountDto.DiscountPercentage,
-                StartDate = request.ProductDiscountDto.StartDate,
-                EndDate = request.ProductDiscountDto.EndDate,
+                ProductId = request.CreateProductDiscountDto.ProductId,
+                DiscountPercentage = request.CreateProductDiscountDto.DiscountPercentage,
+                StartDate = request.CreateProductDiscountDto.StartDate,
+                EndDate = request.CreateProductDiscountDto.EndDate,
                 DiscountedPrice = discountPrice,
             };
 

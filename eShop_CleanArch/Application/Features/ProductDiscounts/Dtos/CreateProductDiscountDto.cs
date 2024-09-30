@@ -1,6 +1,6 @@
 namespace Application.Features.ProductDiscounts.Dtos;
 
-public record ProductDiscountDto
+public record CreateProductDiscountDto
 (
     Guid ProductId,
     int DiscountPercentage,
