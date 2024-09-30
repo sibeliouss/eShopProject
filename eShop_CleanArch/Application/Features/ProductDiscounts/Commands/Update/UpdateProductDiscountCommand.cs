@@ -1,6 +1,8 @@
+using Application.Features.ProductDiscounts.Constants;
 using Application.Features.ProductDiscounts.Dtos;
 using Application.Services.Products;
 using Application.Services.Repositories;
+using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,33 +12,30 @@ public class UpdateProductDiscountCommand : IRequest<UpdatedProductDiscountRespo
 {
     public UpdateProductDiscountDto UpdateProductDiscountDto { get; set; }
 
-    public class
-        UpdateProductDiscountCommandHandler : IRequestHandler<UpdateProductDiscountCommand,
-        UpdatedProductDiscountResponse>
+    public class UpdateProductDiscountCommandHandler : IRequestHandler<UpdateProductDiscountCommand, UpdatedProductDiscountResponse>
     {
         private readonly IProductDiscountRepository _productDiscountRepository;
         private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public UpdateProductDiscountCommandHandler(IProductDiscountRepository productDiscountRepository,
-            IProductService productService)
+        public UpdateProductDiscountCommandHandler(IProductDiscountRepository productDiscountRepository, IProductService productService, IMapper mapper)
         {
             _productDiscountRepository = productDiscountRepository;
             _productService = productService;
+            _mapper = mapper;
         }
 
-        public async Task<UpdatedProductDiscountResponse> Handle(UpdateProductDiscountCommand request,
-            CancellationToken cancellationToken)
+        public async Task<UpdatedProductDiscountResponse> Handle(UpdateProductDiscountCommand request, CancellationToken cancellationToken)
         {
-            var productDiscount =await _productDiscountRepository.GetByIdAsync(request.UpdateProductDiscountDto.Id);
+            var updateProductDiscountDto = request.UpdateProductDiscountDto;
+            var productDiscount =await _productDiscountRepository.GetByIdAsync(updateProductDiscountDto.Id);
             
             if (productDiscount is null)
             {
-                throw new Exception("İndirim kaydı bulunamadı.");
+                throw new Exception(ProductDiscountMessages.DiscountRecordNotFound);
             }
-            
-            productDiscount.DiscountPercentage = request.UpdateProductDiscountDto.DiscountPercentage;
-            productDiscount.StartDate = request.UpdateProductDiscountDto.StartDate;
-            productDiscount.EndDate = request.UpdateProductDiscountDto.EndDate;
+
+            _mapper.Map(updateProductDiscountDto, productDiscount);
 
             var productPrice = await _productService.Query()
                 .Where(p => p.Id == productDiscount.ProductId)
@@ -45,7 +44,7 @@ public class UpdateProductDiscountCommand : IRequest<UpdatedProductDiscountRespo
                 .FirstOrDefaultAsync(cancellationToken);
 
             if (productPrice is null)
-                throw new Exception("Ürün fiyatı bulunamadı.");
+                throw new Exception(ProductDiscountMessages.PriceNotFound);
 
             productDiscount.DiscountedPrice = productDiscount.DiscountPercentage == 0
                 ? productPrice.Value
@@ -53,15 +52,8 @@ public class UpdateProductDiscountCommand : IRequest<UpdatedProductDiscountRespo
 
             await _productDiscountRepository.UpdateAsync(productDiscount);
 
-            return new UpdatedProductDiscountResponse
-            {
-                Id = productDiscount.Id,
-                ProductId = productDiscount.ProductId,
-                DiscountPercentage = productDiscount.DiscountPercentage,
-                StartDate = productDiscount.StartDate,
-                EndDate = productDiscount.EndDate,
-                DiscountedPrice = productDiscount.DiscountedPrice
-            };
+            return _mapper.Map<UpdatedProductDiscountResponse>(productDiscount);
+            
         }
 
     }

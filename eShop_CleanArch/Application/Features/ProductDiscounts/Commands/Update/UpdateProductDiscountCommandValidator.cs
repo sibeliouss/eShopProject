@@ -7,7 +7,6 @@ public class UpdateProductDiscountCommandValidator : AbstractValidator<UpdatePro
 {
     public UpdateProductDiscountCommandValidator()
     {
-        RuleFor(x => x.ProductId).NotEmpty();
         RuleFor(x => x.DiscountPercentage).InclusiveBetween(0, 100).WithMessage("İndirim yüzdesi 0 ile 100 arasında olmalıdır.");
         RuleFor(x => x.StartDate)
             .LessThan(x => x.EndDate).WithMessage("Başlangıç tarihi, bitiş tarihinden önce olmalıdır.");
