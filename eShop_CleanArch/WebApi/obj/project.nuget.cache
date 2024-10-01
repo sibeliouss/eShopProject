@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qsANli9X/RYgn8s9WGZCHjc/T7R/nJIjvnWOclLJEao2um0buRPn46WmM5vzgUCgMA8A6O3/QU8XqRECh0zP3w==",
+  "dgSpecHash": "uzpmI6dBB+AnVnVI41NHZFGpcv4VppACttRdBR68RrANyrZh9GidgMd5NDNTu6nJVkRLo01h69jm/bTw0/9vuQ==",
   "success": true,
   "projectFilePath": "/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/WebApi.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "/Users/sozey/.nuget/packages/fluentvalidation/11.9.2/fluentvalidation.11.9.2.nupkg.sha512",
     "/Users/sozey/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.9.2/fluentvalidation.dependencyinjectionextensions.11.9.2.nupkg.sha512",
     "/Users/sozey/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/sozey/.nuget/packages/iyzipay/2.1.61/iyzipay.2.1.61.nupkg.sha512",
     "/Users/sozey/.nuget/packages/mediatr/12.4.0/mediatr.12.4.0.nupkg.sha512",
     "/Users/sozey/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/Users/sozey/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.6/microsoft.aspnetcore.authentication.jwtbearer.8.0.6.nupkg.sha512",
@@ -57,6 +58,7 @@
     "/Users/sozey/.nuget/packages/microsoft.sqlserver.server/1.0.0/microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "/Users/sozey/.nuget/packages/microsoft.win32.systemevents/6.0.0/microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "/Users/sozey/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
+    "/Users/sozey/.nuget/packages/newtonsoft.json/13.0.2/newtonsoft.json.13.0.2.nupkg.sha512",
     "/Users/sozey/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "/Users/sozey/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "/Users/sozey/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",

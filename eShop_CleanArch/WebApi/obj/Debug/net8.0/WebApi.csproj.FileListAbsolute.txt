@@ -155,3 +155,5 @@
 /Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/Application.pdb
 /Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/MediatR.dll
 /Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/MediatR.Contracts.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/Iyzipay.dll
+/Users/sozey/Projects/eShopProject/eShop_CleanArch/WebApi/bin/Debug/net8.0/Newtonsoft.Json.dll
