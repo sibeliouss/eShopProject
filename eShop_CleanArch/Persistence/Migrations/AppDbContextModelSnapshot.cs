@@ -43,7 +43,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("Create Date")
+                        .HasColumnName("CreateShoppingBasket Date")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<Guid>("CustomerId")
@@ -72,6 +72,39 @@ namespace Persistence.Migrations
                     b.ToTable("Addresses", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Basket", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Baskets", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.BillingAddress", b =>
                 {
                     b.Property<Guid>("Id")
@@ -93,7 +126,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("Create Date")
+                        .HasColumnName("CreateShoppingBasket Date")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<Guid>("CustomerId")
@@ -131,7 +164,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("Create Date")
+                        .HasColumnName("CreateShoppingBasket Date")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -397,6 +430,11 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("ProductName");
 
+                    b.Property<int>("Quantity")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
                     b.Property<DateTime?>("UpdateAt")
                         .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime2")
@@ -421,7 +459,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("Create Date")
+                        .HasColumnName("CreateShoppingBasket Date")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -460,7 +498,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("Create Date")
+                        .HasColumnName("CreateShoppingBasket Date")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -489,11 +527,6 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("Stock")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
 
                     b.Property<DateTime?>("UpdateAt")
                         .ValueGeneratedOnUpdate()
@@ -637,6 +670,49 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Basket", b =>
+                {
+                    b.HasOne("Domain.Entities.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("Domain.Entities.ValueObjects.Money", "Price", b1 =>
+                        {
+                            b1.Property<Guid>("BasketId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Currency")
+                                .IsRequired()
+                                .HasMaxLength(5)
+                                .HasColumnType("nvarchar(5)");
+
+                            b1.Property<decimal>("Value")
+                                .HasColumnType("money");
+
+                            b1.HasKey("BasketId");
+
+                            b1.ToTable("Baskets");
+
+                            b1.WithOwner()
+                                .HasForeignKey("BasketId");
+                        });
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Price")
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Domain.Entities.BillingAddress", b =>

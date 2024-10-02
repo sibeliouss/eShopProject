@@ -36,12 +36,12 @@ public class GetProductDetailByIdQuery:IRequest<ProductDto>
                 Id = product.Id,
                 Name = product.Name,
                 Brand = product.Brand,
+                Quantity = product.Quantity,
                 ProductDetail = new ProductDetailDto()
                 {
                     Id = product.ProductDetail!.Id,
                     ProductId = product.Id,
                     Barcode = product.ProductDetail.Barcode,
-                    Stock = product.ProductDetail.Stock,
                     Description = product.ProductDetail.Description,
                     Material = product.ProductDetail.Material,
                     Fit = product.ProductDetail.Fit,

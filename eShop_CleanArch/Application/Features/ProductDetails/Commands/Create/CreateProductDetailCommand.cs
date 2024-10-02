@@ -3,6 +3,7 @@ using Application.Features.ProductDetails.Dtos;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using FluentValidation;
 using MediatR;
 
 namespace Application.Features.ProductDetails.Commands.Create;
@@ -16,16 +17,24 @@ public class CreateProductDetailCommandHandler : IRequestHandler<CreateProductDe
 {
     private readonly IProductDetailRepository _productDetailRepository;
     private readonly IMapper _mapper;
+    private readonly IValidator<CreateProductDetailDto> _validator;
 
-    public CreateProductDetailCommandHandler(IProductDetailRepository productDetailRepository, IMapper mapper)
+    public CreateProductDetailCommandHandler(IProductDetailRepository productDetailRepository, IMapper mapper, IValidator<CreateProductDetailDto> validator)
     {
         _productDetailRepository = productDetailRepository;
         _mapper = mapper;
+        _validator = validator;
     }
 
     public async Task<CreatedProductDetailResponse> Handle(CreateProductDetailCommand request, CancellationToken cancellationToken)
     {
         var detailDto = request.CreateProductDetailDto;
+        
+        var validationResult = await _validator.ValidateAsync(detailDto, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            throw new ValidationException(validationResult.Errors);
+        }
 
         var findProductDetail = await _productDetailRepository.AnyAsync(pd => pd.ProductId == detailDto.ProductId);
         if (findProductDetail)

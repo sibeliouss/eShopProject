@@ -77,6 +77,7 @@ public class GetListProductQuery: IRequest<ResponseDto<List<ProductDto>>>
                 CreateAt = product.CreateAt,
                 Img = product.Img,
                 Price = product.Price,
+                Quantity = product.Quantity,
                 ProductCategories = _productCategoryService.Query()
                                         .Where(p => p.ProductId == product.Id)
                                         .Select(s => new ProductCategoryDto

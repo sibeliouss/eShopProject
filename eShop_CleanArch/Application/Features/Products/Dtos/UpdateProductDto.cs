@@ -6,7 +6,8 @@ public record UpdateProductDto(
     Guid Id,
     string Name, 
     string Brand,
-    string Img, 
+    string Img,
+    int Quantity,
     Money Price,
     bool IsFeatured,
     List<Guid> CategoryIds);

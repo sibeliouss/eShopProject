@@ -21,4 +21,13 @@
       <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\Baskets\Constants\" />
+      <Folder Include="Features\Orders\Commands\Delete\" />
+      <Folder Include="Features\Orders\Commands\Update\" />
+      <Folder Include="Features\Orders\Constants\" />
+      <Folder Include="Features\Orders\Profiles\" />
+      <Folder Include="Features\Orders\Rules\" />
+    </ItemGroup>
+
 </Project>

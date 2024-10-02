@@ -10,7 +10,7 @@ public class AddressConfiguration : IEntityTypeConfiguration<Address>
     {
         builder.ToTable("Addresses").HasKey(a => a.Id);
         builder.Property(a => a.Id).IsRequired();
-        builder.Property(a => a.CreateAt).HasColumnName("Create Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
+        builder.Property(a => a.CreateAt).HasColumnName("CreateShoppingBasket Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
         builder.Property(a => a.UpdateAt).HasColumnName("Update Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
 
     }

@@ -39,7 +39,7 @@ namespace Persistence.Migrations
                 newName: "ProductBrand");
 
             migrationBuilder.RenameColumn(
-                name: "Create Date",
+                name: "CreateShoppingBasket Date",
                 table: "Products",
                 newName: "CreateDate");
 
@@ -64,7 +64,7 @@ namespace Persistence.Migrations
                     Color = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Fit = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Brand = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CreateDate = table.Column<DateTime>(name: "Create Date", type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    CreateDate = table.Column<DateTime>(name: "CreateShoppingBasket Date", type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     UpdateDate = table.Column<DateTime>(name: "Update Date", type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -148,7 +148,7 @@ namespace Persistence.Migrations
             migrationBuilder.RenameColumn(
                 name: "CreateDate",
                 table: "Products",
-                newName: "Create Date");
+                newName: "CreateShoppingBasket Date");
 
             migrationBuilder.AddColumn<string>(
                 name: "Barcode",

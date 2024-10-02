@@ -29,6 +29,7 @@ public static class PersistenceServiceRegistration
 
         }).AddEntityFrameworkStores<AppDbContext>();
         #endregion
+        
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IAddressRepository, AddressRepository>();
         services.AddScoped<IBillingAddressRepository, BillingAddressRepository>();
@@ -37,6 +38,9 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
         services.AddScoped<IProductDetailRepository, ProductDetailRepository>();
         services.AddScoped<IProductDiscountRepository, ProductDiscountRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+        services.AddScoped<IBasketRepository, BasketRepository>();
 
     } 
 }

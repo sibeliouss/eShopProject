@@ -1,9 +1,11 @@
+using Application.Features.ProductDetails.Dtos;
 using Application.Features.ProductDiscounts.Constants;
 using Application.Features.ProductDiscounts.Dtos;
 using Application.Services.Products;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,17 +20,26 @@ public class CreateProductDiscountCommand : IRequest<CreatedProductDiscountRespo
         private readonly IProductDiscountRepository _productDiscountRepository;
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
+        private readonly IValidator<CreateProductDiscountDto> _validator;
 
-        public CreateProductDiscountCommandHandler(IProductDiscountRepository productDiscountRepository, IProductService productService, IMapper mapper)
+        public CreateProductDiscountCommandHandler(IProductDiscountRepository productDiscountRepository, IProductService productService, IMapper mapper, IValidator<CreateProductDiscountDto> validator)
         {
             _productDiscountRepository = productDiscountRepository;
             _productService = productService;
             _mapper = mapper;
+            _validator = validator;
         }
         
         public async Task<CreatedProductDiscountResponse> Handle(CreateProductDiscountCommand request, CancellationToken cancellationToken)
         {
             var productDiscountDto = request.CreateProductDiscountDto;
+            
+            var validationResult = await _validator.ValidateAsync(productDiscountDto, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
+            
             var existingDiscount = await _productDiscountRepository.Query()
                 .Where(pd => pd.ProductId == productDiscountDto.ProductId)
                 .FirstOrDefaultAsync(cancellationToken: cancellationToken);

@@ -3,6 +3,7 @@ using Application.Features.ProductDiscounts.Dtos;
 using Application.Services.Products;
 using Application.Services.Repositories;
 using AutoMapper;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,17 +18,26 @@ public class UpdateProductDiscountCommand : IRequest<UpdatedProductDiscountRespo
         private readonly IProductDiscountRepository _productDiscountRepository;
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
+        private readonly IValidator<UpdateProductDiscountDto> _validator;
 
-        public UpdateProductDiscountCommandHandler(IProductDiscountRepository productDiscountRepository, IProductService productService, IMapper mapper)
+        public UpdateProductDiscountCommandHandler(IProductDiscountRepository productDiscountRepository, IProductService productService, IMapper mapper, IValidator<UpdateProductDiscountDto> validator)
         {
             _productDiscountRepository = productDiscountRepository;
             _productService = productService;
             _mapper = mapper;
+            _validator = validator;
         }
 
         public async Task<UpdatedProductDiscountResponse> Handle(UpdateProductDiscountCommand request, CancellationToken cancellationToken)
         {
             var updateProductDiscountDto = request.UpdateProductDiscountDto;
+            
+            var validationResult = await _validator.ValidateAsync(updateProductDiscountDto, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
+            
             var productDiscount =await _productDiscountRepository.GetByIdAsync(updateProductDiscountDto.Id);
             
             if (productDiscount is null)

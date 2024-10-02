@@ -15,4 +15,9 @@ public class ProductService : IProductService
     {
         return _productRepository.Query();
     }
+
+    public async Task<Product?> GetByIdAsync(Guid id)
+    {
+        return await _productRepository.GetByIdAsync(id);
+    }
 }

@@ -20,7 +20,7 @@ namespace Persistence.Migrations
                     IconImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreateDate = table.Column<DateTime>(name: "Create Date", type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    CreateDate = table.Column<DateTime>(name: "CreateShoppingBasket Date", type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     UpdateDate = table.Column<DateTime>(name: "Update Date", type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -43,7 +43,7 @@ namespace Persistence.Migrations
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     IsFeatured = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreateDate = table.Column<DateTime>(name: "Create Date", type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    CreateDate = table.Column<DateTime>(name: "CreateShoppingBasket Date", type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     UpdateDate = table.Column<DateTime>(name: "Update Date", type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -86,7 +86,7 @@ namespace Persistence.Migrations
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreateDate = table.Column<DateTime>(name: "Create Date", type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    CreateDate = table.Column<DateTime>(name: "CreateShoppingBasket Date", type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     UpdateDate = table.Column<DateTime>(name: "Update Date", type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -152,7 +152,7 @@ namespace Persistence.Migrations
                     ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContactName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreateDate = table.Column<DateTime>(name: "Create Date", type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    CreateDate = table.Column<DateTime>(name: "CreateShoppingBasket Date", type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     UpdateDate = table.Column<DateTime>(name: "Update Date", type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -178,7 +178,7 @@ namespace Persistence.Migrations
                     ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContactName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreateDate = table.Column<DateTime>(name: "Create Date", type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    CreateDate = table.Column<DateTime>(name: "CreateShoppingBasket Date", type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     UpdateDate = table.Column<DateTime>(name: "Update Date", type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },

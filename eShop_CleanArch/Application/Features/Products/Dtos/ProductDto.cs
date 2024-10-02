@@ -11,6 +11,8 @@ public class ProductDto
     public string Name { get; set; } = string.Empty;
     public string Brand { get; set; } = string.Empty;
     public string Img { get; set; }= string.Empty;
+    
+    public int Quantity { get; set; }
     public ProductDetailDto ProductDetail { get; set; }
     public Money Price { get; set; } = new Money(0, "₺");
   

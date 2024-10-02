@@ -12,6 +12,7 @@ public class ProductConfiguration :IEntityTypeConfiguration<Product>
         builder.Property(p => p.Id).IsRequired();
         builder.Property(p => p.Name).HasColumnName("ProductName").HasMaxLength(30).IsRequired();
         builder.Property(p => p.Brand).HasColumnName("ProductBrand").HasMaxLength(30).IsRequired();
+        builder.Property(p => p.Quantity).IsRequired().HasDefaultValue(0);
         builder.Property(p => p.CreateAt).HasColumnName("CreateDate").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
         builder.Property(p => p.UpdateAt).HasColumnName("UpdateDate").HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
         

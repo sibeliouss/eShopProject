@@ -4,7 +4,6 @@ public class GetAllProductDetailResponse
 {
     public Guid Id { get; set; }
     public string? Description { get; set; }
-    public int Stock { get; set; }
     public string? Barcode { get; set; }
     public string Material { get; set; } = string.Empty;
     public string Size { get; set; } = string.Empty;

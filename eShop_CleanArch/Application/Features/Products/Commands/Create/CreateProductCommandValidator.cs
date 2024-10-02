@@ -7,18 +7,10 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductDto>
 {
     public CreateProductCommandValidator()
     {
-        RuleFor(product => product.Name).NotEmpty().WithMessage("Ürün adı boş olamaz.")
-            .Length(2, 100).WithMessage("Ürün adı 2 ile 100 karakter arasında olmalıdır.");
-
-        RuleFor(product => product.Brand)
-            .NotEmpty().WithMessage("Marka boş olamaz.")
-            .Length(2, 50).WithMessage("Marka 2 ile 50 karakter arasında olmalıdır.");
-
-        RuleFor(product => product.Img)
-            .NotEmpty().WithMessage("Resim URL'si boş olamaz.");
-
-        RuleFor(product => product.Price)
-            .NotNull().WithMessage("Fiyat boş olamaz.")
-            .Must(price => price.Value > 0).WithMessage("Fiyat 0'dan büyük olmalıdır.");
+        RuleFor(product => product.Name).NotEmpty().WithMessage("Ürün adı boş olamaz.").Length(2, 100).WithMessage("Ürün adı 2 ile 100 karakter arasında olmalıdır.");
+        RuleFor(product => product.Brand).NotEmpty().WithMessage("Marka boş olamaz.").Length(2, 50).WithMessage("Marka 2 ile 50 karakter arasında olmalıdır.");
+        RuleFor(product => product.Img).NotEmpty().WithMessage("Resim URL'si boş olamaz.");
+        RuleFor(product => product.Price).NotNull().WithMessage("Fiyat boş olamaz.").Must(price => price.Value > 0).WithMessage("Fiyat 0'dan büyük olmalıdır.");
+        RuleFor(product => product.Quantity).GreaterThanOrEqualTo(0).WithMessage("Stok miktarı negatif olamaz.");
     }
 }

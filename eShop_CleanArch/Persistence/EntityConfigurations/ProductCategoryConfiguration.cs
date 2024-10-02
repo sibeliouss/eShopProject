@@ -12,7 +12,7 @@ public class ProductCategoryConfiguration : IEntityTypeConfiguration<ProductCate
         builder.Property(pc => pc.Id).IsRequired();
         builder.Property(pc => pc.CategoryId).HasColumnName("CategoryId");
         builder.Property(pc => pc.ProductId).HasColumnName("ProductId");
-        builder.Property(pc => pc.CreateAt).HasColumnName("Create Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
+        builder.Property(pc => pc.CreateAt).HasColumnName("CreateShoppingBasket Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
         builder.Property(pc => pc.UpdateAt).HasColumnName("Update Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
         
         builder.HasQueryFilter(pc => !pc.DeletedAt.HasValue);
