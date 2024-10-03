@@ -22,7 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Baskets\Commands\Payment\" />
       <Folder Include="Features\Baskets\Constants\" />
       <Folder Include="Features\Orders\Commands\Delete\" />
       <Folder Include="Features\Orders\Commands\Update\" />

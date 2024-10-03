@@ -43,7 +43,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("CreateShoppingBasket Date")
+                        .HasColumnName("Create Date")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<Guid>("CustomerId")
@@ -126,7 +126,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("CreateShoppingBasket Date")
+                        .HasColumnName("Create Date")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<Guid>("CustomerId")
@@ -164,7 +164,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("CreateShoppingBasket Date")
+                        .HasColumnName("Create Date")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -459,7 +459,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("CreateShoppingBasket Date")
+                        .HasColumnName("Create Date")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -498,7 +498,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("CreateShoppingBasket Date")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -529,9 +528,8 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("UpdateAt")
-                        .ValueGeneratedOnUpdate()
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("Update Date")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.HasKey("Id");
