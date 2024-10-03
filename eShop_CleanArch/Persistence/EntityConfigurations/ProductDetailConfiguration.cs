@@ -17,7 +17,7 @@ public class ProductDetailConfiguration :IEntityTypeConfiguration<ProductDetail>
         builder.Property(pd => pd.Size).IsRequired().HasMaxLength(50);
         builder.Property(pd => pd.Color).HasMaxLength(50);
         builder.Property(pd => pd.Fit).HasMaxLength(10);
-        builder.Property(pd => pd.CreateAt).HasColumnName("CreateShoppingBasket Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
+        builder.Property(pd => pd.CreateAt).HasColumnName("Create Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
         builder.Property(pd => pd.UpdateAt).HasColumnName("Update Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
 
         

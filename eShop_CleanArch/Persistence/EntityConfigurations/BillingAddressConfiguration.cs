@@ -10,7 +10,7 @@ public class BillingAddressConfiguration : IEntityTypeConfiguration<BillingAddre
     {
         builder.ToTable("BillingAddresses").HasKey(a => a.Id);
         builder.Property(ba => ba.Id).IsRequired();
-        builder.Property(ba => ba.CreateAt).HasColumnName("CreateShoppingBasket Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
+        builder.Property(ba => ba.CreateAt).HasColumnName("Create Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
         builder.Property(ba => ba.UpdateAt).HasColumnName("Update Date").HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
 
     }

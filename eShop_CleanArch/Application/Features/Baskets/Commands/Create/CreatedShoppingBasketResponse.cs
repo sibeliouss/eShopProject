@@ -1,6 +1,6 @@
 using Domain.Entities.ValueObjects;
 
-namespace Application.Features.Baskets.Commands.CreateShoppingBasket;
+namespace Application.Features.Baskets.Commands.Create;
 
 public class CreatedShoppingBasketResponse
 {

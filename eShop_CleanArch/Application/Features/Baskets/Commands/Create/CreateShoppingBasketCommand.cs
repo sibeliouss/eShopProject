@@ -6,7 +6,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Features.Baskets.Commands.CreateShoppingBasket;
+namespace Application.Features.Baskets.Commands.Create;
 
 public class CreateShoppingBasketCommand : IRequest<CreatedShoppingBasketResponse>
 {
