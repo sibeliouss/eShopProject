@@ -11,6 +11,8 @@ public class Order : Entity<Guid>
    public int ProductQuantity { get; set; }
    public DateTime PaymentDate { get; set; }=DateTime.Now;
    public string PaymentMethod { get; set; } = string.Empty;
+   
+   public string PaymentNumber { get; set; } = string.Empty;
    public string Status { get; set; } = string.Empty;
    public string PaymentCurrency { get; set; } = string.Empty;
    public ICollection<OrderDetail> OrderDetails { get; set; }

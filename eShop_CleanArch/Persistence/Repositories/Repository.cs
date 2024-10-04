@@ -50,5 +50,17 @@ public class Repository<T, TContext> : IRepository<T> where T : class  where TCo
     {
         return _context.Set<T>().AsQueryable();
     }
+    
+    public async Task UpdateRangeAsync(IEnumerable<T> entities)
+    {
+        _context.Set<T>().UpdateRange(entities);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteRangeAsync(IEnumerable<T> entities)
+    {
+        _context.Set<T>().RemoveRange(entities);
+        await _context.SaveChangesAsync();
+    }
 }
 

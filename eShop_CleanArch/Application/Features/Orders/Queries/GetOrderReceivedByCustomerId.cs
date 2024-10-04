@@ -34,6 +34,7 @@ public class GetOrderReceivedByCustomerId : IRequest<GetOrderReceivedByCustomerI
                 ProductQuantity = order.ProductQuantity,
                 PaymentCurrency = order.PaymentCurrency,
                 PaymentMethod = order.PaymentMethod,
+                PaymentNumber = order.PaymentNumber,
                 Status = order.Status,
                 Products = order.OrderDetails.Select(orderDetail => new OrderDetailDto()
                 {

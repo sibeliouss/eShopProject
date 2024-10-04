@@ -10,6 +10,7 @@ public class GetOrderReceivedByCustomerIdResponse
     public DateTime CreatedAt { get; set; }
     public string PaymentMethod { get; set; }
     public string Status { get; set; }
+    public string PaymentNumber { get; set; }
     public string PaymentCurrency { get; set; }
     public IEnumerable<OrderDetailDto> Products { get; set; } = new List<OrderDetailDto>();
 }

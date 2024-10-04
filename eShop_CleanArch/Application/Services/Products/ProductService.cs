@@ -20,4 +20,14 @@ public class ProductService : IProductService
     {
         return await _productRepository.GetByIdAsync(id);
     }
+
+    public async Task UpdateAsync(Product product)
+    {
+        await _productRepository.UpdateAsync(product);
+    }
+    
+    public async Task UpdateRangeAsync(IEnumerable<Product> products)
+    {
+        await _productRepository.UpdateRangeAsync(products);  // IProductRepository'deki metodu çağırıyoruz
+    }
 }
