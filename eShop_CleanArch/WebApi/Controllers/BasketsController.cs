@@ -30,7 +30,8 @@ public class BasketsController : ApiController
         return CreatedAtAction(nameof(CreateBasket), new { id = result.ProductId }, result);
     }
     
-    [HttpGet("{productId}/{quantity}")]
+    
+    [HttpGet("{productId:guid}/{quantity:int}")]
     public async Task<IActionResult> CheckProductQuantity(Guid productId, int quantity)
     {
         var query = new GetCheckProductQuantityIsAvailableQuery
