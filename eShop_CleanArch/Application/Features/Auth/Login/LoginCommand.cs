@@ -70,9 +70,6 @@ public class LoginCommand : IRequest<LoginResponse>
                 return new LoginResponse
                 {
                     Token = token,
-                    UserName = appUser.UserName,
-                    UserId = appUser.Id,
-                    Expiration = DateTime.UtcNow
                 };
                 
         }

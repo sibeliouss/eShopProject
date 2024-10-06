@@ -5,8 +5,19 @@ using Persistence;
 using WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
+
+builder.Services.AddCors(configure =>
+{
+    configure.AddDefaultPolicy(policy =>
+    {
+        policy
+            .AllowAnyHeader()
+            .AllowAnyOrigin() 
+            .AllowAnyMethod(); 
+    });
+});
+
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
 
@@ -50,6 +61,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors();
 
 app.UseAuthorization();
 

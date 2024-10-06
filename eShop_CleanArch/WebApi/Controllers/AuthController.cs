@@ -23,8 +23,8 @@ public class AuthController : ApiController
         try
         {
             var response = await _mediator.Send(command, cancellationToken);
-            return Ok(new { Info = response });
-            /*return Created(uri: "", response);*/
+            return Ok(response);
+            
         }
         catch (Exception ex)
         {

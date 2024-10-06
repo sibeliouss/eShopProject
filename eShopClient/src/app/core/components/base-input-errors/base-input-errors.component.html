@@ -1,0 +1,11 @@
+<small *ngIf="hasError('required')">
+    * {{ 'required' | translate }}
+  </small>
+  <small *ngIf="hasError('email')">
+    * {{ 'validE-posta' | translate }}
+  </small>
+  <small *ngIf="hasError('minlength')">
+    * {{ 'minLenghtError' | translate: { requiredLength: getError('minlength').requiredLength } }}
+  </small>
+  
+  
