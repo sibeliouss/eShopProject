@@ -1,0 +1,31 @@
+<div class="topbar  d-md-block ">
+    <div class="container  px-2 px-md-5 px-xl-8d75 ">
+        <div class="topbar__nav d-flex justify-content-between align-items-center  ">
+            <ul class="topbarleft nav ml-lg-n3">
+                <li class="nav-item yazi"> 
+                    <!-- <span>{{ 'ordersOver' | translate }}</span> 
+                    <span> {{ 'freeDelivery' | translate }}!</span> -->
+                 </li> 
+            </ul>
+            <ul class="topbarright nav">
+
+               
+                <li class="nav-item"> {{'trackYourOrder' | translate}}
+                </li>
+                <li class="nav-item ">{{'contactUs' | translate}}</li>
+                <div class="language-switcher">
+                    <li class="nav-item">  
+                    <button class="btn"  (click)="switchLanguage('en')"><img src="/public/img/eng.png" alt="" height="20px" width="28px" ></button> 
+                    
+                     <button class="btn" (click)="switchLanguage('tr')"><img src="/public/img/tr.png" alt=""  height="22px" width="30px"></button>
+                      </li>
+                 </div>
+
+
+              
+              
+            </ul>
+        </div>
+    </div>
+</div>
+

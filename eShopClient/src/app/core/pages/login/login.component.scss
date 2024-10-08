@@ -1,141 +1,178 @@
+.first {
 
-/* *{
-  margin: auto;
-} */
-
-.form_main {
-  margin: auto;
-  margin-top: 50px;
-  width: 380px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(255, 255, 255);
-  padding: 30px 30px 30px 30px;
-  border-radius: 60px;
-  box-shadow: 10px 5px  40px rgba(0, 0, 0, 0.162);
+  height: 100vh;
   
-  background: radial-gradient(circle at 100% 100%, #fff 0, #fff 60px, transparent 0) 0 0 / 64px 64px no-repeat, radial-gradient(circle at 0 80%, #fff 0, #fff 60px, transparent 0) 100% 0 / 64px 64px no-repeat, radial-gradient(circle at 100% 0, #fff 0, #fff 60px, transparent 0) 0 100% / 64px 64px no-repeat, radial-gradient(circle at 0 0, #fff 0, #fff 60px, transparent 0) 100% 100% / 64px 64px no-repeat, linear-gradient(#fff, #fff) 50% 50% / calc(100% - 8px) calc(100% - 128px) no-repeat, linear-gradient(#fff, #fff) 50% 50% / calc(100% - 128px) calc(100% - 8px) no-repeat, linear-gradient(140deg, transparent 65%, rgb(156, 30, 194)), linear-gradient(311deg, #fff 65%,rgb(156, 30, 194) );
- 
-  
-  .heading {
-    font-size: 1.8em;
-    color: #5d5b5b;
-    font-weight: 600;
-    margin: 15px 0 30px 0;
-  }
-  .inputContainer {
-    width: 100%;
-    position: relative;
+  h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    .inputIcon {
-      position: absolute;
-      left: 10px;
-    }
-    .inputField {
-      width: 100%;
-      height: 50px;
-      background-color: transparent;
-      border: none;
-      border-bottom: 2px solid rgb(173, 173, 173);
-      border-radius: 20px;
-      margin: 10px 0;
-      color: rgb(31, 28, 28);
-      font-size: .9em;
-      font-weight: 500;
-      box-sizing: border-box;
-      padding-left: 40px;
-    }
-    .inputField:focus {
-      outline: none;
-      border-bottom: 2px solid rgb(199, 114, 255);
-    }
-    .inputField::placeholder {
-      color: rgb(80, 80, 80);
-      font-size: 1em;
-      font-weight: 500;
-     
-    }
-    
+    margin-top: 150px;
   }
-  #button {
-    position: relative;
-    width: 100%;
-    border:none;
-    border-bottom: 2px solid rgb(211, 88, 211);
-    background-color: #faef76;
-    height: 50px;
-    color: rgb(55, 51, 51);
-    font-size: 1.1em;
-    font-weight: 500;
-    letter-spacing: 1px;
-    border-radius: 20px;
-    margin: 10px;
-    cursor: pointer;
-    overflow: hidden;
-  }
-  #button::after {
-    content: "";
-    position: absolute;
-    background-color: rgba(244, 164, 241, 0.343);
-    height: 100%;
-    width: 150px;
-    top: 0;
-    left: -200px;
-    border-bottom-right-radius: 100px;
-    border-top-left-radius: 100px;
-    filter: blur(15px);
-    transition-duration: .5s;
-  }
-  
-  #button:hover::after {
-    transform: translateX(600px);
-    transition-duration: .5s;
-  }
+}
 
-  .signupContainer {
-    margin: 0;
+.second{
+ background-color: #9f74a51f;
+  .form_main {
+    margin: auto;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    //background-color: rgb(255, 255, 255);
+    padding-top: 100px;
+    
+   
+    //border-radius: 60px; box-shadow: 10px 5px  40px rgba(0, 0, 0, 0.162);
+    
+    //background: radial-gradient(circle at 100% 100%, #fff 0, #fff 60px, transparent 0) 0 0 / 64px 64px no-repeat, radial-gradient(circle at 0 80%, #fff 0, #fff 60px, transparent 0) 100% 0 / 64px 64px no-repeat, radial-gradient(circle at 100% 0, #fff 0, #fff 60px, transparent 0) 0 100% / 64px 64px no-repeat, radial-gradient(circle at 0 0, #fff 0, #fff 60px, transparent 0) 100% 100% / 64px 64px no-repeat, linear-gradient(#fff, #fff) 50% 50% / calc(100% - 8px) calc(100% - 128px) no-repeat, linear-gradient(#fff, #fff) 50% 50% / calc(100% - 128px) calc(100% - 8px) no-repeat, linear-gradient(140deg, transparent 65%, rgb(156, 30, 194)), linear-gradient(311deg, #fff 65%,rgb(156, 30, 194) );
+   
+    
+    .heading {
+      font-size: 1.8em;
+      color: #5d5b5bb6;
+      font-weight: 600;
+      margin: 15px 0 30px 0;
+      padding: 10px;
+      border-bottom:2px solid rgba(0, 0, 0, 0.268);
+    }
+    .inputContainer {
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
 
-    a {
-      font-size: .7em;
-      font-weight: 500;
-      background-color: #2e2e2e;
+      .inputIcon {
+        position: absolute;
+        left:36px;
+         font-size: 20px; }
+
+      .inputField {
+        width: 90%;
+        height: 60px;
+        border: none;
+        border-bottom: 2px solid rgb(199, 114, 255);
+        border-radius: 5px;
+        margin: 10px 0;
+        color: rgb(31, 28, 28);
+     
+       // box-sizing: border-box;
+        padding-left: 45px;
+      }
+      .inputField:focus {
+        outline: none;
+        border: 1px solid rgb(199, 114, 255);
+      }
+      .inputField::placeholder {
+        color: rgb(80, 80, 80);
+        font-size: 1em;
+        font-weight: 550;
+       
+      }
+      
+    }
+    .form-check{
+      margin-top: 30px;
+      .form-check-input {
+
+        background-color: #5d5b5bb6;
+        border: 1px solid #ad58b0; /* İsteğe bağlı, kendi sınırınızı tanımlayabilirsiniz */
+        border-radius: 4px; /* İsteğe bağlı, köşeleri yuvarlatır */
+        
+      }
+     
+      .form-check-input:focus {
+
+       box-shadow:  0 0 0 0.2rem rgba(236, 161, 220, 0.863);
+       }
+      }
+    
+    #button {
+      position: relative;
+      width: 70%;
+      border:none;
+      border-bottom: 2px solid rgb(211, 88, 211);
+      background-color: #2c2b1f;
+      height: 50px;
       color: white;
-      text-decoration: none;
-      padding: 8px 15px;
-      border-radius: 20px;
+      font-size: 1.1em;
+      font-weight: 500;
+      letter-spacing: 1px;
+      border-radius: 10px;
+      margin: 15px;
+      cursor: pointer;
+      overflow: hidden;
+      
+    }
+    #button::after {
+      content: "";
+      position: absolute;
+      background-color: rgba(244, 164, 241, 0.343);
+      height: 100%;
+      width: 150px;
+      top: 0;
+      left: -200px;
+      border-bottom-right-radius: 100px;
+      border-top-left-radius: 100px;
+      filter: blur(15px);
+      transition-duration: .5s;
+    }
+    
+    #button:hover::after {
+      transform: translateX(600px);
+      transition-duration: .5s;
+    }
+  
+    .signupContainer {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+  
+      a {
+        font-size: .7em;
+        font-weight: 500;
+        background-color: #2e2e2e;
+        color: white;
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+      }
+    }
+  
+    #passwordContainer{
+      position: relative;
+     
+  
+      .eye-icon {
+      position: absolute;
+      top: 65%;
+      right: 40px; /* veya uygun bir mesafe belirleyin */
+      transform: translateY(-80%);
+      cursor: pointer;
+    }
+    }
+   
+    .konum {
+      width: 100%;
+      display: flex;
+      margin-left:50px;
+     
     }
   }
+  
 
-  #passwordContainer{
-    position: relative;
-   
 
-    .eye-icon {
-    position: absolute;
-    top: 60%;
-    right: 50px; /* veya uygun bir mesafe belirleyin */
-    transform: translateY(-80%);
-    cursor: pointer;
-  }
-  }
+
+
+
+
+
+
  
-  .konum {
-    width: 100%;
-    display: flex;
-    margin-left: 30px;
-   
-  }
+
 }
-
-
-
-

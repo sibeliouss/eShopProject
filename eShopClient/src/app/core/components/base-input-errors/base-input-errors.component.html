@@ -5,7 +5,6 @@
     * {{ 'validE-posta' | translate }}
   </small>
   <small *ngIf="hasError('minlength')">
-    * {{ 'minLenghtError' | translate: { requiredLength: getError('minlength').requiredLength } }}
+    * {{ 'minLenghtError' | translate: { requiredLength: getError('minlength')?.requiredLength } }}
   </small>
-  
   

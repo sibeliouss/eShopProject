@@ -1,0 +1,61 @@
+.navbar {
+    .container {
+        margin-left: 120px;
+        margin-right: 120px;
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            img {
+                margin-right: 10px;
+                display: block;
+                margin-bottom: 5px;
+            }
+            h2 {
+                margin-top: 10px;
+                font-size: 24px;
+            }
+        }
+    }
+    border-bottom: 1px solid rgba(128, 128, 128, 0.314);
+
+    .search-container {
+        position: relative;
+        width: 650px;
+    }
+
+    .search {
+        width: 100%;
+        padding: 10px 40px 10px 10px; // Sağda buton için yer açmak
+        border: 1.5px solid black;
+        border-radius: 30px;
+    }
+
+    .search:focus {
+        border: none;
+        box-shadow: 0 0 0 0.2rem rgba(54, 53, 42, 0.201);
+    }
+
+    .search-button {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 1.5px solid black;
+        background-color: #faef764a;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .search-button i {
+        font-size: 1.2em;
+    }
+
+    .btn {
+        background-color: #faef764a;
+        border: 1.5px solid black;
+    }
+    .search::-webkit-search-cancel-button {
+        position: relative;
+        right: 20px;
+    }
+}

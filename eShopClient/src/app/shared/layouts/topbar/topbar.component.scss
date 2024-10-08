@@ -1,0 +1,43 @@
+
+.topbar{
+    padding: 10px;
+    .nav-item{
+        font-size:14px;
+        font-weight: 600;
+    }
+    .yazi{
+        font-style: oblique;
+    }
+    border-bottom: 1px solid rgba(128, 128, 128, 0.314);
+    background-color: #faef764a;
+}
+
+.topbarright {
+    display: flex; 
+    align-items: center; 
+    padding: 0;
+    margin: 0;
+    .nav-item {
+        margin: 0 10px; 
+        display: flex; 
+        align-items: center; 
+       
+       
+       
+            .btn {
+                padding: 0; 
+                margin:0 3px; 
+               
+           
+                
+                
+                
+            
+
+        }
+    }
+}
+
+
+
+// background-color: rgb(245, 239, 239);

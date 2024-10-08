@@ -1,0 +1,56 @@
+{
+  "welcome":"Hoş geldin",
+ "myAccount": "Hesabım",
+   "dashboard": "Pano",
+   "orders": "Siparişler",
+   "addresses": "Adresler",
+   "accountDetails": "Hesap Detayları",
+   "wishlist": "Favori Listesi",
+   "logout": "Çıkış Yap",
+   "hello": "Merhaba",
+   "edit": "Düzenle",
+   "firstName":"İsim",
+   "lastName":"Soy isim",
+   "editAccount": "Hesabı Düzenle",
+   "emailaddress": "E-posta adresi",
+   "password":"Şifre",
+   "passwordChange": "Şifre Değişikliği",
+   "currentPassword": "Mevcut Şifre",
+   "newPassword": "Yeni Şifre",
+   "confirmNewPassword": "Yeni Şifreyi Onayla",
+   "saveChanges": "Değişiklikleri Kaydet",
+   "minLenghtError": "En az {{requiredLength}} karakter olmalıdır!",
+
+   "(Şifre alanı boş olamaz)": "Şifre alanı boş olamaz!",
+   "validE-posta": "Geçerli bir e-posta adresi girin!",
+   "required":"Bu alan zorunludur!",
+   "errorLogin":"Lütfen tüm alanları doğru doldurduğunuzdan emin olun.",
+   "successLogin":"Giriş başarılı",
+   "gecerlisim": "Geçerli bir isim girin!",
+   "gecerlisoyisim": "Geçerli bir soy isim girin!",
+   "unsuccessreg": "Başarısız kayıt işlemi.",
+   "availableUser": "Bu kullanıcı kaydı zaten mevcut!",
+   "successReg": "Kayıt işlemi başarıyla tamamlandı.",
+   "Account information updated!": "Hesap bilgileri güncellendi!",
+ 
+  
+ 
+     "login" : {
+     "title": "Giriş",
+     "Information": "Hesabınız yok mu?",
+     "loginBtn": "Giriş Yap",
+     "gotoRegisterBtn": "Kayıt Ol"
+      },
+ 
+      "register":{
+         "title": "Kayıt",
+         "name":"Ad:",
+         "lastName":"Soyad:",
+         "email":"Email:",
+         "password":"Şifre:",
+         "registerBtn":"Kayıt Ol",
+         "goToLoginBtn":"Zaten hesabınız varsa giriş yapın.",
+         "loginBtn":"Giriş Yap"
+ 
+      }
+ }

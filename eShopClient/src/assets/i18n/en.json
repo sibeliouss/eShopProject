@@ -1,0 +1,55 @@
+{
+   "welcome":"Welcome",
+    "myAccount": "My Account",
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "addresses": "Addresses",
+    "accountDetails": "Account Details",
+    "wishlist": "Wishlist",
+    "logout": "Logout",
+    "hello": "Hello",
+    "edit": "Edit",
+    "firstName":"Name",
+    "lastName":"Surname",
+    "editAccount": "Edit Account",
+    "emailaddress": "Email address",
+    "password":"Password",
+    "passwordChange": "Password Change",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "saveChanges": "Save Changes",
+    "minLenghtError": "Must be at least {{requiredLenght}} characters!",
+    "(Şifre alanı boş olamaz)": "Password field cannot be empty!",
+    "validE-posta": "Enter a valid email address!",
+    "required":"This field is required!",
+    "errorLogin":"Please make sure all fields are filled out correctly.",
+    "successLogin":"Login successful.",
+    "gecerlisim": "Enter a valid name!",
+    "gecerlisoyisim": "Enter a valid surname!",
+    "unsuccessreg": "Failed registration.",
+    "availableUser": "This user record already exists!",
+    "successReg": "Registration completed successfully.",
+  
+    "Account information updated!": "Account information updated!",
+    
+   
+  
+      "login": {
+          "title": "Log In",
+          "Information": "Don't you have an account?",
+          "loginBtn": "Log In",
+          "gotoRegisterBtn": "Sign Up"
+        },
+        "register":{
+          "title": "Sign Up",
+          "name":"Name:",
+          "lastName":"Lastname:",
+          "email":"Email:",
+          "password":"Password:",
+          "registerBtn":"Sign Up",
+          "goToLoginBtn":"If you have a account you can login here.",
+          "loginBtn":"Log In"
+  
+       }
+  }

@@ -5,6 +5,9 @@ import { routes } from './app.routes';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideToastr } from 'ngx-toastr';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -19,7 +22,7 @@ export const appConfig: ApplicationConfig = {
         useFactory:  HttpLoaderFactory,
         deps: [HttpClient]
       }
-    }) ), 
+    }) ), provideToastr(), provideAnimationsAsync() 
    
    
   ]
