@@ -20,6 +20,9 @@
    "confirmNewPassword": "Yeni Şifreyi Onayla",
    "saveChanges": "Değişiklikleri Kaydet",
    "minLenghtError": "En az {{requiredLength}} karakter olmalıdır!",
+   "contactUs": "Bize Ulaşın",
+   "aboutUs": "Hakkımızda",
+   "trackYourOrder": "Sipariş Takip",
 
    "(Şifre alanı boş olamaz)": "Şifre alanı boş olamaz!",
    "validE-posta": "Geçerli bir e-posta adresi girin!",
@@ -39,7 +42,8 @@
      "title": "Giriş",
      "Information": "Hesabınız yok mu?",
      "loginBtn": "Giriş Yap",
-     "gotoRegisterBtn": "Kayıt Ol"
+     "gotoRegisterBtn": "Kayıt Ol",
+     "rememberMe": "Beni Hatırla"
       },
  
       "register":{

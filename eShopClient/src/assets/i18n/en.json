@@ -30,6 +30,9 @@
     "unsuccessreg": "Failed registration.",
     "availableUser": "This user record already exists!",
     "successReg": "Registration completed successfully.",
+    "contactUs": "Contact Us",
+    "aboutUs": "About Us",
+    "trackYourOrder": "Track Your Order",
   
     "Account information updated!": "Account information updated!",
     
@@ -39,7 +42,8 @@
           "title": "Log In",
           "Information": "Don't you have an account?",
           "loginBtn": "Log In",
-          "gotoRegisterBtn": "Sign Up"
+          "gotoRegisterBtn": "Sign Up",
+          "rememberMe":"Remember Me"
         },
         "register":{
           "title": "Sign Up",

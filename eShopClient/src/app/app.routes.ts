@@ -3,6 +3,7 @@ import { LoginComponent } from './core/pages/login/login.component';
 import { HomeComponent } from './shared/home/home.component';
 import { AuthService } from './core/services/auth.service';
 import { RegisterComponent } from './core/pages/register/register.component';
+import { AccountComponent } from './features/pages/account/account.component';
 
 export const routes: Routes = [
    
@@ -10,5 +11,6 @@ export const routes: Routes = [
     { path: 'homepage', component: HomeComponent},
     {path:'login',component: LoginComponent},
     { path: 'register', component: RegisterComponent },
+    {path:'account/:id', component: AccountComponent}
 
 ];
