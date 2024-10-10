@@ -65,13 +65,14 @@ public class LoginCommand : IRequest<LoginResponse>
                             $"Kullanıcı art arda 3 kere yanlış şifre girişinden dolayı sistem {Math.Ceiling(timeSpan.Value.TotalMinutes)} dakika kilitlenmiştir.");
                     }
                 }
-            } 
-            var token = _jwtService.CreateToken(appUser, null, request.RememberMe);
-                return new LoginResponse
-                {
-                    Token = token,
-                };
-                
+            }
+
+            string token = _jwtService.CreateToken(appUser, null, request.RememberMe);
+            return new LoginResponse
+            {
+                AccessToken = token,
+            };
+            
         }
     } 
 }

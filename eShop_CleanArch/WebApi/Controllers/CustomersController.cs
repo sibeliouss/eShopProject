@@ -6,11 +6,12 @@ using Application.Features.Customers.Queries;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Controllers.Abstract;
+
 
 namespace WebApi.Controllers;
-
-public class CustomersController : ApiController
+[Route("api/[controller]/[action]")]
+[ApiController]
+public class CustomersController : ControllerBase
 {
     private readonly IMediator _mediator;
     public CustomersController(IMediator mediator)

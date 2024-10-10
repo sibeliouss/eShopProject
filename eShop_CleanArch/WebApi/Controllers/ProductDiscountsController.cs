@@ -4,11 +4,12 @@ using Application.Features.ProductDiscounts.Commands.Update;
 using Application.Features.ProductDiscounts.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Controllers.Abstract;
+
 
 namespace WebApi.Controllers;
-
-public class ProductDiscountsController : ApiController
+[Route("api/[controller]/[action]")]
+[ApiController]
+public class ProductDiscountsController : ControllerBase
 {
     private readonly IMediator _mediator;
 

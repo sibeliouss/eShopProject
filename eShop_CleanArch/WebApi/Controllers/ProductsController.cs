@@ -5,11 +5,12 @@ using Application.Features.Products.Dtos;
 using Application.Features.Products.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Controllers.Abstract;
+
 
 namespace WebApi.Controllers;
-
-public class ProductsController : ApiController
+[Route("api/[controller]/[action]")]
+[ApiController]
+public class ProductsController : ControllerBase
 {
     private readonly IMediator _mediator;
 

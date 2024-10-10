@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserModel } from '../../../core/models/user';
+import { TokenService } from '../../../core/services/token.service';
 
 @Component({
   selector: 'app-middlebar',
@@ -18,18 +19,20 @@ export class MiddlebarComponent {
 
   responseInLocalStorage: any;  
 
-  constructor(public auth: AuthService) {}
 
   ngOnInit() {
-    this.responseInLocalStorage = localStorage.getItem("response");
-    if (this.auth.checkAuthentication()) {
-      this.auth.getUser(); // Kullanıcı verilerini al
-    } else {
-      console.error("User is not authenticated."); // Giriş yapılmamışsa hata mesajı
+    if (localStorage.getItem('response')) {
+      this.responseInLocalStorage = localStorage.getItem("response");
+      this.auth.checkAuthentication();
     }
+    this.auth.getUser();
+    console.log(this.auth.token.userId);
+    
   }
 
-  isLoggedIn() {
-    return this.auth.checkAuthentication(); // Kullanıcı giriş yapmış mı
-  }
+  constructor(public auth: AuthService, private router: Router) {}
+  
+
+
+  
 }

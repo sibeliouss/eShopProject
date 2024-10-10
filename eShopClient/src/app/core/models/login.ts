@@ -1,5 +1,5 @@
-export interface LoginModel{
-	userNameOrEmail: string;
-	password: string;
-	rememberMe: boolean;
+export class LoginModel{
+    userNameOrEmail: string = ""
+    password: string = ""
+    rememberMe: boolean = false
 }

@@ -5,11 +5,13 @@ using Application.Features.Baskets.Queries;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Controllers.Abstract;
+
 
 namespace WebApi.Controllers;
 
-public class BasketsController : ApiController
+[Route("api/[controller]/[action]")]
+[ApiController]
+public class BasketsController : ControllerBase
 {
     private readonly IMediator _mediator;
 

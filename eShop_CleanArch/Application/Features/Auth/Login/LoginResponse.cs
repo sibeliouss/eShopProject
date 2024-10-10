@@ -1,6 +1,7 @@
 namespace Application.Features.Auth.Login;
 
 public class LoginResponse 
-{ public string Token { get; set; }
+{ 
+    public string AccessToken { get; set; }
   
 }

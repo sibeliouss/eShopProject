@@ -5,11 +5,12 @@ using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Controllers.Abstract;
+
 
 namespace WebApi.Controllers;
-[AllowAnonymous]
-public class AuthController : ApiController
+[Route("api/[controller]/[action]")]
+[ApiController]
+public class AuthController : ControllerBase
 {
     private readonly IMediator _mediator;
 
@@ -21,16 +22,8 @@ public class AuthController : ApiController
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginCommand command, CancellationToken cancellationToken)
     {
-        try
-        {
-            var response = await _mediator.Send(command, cancellationToken);
-            return Ok(response);
-            
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(new { Error = ex.Message });
-        }
+        var result = await _mediator.Send(command, cancellationToken);
+        return Ok(new { AccessToken = result.AccessToken });
     }
     [HttpPost]
     public async Task<IActionResult> Register([FromBody] RegisterCommand command, CancellationToken cancellationToken)
@@ -46,12 +39,11 @@ public class AuthController : ApiController
             return BadRequest(ex.Message);
         }
     }
-    
-    [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetUserById(Guid id)
+    [HttpGet("{userId}")]
+    public async Task<IActionResult> GetUser(Guid userId)
     {
-        var query = new GetUserByIdQuery { UserId = id };
-        var user = await _mediator.Send(query);
+        var user = await _mediator.Send(new GetUserByIdQuery(userId));
+        
         return Ok(user);
     }
 

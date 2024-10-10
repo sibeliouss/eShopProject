@@ -46,6 +46,15 @@ export class SwalService {
     })
   }
 
+  callSwalErr(title: string) {
+    Swal.fire({
+      title: title,
+      icon: 'error',
+      timer: 3000,
+      showConfirmButton: false
+    });
+  }
+
   callSwal3(title: string, confirmButtonName: string, callBack: ()=> void){
     Swal.fire({
       title: title,

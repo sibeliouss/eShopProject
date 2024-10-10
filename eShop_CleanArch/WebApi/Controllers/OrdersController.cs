@@ -1,11 +1,12 @@
 using Application.Features.Orders.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Controllers.Abstract;
+
 
 namespace WebApi.Controllers;
-
-public class OrdersController : ApiController
+[Route("api/[controller]/[action]")]
+[ApiController]
+public class OrdersController : ControllerBase
 {
     private readonly IMediator _mediator;
 

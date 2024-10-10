@@ -5,11 +5,12 @@ using Application.Features.Categories.Dtos;
 using Application.Features.Categories.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Controllers.Abstract;
+
 
 namespace WebApi.Controllers;
-
-public class CategoriesController : ApiController
+[Route("api/[controller]/[action]")]
+[ApiController]
+public class CategoriesController : ControllerBase
 {
     private readonly IMediator _mediator;
 

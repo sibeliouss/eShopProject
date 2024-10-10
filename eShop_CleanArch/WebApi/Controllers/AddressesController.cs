@@ -8,11 +8,12 @@ using Application.Features.BillingAddresses.Commands.Update;
 using Application.Features.BillingAddresses.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Controllers.Abstract;
+
 
 namespace WebApi.Controllers;
-
-public class AddressesController : ApiController
+[Route("api/[controller]/[action]")]
+[ApiController]
+public class AddressesController : ControllerBase
 {
     private readonly IMediator _mediator;
 
