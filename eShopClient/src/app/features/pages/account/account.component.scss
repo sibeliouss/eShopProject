@@ -1,0 +1,35 @@
+.container{
+    
+    .row{
+       
+        .first{
+            
+            h6{
+                font-size:x-large;
+                font-weight:500;
+                 
+            }
+            .account{
+               
+                .aa{
+                   
+                    .nav-link{
+                       color: rgba(93, 55, 102, 0.628); 
+                       font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                       font-size: large;
+                    }
+                    
+                }
+               
+            }
+
+            
+        }
+    }
+   
+}
+
+.aa:hover{
+    padding-left: 10px;
+   transition: 0.2s;
+}

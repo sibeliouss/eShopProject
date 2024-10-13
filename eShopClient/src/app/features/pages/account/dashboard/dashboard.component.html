@@ -1,0 +1,46 @@
+<<div class="col-md-9">
+    <div class="tab">
+        <div class="tab-pane">
+            <div class="pt-5 pt-lg-8 pl-md-5 pl-lg-9 space-bottom-lg-3 mb-xl-1">
+                <div class="ml-lg-1 mb-4">
+                    <span class="title">{{'hello' | translate}} {{auth.user.firstName + " &#128522;"}}</span>
+                </div>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                    <div class="col">
+                        <div class="border" type="button">
+                            <a routerLink="orders" class="btn px-4 mb-2">
+                                <span><img src="/public/img/orders.png" alt=""></span>
+                            </a>
+                            <div class="mb-xl-1">{{'orders' | translate}}</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="border" type="button">
+                            <a routerLink="address" class="btn px-4 mb-2">
+                                <span class=""><img src="/public/img/address.png" alt=""></span>
+                            </a>
+                            <div class="font-size-3 mb-xl-1">{{'addresses' | translate}}</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="border py-6" type="button">
+                            <a routerLink="account-details" class="btn px-4 mb-2">
+                                <span class=""><img src="/public/img/userdetail.png" alt=""></span>
+                            </a>
+                            <div class="font-size-3 mb-xl-1">{{'accountDetails' | translate}}</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="border py-6" type="button">
+                            <a class="btn px-4 mb-2">
+                                <span class="" (click)="auth.logout()"><img src="/public/img/exit.png" alt=""></span>
+                            </a>
+                            <div class="mb-xl-1" (click)="auth.logout()">{{'logout' | translate}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

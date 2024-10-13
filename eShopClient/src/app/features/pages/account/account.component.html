@@ -1,1 +1,49 @@
-<p>account works!</p>
+<section>
+    <main id="content">
+        <div class="container">
+            <div class="row">
+                <div class="first col-md-3">
+                    <h6 class="pt-5 pt-lg-8  mb-4 mb-lg-7">{{'myAccount' | translate}}
+                    </h6>
+                    <div class="tab">
+                        <ul class="account nav flex-column mb-0" role="tablist">
+                            <li class="aa nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0" type="button" >
+                                    <span class="" routerLink="/account/{{auth.token?.userId}}">{{'dashboard' | translate}}</span>
+                                </a>
+                            </li>
+                            <li class="aa nav-item mx-0">
+                                <a routerLink="orders" class="nav-link d-flex align-items-center px-0" type="button">
+                                    <span class="">{{'orders' | translate}}</span>
+                                </a>
+                            </li>
+                            <li class="aa nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0" type="button">
+                                    <span class="" routerLink="address">{{'addresses' | translate}}</span>
+                                </a>
+                            </li>
+                            <li class="aa nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0" type="button">
+                                    <span class="font-weight-normal text-gray-600" routerLink="account-details" >{{'accountDetails' |
+                                        translate}}</span>
+                                </a>
+                            </li>
+                            
+                            <li class="aa nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0" type="button">
+                                    <span class="font-weight-normal text-gray-600" (click)="auth.logout()" >{{'logout' | translate}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <router-outlet></router-outlet>
+                  </div>
+                
+            </div>
+        </div>
+        
+    </main>
+</section>
+

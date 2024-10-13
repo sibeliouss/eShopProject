@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class AuthService {
-  token: TokenModel = new TokenModel();
+  token: TokenModel | null=null;
   tokenString: string = "";
   user: UserModel = new UserModel();
 
@@ -28,28 +28,31 @@ export class AuthService {
       const responseJson = JSON.parse(responseString);
       this.tokenString = responseJson?.accessToken;
       const decode: any = jwtDecode(this.tokenString);
-      this.token.email = decode?.Email;
-      this.token.name = decode?.Name;
-      this.token.userName = decode?.UserName;
-      this.token.userId = decode?.UserId;
-      this.token.exp = decode?.exp;
-      this.token.roles = decode?.Roles;
+
+      // Token kontrolü null ise burada başlatılıyor
+      this.token = {
+        email: decode?.Email || '',
+        name: decode?.Name || '',
+        userName: decode?.UserName || '',
+        userId: decode?.UserId || '',
+        exp: decode?.exp || 0,
+        roles: decode?.Roles || []  
+      };
 
       const now = new Date().getTime() / 1000;
       if (this.token.exp < now) {
         return false;
       }
       return true;
-    }
-    
-    else {
+    } else {
       this.router.navigateByUrl("/");
       return true;
     }
-  }
+}
+
   
   getUser(){
-    this.http.get("http://localhost:5123/api/Auth/GetUser/" + this.token.userId).subscribe({
+    this.http.get("http://localhost:5123/api/Auth/GetUser/" + this.token?.userId).subscribe({
       next: (res: any) => {
         this.user = res;
         this.firstName = this.user.firstName;
@@ -59,6 +62,8 @@ export class AuthService {
       },
       error: (err: HttpErrorResponse) => {
        
+        console.error("Kullanıcı bilgileri alınırken bir hata oluştu:", err.message);
+        this.toast.error('Kullanıcı bilgileri alınırken bir hata oluştu.', 'Hata');
       }
     })
   }
@@ -66,7 +71,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('response');
     this.router.navigateByUrl('/login');
-    this.toast.success('çıkış başarılı');
+    this.toast.warning('Çıkış yaptınız.');
    
   }
 }

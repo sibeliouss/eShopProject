@@ -21,7 +21,6 @@ export class LoginService {
     return this.http.post(`${this.apiUrl}/${api}`, data).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error("Login request failed:", error);
-        this.swalService.callSwalErr("Login failed! Please check your credentials.");
         return throwError(() => new Error("Login request failed"));
       })
     );

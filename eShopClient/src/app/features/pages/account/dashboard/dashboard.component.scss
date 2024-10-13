@@ -1,0 +1,47 @@
+.tab {
+    .tab-pane {
+        .title {
+            font-size: larger;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: rgba(93, 55, 102, 0.915);
+            font-weight: 200;
+            border-left: 2px solid gray;
+            padding-left: 8px;
+        }
+        
+        .row {
+            .col {
+                margin-bottom: 20px; 
+               
+                .border {
+                    width: 230px;
+                    height: 200px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    color: rgba(93, 55, 102, 0.915);
+                   // border-bottom: 1px solid rgb(211, 88, 211);
+
+                    //margin: 0 auto; 
+                    img {
+                        width: 80px;
+                    }
+                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                    border-radius: 10px;
+
+                    img:hover{
+                        width: 83px;
+                        transition: 0.1s;
+                     }
+
+                }
+                
+            }
+        }
+    }
+
+    
+}

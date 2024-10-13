@@ -16,6 +16,7 @@
           <li class="nav-item">
             <a class="nav-link me-2" aria-current="page" routerLink="/"><img src="/public/img/love.png" alt="" width="35px" height="35px"></a>
           </li>
+        <!--   User  -->
         </div>
         <li class="nav-item" *ngIf="!responseInLocalStorage" >
           <a class="nav-link" aria-current="page" routerLink="/login">
@@ -23,15 +24,12 @@
           </a>
         </li>
         
-        <!-- Giriş Yapıldıysa Kullanıcı Adı -->
         <div class="btn-group" *ngIf="responseInLocalStorage">
-          <button type="button" class="btn" [routerLink]="['/account', auth.token.userId]">
+          <button type="button" class="btn" [routerLink]="['/account', auth.token?.userId]">
           <span>{{ auth.user.firstName }} {{ auth.user.lastName }}</span>
            </button>
         </div>
-        
-     
-        <div >
+         <div >
           <li class="nav-item">
             <a class="nav-link ms-2" aria-current="page" routerLink="/" (click)="auth.logout()"><img src="/public/img/shopping.png" alt="" width="35px" height="35px"></a>
           </li>

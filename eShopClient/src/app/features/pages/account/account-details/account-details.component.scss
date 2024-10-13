@@ -1,0 +1,64 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    .baslik {
+        font-size: larger;
+        color: rgba(93, 55, 102, 0.915);
+        font-weight: 200;
+        border-left: 2px solid gray;
+        padding-left: 8px;
+    }
+    .edit {
+        font-weight: 500;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.427);
+        padding-bottom: 2px;
+        font-size: 20px;
+    }
+    .row {
+        .edit1 {
+            margin-top: 10px;
+            label {
+                padding-bottom: 2px;
+                font-size: 15px;
+                color: gray;
+            }
+            input {
+                border: 1.5px solid rgba(0, 0, 0, 0.292);
+            }
+            input:focus {
+                box-shadow: 0 0 0 0.2rem rgba(93, 55, 102, 0.435);
+                border: none;
+            }
+        }
+        
+    }
+    .buton {
+      
+       display: flex;
+       justify-content: center;
+       //border-bottom: 1px solid gray;
+       padding-top: 15px;
+       
+       .btn{
+       // border:2px solid rgba(93, 55, 102, 0.435);
+       background-color:  rgba(0, 0, 0, 0.599) ;
+       color: rgb(255, 255, 255);
+       padding: 10px;
+       }
+       .btn:hover{
+       box-shadow: 0 4px 10px 0.2rem rgba(93, 55, 102, 0.435);
+      // box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+       }
+       
+    }
+    .yukari {
+        margin-top: -20px;  
+    }
+    .altbuton{
+        padding-bottom: 20px;
+    }
+    
+
+}

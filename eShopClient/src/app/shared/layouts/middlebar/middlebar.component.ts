@@ -5,8 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UserModel } from '../../../core/models/user';
-import { TokenService } from '../../../core/services/token.service';
+
 
 @Component({
   selector: 'app-middlebar',
@@ -26,7 +25,7 @@ export class MiddlebarComponent {
       this.auth.checkAuthentication();
     }
     this.auth.getUser();
-    console.log(this.auth.token.userId);
+    console.log(this.auth.token?.userId);
     
   }
 
