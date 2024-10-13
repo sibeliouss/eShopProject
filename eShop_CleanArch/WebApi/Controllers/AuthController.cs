@@ -32,7 +32,7 @@ public class AuthController : ControllerBase
         try
         {
             await _mediator.Send(command, cancellationToken);
-            return Ok("Kullanıcı başarıyla oluşturuldu.");
+            return Ok(new { message = "Kullanıcı başarıyla oluşturuldu." });
         }
         catch (Exception ex)
         {
