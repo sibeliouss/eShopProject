@@ -63,7 +63,7 @@ export class AuthService {
       error: (err: HttpErrorResponse) => {
        
         console.error("Kullanıcı bilgileri alınırken bir hata oluştu:", err.message);
-        this.toast.error('Kullanıcı bilgileri alınırken bir hata oluştu.', 'Hata');
+       
       }
     })
   }
@@ -71,7 +71,5 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('response');
     this.router.navigateByUrl('/login');
-    this.toast.warning('Çıkış yaptınız.');
-   
-  }
+   }
 }

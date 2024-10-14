@@ -28,7 +28,14 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     public authService: AuthService
-  ) {
+  ) { }
+
+
+   ngOnInit(): void {
+    this.createLoginForm();
+  }
+
+  createLoginForm() {
     this.loginForm = this.formBuilder.group({
       userNameOrEmail: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -36,9 +43,7 @@ export class LoginComponent {
     });
   }
 
-  ngOnInit(): void {
-    this.signIn();
-  }
+ 
 
   signIn() {
     if (this.loginForm.invalid) {

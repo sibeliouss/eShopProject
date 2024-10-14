@@ -23,11 +23,7 @@
     padding-top: 100px;
     
    
-    //border-radius: 60px; box-shadow: 10px 5px  40px rgba(0, 0, 0, 0.162);
-    
-    //background: radial-gradient(circle at 100% 100%, #fff 0, #fff 60px, transparent 0) 0 0 / 64px 64px no-repeat, radial-gradient(circle at 0 80%, #fff 0, #fff 60px, transparent 0) 100% 0 / 64px 64px no-repeat, radial-gradient(circle at 100% 0, #fff 0, #fff 60px, transparent 0) 0 100% / 64px 64px no-repeat, radial-gradient(circle at 0 0, #fff 0, #fff 60px, transparent 0) 100% 100% / 64px 64px no-repeat, linear-gradient(#fff, #fff) 50% 50% / calc(100% - 8px) calc(100% - 128px) no-repeat, linear-gradient(#fff, #fff) 50% 50% / calc(100% - 128px) calc(100% - 8px) no-repeat, linear-gradient(140deg, transparent 65%, rgb(156, 30, 194)), linear-gradient(311deg, #fff 65%,rgb(156, 30, 194) );
-   
-    
+     
     .heading {
       font-size: 1.8em;
       color: #5d5b5bb6;
@@ -78,8 +74,8 @@
       .form-check-input {
 
         background-color: #5d5b5bb6;
-        border: 1px solid #ad58b0; /* İsteğe bağlı, kendi sınırınızı tanımlayabilirsiniz */
-        border-radius: 4px; /* İsteğe bağlı, köşeleri yuvarlatır */
+        border: 1px solid #ad58b0; 
+        border-radius: 4px; 
         
       }
      

@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { BaseInputErrorsComponent } from '../../components/base-input-errors/base-input-errors.component';
 import { RegisterService } from '../../services/register.service';
 import { ToastrService } from 'ngx-toastr';
+import { RegisterModel } from '../../models/register';
 
 @Component({
   selector: 'app-register',
@@ -29,8 +30,13 @@ export class RegisterComponent {
   private translate: TranslateService,
   private toastr: ToastrService,
   private formBuilder: FormBuilder,
-  private register: RegisterService){
+  private register: RegisterService){ }
 
+  ngOnInit(): void {
+    this.createSignUpForm();
+  }
+
+  createSignUpForm() {
     this.signUpForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(3)]],
@@ -39,21 +45,25 @@ export class RegisterComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmedPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
-  
   }
 
   signUp(){
     if (this.signUpForm.invalid) {
       return;
     }
-    const request = this.signUpForm.value;
+    const password = this.signUpForm.get('password')?.value;
+    const confirmedPassword = this.signUpForm.get('confirmedPassword')?.value;
+  
+    if (password !== confirmedPassword) {
+    this.toastr.error('Şifreler uyuşmuyor. Lütfen şifrelerinizi kontrol edin.', 'Hata');
+    return;
+  }
+    const request: RegisterModel = this.signUpForm.value; 
     console.log("Kullanıcı Adı:", request.userName);
-    
+
     this.register.post('Auth/Register', request).subscribe({
       next: (res: any) => {
         console.log("Response from server:", res);
-        // Token'ı yerel depolamaya kaydedin
-       
         this.toastr.success('Kayıt başarılı');
         this.router.navigateByUrl("/login");
       },

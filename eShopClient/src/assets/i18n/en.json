@@ -47,13 +47,17 @@
         },
         "register":{
           "title": "Sign Up",
-          "name":"Name:",
-          "lastName":"Lastname:",
-          "email":"Email:",
-          "password":"Password:",
+          "name":"Name",
+          "lastName":"Lastname",
+          "email":"Email",
+          "password":"Password",
           "registerBtn":"Sign Up",
-          "goToLoginBtn":"If you have a account you can login here.",
-          "loginBtn":"Log In"
+          "goToLoginBtn":"Already have an account? Sign in.",
+          "loginBtn":"Log In",
+          "userName": "Username",
+          "confirmPassword": "Confirm Password",
+          "signupNow": "Sign up now and be at the heart of fashion!"
+
   
        }
   }

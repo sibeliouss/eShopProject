@@ -91,6 +91,17 @@ public class CustomersController : ControllerBase
         return Ok(customers);
     }
     
+    [HttpGet("{userId:guid}")]
+    public async Task<IActionResult> GetCustomerByUserId(Guid userId)
+    {
+        var query = new GetCustomerByUserIdQuery(userId);
+        var customer = await _mediator.Send(query); 
+        
+        return Ok(customer);
+    }
+
+
+    
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCustomer(Guid id, [FromQuery] string password)
     {

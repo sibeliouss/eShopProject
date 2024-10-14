@@ -15,7 +15,7 @@ export class LoginService {
 
   private apiUrl: string = "http://localhost:5123/api";
   
-  constructor(private http: HttpClient, private auth: AuthService, private router: Router, private swalService: SwalService) { }
+  constructor(private http: HttpClient) { }
 
   post(api: string, data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/${api}`, data).pipe(

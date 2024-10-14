@@ -48,13 +48,16 @@
  
       "register":{
          "title": "Kayıt",
-         "name":"Ad:",
-         "lastName":"Soyad:",
-         "email":"Email:",
-         "password":"Şifre:",
+         "name":"Ad",
+         "lastName":"Soyad",
+         "email":"Email",
+         "password":"Şifre",
          "registerBtn":"Kayıt Ol",
          "goToLoginBtn":"Zaten hesabınız varsa giriş yapın.",
-         "loginBtn":"Giriş Yap"
+         "loginBtn":"Giriş Yap",
+         "userName":"Kullanıcı Adı",
+         "confirmPassword": "Şifreyi Onayla",
+         "signupNow": "Hemen kayıt ol, sen de modanın kalbinde yerini al!"
  
       }
  }

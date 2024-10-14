@@ -1,8 +1,9 @@
 .first {
 
     height: 100vh;
+   
     
-    h2 {
+    h2 ,p{
       display: flex;
       align-items: center;
       justify-content: center;
@@ -20,13 +21,7 @@
       align-items: center;
       justify-content: center;
       //background-color: rgb(255, 255, 255);
-      padding-top: 100px;
-      
-     
-      //border-radius: 60px; box-shadow: 10px 5px  40px rgba(0, 0, 0, 0.162);
-      
-      //background: radial-gradient(circle at 100% 100%, #fff 0, #fff 60px, transparent 0) 0 0 / 64px 64px no-repeat, radial-gradient(circle at 0 80%, #fff 0, #fff 60px, transparent 0) 100% 0 / 64px 64px no-repeat, radial-gradient(circle at 100% 0, #fff 0, #fff 60px, transparent 0) 0 100% / 64px 64px no-repeat, radial-gradient(circle at 0 0, #fff 0, #fff 60px, transparent 0) 100% 100% / 64px 64px no-repeat, linear-gradient(#fff, #fff) 50% 50% / calc(100% - 8px) calc(100% - 128px) no-repeat, linear-gradient(#fff, #fff) 50% 50% / calc(100% - 128px) calc(100% - 8px) no-repeat, linear-gradient(140deg, transparent 65%, rgb(156, 30, 194)), linear-gradient(311deg, #fff 65%,rgb(156, 30, 194) );
-     
+      padding-top: 10px;
       
       .heading {
         font-size: 1.8em;
@@ -40,16 +35,18 @@
         width: 100%;
         position: relative;
         display: flex;
-        align-items: center;
+        flex-direction: column; 
+        align-items: center; 
         justify-content: center;
     
-  
-        .inputIcon {
-          position: absolute;
-          left:36px;
-           font-size: 20px; }
-  
-        .inputField {
+        label {
+          margin-bottom: 0.3rem; 
+         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        
+         
+      }
+      
+       .inputField {
           width: 90%;
           height: 60px;
           border: none;
@@ -57,9 +54,7 @@
           border-radius: 5px;
           margin: 10px 0;
           color: rgb(31, 28, 28);
-       
-         // box-sizing: border-box;
-          padding-left: 45px;
+          padding-left: 15px;
         }
         .inputField:focus {
           outline: none;
@@ -78,8 +73,8 @@
         .form-check-input {
   
           background-color: #5d5b5bb6;
-          border: 1px solid #ad58b0; /* İsteğe bağlı, kendi sınırınızı tanımlayabilirsiniz */
-          border-radius: 4px; /* İsteğe bağlı, köşeleri yuvarlatır */
+          border: 1px solid #ad58b0; 
+          border-radius: 4px; 
           
         }
        
@@ -90,8 +85,12 @@
         }
       
       #button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         position: relative;
-        width: 70%;
+        width: 50%;
         border:none;
         border-bottom: 2px solid rgb(211, 88, 211);
         background-color: #2c2b1f;
@@ -124,6 +123,14 @@
         transform: translateX(600px);
         transition-duration: .5s;
       }
+      
+      .signupContainer1 {
+       
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
     
       .signupContainer {
         margin: 0;
@@ -150,8 +157,8 @@
     
         .eye-icon {
         position: absolute;
-        top: 65%;
-        right: 40px; /* veya uygun bir mesafe belirleyin */
+        top: 70%;
+        right: 70px; /* veya uygun bir mesafe belirleyin */
         transform: translateY(-80%);
         cursor: pointer;
       }
@@ -163,8 +170,8 @@
     
         .eye-icon {
         position: absolute;
-        top: 65%;
-        right: 40px; /* veya uygun bir mesafe belirleyin */
+        top: 70%;
+        right: 70px; /* veya uygun bir mesafe belirleyin */
         transform: translateY(-80%);
         cursor: pointer;
       }

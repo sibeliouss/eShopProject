@@ -1,64 +1,68 @@
 <div class="container">
-    <div class="col-md-9">
-      <div class="mb-4">
-        <div class="pt-5">
-          <h6 class="baslik ml-lg-1 mb-lg-8 pb-xl-1">{{'accountDetails' | translate}}</h6>
-          <div class="edit mt-4 mb-4 pb-xl-1">{{'editAccount' | translate}}</div>
-          <form>
-            <div class="row">
-              <div class="col-md-6 mb-4">
-                <div class="edit1">
-                  <label for="Input1">{{'firstName' | translate}} *</label>
-                  <input type="text" class="form-control pl-3" id="Input1" formControlName="firstName">
-                </div>
-              </div>
-              <div class="col-md-6 mb-4">
-                <div class="edit1">
-                  <label for="Input2">{{'lastName' | translate}} *</label>
-                  <input type="text" class="form-control pl-3" id="Input2" formControlName="lastName">
-                </div>
-              </div>
-              <div class="col-md-12 mb-4">
-                <div class="edit1">
-                  <label for="Input3">{{'emailaddress' | translate}}</label>
-                  <input type="email" formControlName="email" class="form-control pl-3" id="Input3">
-                </div>
+  <div class="col-md-9">
+    <div class="mb-4">
+      <div class="pt-5">
+        <h6 class="baslik ml-lg-1 mb-lg-8 pb-xl-1">{{'accountDetails' | translate}}</h6>
+        <div class="edit mt-4 mb-4 pb-xl-1">{{'editAccount' | translate}}</div>
+        <form [formGroup]="accountForm">
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="edit1">
+                <label for="Input1">{{'firstName' | translate}} *</label>
+                <input formControlName="firstName" type="text" class="form-control pl-3" id="Input1">
               </div>
             </div>
-          </form>
+            <div class="col-md-6 mb-4">
+              <div class="edit1">
+                <label for="Input2">{{'lastName' | translate}} *</label>
+                <input formControlName="lastName" type="text" class="form-control pl-3" id="Input2">
+              </div>
+            </div>
+            <div class="col-md-12 mb-4">
+              <div class="edit1">
+                <label for="Input3">{{'emailaddress' | translate}}</label>
+                <input formControlName="email" type="email" class="form-control pl-3" id="Input3">
+              </div>
+            </div>
+            <div class="col-md-12 mb-4">
+              <div class="edit1">
+                <label for="Input4">{{'userName' | translate}}</label>
+                <input formControlName="userName" type="text" class="form-control pl-3" id="Input4">
+              </div>
+            </div>
+          </div>
           <div class="buton">
-            <button type="submit" class="btn">{{'saveChanges' | translate}}</button>
+            <button type="button" (click)="updateUserInformation()" class="btn">{{'saveChanges' | translate}}</button>
           </div>
-        </div>
-  
-        <div class="pl-md-5 pl-lg-9">
-          <form>
-            <div class="row mt-5">
-              <div class="col-md-12 mb-4 yukari">
-                <div class="edit1">
-                  <label for="Input5">{{'currentPassword' | translate}}</label>
-                  <input type="password" class="form-control" formControlName="currentPassword" autocomplete="off" placeholder="********" id="Input5">
-                </div>
-              </div>
-              <div class="col-md-12 mb-4">
-                <div class="edit1">
-                  <label for="Input6">{{'newPassword' | translate}}</label>
-                  <input type="password" class="form-control" formControlName="newPassword" autocomplete="off" placeholder="********" id="Input6">
-                </div>
-              </div>
-              <div class="col-md-12 mb-4">
-                <div class="edit1">
-                  <label for="Input7">{{'confirmNewPassword' | translate}}</label>
-                  <input type="password" class="form-control" formControlName="confirmNewPassword" autocomplete="off" placeholder="********" id="Input7">
-                </div>
+        </form>
+      </div>
+      <div class="pl-md-5 pl-lg-9">
+        <form [formGroup]="passwordForm">
+          <div class="row mt-5">
+            <div class="col-md-12 mb-4 yukari">
+              <div class="edit1">
+                <label for="Input5">{{'currentPassword' | translate}}</label>
+                <input formControlName="currentPassword" type="password" class="form-control" placeholder="********" id="Input5">
               </div>
             </div>
-          </form>
-          <div class="buton altbuton">
-            <button type="submit" class="btn" >{{'saveChanges' | translate}}</button>
+            <div class="col-md-12 mb-4">
+              <div class="edit1">
+                <label for="Input6">{{'newPassword' | translate}}</label>
+                <input formControlName="newPassword" type="password" class="form-control" placeholder="********" id="Input6">
+              </div>
+            </div>
+            <div class="col-md-12 mb-4">
+              <div class="edit1">
+                <label for="Input7">{{'confirmNewPassword' | translate}}</label>
+                <input formControlName="confirmNewPassword" type="password" class="form-control" placeholder="********" id="Input7">
+              </div>
+            </div>
           </div>
-        </div>
+          <div class="buton altbuton">
+            <button type="button" (click)="updateUserPassword()" class="btn">{{'saveChanges' | translate}}</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  
+</div>
