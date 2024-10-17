@@ -5,7 +5,7 @@ namespace Application.Services.Customers;
 
 public interface ICustomerService
 {
-    Task CreateCustomerAsync(CreateCustomerDto createCustomerDto);
+    Task<Customer> CreateCustomerAsync(CreateCustomerDto customerDto);
     Task UpdateCustomerInformationAsync(UpdateCustomerInformationDto request);
     Task UpdateCustomerPasswordAsync(UpdateCustomerPasswordDto request);
     Task<Customer?> GetCustomerByIdAsync(Guid customerId);

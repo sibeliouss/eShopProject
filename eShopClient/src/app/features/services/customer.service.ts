@@ -8,17 +8,13 @@ import { Customer } from '../models/Customer';
 })
 export class CustomerService {
 
-  private baseUrl: string = 'http://localhost:5123/api/Customers';
+  private apiUrl = 'http://localhost:5123/api/Customers/GetCustomerById';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getCustomerByUserId(userId: string): Observable<Customer> {
-    const url = `${this.baseUrl}/GetCustomerByUserId/${userId}`;
-    return this.http.get<Customer>(url);
+  getCustomerById(id: string): Observable<Customer> {
+    return this.http.get<Customer>(`${this.apiUrl}/${id}`);
   }
 
-  getCustomerById(customerId: string): Observable<Customer> {
-    const url = `${this.baseUrl}/GetCustomerById/${customerId}`;
-    return this.http.get<Customer>(url);
-  }
+  
 }

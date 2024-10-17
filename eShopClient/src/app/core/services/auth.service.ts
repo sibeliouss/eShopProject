@@ -19,6 +19,7 @@ export class AuthService {
   lastName: string = ""; 
   userName: string = "";
   email: string = "";
+  customer:any;
 
   constructor(private router: Router, private http: HttpClient, private toast: ToastrService) { }
 
@@ -29,7 +30,6 @@ export class AuthService {
       this.tokenString = responseJson?.accessToken;
       const decode: any = jwtDecode(this.tokenString);
 
-      // Token kontrolü null ise burada başlatılıyor
       this.token = {
         email: decode?.Email || '',
         name: decode?.Name || '',
@@ -59,6 +59,7 @@ export class AuthService {
         this.lastName = this.user.lastName;
         this.userName = this.user.userName;
         this.email = this.user.email;
+        
       },
       error: (err: HttpErrorResponse) => {
        
@@ -67,6 +68,9 @@ export class AuthService {
       }
     })
   }
+ 
+  
+  
   
   logout(): void {
     localStorage.removeItem('response');

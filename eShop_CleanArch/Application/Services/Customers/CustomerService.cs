@@ -16,7 +16,7 @@ public class CustomerService: ICustomerService
        
     }
 
-    public async Task CreateCustomerAsync(CreateCustomerDto createCustomerDto)
+    public async Task<Customer> CreateCustomerAsync(CreateCustomerDto createCustomerDto)
     {
         var customer = new Customer 
         {
@@ -30,7 +30,10 @@ public class CustomerService: ICustomerService
         };
         
         await _customerRepository.AddAsync(customer);
+        
+        return customer;
     }
+
     public  async Task UpdateCustomerInformationAsync(UpdateCustomerInformationDto request)
     {
         var customer = await _customerRepository.GetByIdAsync(request.Id);

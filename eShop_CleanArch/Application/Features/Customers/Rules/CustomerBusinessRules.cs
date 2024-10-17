@@ -31,6 +31,14 @@ public class CustomerBusinessRules
             }
         }
     }
+    
+    public async Task PasswordsShouldMatch(string password, string confirmedPassword)
+    {
+        if (password != confirmedPassword)
+        {
+            await ThrowBusinessException(CustomerMessages.PasswordsDoNotMatch);
+        }
+    }
 }
 
 public class BusinessException(string message) : Exception(message);

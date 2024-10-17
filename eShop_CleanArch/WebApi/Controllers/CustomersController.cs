@@ -1,3 +1,4 @@
+using Application.Features.Customers.Commands.Create;
 using Application.Features.Customers.Commands.Delete;
 using Application.Features.Customers.Commands.Update.UpdateCustomerInformation;
 using Application.Features.Customers.Commands.Update.UpdateCustomerPassword;
@@ -18,6 +19,18 @@ public class CustomersController : ControllerBase
     {
         _mediator = mediator;
     } 
+    
+    [HttpPost]
+    public async Task<IActionResult> Add([FromBody] CreateCustomerCommand createCustomerCommand)
+    {
+
+        var response = await _mediator.Send(createCustomerCommand);
+
+        // Yeni oluşturulan müşteri için URI'yi oluşturun (örneğin, customer id'ye göre)
+       
+        return Created(uri: "", response);
+    }
+
     
     [HttpPut]
     public async Task<IActionResult> UpdateCustomerInformation([FromBody] UpdateCustomerInformationDto updateCustomerInformationDto)
@@ -90,18 +103,7 @@ public class CustomersController : ControllerBase
 
         return Ok(customers);
     }
-    
-    [HttpGet("{userId:guid}")]
-    public async Task<IActionResult> GetCustomerByUserId(Guid userId)
-    {
-        var query = new GetCustomerByUserIdQuery(userId);
-        var customer = await _mediator.Send(query); 
-        
-        return Ok(customer);
-    }
 
-
-    
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCustomer(Guid id, [FromQuery] string password)
     {
