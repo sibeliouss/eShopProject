@@ -44,12 +44,12 @@ public class AddressesController : ControllerBase
         return NoContent();
     }
 
-    [HttpGet("{customerId}")]
-    public async Task<IActionResult> Get(Guid customerId)
+    [HttpGet("{userId}")]
+    public async Task<IActionResult> Get(Guid userId)
     {
         var query = new GetListAddressQuery()
         {
-            CustomerId = customerId
+            UserId = userId
         };
        var response= await _mediator.Send(query);
        return Ok(response);

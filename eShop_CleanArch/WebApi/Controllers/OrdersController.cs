@@ -15,20 +15,20 @@ public class OrdersController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("{customerId}")]
-    public async Task<IActionResult> GetAllOrdersByCustomerId(Guid customerId)
+    [HttpGet("{userId}")]
+    public async Task<IActionResult> GetAllOrdersByUserId(Guid userId)
     {
         
-        var query = new GetAllOrdersByCustomerId { CustomerId = customerId };
+        var query = new GetAllOrdersByUserId { UserId = userId };
         var result = await _mediator.Send(query);
             
         return Ok(result);
     }
     
-    [HttpGet("{customerId:guid}")]
-    public async Task<IActionResult> GetOrderReceivedByCustomerId(Guid customerId)
+    [HttpGet("{userId:guid}")]
+    public async Task<IActionResult> GetOrderReceivedByUserrId(Guid userId)
     {
-        var query = new GetOrderReceivedByCustomerId { CustomerId = customerId };
+        var query = new GetOrderReceivedByCustomerId { UserId = userId };
         var result = await _mediator.Send(query);
             
         return Ok(result);

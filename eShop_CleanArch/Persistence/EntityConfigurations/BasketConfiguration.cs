@@ -9,7 +9,7 @@ public class BasketConfiguration : IEntityTypeConfiguration<Basket>
     public void Configure(EntityTypeBuilder<Basket> builder)
     {
         builder.ToTable("Baskets").HasKey(b => b.Id);
-        builder.Property(b => b.CustomerId).IsRequired();
+        builder.Property(b => b.UserId).IsRequired();
         builder.Property(b => b.ProductId).IsRequired();
         builder.Property(b => b.Quantity).IsRequired();
         builder.OwnsOne(p => p.Price, price =>

@@ -1,29 +1,38 @@
 import { Injectable } from '@angular/core';
 import { TokenModel } from '../models/token';
 import { UserModel } from '../models/user';
-import { Router } from '@angular/router';
-import { jwtDecode } from 'jwt-decode';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { Customer } from '../../features/models/Customer';
+import { CustomerService } from '../../features/services/customer.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  token: TokenModel | null=null;
-  tokenString: string = "";
+  token: TokenModel | null = null;
+  tokenString: string = '';
   user: UserModel = new UserModel();
+  customer: Customer | null = null;
 
-  firstName: string = "";
-  lastName: string = ""; 
-  userName: string = "";
-  email: string = "";
-  customer:any;
+  firstName: string = '';
+  lastName: string = ''; 
+  userName: string = '';
+  email: string = '';
+  customerId: string | null = null;
 
-  constructor(private router: Router, private http: HttpClient, private toast: ToastrService) { }
+  constructor(
+    private router: Router, 
+    private http: HttpClient, 
+    private toast: ToastrService,
+    private activeRoute: ActivatedRoute, 
+    private customerService: CustomerService
+  ) {}
 
-  checkAuthentication() {
+  checkAuthentication(): boolean {
     const responseString = localStorage.getItem("response");
     if (responseString) {
       const responseJson = JSON.parse(responseString);
@@ -46,34 +55,43 @@ export class AuthService {
       return true;
     } else {
       this.router.navigateByUrl("/");
-      return true;
+      return false;
     }
-}
+  }
 
-  
-  getUser(){
-    this.http.get("http://localhost:5123/api/Auth/GetUser/" + this.token?.userId).subscribe({
+  getUser(): void {
+    this.http.get(`http://localhost:5123/api/Auth/GetUser/${this.token?.userId}`).subscribe({
       next: (res: any) => {
         this.user = res;
         this.firstName = this.user.firstName;
         this.lastName = this.user.lastName;
         this.userName = this.user.userName;
         this.email = this.user.email;
-        
       },
       error: (err: HttpErrorResponse) => {
-       
         console.error("Kullanıcı bilgileri alınırken bir hata oluştu:", err.message);
-       
       }
-    })
+    });
   }
- 
+
+  getCustomer(customerId: string): void {
+    this.customerService.getCustomerById(customerId).subscribe({
+      next: (response: Customer) => {
+        if (response.userId === this.token?.userId) {
+          this.customer = response; 
+        } else {
+          console.error("Kullanıcı ve müşteri bilgileri eşleşmiyor.");
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error("Müşteri bilgileri alınırken bir hata oluştu:", err.message);
+      }
+    });
+  }
   
-  
-  
+
   logout(): void {
     localStorage.removeItem('response');
     this.router.navigateByUrl('/login');
-   }
+  }
 }

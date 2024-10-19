@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Orders.Queries;
 
-public class GetOrderReceivedByCustomerId : IRequest<GetOrderReceivedByCustomerIdResponse>
+public class GetOrderReceivedByCustomerId : IRequest<GetOrderReceivedByUserIdResponse>
 {
-    public Guid CustomerId { get; set; }
+    public Guid UserId { get; set; }
     
-    public class GetOrderReceivedByCustomerIdHandler : IRequestHandler<GetOrderReceivedByCustomerId, GetOrderReceivedByCustomerIdResponse>
+    public class GetOrderReceivedByCustomerIdHandler : IRequestHandler<GetOrderReceivedByCustomerId, GetOrderReceivedByUserIdResponse>
     {
         private readonly IOrderRepository _orderRepository;
 
@@ -19,14 +19,14 @@ public class GetOrderReceivedByCustomerId : IRequest<GetOrderReceivedByCustomerI
         {
             _orderRepository = orderRepository;
         }
-        public async Task<GetOrderReceivedByCustomerIdResponse> Handle(GetOrderReceivedByCustomerId request, CancellationToken cancellationToken)
+        public async Task<GetOrderReceivedByUserIdResponse> Handle(GetOrderReceivedByCustomerId request, CancellationToken cancellationToken)
         {
-            var order = await _orderRepository.Query().Where(o => o.CustomerId == request.CustomerId)
+            var order = await _orderRepository.Query().Where(o => o.UserId == request.UserId)
                 .OrderByDescending(o => o.CreateAt).Include(o => o.OrderDetails).ThenInclude(o => o.Product)
                 .FirstOrDefaultAsync(cancellationToken);
             if (order is null) throw new Exception("Müşteriye ait herhangi bir sipariş bulunamadı!");
 
-            var orderResponse = new GetOrderReceivedByCustomerIdResponse()
+            var orderResponse = new GetOrderReceivedByUserIdResponse()
             {
                 Id = order.Id,
                 CreatedAt = order.CreateAt,

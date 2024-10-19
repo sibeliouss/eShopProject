@@ -6,6 +6,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Application.Features.Baskets.Commands.Create;
 
 public class CreateShoppingBasketCommand : IRequest<CreatedShoppingBasketResponse>
@@ -42,7 +43,7 @@ public class CreateShoppingBasketCommand : IRequest<CreatedShoppingBasketRespons
            
            var basket = await _basketRepository.Query()
                .Where(b => b.ProductId == request.ShoppingBasketDto.ProductId &&
-                           b.CustomerId == request.ShoppingBasketDto.CustomerId).FirstOrDefaultAsync(cancellationToken);
+                           b.UserId == request.ShoppingBasketDto.UserId).FirstOrDefaultAsync(cancellationToken);
 
            if (basket is not null)
            {
@@ -60,7 +61,7 @@ public class CreateShoppingBasketCommand : IRequest<CreatedShoppingBasketRespons
                  ProductId = shoppingBasketDto.ProductId,
                  Price = shoppingBasketDto.Price,
                  Quantity = 1,
-                 CustomerId = shoppingBasketDto.CustomerId
+                 UserId = shoppingBasketDto.UserId
                };
                await _basketRepository.AddAsync(basket);
            }
@@ -68,7 +69,7 @@ public class CreateShoppingBasketCommand : IRequest<CreatedShoppingBasketRespons
            return new CreatedShoppingBasketResponse()
            {
                ProductId = basket.ProductId,
-               CustomerId = basket.CustomerId,
+               UserId = basket.UserId,
                Price = basket.Price,
                Quantity = basket.Quantity
            };

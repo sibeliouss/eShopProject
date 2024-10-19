@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 export class MiddlebarComponent {
 
   responseInLocalStorage: any;  
+  customerId:any;
 
 
   ngOnInit() {
@@ -24,10 +25,12 @@ export class MiddlebarComponent {
       this.responseInLocalStorage = localStorage.getItem("response");
       this.auth.checkAuthentication();
     }
-    this.auth.getUser();
-    console.log(this.auth.token?.userId);
+    this.auth.getCustomer(this.customerId);
+    console.log(this.auth.customerId);
     
   }
+
+
 
   constructor(public auth: AuthService, private router: Router) {}
   

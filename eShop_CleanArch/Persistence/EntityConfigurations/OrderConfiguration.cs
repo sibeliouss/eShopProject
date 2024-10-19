@@ -13,10 +13,6 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.Property(o => o.PaymentMethod).IsRequired();
         builder.Property(o => o.PaymentNumber).IsRequired();
         builder.Property(o => o.PaymentDate).HasDefaultValueSql("GETDATE()");
-
-        builder.HasOne(o => o.Customer).WithMany(c => c.Orders).HasForeignKey(o => o.CustomerId)
-            .OnDelete(DeleteBehavior.Cascade); // Müşteri silinirse ilgili siparişler de silinir
-        
         builder.Property(o => o.Status).IsRequired();
         builder.Property(o => o.PaymentCurrency).IsRequired();
     }

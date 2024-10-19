@@ -9,7 +9,7 @@ namespace Application.Features.Addresses.Queries;
 
 public class GetListAddressQuery : IRequest<GetListAddressQueryResponse>
 {
-    public Guid CustomerId { get; set; }
+    public Guid UserId { get; set; }
 
     public class GetAddressQueryHandler : IRequestHandler<GetListAddressQuery, GetListAddressQueryResponse>
     {
@@ -26,7 +26,7 @@ public class GetListAddressQuery : IRequest<GetListAddressQueryResponse>
 
         public async Task<GetListAddressQueryResponse> Handle(GetListAddressQuery request, CancellationToken cancellationToken)
         {
-            var address = await _addressRepository.Query().Where(a => a.CustomerId == request.CustomerId)
+            var address = await _addressRepository.Query().Where(a => a.UserId == request.UserId)
                 .FirstOrDefaultAsync(cancellationToken);
 
             await _addressBusinessRules.AddressShouldExistWhenSelected(address);

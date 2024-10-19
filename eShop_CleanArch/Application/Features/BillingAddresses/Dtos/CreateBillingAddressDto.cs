@@ -1,7 +1,7 @@
 namespace Application.Features.BillingAddresses.Dtos;
 
 public record CreateBillingAddressDto(
-    Guid CustomerId,
+    Guid UserId,
     string Country,
     string City,
     string? ZipCode,

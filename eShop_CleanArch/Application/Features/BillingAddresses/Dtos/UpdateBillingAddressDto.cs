@@ -2,7 +2,7 @@ namespace Application.Features.BillingAddresses.Dtos;
 
 public record UpdateBillingAddressDto(
     Guid Id,
-    Guid CustomerId,
+    Guid UserId,
     string Country,
     string City,
     string ZipCode,

@@ -1480,6 +1480,7 @@
       "Iyzipay >= 2.1.61",
       "MediatR >= 12.4.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.6",
+      "Microsoft.EntityFrameworkCore >= 8.0.6",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 8.0.1"
     ]
   },
@@ -1545,6 +1546,10 @@
             "version": "[12.4.0, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[8.0.6, )"
+          },
+          "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[8.0.6, )"
           },

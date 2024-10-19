@@ -12,9 +12,9 @@ public class BillingAddressBusinessRules
         _billingAddressRepository = billingAddressRepository;
     }
     
-    public async Task BillingAddressShouldNotExistForCustomer(Guid customerId)
+    public async Task BillingAddressShouldNotExistForCustomer(Guid userId)
     {
-        var addressExists = await _billingAddressRepository.AnyAsync(a => a.CustomerId == customerId);
+        var addressExists = await _billingAddressRepository.AnyAsync(a => a.UserId == userId);
         if (addressExists)
         {
             throw new Exception(BillingAddressMessages.AddressAlreadyExistsForCustomer);

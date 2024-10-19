@@ -7,7 +7,7 @@ namespace Application.Features.BillingAddresses.Queries;
 
 public class GetListBillingAddressQuery  : IRequest<GetListBillingAddressQueryResponse>
 {
-    public Guid CustomerId { get; set; }
+    public Guid UserId { get; set; }
 
     public class GetAddressQueryHandler : IRequestHandler<GetListBillingAddressQuery, GetListBillingAddressQueryResponse>
     {
@@ -22,7 +22,7 @@ public class GetListBillingAddressQuery  : IRequest<GetListBillingAddressQueryRe
 
         public async Task<GetListBillingAddressQueryResponse> Handle(GetListBillingAddressQuery request, CancellationToken cancellationToken)
         {
-            var address = await _billingAddressRepository.Query().Where(a => a.CustomerId == request.CustomerId)
+            var address = await _billingAddressRepository.Query().Where(a => a.UserId == request.UserId)
                 .FirstOrDefaultAsync(cancellationToken);
             if (address == null)
             {

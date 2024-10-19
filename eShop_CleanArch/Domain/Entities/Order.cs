@@ -5,8 +5,8 @@ namespace Domain.Entities;
 
 public class Order : Entity<Guid>
 {
-   public Guid CustomerId { get; set; }
-   public Customer? Customer { get; set; }
+   public Guid UserId { get; set; }
+   public User? User { get; set; }
    public string OrderNumber { get; set; } = string.Empty;
    public int ProductQuantity { get; set; }
    public DateTime PaymentDate { get; set; }=DateTime.Now;

@@ -1,40 +1,38 @@
 <nav class="navbar navbar-expand-md d-flex align-items-center">
-    <div class="container">
-      <a routerLink="/homepage" class="navbar-brand">
-        <h2>Sibel</h2>
-      </a>
-      <div class="d-flex align-items-center">
-        <form class="d-flex" role="search">
-          <div class="search-container">
-            <input class="form-control search" type="search" placeholder="Ürün arayın..." aria-label="Search">
-            <button class="search-button" type="submit"><i class="bi bi-search"></i></button>
-          </div>
-        </form>
-      </div>
-      <ul class="navbar-nav">
-        <div>
-          <li class="nav-item">
-            <a class="nav-link me-2" aria-current="page" routerLink="/"><img src="/public/img/love.png" alt="" width="35px" height="35px"></a>
-          </li>
-        <!--   User  -->
+  <div class="container">
+    <a routerLink="/homepage" class="navbar-brand">
+      <h2>Sibel</h2>
+    </a>
+    <div class="d-flex align-items-center">
+      <form class="d-flex" role="search">
+        <div class="search-container">
+          <input class="form-control search" type="search" placeholder="Ürün arayın..." aria-label="Search">
+          <button class="search-button" type="submit"><i class="bi bi-search"></i></button>
         </div>
-        <li class="nav-item" *ngIf="!responseInLocalStorage" >
-          <a class="nav-link" aria-current="page" routerLink="/login">
-            <img src="/public/img/profile.png" alt="" width="35px" height="35px">
-          </a>
-        </li>
-        
-        <div class="btn-group" *ngIf="responseInLocalStorage">
-          <button type="button" class="btn" [routerLink]="['/account', auth.token?.userId]">
-          <span>{{ auth.user.firstName }} {{ auth.user.lastName }}</span>
-           </button>
-        </div>
-         <div >
-          <li class="nav-item">
-            <a class="nav-link ms-2" aria-current="page" routerLink="/" (click)="auth.logout()"><img src="/public/img/shopping.png" alt="" width="35px" height="35px"></a>
-          </li>
-        </div>
-      </ul>
+      </form>
     </div>
-  </nav>
-  
+    <ul class="navbar-nav">
+      <div>
+        <li class="nav-item">
+          <a class="nav-link me-2" aria-current="page" routerLink="/"><img src="/public/img/love.png" alt="" width="35px" height="35px"></a>
+        </li>
+      </div>
+      <li class="nav-item" *ngIf="!responseInLocalStorage">
+        <a class="nav-link" aria-current="page" routerLink="/login">
+          <img src="/public/img/profile.png" alt="" width="35px" height="35px">
+        </a>
+      </li>
+      
+      <div class="btn-group" *ngIf="responseInLocalStorage">
+        <button type="button" class="btn" [routerLink]="['/account', auth.customer?.id]"> 
+        <span>{{ auth.customer?.firstName }} {{ auth.customer?.lastName }}</span> 
+         </button>
+      </div>
+      <div>
+        <li class="nav-item">
+          <a class="nav-link ms-2" aria-current="page" routerLink="/" (click)="auth.logout()"><img src="/public/img/shopping.png" alt="" width="35px" height="35px"></a>
+        </li>
+      </div>
+    </ul>
+  </div>
+</nav>

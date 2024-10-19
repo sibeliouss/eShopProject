@@ -1,3 +1,4 @@
+/*
 using Application.Features.Customers.Dtos;
 using Application.Services.Repositories;
 using AutoMapper;
@@ -107,3 +108,4 @@ public class CustomerService: ICustomerService
         return await _customerRepository.GetAllAsync();
     }
 }
+*/

@@ -5,22 +5,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Orders.Queries;
 
-public class GetAllOrdersByCustomerId : IRequest<List<GetAllOrdersByCustomerIdResponse>>
+public class GetAllOrdersByUserId : IRequest<List<GetAllOrdersByUserIdResponse>>
 {
-   public Guid CustomerId { get; set; }
+   public Guid UserId { get; set; }
    
-   public class GetAllOrderByCustomerIdHandler : IRequestHandler<GetAllOrdersByCustomerId,List<GetAllOrdersByCustomerIdResponse> >
+   public class GetAllOrderByUserIdHandler : IRequestHandler<GetAllOrdersByUserId,List<GetAllOrdersByUserIdResponse> >
    {
       private readonly IOrderRepository _orderRepository;
 
-      public GetAllOrderByCustomerIdHandler(IOrderRepository orderRepository)
+      public GetAllOrderByUserIdHandler(IOrderRepository orderRepository)
       {
          _orderRepository = orderRepository;
       }
-      public async Task<List<GetAllOrdersByCustomerIdResponse>> Handle(GetAllOrdersByCustomerId request, CancellationToken cancellationToken)
+      public async Task<List<GetAllOrdersByUserIdResponse>> Handle(GetAllOrdersByUserId request, CancellationToken cancellationToken)
       {
          var orders = await _orderRepository.Query()
-            .Where(o => o.CustomerId == request.CustomerId)
+            .Where(o => o.UserId == request.UserId)
             .Include(o => o.OrderDetails).ThenInclude(p => p.Product)
             .ToListAsync(cancellationToken);
          
@@ -29,7 +29,7 @@ public class GetAllOrdersByCustomerId : IRequest<List<GetAllOrdersByCustomerIdRe
             throw new Exception("Kullanıcıya ait bir sipariş bulunamadı");
          }
          
-         var orderResponse = orders.Select(o => new GetAllOrdersByCustomerIdResponse
+         var orderResponse = orders.Select(o => new GetAllOrdersByUserIdResponse
          {
             Id = o.Id,
             OrderNumber = o.OrderNumber,

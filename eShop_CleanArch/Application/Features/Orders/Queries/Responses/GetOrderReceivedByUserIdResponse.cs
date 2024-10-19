@@ -2,7 +2,7 @@ using Application.Features.Orders.Dtos;
 
 namespace Application.Features.Orders.Queries.Responses;
 
-public class GetOrderReceivedByCustomerIdResponse
+public class GetOrderReceivedByUserIdResponse
 {
     public Guid Id { get; set; }
     public string OrderNumber { get; set; }

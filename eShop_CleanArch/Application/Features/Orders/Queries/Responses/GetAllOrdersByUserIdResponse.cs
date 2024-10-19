@@ -1,6 +1,6 @@
 namespace Application.Features.Orders.Queries.Responses;
 
-public class GetAllOrdersByCustomerIdResponse
+public class GetAllOrdersByUserIdResponse
 {
     public Guid Id { get; set; }
     public string OrderNumber { get; set; }
