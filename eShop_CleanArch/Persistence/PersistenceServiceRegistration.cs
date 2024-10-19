@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Identity.Client;
 using Persistence.Contexts;
 using Persistence.Repositories;
 
@@ -40,6 +41,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
         services.AddScoped<IBasketRepository, BasketRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
     } 
 }

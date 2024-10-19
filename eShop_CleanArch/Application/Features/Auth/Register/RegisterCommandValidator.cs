@@ -1,4 +1,4 @@
-using Application.Features.Customers.Dtos;
+
 using FluentValidation;
 
 namespace Application.Features.Auth.Register;

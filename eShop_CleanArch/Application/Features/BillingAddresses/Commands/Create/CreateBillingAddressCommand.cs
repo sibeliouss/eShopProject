@@ -41,7 +41,7 @@ namespace Application.Features.BillingAddresses.Commands.Create
                 }
 
                 await _billingAddressBusinessRules.BillingAddressShouldNotExistForCustomer(
-                    billingAddressDto.CustomerId);
+                    billingAddressDto.UserId);
                 
                 var billingAddress = _mapper.Map<BillingAddress>(billingAddressDto);
 

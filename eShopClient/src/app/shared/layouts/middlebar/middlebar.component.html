@@ -24,8 +24,8 @@
       </li>
       
       <div class="btn-group" *ngIf="responseInLocalStorage">
-        <button type="button" class="btn" [routerLink]="['/account', auth.customer?.id]"> 
-        <span>{{ auth.customer?.firstName }} {{ auth.customer?.lastName }}</span> 
+        <button type="button" class="btn" [routerLink]="['/account', auth.user.id]"> 
+        <span>{{ auth.user.firstName }} {{ auth.user.lastName }}</span> 
          </button>
       </div>
       <div>

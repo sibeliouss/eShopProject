@@ -5,8 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { Customer } from '../../features/models/Customer';
-import { CustomerService } from '../../features/services/customer.service';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
@@ -16,7 +14,7 @@ export class AuthService {
   token: TokenModel | null = null;
   tokenString: string = '';
   user: UserModel = new UserModel();
-  customer: Customer | null = null;
+ 
 
   firstName: string = '';
   lastName: string = ''; 
@@ -28,8 +26,6 @@ export class AuthService {
     private router: Router, 
     private http: HttpClient, 
     private toast: ToastrService,
-    private activeRoute: ActivatedRoute, 
-    private customerService: CustomerService
   ) {}
 
   checkAuthentication(): boolean {
@@ -73,23 +69,6 @@ export class AuthService {
       }
     });
   }
-
-  getCustomer(customerId: string): void {
-    this.customerService.getCustomerById(customerId).subscribe({
-      next: (response: Customer) => {
-        if (response.userId === this.token?.userId) {
-          this.customer = response; 
-        } else {
-          console.error("Kullanıcı ve müşteri bilgileri eşleşmiyor.");
-        }
-      },
-      error: (err: HttpErrorResponse) => {
-        console.error("Müşteri bilgileri alınırken bir hata oluştu:", err.message);
-      }
-    });
-  }
-  
-
   logout(): void {
     localStorage.removeItem('response');
     this.router.navigateByUrl('/login');

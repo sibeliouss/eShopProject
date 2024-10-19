@@ -7,8 +7,7 @@ import { UpdateCustomerPasswordModel } from '../../../models/UpdateCustomerPassw
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../../core/services/auth.service';
 import { SwalService } from '../../../../core/services/swal.service';
-import { CustomerService } from '../../../services/customer.service';
-import { Customer } from '../../../models/Customer';
+
 
 @Component({
   selector: 'app-account-details',
@@ -18,8 +17,7 @@ import { Customer } from '../../../models/Customer';
   styleUrls: ['./account-details.component.scss']
 })
 export class AccountDetailsComponent {
-  customerId!: string;
-  customer: Customer | undefined;
+
   requestUserInfomation!: UpdateCustomerInformationModel;
   requestUserPassword!: UpdateCustomerPasswordModel;
 
@@ -30,7 +28,6 @@ export class AccountDetailsComponent {
     private http: HttpClient,
     public auth: AuthService,
     private swal: SwalService,
-    public customerService: CustomerService,
     private translate: TranslateService,
   ) {
     

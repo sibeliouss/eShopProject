@@ -1,6 +1,4 @@
 using Application.Features.Auth.Rules;
-using Application.Features.Customers.Dtos;
-using Application.Services.Customers;
 using AutoMapper;
 using Domain.Entities;
 using FluentValidation;
@@ -23,7 +21,6 @@ public class RegisterCommand : IRequest
    public class RegisterCommandHandler : IRequestHandler<RegisterCommand>
 {
     private readonly UserManager<User> _userManager;
-    private readonly ICustomerService _customerService;
     private readonly AuthBusinessRules _authBusinessRules;
     private readonly IMapper _mapper;
     private readonly IValidator<RegisterCommand> _validator;
@@ -31,13 +28,11 @@ public class RegisterCommand : IRequest
     public RegisterCommandHandler(
         AuthBusinessRules authBusinessRules, 
         UserManager<User> userManager, 
-        ICustomerService customerService, 
         IMapper mapper, 
         IValidator<RegisterCommand> validator)
     {
         _authBusinessRules = authBusinessRules;
         _userManager = userManager;
-        _customerService = customerService;
         _mapper = mapper;
         _validator = validator;
     }
@@ -63,25 +58,8 @@ public class RegisterCommand : IRequest
 
         // Kullanıcı oluşturma
         var user = _mapper.Map<User>(request);
-        var result = await _userManager.CreateAsync(user, request.Password);
-
-        if (result.Succeeded)
-        {
-            var customerDto = new CreateCustomerDto(
-                user.FirstName,
-                user.LastName,
-                user.Email,
-                user.Id,
-                user.UserName,
-                user.PasswordHash // Şifre hash'lenmiş olarak otomatik gelir
-            );
-            await _customerService.CreateCustomerAsync(customerDto);
-        }
-        else
-        {
-            await _userManager.DeleteAsync(user);
-            throw new Exception("Kullanıcı oluşturulurken bir hata oluştu.");
-        }
+        await _userManager.CreateAsync(user, request.Password);
+        
     }
 }
 
