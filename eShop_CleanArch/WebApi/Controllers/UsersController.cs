@@ -39,7 +39,7 @@ public class UsersController : ControllerBase
         }
     }
     
-    [HttpPost]
+    [HttpPut]
     public async Task<IActionResult> UpdateUserPassword([FromBody] UpdateUserPasswordDto updateUserPasswordDto)
     {
          

@@ -18,6 +18,6 @@ export class UserService {
   }
 
   updateUserPassword(updatePasswordModel: UpdateUserPasswordModel): Observable<{ message: string }> {
-    return this.http.post<{ message: string }>(`${this.apiUrl}/UpdateUserPassword`, updatePasswordModel);
+    return this.http.put<{ message: string }>(`${this.apiUrl}/UpdateUserPassword`, updatePasswordModel);
   }
 }
