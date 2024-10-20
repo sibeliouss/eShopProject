@@ -25,7 +25,7 @@ export class MiddlebarComponent {
       this.auth.checkAuthentication();
     }
     this.auth.getUser();
-    console.log(this.auth.customerId);
+    console.log(this.auth.token?.userId);
     
   }
 

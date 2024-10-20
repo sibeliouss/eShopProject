@@ -1,4 +1,4 @@
- <div class="container">
+<div class="container">
   <div class="col-md-9">
     <div class="mb-4">
       <div class="pt-5">
@@ -37,31 +37,29 @@
         </form>
       </div>
       <div class="pl-md-5 pl-lg-9">
-        <form [formGroup]="passwordForm">
-          <div class="row mt-5">
+        <div class="row mt-5">
             <div class="col-md-12 mb-4 yukari">
               <div class="edit1">
                 <label for="Input5">{{'currentPassword' | translate}}</label>
-                <input formControlName="currentPassword" type="password" class="form-control" placeholder="********" id="Input5">
+                <input [(ngModel)]="currentPassword" type="password" class="form-control" placeholder="********" id="Input5">
               </div>
             </div>
             <div class="col-md-12 mb-4">
               <div class="edit1">
                 <label for="Input6">{{'newPassword' | translate}}</label>
-                <input formControlName="newPassword" type="password" class="form-control" placeholder="********" id="Input6">
+                <input [(ngModel)]="newPassword" type="password" class="form-control" placeholder="********" id="Input6">
               </div>
             </div>
             <div class="col-md-12 mb-4">
               <div class="edit1">
                 <label for="Input7">{{'confirmNewPassword' | translate}}</label>
-                <input formControlName="confirmNewPassword" type="password" class="form-control" placeholder="********" id="Input7">
+                <input [(ngModel)]="confirmedPassword" type="password" class="form-control" placeholder="********" id="Input7">
               </div>
             </div>
           </div>
           <div class="buton altbuton">
             <button type="button" (click)="updateUserPassword()" class="btn">{{'saveChanges' | translate}}</button>
           </div>
-        </form>
       </div>
     </div>
   </div>

@@ -20,7 +20,7 @@ export class AuthService {
   lastName: string = ''; 
   userName: string = '';
   email: string = '';
-  customerId: string | null = null;
+ 
 
   constructor(
     private router: Router, 

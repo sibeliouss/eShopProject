@@ -30,7 +30,8 @@ public class UsersController : ControllerBase
         try
         { 
             await _mediator.Send(command);
-            return Ok("Müşteri bilgileri başarıyla güncellendi.");
+            return Ok(new { message = "Müşteri bilgileri başarıyla güncellendi." });
+
         }
         catch (Exception ex)
         {
@@ -38,7 +39,7 @@ public class UsersController : ControllerBase
         }
     }
     
-    [HttpPut]
+    [HttpPost]
     public async Task<IActionResult> UpdateUserPassword([FromBody] UpdateUserPasswordDto updateUserPasswordDto)
     {
          
@@ -48,7 +49,7 @@ public class UsersController : ControllerBase
         };
        
         await _mediator.Send(command);
-        return Ok("Şifre başarıyla değiştirildi.");
+        return Ok(new { message = "Şifre başarıyla değiştirildi." });
     }
     
     [HttpGet]
