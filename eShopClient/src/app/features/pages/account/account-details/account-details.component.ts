@@ -1,13 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UpdateCustomerInformationModel } from '../../../models/UpdateCustomerInfomationModel';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AuthService } from '../../../../core/services/auth.service';
 import { SwalService } from '../../../../core/services/swal.service';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { UpdateCustomerInformationModel } from '../../../models/UpdateCustomerInfomationModel';
 import { UpdateUserPasswordModel } from '../../../models/UpdateCustomerPasswordModel';
+import { UserService } from '../../../services/user.service';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-account-details',
@@ -16,9 +17,8 @@ import { UpdateUserPasswordModel } from '../../../models/UpdateCustomerPasswordM
   templateUrl: './account-details.component.html',
   styleUrls: ['./account-details.component.scss']
 })
-export class AccountDetailsComponent {
+export class AccountDetailsComponent implements OnInit {
   accountForm!: FormGroup;
-  //passwordForm!: FormGroup; // Yeni form grubu ekleniyor
   requestUserPassword: UpdateUserPasswordModel = new UpdateUserPasswordModel();
 
   currentPassword: string = "";
@@ -27,32 +27,24 @@ export class AccountDetailsComponent {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
+    private userService: UserService, 
     public auth: AuthService,
     private swal: SwalService,
-    private router: Router,
-    private translate: TranslateService
-  ) {
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
     this.initializeForms();
-    this.auth.checkAuthentication();
-    this.auth.getUser();
+   
   }
 
   private initializeForms() {
-    // Formları başlatma
     this.accountForm = this.fb.group({
       firstName: [this.auth.firstName || '', [Validators.required]],
       lastName: [this.auth.lastName || '', [Validators.required]],
       email: [this.auth.email || '', [Validators.required, Validators.email]],
       userName: [this.auth.userName || '', [Validators.required]]
     });
-
-    // Şifre güncelleme formunu başlatma
-    /* this.passwordForm = this.fb.group({
-      currentPassword: ['', [Validators.required]],
-      newPassword: ['', [Validators.required]],
-      confirmedPassword: ['', [Validators.required]]
-    }); */
   }
 
   updateUserInformation() {
@@ -67,7 +59,7 @@ export class AccountDetailsComponent {
         userName
       };
 
-      this.http.put<{ message: string }>("http://localhost:5123/api/Users/UpdateUserInformation/", updateUserInfo).subscribe({
+      this.userService.updateUserInformation(updateUserInfo).subscribe({
         next: (res) => {
           this.swal.callToast(res.message, 'success');
           setTimeout(() => {
@@ -77,19 +69,20 @@ export class AccountDetailsComponent {
           }, 3000);
         },
         error: (err) => {
-          this.swal.callToast("Güncelleme sırasında hata oluştu: " + err.message, 'error'); // Hata mesajı
+          this.swal.callToast("Güncelleme sırasında hata oluştu: " + err.message, 'error');
         }
       });
     }
   }
-  updateUserPassword(){
+
+  updateUserPassword() {
     this.requestUserPassword.id = this.auth.token?.userId ?? '';
 
     this.requestUserPassword.currentPassword = this.currentPassword;
     this.requestUserPassword.newPassword = this.newPassword;
     this.requestUserPassword.confirmedPassword = this.confirmedPassword;
 
-    this.http.post<{ message: string }>("http://localhost:5123/api/Users/UpdateUserPassword", this.requestUserPassword).subscribe({
+    this.userService.updateUserPassword(this.requestUserPassword).subscribe({
       next: (res) => {
         this.swal.callToast(res.message, 'success');
         setTimeout(() => {
@@ -99,13 +92,11 @@ export class AccountDetailsComponent {
         }, 3000);
       },
       error: (err) => {
-        this.swal.callToast("Güncelleme sırasında hata oluştu: " + err.message, 'error'); // Hata mesajı
+        this.swal.callToast("Güncelleme sırasında hata oluştu: " + err.message, 'error');
       }
     });
   }
 
-
-  // Kullanıcıyı çıkış yap
   logout() {
     localStorage.removeItem("response");
     location.href = "/login";
