@@ -56,7 +56,6 @@ export class LoginComponent {
     this.login.post('Auth/Login', request).subscribe({
       next: (res: any) => {
         console.log("Response from server:", res);
-        // Token'ı yerel depolamaya kaydedin
         localStorage.setItem('response', JSON.stringify(res));
          this.authService.checkAuthentication();
         this.toastr.success('Giriş başarılı');

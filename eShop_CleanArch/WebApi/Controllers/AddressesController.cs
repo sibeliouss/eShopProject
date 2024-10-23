@@ -6,6 +6,7 @@ using Application.Features.BillingAddresses.Commands.Create;
 using Application.Features.BillingAddresses.Commands.Delete;
 using Application.Features.BillingAddresses.Commands.Update;
 using Application.Features.BillingAddresses.Dtos;
+using Application.Features.BillingAddresses.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -77,6 +78,17 @@ public class AddressesController : ControllerBase
         };
 
         var response = await _mediator.Send(command);
+        return Ok(response);
+    }
+    
+    [HttpGet("{userId:guid}")]
+    public async Task<IActionResult> GetBillingAddress(Guid userId)
+    {
+        var query = new GetListBillingAddressQuery()
+        {
+            UserId = userId
+        };
+        var response= await _mediator.Send(query);
         return Ok(response);
     }
     

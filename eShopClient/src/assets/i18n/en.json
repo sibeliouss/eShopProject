@@ -35,6 +35,26 @@
     "trackYourOrder": "Track Your Order",
   
     "Account information updated!": "Account information updated!",
+    "shippingAddress": "Shipping Address",
+    "billingAddress": "Billing Address",
+    "country": "Country",
+    "city": "Town/City",
+    "postcode": "Postcode",
+    "pickupPerson": "Pickup Person",
+    "addressDetails": "Address Details",
+    "neighborhoodApartmentSuiteUnitEtc": "Neighborhood, Apartment, suite, unit, etc.",
+    "isSameAddress": "Shipping and Billing Address are the Same",
+    "Shipping address updated": "Shipping address updated.",
+    "addShippingAddress": "Add Shipping Address",
+    "addBillingAddress": "Add Billing Address",
+    "Shipping address added": "Shipping address added.",
+    "Billing address added": "Billing address added.",
+    "Billing address updated": "Billing address updated.",
+    "add": "Add",
+    "useShippingAddress": "Use the registered address",
+    "addNewShippingAddress": "Add new address",
+    "useBillingAddress": "Use the registered address",
+    "addNewBillingAddress": "Add new address",
     
    
   

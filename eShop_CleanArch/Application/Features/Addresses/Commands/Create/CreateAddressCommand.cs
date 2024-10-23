@@ -9,7 +9,7 @@ namespace Application.Features.Addresses.Commands.Create;
 
 public class CreateAddressCommand : IRequest<CreatedAddressResponse>
 {
-    public Guid CustomerId { get; set; }
+    public Guid UserId { get; set; }
     public string Country { get; set; }
     public string City { get; set; }
     public string ZipCode { get; set; }
@@ -38,7 +38,7 @@ public class CreateAddressCommand : IRequest<CreatedAddressResponse>
             {
                 throw new ValidationException(validationResult.Errors);
             }
-            await _addressBusinessRules.AddressShouldNotExistForCustomer(request.CustomerId);
+            await _addressBusinessRules.AddressShouldNotExistForCustomer(request.UserId);
             
             var address = _mapper.Map<Address>(request);
             

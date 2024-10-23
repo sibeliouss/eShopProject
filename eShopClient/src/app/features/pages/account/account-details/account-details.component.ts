@@ -21,9 +21,9 @@ export class AccountDetailsComponent implements OnInit {
   accountForm!: FormGroup;
   requestUserPassword: UpdateUserPasswordModel = new UpdateUserPasswordModel();
 
-  currentPassword: string = "";
-  newPassword: string = "";
-  confirmedPassword: string = "";
+  currentPassword!: string;
+  newPassword!: string;
+  confirmedPassword!: string;
 
   constructor(
     private fb: FormBuilder,
@@ -40,10 +40,10 @@ export class AccountDetailsComponent implements OnInit {
 
   private initializeForms() {
     this.accountForm = this.fb.group({
-      firstName: [this.auth.firstName || '', [Validators.required]],
-      lastName: [this.auth.lastName || '', [Validators.required]],
-      email: [this.auth.email || '', [Validators.required, Validators.email]],
-      userName: [this.auth.userName || '', [Validators.required]]
+      firstName: [this.auth.firstName, [Validators.required]],
+      lastName: [this.auth.lastName, [Validators.required]],
+      email: [this.auth.email, [Validators.required, Validators.email]],
+      userName: [this.auth.userName, [Validators.required]]
     });
   }
 
@@ -52,7 +52,7 @@ export class AccountDetailsComponent implements OnInit {
       const { firstName, lastName, email, userName } = this.accountForm.value;
 
       const updateUserInfo: UpdateCustomerInformationModel = {
-        id: this.auth.token?.userId || '',
+        id: this.auth.token!.userId,
         firstName,
         lastName,
         email,
@@ -76,7 +76,7 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   updateUserPassword() {
-    this.requestUserPassword.id = this.auth.token?.userId ?? '';
+    this.requestUserPassword.id = this.auth.token!.userId;
 
     this.requestUserPassword.currentPassword = this.currentPassword;
     this.requestUserPassword.newPassword = this.newPassword;

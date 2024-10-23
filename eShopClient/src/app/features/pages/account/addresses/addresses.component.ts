@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { AddrssService } from '../../../services/addrss.service';
+import { AddressService } from '../../../services/address.service';
+
 
 @Component({
   selector: 'app-addresses',
@@ -15,7 +16,7 @@ export class AddressesComponent
 {
 
   constructor(
-    public address: AddrssService,
+    public address: AddressService,
     
   ){
 

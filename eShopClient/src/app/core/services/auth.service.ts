@@ -12,20 +12,19 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
   token: TokenModel | null = null;
-  tokenString: string = '';
+  tokenString!: string;
   user: UserModel = new UserModel();
  
 
-  firstName: string = '';
-  lastName: string = ''; 
-  userName: string = '';
-  email: string = '';
+  firstName!: string;
+  lastName!: string; 
+  userName!: string;
+  email!: string;
  
 
   constructor(
     private router: Router, 
     private http: HttpClient, 
-    private toast: ToastrService,
   ) {}
 
   checkAuthentication(): boolean {
@@ -36,12 +35,12 @@ export class AuthService {
       const decode: any = jwtDecode(this.tokenString);
 
       this.token = {
-        email: decode?.Email || '',
-        name: decode?.Name || '',
-        userName: decode?.UserName || '',
-        userId: decode?.UserId || '',
-        exp: decode?.exp || 0,
-        roles: decode?.Roles || []  
+        email: decode?.Email,
+        name: decode?.Name,
+        userName: decode?.UserName,
+        userId: decode?.UserId,
+        exp: decode?.exp,
+        roles: decode?.Roles  
       };
 
       const now = new Date().getTime() / 1000;
