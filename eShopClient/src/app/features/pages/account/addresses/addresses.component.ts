@@ -60,7 +60,9 @@ export class AddressesComponent
     private translate: TranslateService,
     private auth: AuthService,
     private toast: ToastrService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.getShippingAddress();
     this.getBillingAddress();
   }
@@ -91,11 +93,14 @@ export class AddressesComponent
     this.addressService.createAddress(this.shippingRequestAdd).subscribe({
       next: (res: any) => {
         this.shippingAddress = res;
-        this.swal.callToast("Başarılı bir şekilde adres oluşturdunuz", 'success');
-
+        this.translate.get("Shipping address added").subscribe(
+          (translated: any) => {
+            this.swal.callToast(translated, 'success');
+          }
+        );
         setTimeout(() => {
           location.reload();
-        }, 3000);
+        }, 2000);
       },
       error: (err) => {
         console.error('Adres oluşturulurken hata oluştu:', err);
@@ -123,7 +128,7 @@ export class AddressesComponent
         );
         setTimeout(() => {
           location.reload();
-        }, 3000);
+        }, 2000);
       },
       error: (err) => {
         console.error('Error updating address:', err);
@@ -132,21 +137,21 @@ export class AddressesComponent
   }
 
   deleteAddress(addressId: string) {
-   
-
-    this.swal.callSwal('Silmek istediğinize emin misiniz?', 'İptal', 'Sil', () => {
-    
-      this.addressService.delete(addressId).subscribe({
-        next: (res: any) => {
-          this.swal.callToast("Adres başarıyla silindi", 'success');
-          setTimeout(() => {
-            location.reload();
-          }, 2000);
-        },
-        error: (err) => {
-          console.error('Error deleting address:', err);
-      
-        }
+    this.translate.get('Are you sure you want to delete?').subscribe((confirmationMessage: string) => {
+      this.swal.callSwal(confirmationMessage, 'İptal', 'Sil', () => {
+        this.addressService.delete(addressId).subscribe({
+          next: (res: any) => {
+            this.translate.get('Address successfully deleted').subscribe((successMessage: string) => {
+              this.swal.callToast(successMessage, 'success');
+            });
+            setTimeout(() => {
+              location.reload();
+            }, 2000);
+          },
+          error: (err) => {
+            console.error('Error deleting address:', err);
+          }
+        });
       });
     });
   }
@@ -185,7 +190,7 @@ export class AddressesComponent
         );
         setTimeout(() => {
           location.reload();
-        }, 3000);
+        }, 2000);
       },
       error: (err) => {
         console.error('Error creating billing address:', err);
@@ -214,29 +219,31 @@ export class AddressesComponent
         );
         setTimeout(() => {
           location.reload();
-        }, 3000);
+        }, 2000);
       },
       error: (err) => {
         console.error('Error updating billing address:', err);
-        this.swal.callToast("Hata: Fatura adresi güncellenemedi", 'error');
+      
       }
     });
   }
 
   deleteBillingAddress(addressId: string) {
-    this.swal.callSwal('Silmek istediğinize emin misiniz?', 'İptal', 'Sil', () => {
-    
-      this.addressService.deleteBillingAddress(addressId).subscribe({
-        next: (res: any) => {
-          this.toast.success("Adres başarıyla silindi");
-          setTimeout(() => {
-            location.reload();
-          }, 2000);
-        },
-        error: (err) => {
-          console.error('Error deleting address:', err);
-          this.toast.error("Hata: Adres silinemedi");
-        }
+    this.translate.get('Are you sure you want to delete?').subscribe((confirmationMessage: string) => {
+      this.swal.callSwal(confirmationMessage, 'İptal', 'Sil', () => {
+        this.addressService.deleteBillingAddress(addressId).subscribe({
+          next: (res: any) => {
+            this.translate.get('Address successfully deleted').subscribe((successMessage: string) => {
+              this.toast.success(successMessage);
+            });
+            setTimeout(() => {
+              location.reload();
+            }, 2000);
+          },
+          error: (err) => {
+            console.error('Error deleting address:', err);
+          }
+        });
       });
     });
   }

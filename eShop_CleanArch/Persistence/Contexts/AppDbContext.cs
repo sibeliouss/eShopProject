@@ -22,6 +22,8 @@ public class AppDbContext : DbContext
     public DbSet<OrderDetail> OrderDetails { get; set; }
     public DbSet<OrderStat> OrderStats { get; set; }
     public DbSet<Basket> Baskets { get; set; }
+    public DbSet<WishList> WishLists { get; set; }
+    public DbSet<Review> Reviews { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     { 
