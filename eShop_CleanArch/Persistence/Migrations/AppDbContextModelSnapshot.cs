@@ -523,7 +523,7 @@ namespace Persistence.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<short>("Raiting")
+                    b.Property<short>("Rating")
                         .HasColumnType("smallint");
 
                     b.Property<string>("Title")
