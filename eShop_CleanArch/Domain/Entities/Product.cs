@@ -14,5 +14,6 @@ public class Product : Entity<Guid>
     public bool IsActive { get; set; } = true;
     public bool IsFeatured { get; set; } = false;
     public bool IsDeleted { get; set; } = false;
-    public ICollection<ProductCategory>? ProductCategories { get; set; }
+    public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
+
 }
