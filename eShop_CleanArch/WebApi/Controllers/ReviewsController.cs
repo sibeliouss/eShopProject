@@ -40,5 +40,29 @@ public class ReviewsController : ControllerBase
 
         return Ok(reviews); 
     }
+    
+    [HttpGet("{productId:guid}")]
+    public async Task<IActionResult> CalculateStar(Guid productId)
+    {
+        var query = new CalculateStarQuery { ProductId = productId };
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+    
+    [HttpGet("{productId:guid}")]
+    public async Task<IActionResult> CalculateReviews(Guid productId)
+    {
+        var query = new CalculateReviewsQuery(productId);
+        try
+        {
+            var averageRating = await _mediator.Send(query);
+            return Ok(averageRating);
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+       
+    }
 
 }
