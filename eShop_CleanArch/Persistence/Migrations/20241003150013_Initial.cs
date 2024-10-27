@@ -177,7 +177,7 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customers",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -231,7 +231,7 @@ namespace Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_Addresses_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -256,7 +256,7 @@ namespace Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_Baskets_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -288,7 +288,7 @@ namespace Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_BillingAddresses_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -315,7 +315,7 @@ namespace Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_Orders_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -373,18 +373,18 @@ namespace Persistence.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_Email",
-                table: "Customers",
+                table: "Users",
                 column: "Email",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_UserId",
-                table: "Customers",
+                table: "Users",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_UserName",
-                table: "Customers",
+                table: "Users",
                 column: "UserName",
                 unique: true);
 
@@ -465,7 +465,7 @@ namespace Persistence.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Users");

@@ -28,7 +28,7 @@ namespace Persistence.Migrations
                 table: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Users");
 
             migrationBuilder.RenameColumn(
                 name: "CustomerId",
@@ -163,7 +163,7 @@ namespace Persistence.Migrations
                 newName: "IX_Addresses_CustomerId");
 
             migrationBuilder.CreateTable(
-                name: "Customers",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -198,18 +198,18 @@ namespace Persistence.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_Email",
-                table: "Customers",
+                table: "Users",
                 column: "Email",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_UserId",
-                table: "Customers",
+                table: "Users",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_UserName",
-                table: "Customers",
+                table: "Users",
                 column: "UserName",
                 unique: true);
 
@@ -217,7 +217,7 @@ namespace Persistence.Migrations
                 name: "FK_Addresses_Customers_CustomerId",
                 table: "Addresses",
                 column: "CustomerId",
-                principalTable: "Customers",
+                principalTable: "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
@@ -225,7 +225,7 @@ namespace Persistence.Migrations
                 name: "FK_Baskets_Customers_CustomerId",
                 table: "Baskets",
                 column: "CustomerId",
-                principalTable: "Customers",
+                principalTable: "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
@@ -233,7 +233,7 @@ namespace Persistence.Migrations
                 name: "FK_BillingAddresses_Customers_CustomerId",
                 table: "BillingAddresses",
                 column: "CustomerId",
-                principalTable: "Customers",
+                principalTable: "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
@@ -241,7 +241,7 @@ namespace Persistence.Migrations
                 name: "FK_Orders_Customers_CustomerId",
                 table: "Orders",
                 column: "CustomerId",
-                principalTable: "Customers",
+                principalTable: "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }

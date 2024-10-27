@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Orders.Queries;
 
-public class GetOrderReceivedByCustomerId : IRequest<GetOrderReceivedByUserIdResponse>
+public class GetOrderReceivedByUserId : IRequest<GetOrderReceivedByUserIdResponse>
 {
     public Guid UserId { get; set; }
     
-    public class GetOrderReceivedByCustomerIdHandler : IRequestHandler<GetOrderReceivedByCustomerId, GetOrderReceivedByUserIdResponse>
+    public class GetOrderReceivedByCustomerIdHandler : IRequestHandler<GetOrderReceivedByUserId, GetOrderReceivedByUserIdResponse>
     {
         private readonly IOrderRepository _orderRepository;
 
@@ -19,7 +19,7 @@ public class GetOrderReceivedByCustomerId : IRequest<GetOrderReceivedByUserIdRes
         {
             _orderRepository = orderRepository;
         }
-        public async Task<GetOrderReceivedByUserIdResponse> Handle(GetOrderReceivedByCustomerId request, CancellationToken cancellationToken)
+        public async Task<GetOrderReceivedByUserIdResponse> Handle(GetOrderReceivedByUserId request, CancellationToken cancellationToken)
         {
             var order = await _orderRepository.Query().Where(o => o.UserId == request.UserId)
                 .OrderByDescending(o => o.CreateAt).Include(o => o.OrderDetails).ThenInclude(o => o.Product)
@@ -29,7 +29,7 @@ public class GetOrderReceivedByCustomerId : IRequest<GetOrderReceivedByUserIdRes
             var orderResponse = new GetOrderReceivedByUserIdResponse()
             {
                 Id = order.Id,
-                CreatedAt = order.CreateAt,
+                CreateAt = order.CreateAt,
                 OrderNumber = order.OrderNumber,
                 ProductQuantity = order.ProductQuantity,
                 PaymentCurrency = order.PaymentCurrency,

@@ -28,10 +28,22 @@ public class OrdersController : ControllerBase
     [HttpGet("{userId:guid}")]
     public async Task<IActionResult> GetOrderReceivedByUserrId(Guid userId)
     {
-        var query = new GetOrderReceivedByCustomerId { UserId = userId };
+        var query = new GetOrderReceivedByUserId { UserId = userId };
         var result = await _mediator.Send(query);
             
         return Ok(result);
      
+    }
+    [HttpGet("{userId:guid}/{orderId:guid}")]
+    public async Task<IActionResult> GetOrderDetailsByUserId(Guid userId, Guid orderId)
+    {
+        var query = new GetAllOrderDetailsByUserId
+        {
+            UserId = userId,
+            OrderId = orderId
+        };
+
+        var result = await _mediator.Send(query);
+        return Ok(result);
     }
 }
