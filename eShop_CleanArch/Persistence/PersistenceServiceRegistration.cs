@@ -24,7 +24,7 @@ public static class PersistenceServiceRegistration
         {
             opt.Password.RequiredLength = 6;
             opt.SignIn.RequireConfirmedEmail = true;
-            opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2); //Sonra 20 dk olarak düzelt.
+            opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2); // Sonra 20 dk olarak düzelt.
             opt.Lockout.MaxFailedAccessAttempts = 3;
             opt.Lockout.AllowedForNewUsers = true;
 
@@ -40,7 +40,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IProductDiscountRepository, ProductDiscountRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
-        services.AddScoped<IBasketRepository, BasketRepository>();
+        services.AddScoped<ICartRepository, CartRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IWishListRepository, WishListRepository>();
         services.AddScoped<IReviewRepository, ReviewRepository>();

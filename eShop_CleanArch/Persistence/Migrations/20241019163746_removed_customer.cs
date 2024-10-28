@@ -17,7 +17,7 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Baskets_Customers_CustomerId",
-                table: "Baskets");
+                table: "Carts");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_BillingAddresses_Customers_CustomerId",
@@ -52,12 +52,12 @@ namespace Persistence.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "CustomerId",
-                table: "Baskets",
+                table: "Carts",
                 newName: "UserId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_Baskets_CustomerId",
-                table: "Baskets",
+                table: "Carts",
                 newName: "IX_Baskets_UserId");
 
             migrationBuilder.RenameColumn(
@@ -80,7 +80,7 @@ namespace Persistence.Migrations
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Baskets_Users_UserId",
-                table: "Baskets",
+                table: "Carts",
                 column: "UserId",
                 principalTable: "Users",
                 principalColumn: "Id",
@@ -112,7 +112,7 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Baskets_Users_UserId",
-                table: "Baskets");
+                table: "Carts");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_BillingAddresses_Users_UserId",
@@ -144,12 +144,12 @@ namespace Persistence.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "UserId",
-                table: "Baskets",
+                table: "Carts",
                 newName: "CustomerId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_Baskets_UserId",
-                table: "Baskets",
+                table: "Carts",
                 newName: "IX_Baskets_CustomerId");
 
             migrationBuilder.RenameColumn(
@@ -223,7 +223,7 @@ namespace Persistence.Migrations
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Baskets_Customers_CustomerId",
-                table: "Baskets",
+                table: "Carts",
                 column: "CustomerId",
                 principalTable: "Users",
                 principalColumn: "Id",

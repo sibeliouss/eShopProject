@@ -1,4 +1,3 @@
-
 export class UpdateUserPasswordModel{
     id : string ="";
     currentPassword: string = "";

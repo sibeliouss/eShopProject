@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Application.Features.Baskets.Commands.Create;
 
-public class CreateShoppingBasketCommandValidator : AbstractValidator<ShoppingBasketDto>
+public class CreateShoppingCartCommandValidator : AbstractValidator<ShoppingCartDto>
 {
-   public CreateShoppingBasketCommandValidator()
+   public CreateShoppingCartCommandValidator()
    {
       RuleFor(x => x.ProductId).NotEmpty();
       RuleFor(x => x.UserId).NotEmpty();

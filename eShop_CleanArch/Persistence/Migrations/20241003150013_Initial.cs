@@ -237,7 +237,7 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Baskets",
+                name: "Carts",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -358,12 +358,12 @@ namespace Persistence.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Baskets_CustomerId",
-                table: "Baskets",
+                table: "Carts",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Baskets_ProductId",
-                table: "Baskets",
+                table: "Carts",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -435,7 +435,7 @@ namespace Persistence.Migrations
                 name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "Baskets");
+                name: "Carts");
 
             migrationBuilder.DropTable(
                 name: "BillingAddresses");

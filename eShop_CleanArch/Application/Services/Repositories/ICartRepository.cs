@@ -2,7 +2,7 @@ using Domain.Entities;
 
 namespace Application.Services.Repositories;
 
-public interface IBasketRepository : IRepository<Basket>
+public interface ICartRepository : IRepository<Cart>
 {
     
 }

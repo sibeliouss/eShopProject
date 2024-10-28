@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Baskets\Constants\" />
+      <Folder Include="Features\Carts\Constants\" />
       <Folder Include="Features\Orders\Commands\Delete\" />
       <Folder Include="Features\Orders\Commands\Update\" />
       <Folder Include="Features\Orders\Constants\" />

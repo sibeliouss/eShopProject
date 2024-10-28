@@ -21,7 +21,7 @@ public class AppDbContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderDetail> OrderDetails { get; set; }
     public DbSet<OrderStat> OrderStats { get; set; }
-    public DbSet<Basket> Baskets { get; set; }
+    public DbSet<Cart> Carts { get; set; }
     public DbSet<WishList> WishLists { get; set; }
     public DbSet<Review> Reviews { get; set; }
 

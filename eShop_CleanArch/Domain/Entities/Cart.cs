@@ -3,7 +3,7 @@ using Domain.Entities.ValueObjects;
 
 namespace Domain.Entities;
 
-public class Basket : Entity<Guid>
+public class Cart : Entity<Guid>
 {
     public Guid UserId { get; set; }
     public User? User { get; set; }

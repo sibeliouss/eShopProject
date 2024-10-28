@@ -1,8 +1,8 @@
 using Domain.Entities.ValueObjects;
 
-namespace Application.Features.Baskets.Commands.Create;
+namespace Application.Features.Carts.Commands.Create;
 
-public class CreatedShoppingBasketResponse
+public class CreatedShoppingCartResponse
 {
    public Guid ProductId { get; set; }
    public Money Price { get; set; }

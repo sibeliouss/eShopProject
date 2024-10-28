@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.EntityConfigurations;
 
-public class BasketConfiguration : IEntityTypeConfiguration<Basket>
+public class CartConfiguration : IEntityTypeConfiguration<Cart>
 {
-    public void Configure(EntityTypeBuilder<Basket> builder)
+    public void Configure(EntityTypeBuilder<Cart> builder)
     {
-        builder.ToTable("Baskets").HasKey(b => b.Id);
+        builder.ToTable("Carts").HasKey(b => b.Id);
         builder.Property(b => b.UserId).IsRequired();
         builder.Property(b => b.ProductId).IsRequired();
         builder.Property(b => b.Quantity).IsRequired();

@@ -72,39 +72,6 @@ namespace Persistence.Migrations
                     b.ToTable("Addresses", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Basket", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Baskets", (string)null);
-                });
-
             modelBuilder.Entity("Domain.Entities.BillingAddress", b =>
                 {
                     b.Property<Guid>("Id")
@@ -153,6 +120,39 @@ namespace Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("BillingAddresses", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Cart", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>
@@ -351,6 +351,9 @@ namespace Persistence.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("ProductName");
+
+                    b.Property<Guid>("ProductDetailId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .ValueGeneratedOnAdd()
@@ -663,7 +666,18 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Basket", b =>
+            modelBuilder.Entity("Domain.Entities.BillingAddress", b =>
+                {
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Cart", b =>
                 {
                     b.HasOne("Domain.Entities.Product", "Product")
                         .WithMany()
@@ -679,7 +693,7 @@ namespace Persistence.Migrations
 
                     b.OwnsOne("Domain.Entities.ValueObjects.Money", "Price", b1 =>
                         {
-                            b1.Property<Guid>("BasketId")
+                            b1.Property<Guid>("CartId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("Currency")
@@ -690,29 +704,18 @@ namespace Persistence.Migrations
                             b1.Property<decimal>("Value")
                                 .HasColumnType("money");
 
-                            b1.HasKey("BasketId");
+                            b1.HasKey("CartId");
 
-                            b1.ToTable("Baskets");
+                            b1.ToTable("Carts");
 
                             b1.WithOwner()
-                                .HasForeignKey("BasketId");
+                                .HasForeignKey("CartId");
                         });
 
                     b.Navigation("Price")
                         .IsRequired();
 
                     b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Domain.Entities.BillingAddress", b =>
-                {
-                    b.HasOne("Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("User");
                 });

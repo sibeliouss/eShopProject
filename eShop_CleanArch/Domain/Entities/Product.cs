@@ -10,6 +10,7 @@ public class Product : Entity<Guid>
     public string Img { get; set; }
     public Money Price { get; set; } = new(0, "₺");
     public int Quantity { get; set; }
+    public Guid ProductDetailId { get; set; }
     public ProductDetail? ProductDetail { get; set; }
     public bool IsActive { get; set; } = true;
     public bool IsFeatured { get; set; } = false;

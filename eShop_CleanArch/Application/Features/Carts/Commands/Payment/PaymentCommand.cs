@@ -1,6 +1,5 @@
 using System.Globalization;
 using Application.Features.Baskets.Dtos;
-
 using Application.Services.Orders;
 using Application.Services.Products;
 using Application.Services.Repositories;
@@ -13,7 +12,7 @@ using Iyzipay.Request;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Features.Baskets.Commands.Payment;
+namespace Application.Features.Carts.Commands.Payment;
 
 public class PaymentCommand : IRequest
 {
@@ -22,14 +21,14 @@ public class PaymentCommand : IRequest
 
 public class PaymentCommandHandler : IRequestHandler<PaymentCommand>
 {
-    private readonly IBasketRepository _basketRepository;
+    private readonly ICartRepository _cartRepository;
     private readonly IProductService _productService;
     private readonly IUserService _userService;
     private readonly IOrderService _orderService;
 
-    public PaymentCommandHandler(IBasketRepository basketRepository, IProductService productService, IUserService userService, IOrderService orderService)
+    public PaymentCommandHandler(ICartRepository cartRepository, IProductService productService, IUserService userService, IOrderService orderService)
     {
-        _basketRepository = basketRepository;
+        _cartRepository = cartRepository;
         _productService = productService;
         _userService = userService;
         _orderService = orderService;
@@ -148,8 +147,8 @@ public class PaymentCommandHandler : IRequestHandler<PaymentCommand>
             var user = await _userService.GetUserByIdAsync(paymentRequest.UserId);
             if (user is not null)
             {
-                var baskets = await _basketRepository.Query().Where(p => p.UserId == paymentRequest.UserId).ToListAsync(cancellationToken);
-                await _basketRepository.DeleteRangeAsync(baskets);
+                var baskets = await _cartRepository.Query().Where(p => p.UserId == paymentRequest.UserId).ToListAsync(cancellationToken);
+                await _cartRepository.DeleteRangeAsync(baskets);
             }
             
         }
