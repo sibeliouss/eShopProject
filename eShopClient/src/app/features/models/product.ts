@@ -1,7 +1,5 @@
-export interface Price {
-	value: number;
-	currency: string;
-}
+import { Price } from "./money";
+
 
 export interface ProductModel {
 	name: string;

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { jwtDecode } from 'jwt-decode';
+import { CartService } from '../../features/services/cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class AuthService {
   constructor(
     private router: Router, 
     private http: HttpClient, 
+   
   ) {}
 
   checkAuthentication(): boolean {
