@@ -7,7 +7,7 @@ import { DashboardComponent } from './features/pages/account/dashboard/dashboard
 import { AccountDetailsComponent } from './features/pages/account/account-details/account-details.component';
 import { AddressesComponent } from './features/pages/account/addresses/addresses.component';
 import { OrdersComponent } from './features/pages/account/orders/orders.component';
-import { CategoriesComponent } from './features/pages/categories/categories.component';
+
 
 export const routes: Routes = [
    
@@ -21,6 +21,6 @@ export const routes: Routes = [
         {path:"address", component: AddressesComponent},
         {path:"orders", component: OrdersComponent},
     ]},
-    { path: "categories", component: CategoriesComponent }
+   
 
 ];

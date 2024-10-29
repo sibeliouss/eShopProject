@@ -137,7 +137,7 @@ export class AddressesComponent
   }
 
   deleteAddress(addressId: string) {
-    this.translate.get('Are you sure you want to delete?').subscribe((confirmationMessage: string) => {
+    this.translate.get('deleteConfirmation').subscribe((confirmationMessage: string) => {
       this.swal.callSwal(confirmationMessage, 'İptal', 'Sil', () => {
         this.addressService.delete(addressId).subscribe({
           next: (res: any) => {
@@ -229,8 +229,8 @@ export class AddressesComponent
   }
 
   deleteBillingAddress(addressId: string) {
-    this.translate.get('Are you sure you want to delete?').subscribe((confirmationMessage: string) => {
-      this.swal.callSwal(confirmationMessage, 'İptal', 'Sil', () => {
+    this.translate.get('deleteConfirmation').subscribe((confirmationMessage: string) => {
+      this.swal.callSwal(confirmationMessage, 'Cancel', 'Delete', () => {
         this.addressService.deleteBillingAddress(addressId).subscribe({
           next: (res: any) => {
             this.translate.get('Address successfully deleted').subscribe((successMessage: string) => {
