@@ -14,7 +14,7 @@ public class CreateCategoryCommand : IRequest<CreatedCategoryResponse>
 
     public string Name { get; set; }
     public string IconImgUrl { get; set; }
-    public bool IsActive { get; set; } = true;
+    public bool IsActive { get; set; }
     public bool IsDeleted { get; set; } = false;
 
     public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CreatedCategoryResponse>

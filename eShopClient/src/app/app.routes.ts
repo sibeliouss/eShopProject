@@ -7,6 +7,7 @@ import { DashboardComponent } from './features/pages/account/dashboard/dashboard
 import { AccountDetailsComponent } from './features/pages/account/account-details/account-details.component';
 import { AddressesComponent } from './features/pages/account/addresses/addresses.component';
 import { OrdersComponent } from './features/pages/account/orders/orders.component';
+import { ProductListByCategoryComponent } from './features/pages/product-list-by-category/product-list-by-category.component';
 
 
 export const routes: Routes = [
@@ -21,6 +22,9 @@ export const routes: Routes = [
         {path:"address", component: AddressesComponent},
         {path:"orders", component: OrdersComponent},
     ]},
+    
+    {path: 'shop-list',component: ProductListByCategoryComponent},
+    {path: 'shop-list/:id',component: ProductListByCategoryComponent},
    
 
 ];

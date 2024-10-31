@@ -2,6 +2,7 @@ import { Price } from "./money";
 
 
 export interface ProductModel {
+	id:string;
 	name: string;
 	brand: string;
 	img: string;
