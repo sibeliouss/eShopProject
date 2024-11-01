@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginService {
 
-  private apiUrl: string = "http://localhost:5123/api";
+  private apiUrl: string = "https://localhost:7120/api";
   
   constructor(private http: HttpClient) { }
 

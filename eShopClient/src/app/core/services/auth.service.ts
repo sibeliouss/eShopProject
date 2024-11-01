@@ -57,7 +57,7 @@ export class AuthService {
   }
 
   getUser(): void {
-    this.http.get(`http://localhost:5123/api/Auth/GetUser/${this.token?.userId}`).subscribe({
+    this.http.get(`https://localhost:7120/api/Auth/GetUser/${this.token?.userId}`).subscribe({
       next: (res: any) => {
         this.user = res;
         this.firstName = this.user.firstName;

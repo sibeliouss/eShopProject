@@ -12,11 +12,12 @@ builder.Services.AddCors(configure =>
     configure.AddDefaultPolicy(policy =>
     {
         policy
-            .AllowAnyHeader()
+            .AllowAnyHeader() 
             .AllowAnyOrigin() 
             .AllowAnyMethod(); 
     });
 });
+
 
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
@@ -61,6 +62,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseCors();
 
 //app.UseAuthorization();
