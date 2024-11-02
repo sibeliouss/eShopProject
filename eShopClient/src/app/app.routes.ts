@@ -8,6 +8,7 @@ import { AccountDetailsComponent } from './features/pages/account/account-detail
 import { AddressesComponent } from './features/pages/account/addresses/addresses.component';
 import { OrdersComponent } from './features/pages/account/orders/orders.component';
 import { ProductListByCategoryComponent } from './features/pages/product-list-by-category/product-list-by-category.component';
+import { SingleproductComponent } from './features/pages/singleproduct/singleproduct.component';
 
 
 export const routes: Routes = [
@@ -25,6 +26,8 @@ export const routes: Routes = [
     
     {path: 'shop-list',component: ProductListByCategoryComponent},
     {path: 'shop-list/:id',component: ProductListByCategoryComponent},
+    {path: "single-product/:value",component: SingleproductComponent},
+   
    
 
 ];

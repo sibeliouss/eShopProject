@@ -39,7 +39,7 @@ public class UpdateProductCommand :IRequest<UpdatedProductResponse>
                 throw new Exception(ProductMessages.ProductNotFound);
             }
 
-            _mapper.Map(product, updateProductDto);
+            _mapper.Map(updateProductDto, product);
             
             //Kategoriyi gümcelleme
             if (updateProductDto.CategoryIds is not null)

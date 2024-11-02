@@ -1,4 +1,5 @@
 import { Price } from "./money";
+import { ProductDetailModel } from "./productDetail";
 
 
 export interface ProductModel {
@@ -7,6 +8,7 @@ export interface ProductModel {
 	brand: string;
 	img: string;
 	quantity: number;
+	productDetail: ProductDetailModel;
 	price: Price;
 	isFeatured: boolean;
     productDetailId:string;
