@@ -17,40 +17,40 @@ export class AddressService {
 
   get(): Observable<any> {
     this.auth.checkAuthentication();
-    return this.http.get("http://localhost:5123/api/Addresses/Get/" + this.auth.token?.userId);
+    return this.http.get("https://localhost:7120/api/Addresses/Get/" + this.auth.token?.userId);
   }
 
   createAddress(shippingRequestAdd: AddAddressModel): Observable<any> {
-    return this.http.post("http://localhost:5123/api/Addresses/Create", shippingRequestAdd);
+    return this.http.post("https://localhost:7120/api/Addresses/Create", shippingRequestAdd);
   }
 
   update(shippingRequestUpdate: UpdateAddressModel): Observable<any> {
     this.auth.checkAuthentication();
-    return this.http.put("http://localhost:5123/api/Addresses/Update", shippingRequestUpdate);
+    return this.http.put("https://localhost:7120/api/Addresses/Update", shippingRequestUpdate);
   }
   
   delete(addressId: string): Observable<any> {
     this.auth.checkAuthentication();
-    return this.http.delete("http://localhost:5123/api/Addresses/Delete/" + addressId);
+    return this.http.delete("https://localhost:7120/api/Addresses/Delete/" + addressId);
   }
   
   getBillingAddress(): Observable<any> {
     this.auth.checkAuthentication();
-    return this.http.get("http://localhost:5123/api/Addresses/GetBillingAddress/" + this.auth.token?.userId);
+    return this.http.get("https://localhost:7120/api/Addresses/GetBillingAddress/" + this.auth.token?.userId);
   }
 
   createBillingAddress(billingRequestAdd: AddAddressModel): Observable<any> {
     this.auth.checkAuthentication();
-    return this.http.post("http://localhost:5123/api/Addresses/CreateBillingAddress", billingRequestAdd);
+    return this.http.post("https://localhost:7120/api/Addresses/CreateBillingAddress", billingRequestAdd);
   }
 
   updateBillingAddress(billingRequestUpdate: UpdateAddressModel): Observable<any> {
     this.auth.checkAuthentication();
-    return this.http.put("http://localhost:5123/api/Addresses/UpdateBillingAddress", billingRequestUpdate);
+    return this.http.put("https://localhost:7120/api/Addresses/UpdateBillingAddress", billingRequestUpdate);
   }
   deleteBillingAddress(addressId: string): Observable<any> {
     this.auth.checkAuthentication();
-    return this.http.delete("http://localhost:5123/api/Addresses/DeleteBillingAddress/" + addressId);
+    return this.http.delete("https://localhost:7120/api/Addresses/DeleteBillingAddress/" + addressId);
   }
   
 }

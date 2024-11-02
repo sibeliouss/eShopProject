@@ -58,8 +58,8 @@ public class ProductsController : ControllerBase
         return Ok(product);
     }
     
-    [HttpGet]
-    public async Task<IActionResult> GetAllProducts([FromQuery] RequestDto requestDto)
+    [HttpPost]
+    public async Task<IActionResult> GetAllProducts( RequestDto requestDto)
     {
         try
         {

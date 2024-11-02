@@ -57,6 +57,11 @@
     "useBillingAddress": "Use the registered address",
     "addNewBillingAddress": "Add new address",
     "deleteConfirmation": "Are you sure you want to delete?",
+    "browseCategories": "Browse Categories",
+    "allCategories": "All Categories",
+    "allProducts": "All Products",
+    "productAddedtoCart": "Product added to cart!",
+
 
     
    

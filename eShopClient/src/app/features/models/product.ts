@@ -11,4 +11,5 @@ export interface ProductModel {
 	isFeatured: boolean;
     productDetailId:string;
 	categoryIds: string[];
+	createAt: Date;
 }

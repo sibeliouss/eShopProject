@@ -5,18 +5,16 @@ namespace Application.Features.Products.Dtos;
 public class ProductDto
 {
     public Guid Id { get; set; }
-    public bool IsFeatured { get; set; } = false;
-    public bool IsActive { get; set; } = true;
-    public bool IsDeleted { get; set; } = false;
-    public string Name { get; set; } = string.Empty;
-    public string Brand { get; set; } = string.Empty;
-    public string Img { get; set; }= string.Empty;
-    
+    public string Name { get; set; }
+    public string Brand { get; set; }
+    public string Img { get; set; }
+    public Money Price { get; set; } = new(0, "₺");
     public int Quantity { get; set; }
-    public ProductDetailDto ProductDetail { get; set; }
-    public Money Price { get; set; } = new Money(0, "₺");
-  
+    public ProductDetailDto? ProductDetail { get; set; }
+    public bool IsActive { get; set; } = true;
+    public bool IsFeatured { get; set; } = false;
+    public bool IsDeleted { get; set; } = false;
     public DateTime CreateAt { get; set; } = DateTime.Now;
-    public List<ProductCategoryDto> ProductCategories { get; set; } = new List<ProductCategoryDto>();
+    public ICollection<ProductCategoryDto> ProductCategories { get; set; } = new List<ProductCategoryDto>();
 
 }

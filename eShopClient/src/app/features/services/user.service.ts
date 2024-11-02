@@ -9,7 +9,7 @@ import { UpdateUserPasswordModel } from '../models/UpdateCustomerPasswordModel';
 })
 export class UserService {
 
-  private apiUrl = 'http://localhost:5123/api/Users';
+  private apiUrl = 'https://localhost:7120/api/Users';
 
   constructor(private http: HttpClient) {}
 
