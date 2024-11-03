@@ -11,4 +11,5 @@ public class GetProductResponse
     public Money Price { get; set; } = new(0, "₺");
     public bool IsFeatured { get; set; }
     public DateTime CreateAt { get; set; } = DateTime.Now;
+    public Guid CategoryId { get; set; }
 }

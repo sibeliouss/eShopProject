@@ -34,41 +34,55 @@ namespace Application.Features.Products.Commands.Create;
             _validator = validator;
         } 
         public async Task<CreatedProductResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
-       {
-         var productDto = request.CreateProductDto;
-         
-         var validationResult = await _validator.ValidateAsync(productDto, cancellationToken);
-         if (!validationResult.IsValid)
-         {
-             throw new ValidationException(validationResult.Errors);
-         }
-         
-         await _productBusinessRules.ProductNameAlreadyExists(productDto.Name);
-
-        // Transaction
-        await _productRepository.BeginTransactionAsync(cancellationToken);
-
-        try
         {
-            var product = _mapper.Map<Product>(productDto);
-
-            await _productRepository.AddAsync(product);
-            
-            if (productDto.CategoryIds is not null && productDto.CategoryIds.Any())
+            var productDto = request.CreateProductDto;
+    
+            // Validation işlemi
+            var validationResult = await _validator.ValidateAsync(productDto, cancellationToken);
+            if (!validationResult.IsValid)
             {
-                await _productCategoryService.AddCategoriesToProductAsync(product.Id, productDto.CategoryIds);
+                throw new ValidationException(validationResult.Errors);
             }
-            
-            await _productRepository.CommitTransactionAsync(cancellationToken);
+    
+            // Ürün adı tekrarını kontrol et
+            await _productBusinessRules.ProductNameAlreadyExists(productDto.Name);
 
-            return _mapper.Map<CreatedProductResponse>(product);
+            // Transaction başlat
+            await _productRepository.BeginTransactionAsync(cancellationToken);
+
+            try
+            {
+                // Ürünü oluştur ve veritabanına ekle
+                var product = _mapper.Map<Product>(productDto);
+                await _productRepository.AddAsync(product);
+        
+                // CategoryIds kontrol et ve ekle
+                if (productDto.CategoryIds is not null && productDto.CategoryIds.Any())
+                {
+                    foreach (var categoryId in productDto.CategoryIds)
+                    {
+                        var productCategory = new ProductCategory
+                        {  
+                            Id = Guid.NewGuid(),
+                            ProductId = product.Id,
+                            CategoryId = categoryId
+                        };
+                        await _productCategoryService.AddAsync(productCategory);
+                    }
+                }
+
+                await _productRepository.CommitTransactionAsync(cancellationToken);
+
+                // Dönüş olarak CreatedProductResponse döndür
+                return _mapper.Map<CreatedProductResponse>(product);
+            }
+            catch (Exception ex)
+            {
+                await _productRepository.RollbackTransactionAsync(cancellationToken);
+                throw new Exception(ProductMessages.ProductCreationError, ex);
+            }
         }
-        catch (Exception ex)
-        {
-            await _productRepository.RollbackTransactionAsync(cancellationToken);
-            throw new Exception(ProductMessages.ProductCreationError, ex);
-        }
-       }
 
     }
+
 
