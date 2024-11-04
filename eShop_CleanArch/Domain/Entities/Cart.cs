@@ -10,5 +10,5 @@ public class Cart : Entity<Guid>
     public Guid ProductId { get; set; }
     public Product? Product { get; set; }
     public int Quantity { get; set; }
-    public Money Price { get; set; } = new(0, "₺");
+    public Money Price { get; set; } = new(0, "TRY");
 }

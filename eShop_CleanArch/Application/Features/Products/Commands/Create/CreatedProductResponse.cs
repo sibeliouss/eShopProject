@@ -10,7 +10,7 @@ public class CreatedProductResponse
     public string Img { get; set; }
     public int Quantity { get; set; }
     public IEnumerable<Guid> CategoryIds { get; set; }
-    public Money Price { get; set; } = new(0, "₺");
+    public Money Price { get; set; } = new(0, "TRY");
     public bool IsFeatured { get; set; }
     public bool IsActive { get; set; } = true;
 }

@@ -1,0 +1,31 @@
+.size-chart {
+    position: fixed; /* Sabit pozisyon */
+    top: 0; /* Üstten sıfır boşluk */
+    left: 0; /* Soldan sıfır boşluk */
+    width: 100%; /* Tüm genişlik */
+    height: 100%; /* Tüm yükseklik */
+    background: rgba(0, 0, 0, 0.8); /* Yarı şeffaf arka plan */
+    display: flex; /* Flexbox ile ortalamak için */
+    align-items: center; /* Dikey ortalama */
+    justify-content: center; /* Yatay ortalama */
+    z-index: 9999; /* Diğer içeriklerin üstünde görünmesi için */
+  }
+  
+  .size-chart-inner {
+    background: white; /* İçeriğin arka plan rengi */
+    padding: 20px; /* İçerik için dolgu */
+    width: 80%; /* Genişlik */
+    max-width: 600px; /* Maksimum genişlik */
+    position: relative; /* İçerik için konum */
+    border-radius: 8px; /* Köşe yuvarlama */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Gölge efekti */
+  }
+  
+  .size-chart-closer {
+    position: absolute; /* Gösterim için konum */
+    top: 10px; /* Üstten 10px boşluk */
+    right: 10px; /* Sağdan 10px boşluk */
+    cursor: pointer; /* İmleci tıklanabilir göster */
+    font-size: 18px; /* Yazı boyutu */
+  }
+  

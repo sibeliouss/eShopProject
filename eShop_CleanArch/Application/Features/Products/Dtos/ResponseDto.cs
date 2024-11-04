@@ -10,5 +10,4 @@ public class ResponseDto<T>
     public bool IsLastPage { get; set; }
     public string OrderBy { get; set; }
     
-    public Guid CategoryId { get; set; }
 }

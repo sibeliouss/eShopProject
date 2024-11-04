@@ -8,5 +8,5 @@ public class OrderDetailDto
     public string Name { get; set; }
     public string Brand { get; set; }
     public int Quantity { get; set; }
-    public Money Price { get; set; } = new(0, "₺");
+    public Money Price { get; set; } = new(0, "TRY");
 }

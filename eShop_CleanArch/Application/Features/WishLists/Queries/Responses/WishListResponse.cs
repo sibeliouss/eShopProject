@@ -10,7 +10,7 @@ public class WishListResponse
     public ProductDetail? ProductDetail { get; set; }
     public string Name { get; set; } 
     public string Brand { get; set; }  
-    public Money Price { get; set; } = new(0, "₺");
+    public Money Price { get; set; } = new(0, "TRY");
     public string Img { get; set; } 
     public bool IsFeatured { get; set; } 
     public bool IsActive { get; set; } = true;

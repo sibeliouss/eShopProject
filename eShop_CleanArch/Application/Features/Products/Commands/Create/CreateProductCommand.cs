@@ -73,8 +73,11 @@ namespace Application.Features.Products.Commands.Create;
 
                 await _productRepository.CommitTransactionAsync(cancellationToken);
 
-                // Dönüş olarak CreatedProductResponse döndür
-                return _mapper.Map<CreatedProductResponse>(product);
+              
+                var response = _mapper.Map<CreatedProductResponse>(product);
+                response.CategoryIds = productDto.CategoryIds; 
+
+                return response;
             }
             catch (Exception ex)
             {

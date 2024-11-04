@@ -10,8 +10,16 @@ export interface ProductModel {
 	quantity: number;
 	productDetail: ProductDetailModel;
 	price: Price;
-	isFeatured: boolean;
-    productDetailId:string;
-	categoryIds: string[];
+	isActive: boolean 
+    isDeleted: boolean 
 	createAt: Date;
+	productCategories: ProductCategory[];
 }
+
+
+
+export interface ProductCategory {
+	categoryId: string;
+	categoryName: string;
+}
+

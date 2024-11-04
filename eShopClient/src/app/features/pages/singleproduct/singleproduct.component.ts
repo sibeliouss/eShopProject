@@ -21,27 +21,34 @@ import { WishListService } from '../../services/wish-list.service';
 })
 export class SingleproductComponent {
 
-  product!: ProductModel;
+  product: ProductModel |null=null;
   reviews: ReviewModel[] = [];
   requestCreateReview: CreateReviewModel = new CreateReviewModel();
-  comment!: string;
-  title!: string;
+  comment: string = "";
+  title: string = "";
   isResponse: boolean | undefined = undefined;
   allowToComment: boolean = false;
-  starRating!: number;
+  starRating: number = 0;
   rating: number = 0;
   starData: Star = new Star;
+  sizes: string[] = [ 'S', 'M', 'L', 'XL',];
+  selectedSize: string = 'S';  // Varsayılan beden
+  showSizeChart: boolean = false; 
+
+  toggleSizeChart() {
+    this.showSizeChart = !this.showSizeChart;}
 
   constructor(
     private http: HttpClient,
     private activated: ActivatedRoute,
-    private auth: AuthService,
+    public auth: AuthService,
     private swal: SwalService,
     private translate: TranslateService,
     public wishList: WishListService
   ) {
     if (localStorage.getItem('response')) {
       this.isResponse = true;
+      
     }
 
     this.activated.params.subscribe(res => {
@@ -66,12 +73,12 @@ export class SingleproductComponent {
   }
 
   createReview() {
-    this.requestCreateReview.userId = this.auth.token!.userId;
-    this.requestCreateReview.productId = this.product.id;
+    this.requestCreateReview.userId = this.auth.token?.userId ?? '';
+    this.requestCreateReview.productId = this.product?.id ?? '';
     this.requestCreateReview.raiting = this.starRating;
     this.requestCreateReview.title = this.title;
     this.requestCreateReview.comment = this.comment;
-
+  
     this.http.post("https://localhost:7120/api/Reviews/CreateReview", this.requestCreateReview).subscribe({
       next: (res: any) => {
         this.getAllReview();
@@ -84,13 +91,15 @@ export class SingleproductComponent {
       },
       error: (err) => {
         console.error('Review creation error:', err);
-        
       }
     });
   }
 
+  
+  
+
   AllowToComment() {
-    this.http.get(`https://localhost:7120/api/Reviews/AllowToComment/${this.product.id}/${this.auth.token?.userId}`).subscribe({
+    this.http.get(`https://localhost:7120/api/Reviews/AllowToComment/${this.product?.id}/${this.auth.token?.userId}`).subscribe({
       next: (res: any) => {
         this.allowToComment = res;
       },
@@ -102,7 +111,7 @@ export class SingleproductComponent {
   }
 
   getAllReview() {
-    this.http.get("https://localhost:7120/api/Reviews/GetReviews/" + this.product.id).subscribe({
+    this.http.get("https://localhost:7120/api/Reviews/GetReviews/" + this.product?.id).subscribe({
       next: (res: any) => {
         this.reviews = res;
       },
@@ -114,7 +123,7 @@ export class SingleproductComponent {
   }
 
   calculateStar() {
-    this.http.get("https://localhost:7120/api/Reviews/CalculateStar/" + this.product.id).subscribe({
+    this.http.get("https://localhost:7120/api/Reviews/CalculateStar/" + this.product?.id).subscribe({
       next: (res: any) => {
         this.starData = res;
         console.log(this.starData);
@@ -127,7 +136,7 @@ export class SingleproductComponent {
   }
 
   calculateReviews() {
-    this.http.get("https://localhost:7120/api/Reviews/CalculateReviews/" + this.product.id).subscribe({
+    this.http.get("https://localhost:7120/api/Reviews/CalculateReviews/" + this.product?.id).subscribe({
       next: (res: any) => {
         this.rating = res;
       },
@@ -142,5 +151,20 @@ export class SingleproductComponent {
     this.title = "";
     this.comment = "";
     this.starRating = 0;
+  }
+  getStars(rating: number) {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      if (rating > i) {
+        if (rating > i + 0.5) {
+          stars.push({ class: 'fas fa-star' }); // Tam yıldız
+        } else {
+          stars.push({ class: 'fa-solid fa-star-half-stroke' }); // Yarım yıldız
+        }
+      } else {
+        stars.push({ class: 'far fa-star' }); // Boş yıldız
+      }
+    }
+    return stars;
   }
 }

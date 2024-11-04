@@ -7,7 +7,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { CategoryModel } from '../../features/models/category';
 import { CategoryService } from '../../features/services/category.service';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProductListService } from '../../features/services/product-list.service';
+
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -22,7 +22,7 @@ export class LayoutsComponent {
   showBars: boolean = true;
   categories: CategoryModel[] = [];
 
-  constructor(public router: Router, private categoryService: CategoryService, public productList: ProductListService, private http: HttpClient) {
+  constructor(public router: Router, private categoryService: CategoryService, private http: HttpClient) {
    
     this.router.events.subscribe((event: any) => {
       if (event.url) {

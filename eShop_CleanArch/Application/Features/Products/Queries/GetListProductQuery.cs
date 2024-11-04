@@ -1,9 +1,11 @@
+
 using Application.Features.Products.Dtos;
 using Application.Services.ProductCategories;
 using Application.Services.Repositories;
-using Domain.Entities;
+
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using ProductDto = Application.Features.Products.Queries.ResponseDtos.ProductDto;
 
 namespace Application.Features.Products.Queries;
 
@@ -89,7 +91,6 @@ public class GetListProductQuery : IRequest<ResponseDto<List<ProductDto>>>
             response.PageNumber = request.RequestDto.PageNumber;
             response.PageSize = request.RequestDto.PageSize;
             response.OrderBy = request.RequestDto.OrderBy;
-            response.CategoryId = request.RequestDto.CategoryId;
             response.TotalPageCount = (int)Math.Ceiling(await query.CountAsync(cancellationToken) / (double)request.RequestDto.PageSize);
             response.IsFirstPage = request.RequestDto.PageNumber == 1;
             response.IsLastPage = request.RequestDto.PageNumber == response.TotalPageCount;

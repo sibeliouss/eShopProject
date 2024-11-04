@@ -1,6 +1,8 @@
+
+using Application.Features.Products.Dtos;
 using Domain.Entities.ValueObjects;
 
-namespace Application.Features.Products.Dtos;
+namespace Application.Features.Products.Queries.ResponseDtos;
 
 public class ProductDto
 {
@@ -10,7 +12,6 @@ public class ProductDto
     public string Img { get; set; }
     public Money Price { get; set; } = new(0, "TRY");
     public int Quantity { get; set; }
-    public ProductDetailDto? ProductDetail { get; set; }
     public bool IsActive { get; set; } = true;
     public bool IsFeatured { get; set; } = false;
     public bool IsDeleted { get; set; } = false;

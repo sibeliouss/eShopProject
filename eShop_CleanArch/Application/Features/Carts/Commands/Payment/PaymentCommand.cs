@@ -56,7 +56,7 @@ public class PaymentCommandHandler : IRequestHandler<PaymentCommand>
             total += Convert.ToDouble(product.Price.Value); // Her ürünün fiyatı toplam fiyata ekleniyor
         }
         
-        if (paymentRequest.Currency == "₺")
+        if (paymentRequest.Currency == "TRY")
         {
             currency = "TRY";
         }

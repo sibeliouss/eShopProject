@@ -17,7 +17,7 @@
             <ul class="dropdown-menu">
               <li *ngFor="let c of categories.slice(0, 8); trackBy: trackById">
                 <a class="text-dark dropdown-item d-flex align-items-center border-bottom" 
-                   (click)="productList.goToShopListByCategoryId(c.id)">
+                   >   <!-- (click)="productList.goToShopListByCategoryId(c.id)" -->
                   <div class="width-30 mr-2 text-lh-sm">
                     <img  [src]="c.iconImgUrl"  width="20" height="20" style="margin-right: 5px;">
                    
