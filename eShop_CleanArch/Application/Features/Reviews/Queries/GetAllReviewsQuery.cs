@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Entities;
 
 namespace Application.Features.Reviews.Queries
 {
@@ -26,13 +27,18 @@ namespace Application.Features.Reviews.Queries
             {
                 var reviews = await _reviewRepository.Query()
                     .Where(r => r.ProductId == request.ProductId)
-                    .Include(r => r.Product)
+                    .Include(r => r.Product).Include(r => r.User) 
                     .Select(r => new GetAllReviewsQueryResponse
                     {
                         Id = r.Id,
                         ProductId = r.ProductId,
                         UserId = r.UserId,
-                        Raiting = r.Rating,
+                        User= new User()
+                        {
+                            FirstName = r.User.FirstName,
+                            LastName = r.User.LastName
+                        },
+                        Rating = r.Rating,
                         Title = r.Title,
                         Comment = r.Comment,
                         CreateAt = r.CreateAt,

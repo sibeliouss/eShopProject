@@ -21,9 +21,9 @@ import { WishListService } from '../../services/wish-list.service';
 })
 export class SingleproductComponent {
 
-  product: ProductModel |null=null;
+  product: ProductModel=new ProductModel;
   reviews: ReviewModel[] = [];
-  requestCreateReview: CreateReviewModel = new CreateReviewModel();
+  requestCreateReview: CreateReviewModel=new CreateReviewModel;
   comment: string = "";
   title: string = "";
   isResponse: boolean | undefined = undefined;
@@ -31,12 +31,7 @@ export class SingleproductComponent {
   starRating: number = 0;
   rating: number = 0;
   starData: Star = new Star;
-  sizes: string[] = [ 'S', 'M', 'L', 'XL',];
-  selectedSize: string = 'S';  // Varsayılan beden
-  showSizeChart: boolean = false; 
-
-  toggleSizeChart() {
-    this.showSizeChart = !this.showSizeChart;}
+  
 
   constructor(
     private http: HttpClient,
@@ -73,27 +68,32 @@ export class SingleproductComponent {
   }
 
   createReview() {
-    this.requestCreateReview.userId = this.auth.token?.userId ?? '';
-    this.requestCreateReview.productId = this.product?.id ?? '';
-    this.requestCreateReview.raiting = this.starRating;
-    this.requestCreateReview.title = this.title;
-    this.requestCreateReview.comment = this.comment;
+     {
+      this.requestCreateReview.userId = this.auth.token?.userId || ''; 
+      this.requestCreateReview.productId = this.product.id || '';
+      this.requestCreateReview.rating = this.starRating;
+      this.requestCreateReview.title = this.title;
+      this.requestCreateReview.comment = this.comment;
   
-    this.http.post("https://localhost:7120/api/Reviews/CreateReview", this.requestCreateReview).subscribe({
-      next: (res: any) => {
-        this.getAllReview();
-        this.clearReviews();
-        this.calculateReviews();
-        this.calculateStar();
-        this.translate.get("commentSuccessfullySaved").subscribe(res => {
-          this.swal.callToast(res, 'success');
-        });
-      },
-      error: (err) => {
-        console.error('Review creation error:', err);
-      }
-    });
+      this.http.post("https://localhost:7120/api/Reviews/CreateReview", this.requestCreateReview).subscribe({
+        next: (res: any) => {
+          this.getAllReview();
+          this.clearReviews();
+          this.calculateReviews();
+          this.calculateStar();
+          this.translate.get("commentSuccessfullySaved").subscribe(res => {
+            this.swal.callToast(res, 'success');
+          });
+        },
+        error: (err) => {
+          console.error('Review creation error:', err);
+        }
+      });
+     
+      console.error('requestCreateReview, auth token veya product null durumda');
+    }
   }
+  
 
   
   
@@ -114,6 +114,7 @@ export class SingleproductComponent {
     this.http.get("https://localhost:7120/api/Reviews/GetReviews/" + this.product?.id).subscribe({
       next: (res: any) => {
         this.reviews = res;
+      
       },
       error: (err) => {
         console.error('All reviews fetch error:', err);
@@ -167,4 +168,10 @@ export class SingleproductComponent {
     }
     return stars;
   }
+  
+
+  trackByReviewId(index: number, review: ReviewModel): string {
+    return review.id; // ya da review'in bir benzersiz özelliği
+  }
+  
 }

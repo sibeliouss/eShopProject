@@ -14,7 +14,7 @@
                                             <div class="text-center my-4">
                                                 <div>
                                                   
-                                                    <img [src]="product?.img" alt="Image Description "
+                                                    <img [src]="product.img" alt="Image Description "
                                                     class="mx-auto img-fluid" style="height: 500px;">   
                                                 </div>
                                             </div>
@@ -22,8 +22,8 @@
                                     </div>
                                     <div class="col-lg-7 pl-lg-0">
                                         <div class="px-lg-4 px-xl-6">
-                                            <h1 class="font-size-5">{{product?.name}}</h1>
-                                            <p class="font-size-3">{{product?.brand}} </p>
+                                            <h1 class="font-size-5">{{product.name}}</h1>
+                                            <p class="font-size-3">{{product.brand}} </p>
                                            
                                             <div class="font-size-2 mb-4">
                                                 <span class="font-size-3">
@@ -35,9 +35,9 @@
                                             </div>
                                             <p class="price mb-4">
                                                 <span class="amount">
-                                                    <span class="">{{product?.price?.value }}
+                                                    <span class="">{{product.price.value }}
                                                     </span>
-                                                    {{product?.price?.currency}}
+                                                    {{product.price.currency}}
                                                 </span>
                                             </p>
 
@@ -72,13 +72,13 @@
 
                                             <div class="details">
                                                 <h5 class="card-title mb-2"> {{'productDetails' | translate}}</h5>
-                                                <h6> {{'color' | translate}} : {{product?.productDetail?.color }}</h6>
+                                                <h6> {{'color' | translate}} : {{product.productDetail.color }}</h6>
                                                
-                                                <h6 >{{ 'fit' | translate }} : {{ product?.productDetail?.fit }}</h6>
+                                                <h6 >{{ 'fit' | translate }} : {{ product.productDetail.fit }}</h6>
                                                 
-                                                <h6>{{ 'size' | translate }} : {{ product?.productDetail?.size }}  </h6>
+                                                <h6>{{ 'size' | translate }} : {{ product.productDetail.size }}  </h6>
                                             
-                                                <h6 class="card-text"><span>{{ 'material' | translate }} : {{ product?.productDetail?.material }}</span></h6>
+                                                <h6 class="card-text"><span>{{ 'material' | translate }} : {{ product.productDetail.material }}</span></h6>
                                              </div>
                                            
                                              
@@ -151,23 +151,24 @@
 
                                         <h4 class="font-size-3 mb-5">{{ 'reviews' | translate }}</h4>
                                         <ul class="list-unstyled mb-8">
-                                            <ng-container *ngFor="let review of reviews; track review">
+                                            <ng-container *ngFor="let review of reviews; track review ">
                                                 <li class="mb-4 pb-5 border-bottom">
                                                     <div class="d-flex align-items-center mb-3">
-                                                        <h6 class="mb-0">{{ review.title }}</h6>
-                                                        <div class="text-yellow-darker ml-3">
+                                                        <h6 class="mb-0">{{ review?.title }}</h6>
+                                                        <div class="ml-3">
                                                             <ng-container *ngFor="let star of getStars(review.rating)">
-                                                                <small [ngClass]="star.class"></small>
+                                                                <i [ngClass]="star.class"></i>
                                                             </ng-container>
                                                         </div>
                                                     </div>
-                                                    <p class="mb-4 text-lh-md">{{ review.comment }}</p>
+                                                    <p class="mb-4 text-lh-md">{{ review?.comment }}</p>
                                                     <div class="text-gray-600 mb-4" *ngIf="review.user">
                                                         {{ review.user.firstName }} {{ review.user.lastName }}, {{ review.createAt | date: 'dd.MM.yyyy' }}
                                                     </div>
                                                 </li>
                                             </ng-container>
                                         </ul>
+                                        
                                         
                                         <div *ngIf="isResponse && allowToComment">
                                             <h4 class="font-size-3 mb-4">{{ 'writeAReview' | translate }}</h4>
@@ -182,7 +183,7 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="js-form-message form-group mb-4">
+                                            <div class="form-group mb-4">
                                                 <label for="descriptionTextarea" class="form-label text-dark h6 mb-3">
                                                     {{ 'detailsPlease!YourReviewHelpsOtherShoppers' | translate }}.
                                                 </label>

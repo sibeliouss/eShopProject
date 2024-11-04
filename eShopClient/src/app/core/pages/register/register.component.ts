@@ -61,7 +61,7 @@ export class RegisterComponent {
     const request: RegisterModel = this.signUpForm.value; 
     console.log("Kullanıcı Adı:", request.userName);
 
-    this.register.Register('Customers/Add', request).subscribe({
+    this.register.Register('Auth/Register', request).subscribe({
       next: (res) => {
         console.log("Response from server:", res);
         this.toastr.success('Kayıt başarılı');

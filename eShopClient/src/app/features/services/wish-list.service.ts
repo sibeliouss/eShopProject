@@ -43,7 +43,7 @@ export class WishListService {
 
        const data: WishListModel= new WishListModel();
       data.productId = product.id;
-      data.userId = this.auth.token!.userId;
+      data.userId = this.auth.token?.userId ?? "";
       data.price = product.price;
 
       this.http.post("https://localhost:7120/api/WishLists/AddToWishList", data).subscribe({
