@@ -170,8 +170,21 @@ export class SingleproductComponent {
   }
   
 
-  trackByReviewId(index: number, review: ReviewModel): string {
+  trackReview(index: number, review: ReviewModel): string {
     return review.id; // ya da review'in bir benzersiz özelliği
   }
+
+  getStars2(rating: number): { class: string }[] {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+            stars.push({ class: 'fas fa-star' }); // Dolu yıldız
+        } else {
+            stars.push({ class: 'far fa-star' }); // Boş yıldız
+        }
+    }
+    return stars;
+}
+
   
 }
