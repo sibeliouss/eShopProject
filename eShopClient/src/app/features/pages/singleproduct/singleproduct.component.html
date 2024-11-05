@@ -35,10 +35,10 @@
                                             </div>
                                             <p class="price mb-4">
                                                 <span class="amount">
-                                                    <span class="">{{product.price.value }}
-                                                    </span>
-                                                    {{product.price.currency}}
+                                                    <span class="">{{ product.price.value }}</span>
+                                                    {{ product.price.currency }}
                                                 </span>
+                                                
                                             </p>
 
                                             <form class="cart d-md-flex align-items-center" method="post">
@@ -151,15 +151,13 @@
 
                                         <h4 class="font-size-3 mb-5">{{ 'reviews' | translate }}</h4>
                                         <ul class="list-unstyled mb-8">
-                                            <ng-container *ngFor="let review of reviews; track: review">
+                                            <ng-container *ngFor="let review of reviews; ">
                                                 <li class="mb-4 pb-5 border-bottom">
                                                     <div class="d-flex align-items-center mb-3">
                                                         <h6 class="mb-0">{{ review?.title }}</h6>
-                                                        <div class="ml-3">
-                                                            <ng-container *ngFor="review.rating">
-                                                                <i [ngClass]=""></i>
-                                                            </ng-container>
-                                                        </div>
+                                                        <ng-container *ngFor="let star of getStars(review.rating)">
+                                                            <small [ngClass]="star.class"></small>
+                                                        </ng-container>
                                                     </div>
                                                     <p class="mb-4 text-lh-md">{{ review?.comment }}</p>
                                                     <div class="text-gray-600 mb-4" *ngIf="review.user">
