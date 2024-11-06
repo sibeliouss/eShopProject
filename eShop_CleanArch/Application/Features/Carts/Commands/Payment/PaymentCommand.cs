@@ -94,7 +94,7 @@ public class PaymentCommandHandler : IRequestHandler<PaymentCommand>
         {
             var item = new BasketItem();
             item.Category1 = "Giyim";
-            item.Category2 = "Giyim";
+            item.Category2 = "Ev & Dekorasyon";
             item.Id = product.Id.ToString();
             item.Name = product.Name;
             item.ItemType = BasketItemType.PHYSICAL.ToString();

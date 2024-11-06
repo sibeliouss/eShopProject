@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { WishListService } from '../../../features/services/wish-list.service';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class MiddlebarComponent {
 
 
 
-  constructor(public auth: AuthService, private router: Router) {}
+  constructor(public auth: AuthService, private router: Router, public wishList: WishListService) {}
   
 
 

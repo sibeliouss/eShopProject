@@ -11,28 +11,35 @@
         </div>
       </form>
     </div>
-    <ul class="navbar-nav">
-      <div>
-        <li class="nav-item">
-          <a class="nav-link me-2" aria-current="page" routerLink="/"><img src="/public/img/love.png" alt="" width="35px" height="35px"></a>
-        </li>
-      </div>
+    <ul class="navbar-nav d-flex justify-content-between">
+      <li class="nav-item position-relative">
+        <a routerLink="/wish-list" class="nav-link text-dark d-flex align-items-center">
+          <img src="/public/img/love.png" width="35" height="35" alt="Love Icon">
+          <span *ngIf="wishList.wishListItems.length > 0"
+                class="counter position-absolute bg-dark rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9">
+            {{wishList.wishListItems.length}}
+          </span>
+        </a>
+      </li>
+      
       <li class="nav-item" *ngIf="!responseInLocalStorage">
         <a class="nav-link" aria-current="page" routerLink="/login">
           <img src="/public/img/profile.png" alt="" width="35px" height="35px">
         </a>
       </li>
       
-      <div class="btn-group" *ngIf="responseInLocalStorage">
-        <button type="button" class="btn" [routerLink]="['/account', auth.token?.userId]"> 
-        <span>{{ auth.user.firstName }} {{ auth.user.lastName }}</span> 
-         </button>
+      <div class="btn-group ms-2" *ngIf="responseInLocalStorage">
+        <button type="button" class="btn" [routerLink]="['/account', auth.token?.userId]">
+          <span>{{ auth.user.firstName }} {{ auth.user.lastName }}</span>
+        </button>
       </div>
-      <div>
-        <li class="nav-item">
-          <a class="nav-link ms-2" aria-current="page" routerLink="/" (click)="auth.logout()"><img src="/public/img/shopping.png" alt="" width="35px" height="35px"></a>
-        </li>
-      </div>
+      
+      <li class="nav-item">
+        <a class="nav-link ms-2" aria-current="page" routerLink="/" (click)="auth.logout()">
+          <img src="/public/img/shopping.png" alt="" width="35px" height="35px">
+        </a>
+      </li>
     </ul>
+    
   </div>
 </nav>

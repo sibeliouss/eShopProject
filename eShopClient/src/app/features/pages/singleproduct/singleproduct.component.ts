@@ -21,9 +21,9 @@ import { WishListService } from '../../services/wish-list.service';
 })
 export class SingleproductComponent {
 
-  product: ProductModel=new ProductModel;
+  product: ProductModel | null= null;
   reviews: ReviewModel[] = [];
-  requestCreateReview: CreateReviewModel=new CreateReviewModel;
+  requestCreateReview: CreateReviewModel =new CreateReviewModel;
   comment: string = "";
   title: string = "";
   isResponse: boolean | undefined = undefined;
@@ -69,8 +69,9 @@ export class SingleproductComponent {
 
   createReview() {
      {
-      this.requestCreateReview.userId = this.auth.token?.userId || ''; 
-      this.requestCreateReview.productId = this.product.id || '';
+      
+      this.requestCreateReview.userId = this.auth.token?.userId ?? ''; 
+      this.requestCreateReview.productId = this.product?.id ?? '';
       this.requestCreateReview.rating = this.starRating;
       this.requestCreateReview.title = this.title;
       this.requestCreateReview.comment = this.comment;

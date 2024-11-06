@@ -3,56 +3,59 @@ import { TranslateService } from '@ngx-translate/core';
 import { SwalService } from '../../core/services/swal.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../core/services/auth.service';
-import { ProductModel } from '../models/product';
+
 import { WishListModel } from '../models/wishList';
 import { forkJoin } from 'rxjs';
+import { ProductModel } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WishListService {
 
-  wishList: any[] = [];
+  wishListItems: ProductModel[] = [];
   constructor(
     private translate: TranslateService,
     private swal: SwalService,
     private http: HttpClient,
     private auth: AuthService
-  ) { }
+  ) { 
+    this.checkLocalStorageForWishList();
+  }
 
   checkLocalStorageForWishList(){
     if(localStorage.getItem('response')){
       this.auth.checkAuthentication();
-      this.http.get("https://localhost:5123/api/WishLists/GetAllWishList/" + this.auth.token?.userId).subscribe(
+      this.http.get("https://localhost:7120/api/WishLists/GetAllWishLists/" + this.auth.token?.userId).subscribe(
         {
           next: (res: any) => {
-            this.wishList = res;
+            this.wishListItems = res;
           },
          
         }
       )
     }
     else{
-      this.wishList = [];
-      localStorage.setItem('wishList', JSON.stringify(this.wishList));
+      this.wishListItems = [];
+      localStorage.setItem('wishList', JSON.stringify(this.wishListItems));
     }
   }
 
   addToWishList(product: ProductModel) {
     if(localStorage.getItem('response')) {
 
-       const data: WishListModel= new WishListModel();
+       const data: WishListModel=new WishListModel();
       data.productId = product.id;
       data.userId = this.auth.token?.userId ?? "";
       data.price = product.price;
 
       this.http.post("https://localhost:7120/api/WishLists/AddToWishList", data).subscribe({
         next: (res: any) => {
-          this.wishList.push(product);
-          localStorage.setItem('wishList', JSON.stringify(this.wishList));
+          this.wishListItems.push(product);
+          localStorage.setItem('wishList', JSON.stringify(this.wishListItems));
           this.checkLocalStorageForWishList();
 
-          this.translate.get("bookAddedToWishlist").subscribe(
+          this.translate.get("productAddedToWishlist").subscribe(
             res => {
               this.swal.callToast(res, 'success');
             }
@@ -71,6 +74,26 @@ export class WishListService {
         })
       })
     }
+  }
+
+  DeleteWishList(index: number) {
+    forkJoin({
+      delete: this.translate.get("remove.doYouWantToDeleted"),
+      cancel: this.translate.get("remove.cancelButton"),
+      confirm: this.translate.get("remove.confirmButton")
+    }).subscribe(res => {
+      this.swal.callSwal(res.delete, res.cancel, res.confirm, () => {
+
+        if (localStorage.getItem("response")) {
+          this.http.delete("https://localhost:7120/api/WishLists/Delete/" + this.wishListItems[index]?.wishListId).subscribe({
+            next: (res: any) => {
+                this.checkLocalStorageForWishList();
+            },
+           
+          });
+        }
+      });
+    })
   }
 
 }

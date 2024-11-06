@@ -9,6 +9,7 @@ import { AddressesComponent } from './features/pages/account/addresses/addresses
 import { OrdersComponent } from './features/pages/account/orders/orders.component';
 
 import { SingleproductComponent } from './features/pages/singleproduct/singleproduct.component';
+import { WishListComponent } from './features/pages/wish-list/wish-list.component';
 
 
 export const routes: Routes = [
@@ -25,6 +26,7 @@ export const routes: Routes = [
     ]},
     
     {path: "single-product/:value",component: SingleproductComponent},
+    {path: "wish-list", component: WishListComponent},
    
    
 

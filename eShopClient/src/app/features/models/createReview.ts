@@ -5,6 +5,6 @@ export class CreateReviewModel{
     userId: string="";
     user: UserModel=new UserModel;
     rating: number=0;
-    title: string="" ;
+    title: string ="";
     comment: string="";
 }

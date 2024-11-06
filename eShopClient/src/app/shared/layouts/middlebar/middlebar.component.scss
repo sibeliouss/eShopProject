@@ -58,4 +58,18 @@
         position: relative;
         right: 20px;
     }
+
+    
+      
+       .counter {
+        top: 0;
+        right: 0;
+        width: 20px;
+        height: 20px;
+        transform: translate(10%, -10%);
+        font-size: 0.8rem;
+      } 
+
+      
+      
 }

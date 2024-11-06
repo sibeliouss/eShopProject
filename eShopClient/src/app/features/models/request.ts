@@ -1,5 +1,5 @@
 export class RequestModel {
-    categoryId: string | null = null; // Başlangıç değeri olarak null kullanmak daha anlamlı olabilir
+    categoryId: string | null = null; 
     pageNumber: number = 1;
     pageSize: number = 10;
     search: string = '';
