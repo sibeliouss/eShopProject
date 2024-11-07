@@ -11,6 +11,7 @@ import { Countries } from '../../../constants/countries';
 import { Cities } from '../../../constants/cities';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -136,12 +137,18 @@ export class AddressesComponent
     });
   }
 
-  deleteAddress(addressId: string) {
-    this.translate.get('deleteConfirmation').subscribe((confirmationMessage: string) => {
-      this.swal.callSwal(confirmationMessage, 'İptal', 'Sil', () => {
+  deleteAddress(addressId: string): void {
+    forkJoin({
+      deleteMessage: this.translate.get("remove.doYouWantToDeleted"),
+      cancel: this.translate.get("remove.cancelButton"),
+      confirm: this.translate.get("remove.confirmButton")
+    }).subscribe(translations => {
+    
+      this.swal.callSwal(translations.deleteMessage, translations.cancel, translations.confirm, () => {
+      
         this.addressService.delete(addressId).subscribe({
-          next: (res: any) => {
-            this.translate.get('Address successfully deleted').subscribe((successMessage: string) => {
+          next: () => {
+          this.translate.get('Address successfully deleted').subscribe(successMessage => {
               this.swal.callToast(successMessage, 'success');
             });
             setTimeout(() => {
@@ -155,6 +162,9 @@ export class AddressesComponent
       });
     });
   }
+  
+ 
+  
   
 
   getBillingAddress() {
@@ -229,12 +239,18 @@ export class AddressesComponent
   }
 
   deleteBillingAddress(addressId: string) {
-    this.translate.get('deleteConfirmation').subscribe((confirmationMessage: string) => {
-      this.swal.callSwal(confirmationMessage, 'Cancel', 'Delete', () => {
+    forkJoin({
+      deleteMessage: this.translate.get("remove.doYouWantToDeleted"),
+      cancel: this.translate.get("remove.cancelButton"),
+      confirm: this.translate.get("remove.confirmButton")
+    }).subscribe(translations => {
+    
+      this.swal.callSwal(translations.deleteMessage, translations.cancel, translations.confirm, () => {
+      
         this.addressService.deleteBillingAddress(addressId).subscribe({
-          next: (res: any) => {
-            this.translate.get('Address successfully deleted').subscribe((successMessage: string) => {
-              this.toast.success(successMessage);
+          next: () => {
+          this.translate.get('Billing address successfully deleted').subscribe(successMessage => {
+              this.swal.callToast(successMessage, 'success');
             });
             setTimeout(() => {
               location.reload();

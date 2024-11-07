@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
@@ -18,6 +18,7 @@ import { WishListService } from '../../../features/services/wish-list.service';
 export class MiddlebarComponent {
 
   responseInLocalStorage: any;  
+  showWishListCollapse = false; 
 
 
   ngOnInit() {
@@ -30,11 +31,14 @@ export class MiddlebarComponent {
     
   }
 
-
-
   constructor(public auth: AuthService, private router: Router, public wishList: WishListService) {}
   
 
+  toggleCollapse() {
+    this.showWishListCollapse = !this.showWishListCollapse; 
+  }
+
+  
 
   
 }

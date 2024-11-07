@@ -44,24 +44,26 @@ export class SingleproductComponent {
     if (localStorage.getItem('response')) {
       this.isResponse = true;
       
-    }
+    }}
 
-    this.activated.params.subscribe(res => {
-      this.http.get<ProductModel[]>('https://localhost:7120/api/Products/GetProductDetailById/' + res["value"]).subscribe({
-        next: (res: any) => {
-          this.product = res;
-          this.getAllReview();
-          this.AllowToComment();
-          this.calculateReviews();
-          this.calculateStar();
-        },
-        error: (err) => {
-          console.error('Product fetch error:', err);
-          this.swal.callToast('Ürün bilgileri alınırken bir hata oluştu.', 'error');
-        }
+    ngOnInit(): void {
+      this.activated.params.subscribe(res => {
+        this.http.get<ProductModel[]>('https://localhost:7120/api/Products/GetProductDetailById/' + res["value"]).subscribe({
+          next: (res: any) => {
+            this.product = res;
+            this.getAllReview();
+            this.AllowToComment();
+            this.calculateReviews();
+            this.calculateStar();
+          },
+          error: (err) => {
+            console.error('Product fetch error:', err);
+          
+          }
+        });
       });
-    });
-  }
+      
+    }
 
   setRating(rating: number) {
     this.starRating = rating;

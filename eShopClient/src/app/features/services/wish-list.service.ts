@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { SwalService } from '../../core/services/swal.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../core/services/auth.service';
-
 import { WishListModel } from '../models/wishList';
 import { forkJoin } from 'rxjs';
 import { ProductModel } from '../models/product';
@@ -14,26 +13,28 @@ import { ProductModel } from '../models/product';
 export class WishListService {
 
   wishListItems: ProductModel[] = [];
+  
   constructor(
     private translate: TranslateService,
     private swal: SwalService,
     private http: HttpClient,
     private auth: AuthService
-  ) { 
-    this.checkLocalStorageForWishList();
-  }
+  ) { this.checkLocalStorageForWishList(); }
+
+  
 
   checkLocalStorageForWishList(){
     if(localStorage.getItem('response')){
       this.auth.checkAuthentication();
-      this.http.get("https://localhost:7120/api/WishLists/GetAllWishLists/" + this.auth.token?.userId).subscribe(
-        {
-          next: (res: any) => {
-            this.wishListItems = res;
-          },
-         
+      this.http.get("https://localhost:7120/api/WishLists/GetAllWishLists/" + this.auth.token?.userId).subscribe({
+        next: (res: any) => {
+          this.wishListItems = res;
+        },
+        error: (err) => {
+          console.error('Error fetching wish list:', err);
+        
         }
-      )
+      });
     }
     else{
       this.wishListItems = [];
@@ -44,7 +45,7 @@ export class WishListService {
   addToWishList(product: ProductModel) {
     if(localStorage.getItem('response')) {
 
-       const data: WishListModel=new WishListModel();
+      const data: WishListModel = new WishListModel();
       data.productId = product.id;
       data.userId = this.auth.token?.userId ?? "";
       data.price = product.price;
@@ -61,7 +62,9 @@ export class WishListService {
             }
           )
         },
-        
+        error: (err) => {
+          console.error('Error adding product to wish list:', err);
+        }
       });
     }
     else {
@@ -69,9 +72,7 @@ export class WishListService {
         title: this.translate.get("pleaseLoginToAddTheProductToFavorites"),
         confirm: this.translate.get("confirmButton")
       }).subscribe(res => {
-        this.swal.callSwal2(res.title, res.confirm, () => {
-
-        })
+        this.swal.callSwal2(res.title, res.confirm, () => {})
       })
     }
   }
@@ -87,13 +88,15 @@ export class WishListService {
         if (localStorage.getItem("response")) {
           this.http.delete("https://localhost:7120/api/WishLists/Delete/" + this.wishListItems[index]?.wishListId).subscribe({
             next: (res: any) => {
-                this.checkLocalStorageForWishList();
+              this.checkLocalStorageForWishList();
             },
+            error: (err) => {
+              console.error('Error deleting product from wish list:', err);
            
+            }
           });
         }
       });
     })
   }
-
 }
