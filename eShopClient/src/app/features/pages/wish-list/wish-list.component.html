@@ -2,7 +2,7 @@
   <div class="site-content" >
     <div class="container py-4">
       <header class="entry-header text-center mb-4">
-        <h3 class="entry-title text-muted">
+        <h3 class="entry-title">
           {{ 'wishList' | translate }} ({{ wishList.wishListItems.length }} {{ 'items' | translate }})
         </h3>
       </header>
@@ -11,11 +11,11 @@
         <div class="content-area col-md-9">
             <div class="entry-content">
               <div>
-                <form class="table-responsive" method="post">
+                <form class="table-responsive" >
                   <table class="shop_table table">
                     <thead>
-                      <tr class="text-black">
-                        <th class="product-name p-3 mr-4">{{ 'product' | translate }}</th>
+                      <tr class="text1">
+                        <th class="product-name p-3 mr-5">{{ 'product' | translate }}</th>
                         <th class="product-price p-3">{{ 'price' | translate }}</th>
                         <th class="product-remove p-3">&nbsp;</th>
                       </tr>
@@ -34,11 +34,11 @@
                           </div>
                         </td>
                         <td class="product-price align-middle p-2 ">
-                          <span class="fw-bold">{{ w.price.value }}</span>
-                          <span class="text-muted">{{ w.price.currency }}</span>
+                          <span class="font-weight-bold">{{ w.price.value }}</span>
+                          <span class="text-dark">  {{ w.price.currency }}</span>
                         </td>
                         <td class="product-remove align-middle text-center p-3">
-                          <a (click)="wishList.DeleteWishList(i)" class="remove" aria-label="Remove this item">
+                          <a (click)="wishList.DeleteWishList(i)" class="remove" aria-label="Remove">
                             <i class="bi bi-trash-fill"></i>
                           </a>
                         </td>

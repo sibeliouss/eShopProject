@@ -1,237 +1,120 @@
-
-<section class="right-sidebar">
+<section class="right-sidebar py-5 bg-light">
     <div class="site-content" id="content">
         <div class="container">
-            <div class="row  space-top-2">
-                <div id="primary" class="content-area">
-                    
-                        <div class="product">
-                            <div class="container">
-                                <div class="row">
-                                    <div
-                                        class="col-lg-5 images">
-                                        <figure class=" mb-0">
-                                            <div class="text-center my-4">
-                                                <div>
-                                                  
-                                                    <img [src]="product?.img" alt="Image Description "
-                                                    class="mx-auto img-fluid" style="height: 500px;">   
-                                                </div>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                    <div class="col-lg-7 pl-lg-0">
-                                        <div class="px-lg-4 px-xl-6">
-                                            <h1 class="font-size-5">{{product?.name}}</h1>
-                                            <p class="font-size-3">{{product?.brand}} </p>
-                                           
-                                            <div class="font-size-2 mb-4">
-                                                <span class="font-size-3">
-                                                    <ng-container *ngFor="let star of getStars(rating)">
-                                                        <small [ngClass]="star.class"></small>
-                                                    </ng-container>
-                                                </span>
-                                                <span class="ml-2">({{ rating | number:'1.2-2' }})</span>
-                                            </div>
-                                            <p class="price mb-4">
-                                                <span class="amount">
-                                                    <span class="">{{ product?.price?.value }}</span>
-                                                    {{ product?.price?.currency }}
-                                                </span>
-                                                
-                                            </p>
+            <div class="row">
+                <div id="primary" class="content-area col-lg-9 mx-auto">
+                    <div class="product card border-0 shadow-sm">
+                        <div class="container py-4">
+                            <div class="row">
+                                <!-- Ürün Görseli -->
+                                <div class="col-lg-5 text-center">
+                                    <figure class="mb-0">
+                                        <img [src]="product?.img" alt="Image Description"
+                                             class="img-fluid rounded" style="height: 500px;">
+                                    </figure>
+                                </div>
 
-                                            <form class="cart d-md-flex align-items-center" method="post">
-                                                <div class="quantity mb-4 mb-md-0 d-flex align-items-center">
-                                                    <!-- Quantity -->
-                                                    <div class="border px-3 width-120">
-                                                        <input type="number" class="input-text qty text form-control text-center border-0" step="1" min="1" max="100" name="quantity" value="1" title="Qty">
-                                                    </div>
-                                                    <!-- End Quantity -->
-                                                </div>
-                                                <button type="submit" name="add-to-cart" value="your-guid-value-here" class="btn btn-dark border-0 rounded-0 p-3 btn-block ml-md-4 button">Add to cart</button>
-                                            </form>
-                                            
-                                        </div>
-                                        <div class="px-lg-4 px-xl-7 py-5 d-flex align-items-center">
-                                            <ul class="list-unstyled nav">
-                                                <li class="mr mb-4 mb-md-0">
-                                                    <a (click)="wishList.addToWishList(product!)" class="">
-                                                        <i class="bi bi-heart"></i>
-                                                        {{'addToWishlist' | translate}}
-                                                    </a>
-                                                </li>
-                                                <li class="mr-2">
-                                                    <i class="bi bi-share"></i>
-                                                    <a href="#" class="mr-6 mb-4 mb-md-0"> 
-                                                        {{'share' | translate}}</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="mb-4">
-
-                                            <div class="details">
-                                                <h5 class="card-title mb-2"> {{'productDetails' | translate}}</h5>
-                                                <h6> {{'color' | translate}} : {{product?.productDetail?.color }}</h6>
-                                               
-                                                <h6 >{{ 'fit' | translate }} : {{ product?.productDetail?.fit }}</h6>
-                                                
-                                                <h6>{{ 'size' | translate }} : {{ product?.productDetail?.size }}  </h6>
-                                            
-                                                <h6 class="card-text"><span>{{ 'material' | translate }} : {{ product?.productDetail?.material }}</span></h6>
-                                             </div>
-                                           
-                                             
-                                              
-                                              
-                                        </div></div></div></div>     
-                                    
-                              
-                         
-
-                            <!-- Features Section -->
-                            <div class="mb-10 row">
-                               
-
-                                <!-- Tab Content -->
-                                <div class=" col-lg-8 col-xl-9 border-top" >
-                                   
-                                    <div class="border-left pl-4 pt-4 pl-lg-6 pt-lg-6 pl-xl-9 pt-xl-9"
+                                <!-- Ürün Detayları -->
+                                <div class="col-lg-7">
+                                    <div class="px-lg-4">
+                                        <h1 class="font-size-5 font-weight-bold">{{ product?.name }}</h1>
+                                        <p class="font-size-3 text-muted">{{ product?.brand }}</p>
                                        
-                                        >
-                                        <!-- Mockup Block -->
-                                        <h4 class="font-size-3">{{'customerReviews' | translate}} </h4>
-                                        <div class="mb-8">
-                                            <div class="mb-0">
-                                                <div class="d-flex align-items-center mb-4">
-                                                    <span class="font-size-15 font-weight-bold">{{ rating | number:'1.2-2' }}</span>
-                                                    <div class="ml-3 h6 mb-0">
-                                                        <span class="font-weight-normal">{{ reviews.length }} {{ 'review' | translate }}</span>
-                                                        <div class="text-yellow-darker">
-                                                            <ng-container *ngFor="let star of getStars(rating)">
-                                                                <small [ngClass]="star.class"></small>
-                                                            </ng-container>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div>
-                                                <!-- Ratings -->
-                                                <div class="rating-list">
-                                                    <ul class="list-unstyled">
-                                                      <li class="py-2" *ngFor="let rating of [5, 4, 3, 2, 1]">
-                                                        <div class="row align-items-center mx-gutters-2 font-size-2">
-                                                          <div class="col-auto">
-                                                            <span class="text-dark">{{ rating }} {{ 'star' | translate }}</span>
-                                                          </div>
-                                                          <div class="col px-0">
-                                                            <div class="progress bg-white-100" style="height: 7px;">
-                                                              <div 
-                                                                class="progress-bar bg-yellow-darker"
-                                                                role="progressbar" 
-                                                                [style.width.%]="starData['star' + rating] * 15"
-                                                                [attr.aria-valuenow]="starData['star' + rating]" 
-                                                                aria-valuemin="0" 
-                                                                aria-valuemax="100">
-                                                              </div>
-                                                            </div>
-                                                          </div>
-                                                          <div class="col-2">
-                                                            <span class="text-secondary">{{ starData['star' + rating] }}</span>
-                                                          </div>
-                                                        </div>
-                                                      </li>
-                                                    </ul>
-                                                  </div>
-                                                  
-                                                <!-- End Ratings -->
-                                            </div>
+                                        <!-- Yıldız Puanlama -->
+                                        <div class="mb-4">
+                                            <span class="text-warning">
+                                                <ng-container *ngFor="let star of getStars(rating)">
+                                                    <small [ngClass]="star.class"></small>
+                                                </ng-container>
+                                            </span>
+                                            <span class="ml-2 text-muted">({{ rating | number:'1.2-2' }})</span>
                                         </div>
 
-                                        <h4 class="font-size-3 mb-5">{{ 'reviews' | translate }}</h4>
-                                        <ul class="list-unstyled mb-8">
-                                            <ng-container *ngFor="let review of reviews; ">
-                                                <li class="mb-4 pb-5 border-bottom">
-                                                    <div class="d-flex align-items-center mb-3">
-                                                        <h6 class="mb-0">{{ review?.title }}</h6>
-                                                        <ng-container *ngFor="let star of getStars(review.rating)">
-                                                            <small [ngClass]="star.class"></small>
-                                                        </ng-container>
-                                                    </div>
-                                                    <p class="mb-4 text-lh-md">{{ review?.comment }}</p>
-                                                    <div class="text-gray-600 mb-4" *ngIf="review.user">
-                                                        {{ review.user.firstName }} {{ review.user.lastName }}, {{ review.createAt | date: 'dd.MM.yyyy' }}
-                                                    </div>
-                                                </li>
-                                            </ng-container>
-                                        </ul>
-                                        
-                                        
-                                        <div *ngIf="isResponse && allowToComment">
-                                            <h4 class="font-size-3 mb-4">{{ 'writeAReview' | translate }}</h4>
-                                            <div class="d-flex align-items-center mb-6">
-                                                <h6 class="mb-0">{{ 'selectARating(required)' | translate }}</h6>
-                                                <div class="text-yellow-darker ml-3 font-size-4">
-                                                    <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-                                                        <small [ngClass]="{'far': starRating < star, 'fas': starRating >= star}" 
-                                                               class="fa-star" 
-                                                               (click)="setRating(star)"></small>
-                                                    </ng-container>
-                                                </div>
+                                        <!-- Fiyat -->
+                                        <p class="price font-size-4 text-primary mb-4">
+                                            <span>{{ product?.price?.value }}</span>
+                                            {{ product?.price?.currency }}
+                                        </p>
+
+                                        <!-- Sepete Ekle Butonu -->
+                                        <form class="cart d-md-flex align-items-center">
+                                            <div class="quantity mb-4 mb-md-0 d-flex align-items-center">
+                                                <input type="number" class="form-control text-center border border-secondary"
+                                                       step="1" min="1" max="100" value="1">
                                             </div>
-                                            
-                                            <div class="form-group mb-4">
-                                                <label for="descriptionTextarea" class="form-label text-dark h6 mb-3">
-                                                    {{ 'detailsPlease!YourReviewHelpsOtherShoppers' | translate }}.
-                                                </label>
-                                                <textarea [(ngModel)]="comment" 
-                                                          name="comment" 
-                                                          class="form-control rounded-0 p-4" 
-                                                          rows="7" 
-                                                          id="descriptionTextarea" 
-                                                          required 
-                                                          placeholder="{{ 'What did you like or dislike? What should other shoppers know before buying?' | translate }}" 
-                                                          data-msg="Please enter your message." 
-                                                          data-error-class="u-has-error" 
-                                                          data-success-class="u-has-success"></textarea>
-                                            </div>
-                                        
-                                            <div class="form-group mb-5">
-                                                <label for="inputCompanyName" class="form-label text-dark h6 mb-3">
-                                                    {{ 'addATitle' | translate }}
-                                                </label>
-                                                <input [(ngModel)]="title" 
-                                                       type="text" 
-                                                       class="form-control rounded-0 px-4" 
-                                                       name="title" 
-                                                       required 
-                                                       id="inputCompanyName" 
-                                                       placeholder="{{ '3000 characters remaining' | translate }}" 
-                                                       aria-label="3000 characters remaining">
-                                            </div>
-                                        
-                                            <div class="d-flex">
-                                                <button type="submit" (click)="createReview()" 
-                                                        class="btn btn-dark btn-wide rounded-0 transition-3d-hover">
-                                                    {{ 'submit' | translate }}
-                                                </button>
-                                            </div>
+                                            <button type="submit" class="btn btn-dark rounded-0 ml-md-4">
+                                                Add to cart
+                                            </button>
+                                        </form>
+
+                                        <!-- Wishlist ve Paylaş Butonları -->
+                                        <div class="mt-4">
+                                            <a (click)="wishList.addToWishList(product!)" class="text-muted mr-4">
+                                                <i class="bi bi-heart"></i> {{'addToWishlist' | translate}}
+                                            </a>
+                                            <a href="#" class="text-muted">
+                                                <i class="bi bi-share"></i> {{'share' | translate}}
+                                            </a>
                                         </div>
-                                        
-                                        <!-- End Mockup Block -->
+                                    </div>
+
+                                    <!-- Ürün Detayları Listesi -->
+                                    <div class="my-4">
+                                        <h5>{{'productDetails' | translate}}</h5>
+                                        <ul class="list-unstyled text-muted">
+                                            <li>{{'color' | translate}}: {{ product?.productDetail?.color }}</li>
+                                            <li>{{ 'fit' | translate }}: {{ product?.productDetail?.fit }}</li>
+                                            <li>{{ 'size' | translate }}: {{ product?.productDetail?.size }}</li>
+                                            <li>{{ 'material' | translate }}: {{ product?.productDetail?.material }}</li>
+                                        </ul>
                                     </div>
                                 </div>
-                                <!-- End Tab Content -->
                             </div>
-                            <!-- End Features Section -->
 
+                            <!-- Müşteri Yorumları -->
+                            <div class="mt-5">
+                                <h4>{{ 'customerReviews' | translate }}</h4>
+                                <div class="rating-list my-3">
+                                    <ul class="list-unstyled">
+                                        <li *ngFor="let rating of [5, 4, 3, 2, 1]" class="d-flex align-items-center">
+                                            <span class="mr-2">{{ rating }} {{ 'star' | translate }}</span>
+                                            <div class="progress w-50 bg-light" style="height: 5px;">
+                                                <div class="progress-bar bg-warning" [style.width.%]="starData['star' + rating] * 15"></div>
+                                            </div>
+                                            <span class="ml-2 text-muted">{{ starData['star' + rating] }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Yorumlar -->
+                                <h4 class="mb-3">{{ 'reviews' | translate }}</h4>
+                                <ul class="list-unstyled">
+                                    <ng-container *ngFor="let review of reviews">
+                                        <li class="mb-4 border-bottom pb-3">
+                                            <h6>{{ review?.title }}   <span class="text-warning">
+                                                <ng-container *ngFor="let star of getStars(review.rating)">
+                                                    <small [ngClass]="star.class"></small>
+                                                </ng-container>
+                                            </span></h6>
+                                           
+                                            <p class="text-muted">{{ review?.comment }}</p>
+                                            <div class="text-muted">{{ review.user.firstName }} {{ review.user.lastName }} - {{ review.createAt | date: 'dd.MM.yyyy' }}</div>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+
+                                <!-- Yorum Ekle -->
+                                <div *ngIf="isResponse && allowToComment" class="mt-5">
+                                    <h4>{{ 'writeAReview' | translate }}</h4>
+                                    <div class="form-group">
+                                        <textarea [(ngModel)]="comment" class="form-control" rows="4" placeholder="{{ 'Your comment...' | translate }}"></textarea>
+                                    </div>
+                                    <button (click)="createReview()" class="btn btn-dark mt-2">{{ 'submit' | translate }}</button>
+                                </div>
+                            </div>
                         </div>
-                            
-                   
-                
+                    </div>
                 </div>
-               
             </div>
         </div>
     </div>

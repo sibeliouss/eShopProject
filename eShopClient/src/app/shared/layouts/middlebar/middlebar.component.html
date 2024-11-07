@@ -25,7 +25,7 @@
           </a>
       
           <!-- Wishlist Dropdown -->
-          <div [ngClass]="{'collapse': !showWishListCollapse, 'show': showWishListCollapse}" class="position-absolute bg-white shadow rounded p-3 mt-1" style="width: 300px; right: 0;" id="collapseExample">
+          <div [ngClass]="{'collapse': !showWishListCollapse, 'show': showWishListCollapse}" class=" wishlist-dropdown position-absolute bg-white shadow rounded p-3 mt-1" style="width: 300px; right: 0;" id="collapseExample">
             <h6 class="text-center">{{ 'wishList' | translate }} ({{ wishList.wishListItems.length }})</h6>
             <ul class="list-unstyled mb-0">
               <!--max 5 ürünü göstermesini istiyorum-->
@@ -36,7 +36,7 @@
                     <p class="mb-0">{{ item.name }}</p>
                     <small class="text-muted">{{ item.brand }} - {{ item.productDetail.size }}</small>
                   </div>
-                  <button (click)="wishList.DeleteWishList(i)" class="btn btn-sm btn-outline-danger">
+                  <button (click)="wishList.DeleteWishList(i)" class="btn btn-sm btn-outline-danger ">
                     <i class="bi bi-trash"></i>
                   </button>
                 </div>

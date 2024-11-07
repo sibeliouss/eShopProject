@@ -4,49 +4,40 @@
 
 
      <!-- Bottom Bar -->
-     <div class="border-bottom py-3 py-md-0">
+     <div class="header-section border-bottom py-3 py-md-0">
       <div class="container">
-        <div class="d-md-flex position-relative">
-         
-
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <span class="ml-3 text-white">{{ 'browseCategories' | translate }}</span>
+        <div class="d-md-flex align-items-center position-relative">
+          
+          <!-- Kategoriler Dropdown -->
+          <div class="dropdown me-4">
+            <button class="btn dropdown-toggle custom-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="text-white">{{ 'browseCategories' | translate }}</span>
             </button>
-            <!-- sadece homepage sayfasında iken aktif -->
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu custom-dropdown-menu">
               <li *ngFor="let c of categories.slice(0, 8); trackBy: trackById">
-                <a class="text-dark dropdown-item d-flex align-items-center border-bottom" 
-                   >   <!-- (click)="productList.goToShopListByCategoryId(c.id)" -->
-                  <div class="width-30 mr-2 text-lh-sm">
-                    <img  [src]="c.iconImgUrl"  width="20" height="20" style="margin-right: 5px;">
-                   
-                  </div>
-                  <span class="flex-grow-1">{{ c.name }}</span>
+                <a class="dropdown-item d-flex align-items-center">
+                  <img [src]="c.iconImgUrl" class="category-icon me-2">
+                  <span>{{ c.name }}</span>
                 </a>
               </li>
             </ul>
           </div>
-            
-  </div>
-
-  <div class="d-none d-md-block ml-md-auto secondary-navigation ">
-    <ul class="nav">
-      <li class="nav-item"><a routerLink="/categories"
-        class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2"
-      >{{ 'allCategories' | translate }}</a>
-    </li>
-
-    <li class="nav-item"><a routerLink="/shop-list"
-      class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2"
-    >{{'allProducts' | translate}}</a>
-  </li>
+          
+          <!-- İkincil Navigasyon -->
+          <div class="d-none d-md-block ms-auto">
+            <ul class="nav secondary-navigation">
+              <li class="nav-item">
+                <a routerLink="/categories" class="nav-link" type="button">{{ 'allCategories' | translate }}</a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="/shop-list" class="nav-link" type="button">{{ 'allProducts' | translate }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     
-</ul>
-</div>
-</div>
-</div>
-</div>
 <!-- End Bottom Bar -->
     
 
