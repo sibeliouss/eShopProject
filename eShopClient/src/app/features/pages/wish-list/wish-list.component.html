@@ -1,0 +1,55 @@
+<section *ngIf="wishList.wishListItems.length > 0" class="section p-2">
+  <div class="site-content" >
+    <div class="container py-4">
+      <header class="entry-header text-center mb-4">
+        <h3 class="entry-title text-muted">
+          {{ 'wishList' | translate }} ({{ wishList.wishListItems.length }} {{ 'items' | translate }})
+        </h3>
+      </header>
+
+      <div class="row align-items-center justify-content-center">
+        <div class="content-area col-md-9">
+            <div class="entry-content">
+              <div>
+                <form class="table-responsive" method="post">
+                  <table class="shop_table table">
+                    <thead>
+                      <tr class="text-black">
+                        <th class="product-name p-3 mr-4">{{ 'product' | translate }}</th>
+                        <th class="product-price p-3">{{ 'price' | translate }}</th>
+                        <th class="product-remove p-3">&nbsp;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="cart_item" *ngFor="let w of wishList.wishListItems; let i = index">
+                        <td class="product-name align-middle p-3">
+                          <div class="d-flex align-items-center">
+                          <img [src]="w.img" class="wishlist-img rounded shadow-sm" alt="Image">
+                          
+                            <div class="ms-3">
+                              <a href="#" class="d-block fw-bold text-dark">{{ w.brand }}</a>
+                              <p class="mb-0 text-muted">{{ w.name }}</p>
+                              <span class="text-muted">{{ w.productDetail.size }}</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="product-price align-middle p-2 ">
+                          <span class="fw-bold">{{ w.price.value }}</span>
+                          <span class="text-muted">{{ w.price.currency }}</span>
+                        </td>
+                        <td class="product-remove align-middle text-center p-3">
+                          <a (click)="wishList.DeleteWishList(i)" class="remove" aria-label="Remove this item">
+                            <i class="bi bi-trash-fill"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

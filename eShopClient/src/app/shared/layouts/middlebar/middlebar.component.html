@@ -3,6 +3,7 @@
     <a routerLink="/homepage" class="navbar-brand">
       <h2>Sibel</h2>
     </a>
+    
     <div class="d-flex align-items-center">
       <form class="d-flex" role="search">
         <div class="search-container">
@@ -11,23 +12,42 @@
         </div>
       </form>
     </div>
-    <ul class="navbar-nav d-flex justify-content-between">
-      <li class="nav-item position-relative">
-        <a routerLink="/wish-list" class="nav-link text-dark d-flex align-items-center">
-          <img src="/public/img/love.png" width="35" height="35" alt="Love Icon">
-          <span *ngIf="wishList.wishListItems.length > 0"
-                class="counter position-absolute bg-dark rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9">
-            {{wishList.wishListItems.length}}
-          </span>
-        </a>
-      </li>
+    <!--Wishlist-->
+    <ul class="navbar-nav d-inline-flex justify-content-between">
+      <ul class="navbar-nav d-inline-flex justify-content-between">
+        <li class="nav-item position-relative">
+          <a class="nav-link text-dark d-flex align-items-center" (click)="toggleCollapse()" style="cursor: pointer;">
+            <img src="/public/img/love.png" width="35" height="35" alt="Love Icon">
+            <span *ngIf="wishList.wishListItems.length > 0"
+                  class="counter position-absolute bg-dark rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9">
+              {{ wishList.wishListItems.length }}
+            </span>
+          </a>
       
-      <li class="nav-item" *ngIf="!responseInLocalStorage">
-        <a class="nav-link" aria-current="page" routerLink="/login">
-          <img src="/public/img/profile.png" alt="" width="35px" height="35px">
-        </a>
-      </li>
+          <!-- Wishlist Dropdown -->
+          <div [ngClass]="{'collapse': !showWishListCollapse, 'show': showWishListCollapse}" class="position-absolute bg-white shadow rounded p-3 mt-1" style="width: 300px; right: 0;" id="collapseExample">
+            <h6 class="text-center">{{ 'wishList' | translate }} ({{ wishList.wishListItems.length }})</h6>
+            <ul class="list-unstyled mb-0">
+              <!--max 5 ürünü göstermesini istiyorum-->
+              <li *ngFor="let item of wishList.wishListItems.slice(0, 5); let i = index">
+                <div class="d-flex align-items-center mb-2">
+                  <img [src]="item.img" alt="Product Image" width="45" height="65" class="me-2">
+                  <div class="flex-grow-1">
+                    <p class="mb-0">{{ item.name }}</p>
+                    <small class="text-muted">{{ item.brand }} - {{ item.productDetail.size }}</small>
+                  </div>
+                  <button (click)="wishList.DeleteWishList(i)" class="btn btn-sm btn-outline-danger">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </li>
+            </ul>
+            <a routerLink="/wish-list" class="btn w-100 mt-2">{{ 'viewWishList' | translate }}</a>
+          </div>
+        </li>
+      </ul>
       
+      <!--User Girişi-->
       <div class="btn-group ms-2" *ngIf="responseInLocalStorage">
         <button type="button" class="btn" [routerLink]="['/account', auth.token?.userId]">
           <span>{{ auth.user.firstName }} {{ auth.user.lastName }}</span>
@@ -40,6 +60,5 @@
         </a>
       </li>
     </ul>
-    
   </div>
 </nav>
