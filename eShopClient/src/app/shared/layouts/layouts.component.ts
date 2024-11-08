@@ -3,26 +3,21 @@ import { TopbarComponent } from "./topbar/topbar.component";
 import { MiddlebarComponent } from "./middlebar/middlebar.component";
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from "./footer/footer.component";
-import { CategoryModel } from '../../features/models/category';
-import { CategoryService } from '../../features/services/category.service';
-import { TranslateModule } from '@ngx-translate/core';
-
-import { HttpClient } from '@angular/common/http';
+import { BottombarComponent } from "./bottombar/bottombar.component";
 
 @Component({
   selector: 'app-layouts',
   standalone: true,
-  imports: [TopbarComponent, MiddlebarComponent, CommonModule, TranslateModule],
+  imports: [TopbarComponent, MiddlebarComponent, CommonModule, BottombarComponent],
   templateUrl: './layouts.component.html',
   styleUrl: './layouts.component.scss'
 })
 export class LayoutsComponent {
 
   showBars: boolean = true;
-  categories: CategoryModel[] = [];
+  
 
-  constructor(public router: Router, private categoryService: CategoryService, private http: HttpClient) {
+  constructor(public router: Router) {
    
     this.router.events.subscribe((event: any) => {
       if (event.url) {
@@ -32,20 +27,7 @@ export class LayoutsComponent {
     });
   }
 
-  ngOnInit() {
-    this.getBrowseCategories1();
-  }
-
-  getBrowseCategories1(){
-    this.categoryService.getCategories1().subscribe((data)=>{
-     this.categories=data;
-      
-    })
-  }
-
-  trackById(index: number, item: CategoryModel): string {
-    return item.id;
-  }
+ 
   
 
 }
