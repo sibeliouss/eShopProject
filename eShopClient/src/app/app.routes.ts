@@ -10,6 +10,7 @@ import { OrdersComponent } from './features/pages/account/orders/orders.componen
 
 import { SingleproductComponent } from './features/pages/singleproduct/singleproduct.component';
 import { WishListComponent } from './features/pages/wish-list/wish-list.component';
+import { WishListeComponent } from './features/pages/account/wish-liste/wish-liste.component';
 
 
 export const routes: Routes = [
@@ -23,10 +24,12 @@ export const routes: Routes = [
         {path:"account-details", component: AccountDetailsComponent},
         {path:"address", component: AddressesComponent},
         {path:"orders", component: OrdersComponent},
+        {path:"wishlist", component:WishListeComponent}
     ]},
     
     {path: "single-product/:value",component: SingleproductComponent},
     {path: "wish-list", component: WishListComponent},
+   
    
    
 

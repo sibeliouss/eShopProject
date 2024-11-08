@@ -32,6 +32,14 @@
                     </div>
                     <div class="col">
                         <div class="border py-6" type="button">
+                            <a routerLink="wishlist" class="btn px-4 mb-2">
+                                <span class=""><img src="/public/img/heart_1.png" alt=""></span>
+                            </a>
+                            <div class="font-size-3 mb-xl-1">{{'wishList' | translate}}</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="border py-6" type="button">
                             <a class="btn px-4 mb-2">
                                 <span class="" (click)="auth.logout()"><img src="/public/img/exit.png" alt=""></span>
                             </a>

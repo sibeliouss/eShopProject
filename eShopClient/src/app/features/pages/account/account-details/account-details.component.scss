@@ -34,25 +34,7 @@
         }
         
     }
-    .buton {
-      
-       display: flex;
-       justify-content: center;
-       //border-bottom: 1px solid gray;
-       padding-top: 15px;
-       
-       .btn{
-       // border:2px solid rgba(93, 55, 102, 0.435);
-       background-color:  rgba(0, 0, 0, 0.599) ;
-       color: rgb(255, 255, 255);
-       padding: 10px;
-       }
-       .btn:hover{
-       box-shadow: 0 4px 10px 0.2rem rgba(93, 55, 102, 0.435);
-      // box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-       }
-       
-    }
+   
     .yukari {
         margin-top: -20px;  
     }
@@ -62,3 +44,22 @@
     
 
 }
+.buton {
+      
+    display: flex;
+    justify-content: center;
+    //border-bottom: 1px solid gray;
+    padding-top: 15px;
+    
+    .btn{
+    // border:2px solid rgba(93, 55, 102, 0.435);
+    background-color:  rgba(0, 0, 0, 0.599) ;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    }
+    .btn:hover{
+    box-shadow: 0 4px 10px 0.2rem rgba(93, 55, 102, 0.435);
+   // box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    
+ }

@@ -93,6 +93,9 @@
       "cancelButton": "Cancel",
       "confirmButton": "Confirm"
     },
+    "view": "View",
+    "noProducts": "There are no products in the wishlist.",
+    "detail":"Detay",
 
 
     

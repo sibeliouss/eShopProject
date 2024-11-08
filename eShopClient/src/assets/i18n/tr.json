@@ -90,13 +90,11 @@
    "remove": {
     "doYouWantToDeleted": "Silmek istiyor musunuz?",
     "cancelButton": "Vazgeç",
-    "confirmButton": "Sil"
-  },
-
- 
-  
- 
-     "login" : {
+    "confirmButton": "Sil"},
+    "view": "Görüntüle",
+    "noProducts": "Favorilerinizde herhangi bir ürün bulunmamaktadır.",
+    "detail":"Detay",
+    "login" : {
      "title": "Giriş",
      "Information": "Hesabınız yok mu?",
      "loginBtn": "Giriş Yap",
