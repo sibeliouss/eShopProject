@@ -1,0 +1,16 @@
+<div class="category-container">
+    <div *ngFor="let category of categories" class="category-card">
+      
+      <img [src]="category.iconImgUrl" alt="{{ category.name }} icon" class="category-icon" />
+      
+      <div class="category-info">
+        <h3>{{ category.name }}</h3>
+      </div>
+  
+      <div class="category-actions">
+        <button class="explore-button">Keşfet</button>
+      </div>
+      
+    </div>
+  </div>
+  

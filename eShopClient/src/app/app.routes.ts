@@ -11,6 +11,7 @@ import { OrdersComponent } from './features/pages/account/orders/orders.componen
 import { SingleproductComponent } from './features/pages/singleproduct/singleproduct.component';
 import { WishListComponent } from './features/pages/wish-list/wish-list.component';
 import { WishListeComponent } from './features/pages/account/wish-liste/wish-liste.component';
+import { CategoryComponent } from './features/pages/category/category.component';
 
 
 export const routes: Routes = [
@@ -29,6 +30,7 @@ export const routes: Routes = [
     
     {path: "single-product/:value",component: SingleproductComponent},
     {path: "wish-list", component: WishListComponent},
+    {path: "categories", component: CategoryComponent},
    
    
    
