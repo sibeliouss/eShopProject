@@ -10,7 +10,9 @@ public class ProductDto
     public string Name { get; set; }
     public string Brand { get; set; }
     public string Img { get; set; }
+    
     public Money Price { get; set; } = new(0, "TRY");
+    
     public int Quantity { get; set; }
     public bool IsActive { get; set; } = true;
     public bool IsFeatured { get; set; } = false;

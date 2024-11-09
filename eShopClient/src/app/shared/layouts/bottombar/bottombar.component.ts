@@ -5,6 +5,7 @@ import { CategoryModel } from '../../../features/models/category';
 import { Router, RouterLink } from '@angular/router';
 import { CategoryService } from '../../../features/services/category.service';
 import { HttpClient } from '@angular/common/http';
+import { ProductListService } from '../../../features/services/product-list.service';
 
 @Component({
   selector: 'app-bottombar',
@@ -17,7 +18,7 @@ export class BottombarComponent {
 
   categories: CategoryModel[] = [];
 
-  constructor(public router: Router, private categoryService: CategoryService, private http: HttpClient) {
+  constructor(public router: Router, private categoryService: CategoryService, private http: HttpClient,   public shopListProducts: ProductListService,) {
    
     
   }

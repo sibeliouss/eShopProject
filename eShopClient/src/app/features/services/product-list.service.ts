@@ -1,4 +1,4 @@
-/* import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductListService {
   response: ResponseDto<ProductModel[]> | null = null;
+
   pageNumbers: number[] = [];
   searchCategory: string = "";
   request: RequestModel = new RequestModel();
@@ -67,25 +68,20 @@ export class ProductListService {
       });
   }
 
-  setPageNumber(): void {
+  setPageNumber() {
     this.pageNumbers = [];
-    if (this.response?.TotalPageCount) {
-      for (let i = 0; i < this.response.TotalPageCount; i++) {
+    if (this.response && this.response.totalPageCount) {
+      for (let i = 0; i < this.response.totalPageCount; i++) {
         this.pageNumbers.push(i + 1);
       }
     }
   }
-
-  changeCategory(categoryId: string): void {
-    this.request.categoryId = categoryId;
-    this.getAllProducts(1);
-  }
-
-  changeSorting(): void {
+  
+   changeSorting(): void {
     this.getAllProducts();
   }
 
   changePageSize(): void {
     this.getAllProducts(1);
   }
-} */
+} 

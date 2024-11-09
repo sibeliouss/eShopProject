@@ -9,11 +9,12 @@
             <span class="text-white">{{ 'browseCategories' | translate }}</span>
           </button>
           <ul class="dropdown-menu custom-dropdown-menu">
-            <li *ngFor="let c of categories.slice(0, 8); trackBy: trackById">
-              <a class="dropdown-item d-flex align-items-center">
+            <li *ngFor="let c of categories.slice(0, 5); trackBy: trackById">
+              <a class="dropdown-item d-flex align-items-center" (click)="shopListProducts.goToShopListByCategoryId(c.id)">
                 <img [src]="c.iconImgUrl" class="category-icon me-2">
                 <span>{{ c.name }}</span>
               </a>
+             
             </li>
           </ul>
         </div>

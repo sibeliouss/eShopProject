@@ -1,9 +1,9 @@
 export interface ResponseDto<T> {
-    Data: T;
-    TotalPageCount: number;
-    PageNumber: number;
-    PageSize: number;
-    IsFirstPage: boolean;
-    IsLastPage: boolean;
-    OrderBy: string;
+    data: T;
+    totalPageCount: number;
+    pageNumber: number;
+    pageSize: number;
+    isFirstPage: boolean;
+    isLastPage: boolean;
+    orderBy: string;
   }

@@ -86,7 +86,7 @@ export class CartService {
         data.quantity = product.quantity;
         data.userId = this.auth.token!.userId;
   
-        this.http.post("https://localhost:7120/api/Carts/AddShoppingCart", data).subscribe({
+        this.http.post("https://localhost:7120/api/Carts/CreateCart", data).subscribe({
           next: (res: any) => {
             this.GetAllCarts();
             this.calcTotal();

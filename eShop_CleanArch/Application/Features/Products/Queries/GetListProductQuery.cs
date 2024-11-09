@@ -5,7 +5,7 @@ using Application.Services.Repositories;
 
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ProductDto = Application.Features.Products.Queries.ResponseDtos.ProductDto;
+
 
 namespace Application.Features.Products.Queries;
 
@@ -77,6 +77,17 @@ public class GetListProductQuery : IRequest<ResponseDto<List<ProductDto>>>
                     Img = product.Img,
                     Price = product.Price,
                     Quantity = product.Quantity,
+                    ProductDetail = new ProductDetailDto()
+                    {
+                        Id = product.ProductDetail.Id,
+                        ProductId = product.Id,
+                        Barcode = product.ProductDetail.Barcode,
+                        Description = product.ProductDetail.Description,
+                        Material = product.ProductDetail.Material,
+                        Fit = product.ProductDetail.Fit,
+                        Size = product.ProductDetail.Size,
+                        Color = product.ProductDetail.Color
+                    },
                     ProductCategories = _productCategoryService.Query()
                                             .Where(p => p.ProductId == product.Id)
                                             .Select(s => new ProductCategoryDto
