@@ -16,6 +16,7 @@ import { ProductDetailModel } from "./productDetail";
 	productCategories: ProductCategory[];
 	cartId:string;
     wishListId: string;
+	isFavorite?: boolean;
 }
 
 

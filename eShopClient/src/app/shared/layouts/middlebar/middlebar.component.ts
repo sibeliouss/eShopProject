@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WishListService } from '../../../features/services/wish-list.service';
+import { ProductListService } from '../../../features/services/product-list.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class MiddlebarComponent {
 
   responseInLocalStorage: any;  
   showWishListCollapse = false; 
+  productFilter: string = '';
 
 
   ngOnInit() {
@@ -31,14 +33,16 @@ export class MiddlebarComponent {
     
   }
 
-  constructor(public auth: AuthService, private router: Router, public wishList: WishListService) {}
+  constructor(public auth: AuthService, private router: Router, public wishList: WishListService, public shoplistProducts: ProductListService) {}
   
 
   toggleCollapse() {
     this.showWishListCollapse = !this.showWishListCollapse; 
   }
 
-  
+  onSearch(): void {
+    this.router.navigate(['/search'], { queryParams: { filter: this.productFilter } });
+  }
 
   
 }

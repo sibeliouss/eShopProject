@@ -20,6 +20,7 @@ export class ProductListService {
   products: ProductModel[] = [];
   category: CategoryModel[] = [];
 
+
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -56,6 +57,11 @@ export class ProductListService {
 }
 
 
+
+getProducts(): Observable<ProductModel[]> {
+  return this.http.get<ProductModel[]>('https://localhost:7120/api/Products/GetProducts');
+}
+
   getAllCategories(): void {
     this.http.get<CategoryModel[]>('https://localhost:7120/api/Categories/GetAllCategories')
       .subscribe({
@@ -84,4 +90,7 @@ export class ProductListService {
   changePageSize(): void {
     this.getAllProducts(1);
   }
+
+  
+  
 } 

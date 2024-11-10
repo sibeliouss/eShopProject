@@ -73,19 +73,6 @@
 
                             <!-- Müşteri Yorumları -->
                             <div class="mt-5">
-                                <h4>{{ 'customerReviews' | translate }}</h4>
-                                <div class="rating-list my-3">
-                                    <ul class="list-unstyled">
-                                        <li *ngFor="let rating of [5, 4, 3, 2, 1]" class="d-flex align-items-center">
-                                            <span class="mr-2">{{ rating }} {{ 'star' | translate }}</span>
-                                            <div class="progress w-50 bg-light" style="height: 5px;">
-                                                <div class="progress-bar bg-warning" [style.width.%]="starData['star' + rating] * 15"></div>
-                                            </div>
-                                            <span class="ml-2 text-muted">{{ starData['star' + rating] }}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
                                 <!-- Yorumlar -->
                                 <h4 class="mb-3">{{ 'reviews' | translate }}</h4>
                                 <ul class="list-unstyled">

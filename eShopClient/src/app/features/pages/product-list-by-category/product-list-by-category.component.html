@@ -18,50 +18,69 @@
                     <div>
                         <label for="pageSize" class="form-label">Show</label>
                         <select id="pageSize" class="form-select" [(ngModel)]="shopListProducts.request.pageSize" (change)="shopListProducts.changePageSize()">
-                            <option value="5">5 items</option>
-                            <option value="10">10 items</option>
+                            <option value="3">3 items</option>
+                            <option value="6">6 items</option>
+                            <option value="9">9 items</option>
                         </select>
                     </div>
 
                     <div class="btn-group">
                         <button class="btn btn-outline-secondary active" data-bs-toggle="tab" href="#grid-view">
-                            <i class="bi bi-grid"></i>
+                            <i class="fa fa-th"></i>
                         </button>
                         <button class="btn btn-outline-secondary" data-bs-toggle="tab" href="#list-view">
-                            <i class="bi bi-list"></i>
+                            <i class="fa fa-list"></i>
                         </button>
                     </div>
                 </div>
 
-
                 <div class="tab-content">
-               
-                    <div class="tab-content">
-                     <div class="tab-pane fade show active" id="grid-view" *ngIf="shopListProducts.response && shopListProducts.response.data && shopListProducts.response.data.length">
-                          <div class="row">
-                            <div class="col-md-4" *ngFor="let product of shopListProducts.response.data">
-                              <div class="card mb-4">
-                                <img [src]="product.img" class="card-img-top" alt="{{ product.name }}" style="height: 250px;">
-                                <div class="card-body">
-                                  <h5 class="card-title">{{ product.name }}</h5>
-                                  <p class="card-text">{{ product.brand }}</p>
-                                  
-                                 
-                                    <p>{{ product.productDetail.size }}</p>
-                                  
-                                  <p class="card-text">{{ product.price.value }} {{ product.price.currency }}</p>
-                                  <button class="btn btn-primary" (click)="shopping.addShoppingCart(product)">
-                                    Add to Cart
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
+                    <div class="tab-pane fade show active" id="grid-view" *ngIf="shopListProducts.response && shopListProducts.response.data && shopListProducts.response.data.length">
+                        <div class="row">
+                            <div class="col-md-4" *ngFor="let product of shopListProducts.response.data let i = index">
+                                <div class="card mb-4">
+                                    <img [src]="product.img" class="card-img-top" alt="{{ product.name }}" style="height: 250px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ product.name }}</h5>
+                                        <p class="card-text">{{ product.brand }}</p>
+                                        <p>{{ product.productDetail.size }}</p>
 
-             
+                                        <p class="card-text">{{ product.price.value }} {{ product.price.currency }}</p>
+                                        <!-- Add to Cart (If quantity is 0) -->
+                                        <a *ngIf="product.quantity === 0" (click)="shopping.addShoppingCart(product)"
+                                           class=" h-p-bg btn btn-outline-primary border-0"
+                                           data-toggle="tooltip" data-placement="right" title=""
+                                           data-original-title="ADD TO CART">
+                                       
+                                           <span class="product__add-to-cart-icon font-size-4"><i class="fa fa-cart-plus"></i></span>
+                                        </a>
+
+                                        <!-- Add to Cart (If quantity is not 0) -->
+                                        <a *ngIf="product.quantity !== 0" (click)="shopping.addShoppingCart(product)"
+                                           class=" h-p-bg btn btn-outline-primary border-0"
+                                           data-toggle="tooltip" data-placement="right" title=""
+                                           data-original-title="ADD TO CART">
+                                         
+                                           <span class="product__add-to-cart-icon font-size-4"><i class="fa fa-cart-plus"></i></span>
+                                        </a>
+
+                                        <a routerLink="/single-product/{{product.id}}" class="mr-1 h-p-bg btn btn-outline-primary border-0">
+                                            <i class="fa fa-exchange-alt"></i>
+                                        </a>
+                                       
+                                        <a (click)="wishList.addToWishList(product)"class="h-p-bg btn btn-outline-primary border-0"><i class="fa fa-heart"></i></a>
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="tab-pane fade" id="list-view" *ngIf="shopListProducts.response && shopListProducts.response.data.length">
                         <ul class="list-unstyled">
                             <li class="mb-4" *ngFor="let product of shopListProducts.response.data">
@@ -71,9 +90,30 @@
                                         <h5>{{ product.name }}</h5>
                                         <p>{{ product.brand }}</p>
                                         <p>{{ product.price.value }} {{ product.price.currency }}</p>
-                                        <button class="btn btn-primary" (click)="shopping.addShoppingCart(product)">
-                                            Add to Cart
-                                        </button>
+                                        <a *ngIf="product.quantity === 0" (click)="shopping.addShoppingCart(product)"
+                                           class="h-p-bg btn btn-outline-primary border-0"
+                                           data-toggle="tooltip" data-placement="right" title=""
+                                           data-original-title="ADD TO CART">
+                                           <span class="product__add-to-cart-icon font-size-4"><i class="fa fa-cart-plus"></i></span>
+                                        </a>
+
+                                        <a *ngIf="product.quantity !== 0" (click)="shopping.addShoppingCart(product)"
+                                           class=" h-p-bg btn btn-outline-primary border-0"
+                                           data-toggle="tooltip" data-placement="right" title=""
+                                           data-original-title="ADD TO CART">
+                                           <span class="product__add-to-cart-icon"><i class="fa fa-cart-plus"></i></span>
+                                        </a>
+
+                                        <a  routerLink="/single-product/{{product.id}}"  class="mr-1 h-p-bg btn btn-outline-primary border-0">
+                                            <i class="fa fa-exchange-alt"></i>
+                                        </a>
+
+                                        
+                                        <a (click)="wishList.addToWishList(product)"class="h-p-bg btn btn-outline-primary border-0"><i class="fa fa-heart"></i></a>
+                                        
+                                        
+                                        
+                                        
                                     </div>
                                 </div>
                             </li>

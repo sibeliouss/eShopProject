@@ -6,30 +6,31 @@
  import { CommonModule } from '@angular/common';
  import { FormsModule } from '@angular/forms';
 import { ProductListService } from '../../services/product-list.service';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
+import { ProductModel } from '../../models/product';
 
  @Component({
   selector: 'app-product-list-by-category',
   standalone: true,
-   imports: [TranslateModule,FormsModule, CommonModule],
+   imports: [TranslateModule,FormsModule, CommonModule, RouterModule],
    templateUrl: './product-list-by-category.component.html',
   styleUrl: './product-list-by-category.component.scss'
  })
  export class ProductListByCategoryComponent {
 
-   currentMonth: string = "";
+   products: ProductModel[]=[];
    constructor(
      public shopListProducts: ProductListService,
      public shopping: CartService,
      public wishList: WishListService,
     
-   ){
-     const currentDate = new Date();
-      const monthNames = [
-       "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
-       "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"
-     ];
-     const currentMonthIndex = currentDate.getMonth();
-    this.currentMonth = monthNames[currentMonthIndex];
-   } 
- }
+   ){} 
+
+
+}
+
+
+
+
+
+ 

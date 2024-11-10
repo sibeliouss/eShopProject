@@ -13,6 +13,7 @@ import { WishListComponent } from './features/pages/wish-list/wish-list.componen
 import { WishListeComponent } from './features/pages/account/wish-liste/wish-liste.component';
 import { CategoryComponent } from './features/pages/category/category.component';
 import { ProductListByCategoryComponent } from './features/pages/product-list-by-category/product-list-by-category.component';
+import { SearchComponent } from './features/pages/search/search.component';
 
 
 export const routes: Routes = [
@@ -32,8 +33,8 @@ export const routes: Routes = [
     {path: "single-product/:value",component: SingleproductComponent},
     {path: "wish-list", component: WishListComponent},
     {path: "categories", component: CategoryComponent},
-    {path: 'shop-list/:id',component: ProductListByCategoryComponent
-      },
+    {path: 'shop-list/:id',component: ProductListByCategoryComponent},
+    {path: "search", component: SearchComponent},
    
    
    
