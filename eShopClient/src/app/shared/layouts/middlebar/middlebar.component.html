@@ -60,11 +60,19 @@
         </button>
       </div>
       
-      <li class="nav-item">
-        <a class="nav-link ms-2" aria-current="page" routerLink="/" (click)="auth.logout()">
-          <img src="/public/img/shopping.png" alt="" width="35px" height="35px">
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
+        <!-- Shopping Icon for Sidebar -->
+         <li class="nav-item position-relative">
+          <a class="nav-link text-dark d-flex align-items-center" routerLink="/cart"  style="cursor: pointer;">
+            <img src="/public/img/shopping.png" width="35" height="35" alt="Icon">
+            <!-- <span *ngIf="cart.shoppingCarts.length>0"
+                  class="counter position-absolute bg-dark rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9">
+              {{ cart.shoppingCarts.length}}
+            </span> -->
+          </a>
+        </li>
+         
+      </ul>
+    </div>
+   
+  </nav>
+  

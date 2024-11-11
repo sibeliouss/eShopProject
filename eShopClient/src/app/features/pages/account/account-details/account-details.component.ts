@@ -9,7 +9,7 @@ import { UpdateUserPasswordModel } from '../../../models/UpdateCustomerPasswordM
 import { UserService } from '../../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { CartService } from '../../../services/cart.service';
+
 
 @Component({
   selector: 'app-account-details',
@@ -32,7 +32,7 @@ export class AccountDetailsComponent implements OnInit {
     public auth: AuthService,
     private swal: SwalService,
     private router: Router,
-    private cart: CartService
+  
   ) {}
 
   ngOnInit(): void {

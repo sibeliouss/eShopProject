@@ -47,7 +47,7 @@
 
                                         <p class="card-text">{{ product.price.value }} {{ product.price.currency }}</p>
                                         <!-- Add to Cart (If quantity is 0) -->
-                                        <a *ngIf="product.quantity === 0" (click)="shopping.addShoppingCart(product)"
+                                       <!--  <a *ngIf="product.quantity === 0" (click)="shopping.addShoppingCart(product)"
                                            class=" h-p-bg btn btn-outline-primary border-0"
                                            data-toggle="tooltip" data-placement="right" title=""
                                            data-original-title="ADD TO CART">
@@ -55,14 +55,14 @@
                                            <span class="product__add-to-cart-icon font-size-4"><i class="fa fa-cart-plus"></i></span>
                                         </a>
 
-                                        <!-- Add to Cart (If quantity is not 0) -->
+                                         Add to Cart (If quantity is not 0) 
                                         <a *ngIf="product.quantity !== 0" (click)="shopping.addShoppingCart(product)"
                                            class=" h-p-bg btn btn-outline-primary border-0"
                                            data-toggle="tooltip" data-placement="right" title=""
                                            data-original-title="ADD TO CART">
                                          
                                            <span class="product__add-to-cart-icon font-size-4"><i class="fa fa-cart-plus"></i></span>
-                                        </a>
+                                        </a> -->
 
                                         <a routerLink="/single-product/{{product.id}}" class="mr-1 h-p-bg btn btn-outline-primary border-0">
                                             <i class="fa fa-exchange-alt"></i>
@@ -90,7 +90,7 @@
                                         <h5>{{ product.name }}</h5>
                                         <p>{{ product.brand }}</p>
                                         <p>{{ product.price.value }} {{ product.price.currency }}</p>
-                                        <a *ngIf="product.quantity === 0" (click)="shopping.addShoppingCart(product)"
+                                       <!--  <a *ngIf="product.quantity === 0" (click)="shopping.addShoppingCart(product)"
                                            class="h-p-bg btn btn-outline-primary border-0"
                                            data-toggle="tooltip" data-placement="right" title=""
                                            data-original-title="ADD TO CART">
@@ -102,7 +102,7 @@
                                            data-toggle="tooltip" data-placement="right" title=""
                                            data-original-title="ADD TO CART">
                                            <span class="product__add-to-cart-icon"><i class="fa fa-cart-plus"></i></span>
-                                        </a>
+                                        </a> -->
 
                                         <a  routerLink="/single-product/{{product.id}}"  class="mr-1 h-p-bg btn btn-outline-primary border-0">
                                             <i class="fa fa-exchange-alt"></i>

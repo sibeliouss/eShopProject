@@ -1,24 +1,18 @@
-
-<div>
-
-    <div class="category-title mt-5 text-center ">
-        <h5>{{ 'allCategories' | translate }}</h5>
+<div class="container">
+  <div class="category-title mt-5 text-center">
+    <h5>{{ 'allCategories' | translate }}</h5>
+  </div>
+  <div class="category-container mt-3">
+    <div *ngFor="let category of categories" class="category-card">
+      <img [src]="category.iconImgUrl" alt="{{ category.name }} icon" class="category-icon" />
+      <div class="category-info">
+        <h6>{{ category.name }}</h6>
       </div>
-    <div class="category-container mt-3">
-        <div *ngFor="let category of categories" class="category-card">
-          
-          <img [src]="category.iconImgUrl" alt="{{ category.name }} icon" class="category-icon" />
-          
-          <div class="category-info">
-            <h6>{{ category.name }}</h6>
-          </div>
-      
-          <div class="category-actions">
-            <button class="explore-button">Keşfet</button>
-          </div>
-          
-        </div>
+      <div class="category-actions">
+        <button class="explore-button" (click)="shopListProducts.goToShopListByCategoryId(category.id)">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
     </div>
-      
-
+  </div>
 </div>

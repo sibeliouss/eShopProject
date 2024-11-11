@@ -1,6 +1,6 @@
  import { Component } from '@angular/core';
 
- import { CartService } from '../../services/cart.service';
+
  import { WishListService } from '../../services/wish-list.service';
  import { TranslateModule } from '@ngx-translate/core';
  import { CommonModule } from '@angular/common';
@@ -21,7 +21,7 @@ import { ProductModel } from '../../models/product';
    products: ProductModel[]=[];
    constructor(
      public shopListProducts: ProductListService,
-     public shopping: CartService,
+  
      public wishList: WishListService,
     
    ){} 

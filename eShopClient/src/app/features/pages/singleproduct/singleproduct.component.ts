@@ -12,6 +12,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { SwalService } from '../../../core/services/swal.service';
 import { WishListService } from '../../services/wish-list.service';
 
+
 @Component({
   selector: 'app-singleproduct',
   standalone: true,
@@ -22,6 +23,7 @@ import { WishListService } from '../../services/wish-list.service';
 export class SingleproductComponent {
 
   product: ProductModel | null= null;
+  products: ProductModel[]=[];
   reviews: ReviewModel[] = [];
   requestCreateReview: CreateReviewModel =new CreateReviewModel;
   comment: string = "";
@@ -39,7 +41,8 @@ export class SingleproductComponent {
     public auth: AuthService,
     private swal: SwalService,
     private translate: TranslateService,
-    public wishList: WishListService
+    public wishList: WishListService,
+    
   ) {
     if (localStorage.getItem('response')) {
       this.isResponse = true;
@@ -178,6 +181,10 @@ export class SingleproductComponent {
   }
 
   
-
+/*   addToCart(product: ProductModel): void {
+    if (product) {
+        this.shopping.addShoppingCart(product);
+    }
+} */
   
 }

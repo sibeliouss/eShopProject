@@ -9,10 +9,12 @@ import { WishListService } from '../../../features/services/wish-list.service';
 import { ProductListService } from '../../../features/services/product-list.service';
 
 
+
+
 @Component({
   selector: 'app-middlebar',
   standalone: true,
-  imports: [RouterModule, TranslateModule,CommonModule, FormsModule],
+  imports: [RouterModule, TranslateModule, CommonModule, FormsModule],
   templateUrl: './middlebar.component.html',
   styleUrl: './middlebar.component.scss'
 })
@@ -43,6 +45,8 @@ export class MiddlebarComponent {
   onSearch(): void {
     this.router.navigate(['/search'], { queryParams: { filter: this.productFilter } });
   }
+
+ 
 
   
 }

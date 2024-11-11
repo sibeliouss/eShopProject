@@ -37,7 +37,7 @@ public class CartsController : ControllerBase
     
     
     [HttpGet("{productId:guid}/{quantity:int}")]
-    public async Task<IActionResult> CheckProductQuantity(Guid productId, int quantity)
+    public async Task<IActionResult> CheckProductQuantityIsAvailable(Guid productId, int quantity)
     {
         var query = new GetCheckProductQuantityIsAvailableQuery
         {
@@ -76,7 +76,7 @@ public class CartsController : ControllerBase
     }
     
     [HttpPut("{productId:guid}/{quantity:int}")]
-    public async Task<IActionResult> ChangeProductQuantityInBasket([FromBody] ChangeProductQuantityInCartCommand command)
+    public async Task<IActionResult> ChangeProductQuantityInCart([FromBody] ChangeProductQuantityInCartCommand command)
     {
         try
         {

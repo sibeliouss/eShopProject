@@ -14,6 +14,7 @@ import { WishListeComponent } from './features/pages/account/wish-liste/wish-lis
 import { CategoryComponent } from './features/pages/category/category.component';
 import { ProductListByCategoryComponent } from './features/pages/product-list-by-category/product-list-by-category.component';
 import { SearchComponent } from './features/pages/search/search.component';
+import { CartComponent } from './features/pages/cart/cart.component';
 
 
 export const routes: Routes = [
@@ -35,6 +36,7 @@ export const routes: Routes = [
     {path: "categories", component: CategoryComponent},
     {path: 'shop-list/:id',component: ProductListByCategoryComponent},
     {path: "search", component: SearchComponent},
+    {path: "cart", component: CartComponent},
    
    
    
