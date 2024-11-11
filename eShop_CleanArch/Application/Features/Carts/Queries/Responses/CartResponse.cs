@@ -6,7 +6,6 @@ namespace Application.Features.Baskets.Queries.Responses;
 public class CartResponse
 {
     public Guid Id { get; set; }
-    public Guid ProductDetailId { get; set; }
     public ProductDetail? ProductDetail { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Brand { get; set; } = string.Empty;

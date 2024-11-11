@@ -101,6 +101,24 @@
      "gotoRegisterBtn": "Kayıt Ol",
      "rememberMe": "Beni Hatırla"
       },
+     
+  "quantity": "Adet",
+  "total": "Toplam",
+  "cartTotals": "Sepet Toplamları",
+  "shipping": "Kargo",
+  "shippingFee": "Kargo Ücreti",
+  "freeShipping": "Ücretsiz Kargo",
+  "flatRateShipping": "Düz Ücretli Kargo",
+  "currency-symbol": "TL",
+  "orderSummary": "Sipariş Özeti",
+  "noItemsInCart": "Sepetinizde Ürün Yok",
+  "pleaseAddItemsToCart": "Lütfen sepete ürün ekleyin",
+  "color": "Renk",
+  "fit": "Kesim",
+  "size": "Beden",
+  "material": "Malzeme",
+  "Your comment...": "Yorumunuzu yazın...",
+  "productDetails": "Ürün Detayları",
  
       "register":{
          "title": "Kayıt",

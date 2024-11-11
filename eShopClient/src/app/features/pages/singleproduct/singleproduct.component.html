@@ -38,30 +38,26 @@
 
                                         <!-- Sepete Ekle Butonu -->
                                         <form class="cart d-md-flex align-items-center">
-                                            <div class="quantity mb-4 mb-md-0 d-flex align-items-center">
-                                                <input type="number" class="form-control text-center border border-secondary"
-                                                       step="1" min="1" max="100" value="1">
-                                            </div>
-                                          <!--   <button type="button" class="btn btn-dark rounded-0 ml-md-4" (click)="addToCart(product!)">
-                                                Add to cart
-                                            </button> -->
-                                            
+                    
+                                            <button type="button" class="btn btn-dark rounded-0 ml-md-4" (click)="addToCart(product!)">
+                                                {{ 'addToCart' | translate }}
+                                            </button> 
                                         </form>
 
                                         <!-- Wishlist ve Paylaş Butonları -->
                                         <div class="mt-4">
                                             <a (click)="wishList.addToWishList(product!)" class="text-muted mr-4">
-                                                <i class="bi bi-heart"></i> {{'addToWishlist' | translate}}
+                                                <i class="bi bi-heart"></i> 
                                             </a>
-                                            <a href="#" class="text-muted">
-                                                <i class="bi bi-share"></i> {{'share' | translate}}
+                                            <a  class="text-muted">
+                                                <i class="bi bi-share"></i> 
                                             </a>
                                         </div>
                                     </div>
 
                                     <!-- Ürün Detayları Listesi -->
                                     <div class="my-4">
-                                        <h5>{{'productDetails' | translate}}</h5>
+                                        <h5>{{ 'productDetails' | translate }}</h5>
                                         <ul class="list-unstyled text-muted">
                                             <li>{{'color' | translate}}: {{ product?.productDetail?.color }}</li>
                                             <li>{{ 'fit' | translate }}: {{ product?.productDetail?.fit }}</li>
@@ -91,15 +87,6 @@
                                     </ng-container>
                                 </ul>
 
-                                <!-- Yorum Ekle -->
-                               <!--  <div *ngIf="isResponse && allowToComment" class="mt-5">
-                                    <h4>{{ 'writeAReview' | translate }}</h4>
-                                    <div class="form-group">
-                                        <textarea [(ngModel)]="comment" class="form-control" rows="4" placeholder="{{ 'Your comment...' | translate }}"></textarea>
-                                    </div>
-                                    <button (click)="createReview()" class="btn btn-dark mt-2">{{ 'submit' | translate }}</button>
-                                </div> -->
-
                                 <div *ngIf="isResponse && allowToComment" class mt-5>
                                     <h4 class="font-size-3 mb-4">{{ 'writeAReview' | translate }}</h4>
                                     <div class="d-flex align-items-center mb-6">
@@ -110,7 +97,6 @@
                                                        (click)="setRating(star)"></small>
                                             </ng-container>
                                         </div>
-                                        
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="inputCompanyName" class="form-label text-dark h6 mb-3">
@@ -118,11 +104,9 @@
                                         </label>
                                         <input [(ngModel)]="title" type="text" class="form-control rounded-0 px-4" name="title" required>
                                     </div>
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <textarea [(ngModel)]="comment" class="form-control" rows="4" placeholder="{{ 'Your comment...' | translate }}"></textarea>
                                     </div>
-
-                                   
 
                                     <button (click)="createReview()" class="btn btn-dark mt-2">{{ 'submit' | translate }}</button>
                                 </div>

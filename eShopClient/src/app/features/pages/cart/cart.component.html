@@ -1,0 +1,133 @@
+<section *ngIf="shopping.shoppingCarts.length > 0; else noItems">
+    <div class="container mt-5">
+      <!-- Başlık -->
+      <header class="mb-4 text-center">
+        <h1>{{'yourCart' | translate}}: {{shopping.shoppingCarts.length}} {{'items' | translate}}</h1>
+      </header>
+  
+      <!-- Cart Items -->
+      <div class="row">
+        <div class="col-lg-8">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>{{'product' | translate}}</th>
+                <th>{{'price' | translate}}</th>
+                <th>{{'quantity' | translate}}</th>
+                <th>{{'total' | translate}}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of shopping.shoppingCarts; let i = index; trackBy: trackByFn">
+                <td>
+                  <div class="d-flex">
+                    <img [src]="s.img" class="img-fluid" style="max-width: 80px; height: auto;" alt="Product Image">
+                    <div class="ml-3">
+                      <p>{{s.name}}</p>
+                      <small class="text-muted">{{s.brand}}</small>
+                      <p class="text-muted">{{s.productDetail.color}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>{{s.price.value}} <span class="currency-symbol">{{s.price.currency}}</span></td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <button (click)="shopping.changeProductQuantityInCart(s.id, s.quantity - 1)" class="btn btn-outline-secondary btn-sm">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="mx-2">{{s.quantity}}</span>
+                    <button (click)="shopping.changeProductQuantityInCart(s.id, s.quantity + 1)" class="btn btn-outline-secondary btn-sm">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </td>
+                <td>{{s.price.value * s.quantity}} <span class="currency-symbol">{{s.price.currency}}</span></td>
+                <td>
+                  <button (click)="shopping.removeByIndex(i)" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  
+        <!-- Sidebar with Cart Totals and Shipping -->
+        <div class="col-lg-4">
+          <div class="accordion" id="cartAccordion">
+            <!-- Cart Totals -->
+            <div class="card mb-3">
+              <div class="card-header" id="cartTotalsHeading">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#cartTotals" aria-expanded="true" aria-controls="cartTotals">
+                    {{'cartTotals' | translate}}
+                  </button>
+                </h5>
+              </div>
+              <div id="cartTotals" class="collapse show" aria-labelledby="cartTotalsHeading" data-bs-parent="#cartAccordion">
+                <div class="card-body">
+                  <table class="table">
+                    <tbody>
+                      <tr *ngFor="let s of shopping.shoppingCarts">
+                        <td>{{s.brand}} <strong>{{s.quantity}}</strong></td>
+                        <td>{{s.price.value * s.quantity}} {{s.price.currency}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Shipping Method -->
+            <div class="card mb-3">
+              <div class="card-header" id="shippingHeading">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#shippingCollapse" aria-expanded="true" aria-controls="shippingCollapse">
+                    {{'shipping' | translate}}
+                  </button>
+                </h5>
+              </div>
+              <div id="shippingCollapse" class="collapse show" aria-labelledby="shippingHeading" data-bs-parent="#cartAccordion">
+                <div class="card-body">
+                  <!-- Free Shipping for orders over 500 TL -->
+                  <div *ngIf="shopping.getTotal() < 500" class="bg-light p-2">
+                    <span>{{'shippingFee' | translate}}: +50 TL</span>
+                  </div>
+                  <div *ngIf="shopping.getTotal() >= 500" class="bg-success text-white p-2">
+                    <span>{{'freeShipping' | translate}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Total Amount -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <table class="table">
+                  <tbody>
+                    <tr class="order-total">
+                      <th>{{'total' | translate}}</th>
+                      <td>
+                        <strong>
+                          <span>{{shopping.shippingAndCartTotal()}} <span class="currency-symbol">{{'TL'}}</span></span>
+                        </strong>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <ng-template #noItems>
+    <div class="container mt-5 text-center">
+      <h3>{{'noItemsInCart' | translate}}</h3>
+      <p>{{'pleaseAddItemsToCart' | translate}}</p>
+    </div>
+  </ng-template>
+  

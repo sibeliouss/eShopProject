@@ -96,12 +96,27 @@
     "view": "View",
     "noProducts": "There are no products in the wishlist.",
     "detail":"Detay",
-
-
     
+    "quantity": "Quantity",
+    "total": "Total",
+    "cartTotals": "Cart Totals",
+    "shipping": "Shipping",
+    "shippingFee": "Shipping Fee",
+    "freeShipping": "Free Shipping",
+    "flatRateShipping": "Flat Rate Shipping",
+    "currency-symbol": "TL",
+    "orderSummary": "Order Summary",
+    "noItemsInCart": "No Items in Your Cart",
+    "pleaseAddItemsToCart": "Please add items to your cart",
    
-  
-      "login": {
+    "productDetails": "Product Details",
+    "color": "Color",
+    "fit": "Fit",
+    "size": "Size",
+    "material": "Material",
+    "Your comment...": "Your comment...",
+    
+  "login": {
           "title": "Log In",
           "Information": "Don't you have an account?",
           "loginBtn": "Log In",

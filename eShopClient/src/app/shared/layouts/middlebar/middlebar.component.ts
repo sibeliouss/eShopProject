@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WishListService } from '../../../features/services/wish-list.service';
 import { ProductListService } from '../../../features/services/product-list.service';
+import { ShoppingCartService } from '../../../features/services/shopping-cart.service';
 
 
 
@@ -35,7 +36,7 @@ export class MiddlebarComponent {
     
   }
 
-  constructor(public auth: AuthService, private router: Router, public wishList: WishListService, public shoplistProducts: ProductListService) {}
+  constructor(public auth: AuthService, private router: Router, public wishList: WishListService, public shoplistProducts: ProductListService, public shoppingCart: ShoppingCartService) {}
   
 
   toggleCollapse() {

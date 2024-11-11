@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { SwalService } from '../../../core/services/swal.service';
 import { WishListService } from '../../services/wish-list.service';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class SingleproductComponent {
     private swal: SwalService,
     private translate: TranslateService,
     public wishList: WishListService,
+    public shopping: ShoppingCartService
     
   ) {
     if (localStorage.getItem('response')) {
@@ -181,10 +183,10 @@ export class SingleproductComponent {
   }
 
   
-/*   addToCart(product: ProductModel): void {
+   addToCart(product: ProductModel): void {
     if (product) {
         this.shopping.addShoppingCart(product);
     }
-} */
+}
   
 }

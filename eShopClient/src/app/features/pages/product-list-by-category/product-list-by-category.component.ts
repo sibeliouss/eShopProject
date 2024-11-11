@@ -8,6 +8,7 @@
 import { ProductListService } from '../../services/product-list.service';
 import { RouterLink, RouterModule } from '@angular/router';
 import { ProductModel } from '../../models/product';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
  @Component({
   selector: 'app-product-list-by-category',
@@ -22,7 +23,7 @@ import { ProductModel } from '../../models/product';
    constructor(
      public shopListProducts: ProductListService,
   
-     public wishList: WishListService,
+     public wishList: WishListService, public shopping: ShoppingCartService
     
    ){} 
 

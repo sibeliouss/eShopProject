@@ -22,11 +22,10 @@ public class CartsController : ControllerBase
     {
         _mediator = mediator;
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateCart([FromBody] ShoppingCartDto shoppingCartDto)
     {
-
         var command = new CreateShoppingCartCommand
         {
             ShoppingCartDto = shoppingCartDto
@@ -34,8 +33,7 @@ public class CartsController : ControllerBase
         var result = await _mediator.Send(command);
         return CreatedAtAction(nameof(CreateCart), new { id = result.ProductId }, result);
     }
-    
-    
+
     [HttpGet("{productId:guid}/{quantity:int}")]
     public async Task<IActionResult> CheckProductQuantityIsAvailable(Guid productId, int quantity)
     {
@@ -47,7 +45,7 @@ public class CartsController : ControllerBase
         var result = await _mediator.Send(query);
         return Ok(result);
     }
-    
+
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> DeleteCart(Guid id)
     {
@@ -55,7 +53,7 @@ public class CartsController : ControllerBase
         await _mediator.Send(command);
         return NoContent();
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Payment([FromBody] PaymentDto paymentDto)
     {
@@ -74,8 +72,8 @@ public class CartsController : ControllerBase
             return BadRequest(new { Message = ex.Message });
         }
     }
-    
-    [HttpPut("{productId:guid}/{quantity:int}")]
+
+    [HttpPost]
     public async Task<IActionResult> ChangeProductQuantityInCart([FromBody] ChangeProductQuantityInCartCommand command)
     {
         try
@@ -88,7 +86,7 @@ public class CartsController : ControllerBase
             return BadRequest(ex.Message); 
         }
     }
-    
+
     [HttpGet("{userId:guid}")]
     public async Task<ActionResult<List<CartResponse>>> GetAllCart(Guid userId)
     {
