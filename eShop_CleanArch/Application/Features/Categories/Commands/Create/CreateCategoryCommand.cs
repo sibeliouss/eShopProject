@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Application.Features.Categories.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
@@ -15,7 +16,8 @@ public class CreateCategoryCommand : IRequest<CreatedCategoryResponse>
     public string Name { get; set; }
     public string IconImgUrl { get; set; }
     public bool IsActive { get; set; }
-    public bool IsDeleted { get; set; } = false;
+    [DefaultValue(false)] 
+    public bool IsDeleted { get; set; } = false;  
 
     public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CreatedCategoryResponse>
     {
@@ -39,6 +41,8 @@ public class CreateCategoryCommand : IRequest<CreatedCategoryResponse>
                 throw new ValidationException(validationResult.Errors);
             }
 
+            //request.IsDeleted = false; 
+            
             await _categoryBusinessRules.CategoryNameAlreadyExists(request.Name);
 
             var category= _mapper.Map<Category>(request);

@@ -17,6 +17,7 @@ import { SearchComponent } from './features/pages/search/search.component';
 import { CartComponent } from './features/pages/cart/cart.component';
 
 
+
 export const routes: Routes = [
    
     { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -37,6 +38,7 @@ export const routes: Routes = [
     {path: 'shop-list/:id',component: ProductListByCategoryComponent},
     {path: "search", component: SearchComponent},
     {path: "cart", component: CartComponent},
+   
    
    
    

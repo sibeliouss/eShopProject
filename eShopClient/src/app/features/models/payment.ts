@@ -40,6 +40,6 @@ export interface PaymentModel {
 	address: AddressModel;
 	billingAddress: AddressModel;
 	paymentCard: PaymentCard;
-	shippingAndBasketTotal: number;
+	shippingAndCartTotal: number;
 	currency: string;
 }

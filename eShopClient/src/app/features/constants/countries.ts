@@ -1,3 +1,1 @@
-export const Countries: string[] = [
-    "Türkiye"
-]
+export const Countries: string = "Türkiye";

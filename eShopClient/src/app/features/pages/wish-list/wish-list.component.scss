@@ -75,8 +75,17 @@
                       }
                     }
       
-                    .product-remove {
-                      text-align: center;
+                    .single {
+                      color:#0b0b0b;
+                      font-size: 1.3rem;
+                      transition: color 0.2s;
+                    }
+                    .single:hover{
+
+                     background-color:  rgba(93, 55, 102, 0.435);
+                     border-radius: 50%;
+                     box-shadow: 0 4px 10px 0.2rem rgba(93, 55, 102, 0.435);
+                    }
                     
       
                       .remove {
@@ -88,7 +97,7 @@
                       .remove:hover{
                         color: #e3251ed1;
                       }
-                    }
+                    
               }
             }
           }

@@ -6,6 +6,6 @@ public class CreatedCategoryResponse
     public string Name { get; set; }
     public string IconImgUrl { get; set; }
     public bool IsActive { get; set; } = true;
-    public bool IsDeleted { get; set; } = false;
+    public bool IsDeleted { get; set; } 
 
 }

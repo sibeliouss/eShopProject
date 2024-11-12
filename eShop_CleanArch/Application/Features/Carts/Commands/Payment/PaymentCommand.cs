@@ -39,7 +39,7 @@ public class PaymentCommandHandler : IRequestHandler<PaymentCommand>
         var paymentRequest = request.PaymentDto; 
         var currency = ""; 
         double total = 0; 
-        var shippingAndCartTotal = Convert.ToDouble(paymentRequest.ShippingAndBasketTotal); // Sepet ve kargo toplamı
+        var shippingAndCartTotal = Convert.ToDouble(paymentRequest.ShippingAndCartTotal); // Sepet ve kargo toplamı
         
         foreach (var item in paymentRequest.Products)
         {

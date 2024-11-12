@@ -2,10 +2,10 @@ namespace Domain.Enums;
 
 public enum OrderStatusEnum
 {
-    OnayBekliyor = 0,
-    Hazırlanıyor = 1,
-    Taşımada = 2,
-    TeslimEdildi = 3,
-    Reddedildi = 4,
-    IadeEdildi = 5
+    AwaitingApproval = 0, //Onay bekliyor
+    BeingPrepared = 1, //Hazırlanıyor
+    InTransit = 2, 
+    Delivered = 3, 
+    Rejected = 4, 
+    Returned = 5 
 }

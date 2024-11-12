@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 
@@ -9,7 +9,7 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [FormsModule, TranslateModule, CommonModule,],
+  imports: [FormsModule, TranslateModule, CommonModule,RouterModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })

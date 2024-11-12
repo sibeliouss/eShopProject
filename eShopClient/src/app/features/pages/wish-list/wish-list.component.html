@@ -17,6 +17,7 @@
                       <tr class="text1">
                         <th class="product-name p-3 mr-5">{{ 'product' | translate }}</th>
                         <th class="product-price p-3">{{ 'price' | translate }}</th>
+                        <th class="product-single p-3">&nbsp;</th>
                         <th class="product-remove p-3">&nbsp;</th>
                       </tr>
                     </thead>
@@ -36,6 +37,11 @@
                         <td class="product-price align-middle p-2 ">
                           <span class="font-weight-bold">{{ w.price.value }}</span>
                           <span class="text-dark">  {{ w.price.currency }}</span>
+                        </td>
+                        <td class="product-single align-middle text-center p-3">
+                          <a  routerLink="/single-product/{{w.id}}" class="single" aria-label="Single">
+                            <i class="bi bi-bag-heart"></i>
+                          </a>
                         </td>
                         <td class="product-remove align-middle text-center p-3">
                           <a (click)="wishList.DeleteWishList(i)" class="remove" aria-label="Remove">

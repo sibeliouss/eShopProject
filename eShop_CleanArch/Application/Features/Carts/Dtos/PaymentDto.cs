@@ -10,5 +10,5 @@ public record PaymentDto(
     Iyzipay.Model.Address Address,
     Iyzipay.Model.Address BillingAddress,
     PaymentCard PaymentCard,
-    decimal ShippingAndBasketTotal,
+    decimal ShippingAndCartTotal,
     string Currency );

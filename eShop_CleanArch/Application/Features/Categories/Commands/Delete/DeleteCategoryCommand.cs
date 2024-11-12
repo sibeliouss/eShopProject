@@ -22,7 +22,6 @@ public class DeleteCategoryCommand : IRequest
             {
                 throw new Exception("Böyle bir kategori mevcut değil.");
             }
-
             category.IsDeleted = true;
 
             await _categoryRepository.DeleteAsync(category);
