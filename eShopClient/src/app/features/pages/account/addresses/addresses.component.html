@@ -1,357 +1,357 @@
 <div class="container">
-    <div class="row">
-        <div class="col-10">
-            <div class="pt-5">
-                <h6 class="baslik">{{'addresses' |
-                    translate}}</h6>
-               
-               <div class="row row-cols-1 row-cols-2">
-                <!-- Shipping Address -->
-                <div class="col-6">
-                  <!-- Shipping address boş ise -->
-                  <div *ngIf="!shippingAddress">
-                    <div *ngIf="!isaddShippingAddress">
-                      <div class="mb-6 mb-md-0">
-                        <div class="d-flex pt-3">
-                          <button type="submit" (click)="addShippingAddress()"
-                            class="btn">
-                            {{ 'addShippingAddress' | translate }}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div *ngIf="isaddShippingAddress">
-                      <div class="mb-6 mb-md-0">
-                        <form #shippingAddressForm="ngForm" autocomplete="off">
-                          <h3 class="edit mb-4">{{ 'addShippingAddress' | translate }}</h3>
-                          <div class="form-group woocommerce-shipping-fields__field-wrapper row">
-                            <!-- Country -->
-                            <p class="col-lg-6  form-row form-row-wide address-field update_totals_on_change"
-                              id="shipping_country_field">
-                              <label for="shipping_country" class="form-label">{{ 'country' | translate }}
-                              *</label>
-                              <select [(ngModel)]="country" name="shipping_country" id="shipping_country"
-                                class="form-control" autocomplete="country"
-                                tabindex="-1" aria-hidden="true" required>
-                                <option *ngFor="let c of countries">{{ c }}</option>
-                              </select>
-                            </p>
-              
-                            <!-- City -->
-                            <p class="col-lg-6 form-row form-row-wide address-field"
-                              id="shipping_city_field">
-                              <label for="shipping_city" class="form-label">{{ 'city' | translate }} *</label>
-                              <select [(ngModel)]="city" name="shipping_city" id="shipping_city"
-                                class="form-control " autocomplete="city"
-                                tabindex="-1" aria-hidden="true" required>
-                                <option *ngFor="let c of cities">{{ c }}</option>
-                              </select>
-                            </p>
-              
-                            <!-- Postcode -->
-                            <p class="col-6 form-row form-row-wide address-field"
-                              id="shipping_postcode_field">
-                              <label for="shipping_postcode" class="form-label">{{ 'postcode' | translate }}</label>
-                              <input [(ngModel)]="zipCode" type="text" class="input-text form-control" name="shipping_postcode"
-                                id="shipping_postcode" value="" autocomplete="off">
-                            </p>
-              
-                            <!-- Contact Name -->
-                            <p class="col-6 form-row form-row-wide address-field"
-                              id="shipping_address_contactName_field">
-                              <label for="shipping_contactName" class="form-label">{{ 'pickupPerson' | translate }}
-                              *</label>
-                              <input [(ngModel)]="contactName" type="text" class="input-text form-control"
-                                name="shipping_address_contactName" id="shipping_address_contactName" value="" autocomplete="off"
-                                required>
-                            </p>
-              
-                            <!-- Description -->
-                            <p class="col-12 form-row form-row-wide address-field"
-                              id="shipping_address_description_field">
-                              <label for="shipping_description" class="form-label">{{ 'addressDetails' | translate }}
-                                <abbr class="required" title="required">*</abbr></label>
-                              <input [(ngModel)]="description" type="text" class="input-text form-control"
-                                name="shipping_address_description" id="shipping_address_description" value="" autocomplete="off"
-                                required>
-                            </p>
-                          </div>
-                          <div class="d-flex">
-                            <button type="submit" (click)="addButton()"
-                              class="btn btn-dark width-150">
-                              {{ 'add' | translate }}
-                            </button>
-                          </div>
-                        </form>
+  <div class="row">
+      <div class="col-10">
+          <div class="pt-5">
+              <h6 class="baslik">{{'addresses' |
+                  translate}}</h6>
+             
+             <div class="row row-cols-1 row-cols-2">
+              <!-- Shipping Address -->
+              <div class="col-6">
+                <!-- Shipping address boş ise -->
+                <div *ngIf="!shippingAddress">
+                  <div *ngIf="!isaddShippingAddress">
+                    <div class="mb-6 mb-md-0">
+                      <div class="d-flex pt-3">
+                        <button type="submit" (click)="addShippingAddress()"
+                          class="btn">
+                          {{ 'addShippingAddress' | translate }}
+                        </button>
                       </div>
                     </div>
                   </div>
-              
-                  <!-- Eğer shipping address varsa -->
-                  <div *ngIf="shippingAddress">
-                    <div *ngIf="!isShippingAddress">
-                      <div class="mb-6 mb-md-0 pt-4">
-                        <h6 class="edit mb-3">{{ 'shippingAddress' | translate }}</h6>
-                        <address class="d-flex flex-column mb-4">
-                          <span class="text">{{ contactName }}</span>
-                          <span class="text">{{ description }}</span>
-                          <span class="text">{{ city }} {{ zipCode }}</span>
-                          <span class="text">{{ country }}</span>
-                        </address>
+                  <div *ngIf="isaddShippingAddress">
+                    <div class="mb-6 mb-md-0">
+                      <form #shippingAddressForm="ngForm" autocomplete="off">
+                        <h3 class="edit mb-4">{{ 'addShippingAddress' | translate }}</h3>
+                        <div class="form-group woocommerce-shipping-fields__field-wrapper row">
+                          <!-- Country -->
+                          <p class="col-lg-6  form-row form-row-wide address-field update_totals_on_change"
+                            id="shipping_country_field">
+                            <label for="shipping_country" class="form-label">{{ 'country' | translate }}
+                            *</label>
+                            <select [(ngModel)]="country" name="shipping_country" id="shipping_country"
+                              class="form-control" autocomplete="country"
+                              tabindex="-1" aria-hidden="true" required>
+                              <option *ngFor="let c of countries">{{ c }}</option>
+                            </select>
+                          </p>
+            
+                          <!-- City -->
+                          <p class="col-lg-6 form-row form-row-wide address-field"
+                            id="shipping_city_field">
+                            <label for="shipping_city" class="form-label">{{ 'city' | translate }} *</label>
+                            <select [(ngModel)]="city" name="shipping_city" id="shipping_city"
+                              class="form-control " autocomplete="city"
+                              tabindex="-1" aria-hidden="true" required>
+                              <option *ngFor="let c of cities">{{ c }}</option>
+                            </select>
+                          </p>
+            
+                          <!-- Postcode -->
+                          <p class="col-6 form-row form-row-wide address-field"
+                            id="shipping_postcode_field">
+                            <label for="shipping_postcode" class="form-label">{{ 'postcode' | translate }}</label>
+                            <input [(ngModel)]="zipCode" type="text" class="input-text form-control" name="shipping_postcode"
+                              id="shipping_postcode" value="" autocomplete="off">
+                          </p>
+            
+                          <!-- Contact Name -->
+                          <p class="col-6 form-row form-row-wide address-field"
+                            id="shipping_address_contactName_field">
+                            <label for="shipping_contactName" class="form-label">{{ 'pickupPerson' | translate }}
+                            *</label>
+                            <input [(ngModel)]="contactName" type="text" class="input-text form-control"
+                              name="shipping_address_contactName" id="shipping_address_contactName" value="" autocomplete="off"
+                              required>
+                          </p>
+            
+                          <!-- Description -->
+                          <p class="col-12 form-row form-row-wide address-field"
+                            id="shipping_address_description_field">
+                            <label for="shipping_description" class="form-label">{{ 'addressDetails' | translate }}
+                              <abbr class="required" title="required">*</abbr></label>
+                            <input [(ngModel)]="description" type="text" class="input-text form-control"
+                              name="shipping_address_description" id="shipping_address_description" value="" autocomplete="off"
+                              required>
+                          </p>
+                        </div>
                         <div class="d-flex">
-                          <div class="d-flex">
-                            <button type="submit" (click)="editShippingAddress()" class="btn btn-dark width-150" style="margin-right: 10px;">
-                              {{ 'edit' | translate }}
-                            </button>
-                            <button type="button" (click)="deleteAddress(shippingAddress.id)" class="btn btn-dark width-150">
-                              {{ 'delete' | translate }}
-                            </button>
-                          </div>
-                         </div>
-                      </div>
-                    </div>
-                    <div *ngIf="isShippingAddress">
-                      <div class="mb-6 mb-md-0">
-                        <form #shippingAddressForm="ngForm" autocomplete="off">
-                          <h3 class="mb-4 pt-3 edit">{{ 'shippingAddress' | translate }}</h3>
-                          <div class="form-group row">
-                            <!-- Country -->
-                            <p class="col-lg-6 address-field update_totals_on_change"
-                              id="shipping_country_field">
-                              <label for="shipping_country" class="form-label">{{ 'country' | translate }}
-                                *</label>
-                              <select [(ngModel)]="country" name="shipping_country" id="shipping_country"
-                                class="form-control" autocomplete="country"
-                                tabindex="-1" aria-hidden="true" required>
-                                <option *ngFor="let c of countries">{{ c }}</option>
-                              </select>
-                            </p>
-              
-                            <!-- City -->
-                            <p class="col-lg-6  form-row form-row-wide address-field"
-                              id="shipping_city_field">
-                              <label for="shipping_city" class="form-label">{{ 'city' | translate }}
-                              *</label>
-                              <select [(ngModel)]="city" name="shipping_city" id="shipping_city"
-                                class="form-control" autocomplete="city"
-                                tabindex="-1" aria-hidden="true" required>
-                                <option *ngFor="let c of cities">{{ c }}</option>
-                              </select>
-                            </p>
-              
-                            <!-- Postcode -->
-                            <p class="col-6 address-field"
-                              id="shipping_postcode_field">
-                              <label for="shipping_postcode" class="form-label">{{ 'postcode' | translate }}</label>
-                              <input [(ngModel)]="zipCode" type="text" class="input-text form-control" name="shipping_postcode"
-                                id="shipping_postcode" value="" autocomplete="off">
-                            </p>
-              
-                            <!-- Contact Name -->
-                            <p class="col-6 address-field"
-                              id="shipping_address_contactName_field">
-                              <label for="shipping_contactName" class="form-label">{{ 'pickupPerson' | translate }}
-                               *</label>
-                              <input [(ngModel)]="contactName" type="text" class="input-text form-control"
-                                name="shipping_address_contactName" id="shipping_address_contactName" value="" autocomplete="off"
-                                required>
-                            </p>
-              
-                            <!-- Description -->
-                            <p class="col-12 address-field "
-                              id="shipping_address_description_field">
-                              <label for="shipping_description" class="form-label">{{ 'addressDetails' | translate }}
-                                <abbr class="required" title="required">*</abbr></label>
-                              <input [(ngModel)]="description" type="text" class="input-text form-control"
-                                name="shipping_address_description" id="shipping_address_description" value="" autocomplete="off"
-                                required>
-                            </p>
-                          </div>
-                          <div class="d-flex">
-                            <button type="submit" (click)="updateButton()"
-                              class="btn btn-dark width-150">
-                              {{ 'edit' | translate }}
-                            </button>
-                          </div>
-                        </form>
-                      </div>
+                          <button type="submit" (click)="addButton()"
+                            class="btn btn-dark width-150">
+                            {{ 'add' | translate }}
+                          </button>
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </div>
-                <!-- Billing Address -->
-                <div class="col-6">
-                  <!-- Shipping address boş ise -->
-                  <div *ngIf="!billingAddress">
-                    <div *ngIf="!isaddBillingAddress">
-                      <div class="mb-6 mb-md-0">
-                        <div class="d-flex pt-3">
-                          <button type="submit" (click)="addBillingAddress()"
-                            class="btn btn-dark width-250">
-                            {{ 'addBillingAddress' | translate }}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div *ngIf="isaddBillingAddress">
-                      <div class="mb-6">
-                        <form #billingAddressForm="ngForm" autocomplete="off">
-                          <h3 class="mb-4 edit">{{ 'addBillingAddress' | translate }}</h3>
-                          <div class="form-group row">
-                            <!-- Country -->
-                            <p class="col-6  address-field update_totals_on_change"
-                              id="billing_country_field" data-priority="40">
-                              <label for="billing_country" class="form-label">{{ 'country' | translate }}
-                              *</label>
-                              <select [(ngModel)]="billingCountry" name="billing_country" id="billing_country"
-                                class="form-control" autocomplete="country"
-                                tabindex="-1" aria-hidden="true" required>
-                                <option *ngFor="let c of countries">{{ c }}</option>
-                              </select>
-                            </p>
-              
-                            <!-- City -->
-                            <p class="col-6 address-field"
-                              id="billing_city_field">
-                              <label for="billing_city" class="form-label">{{ 'city' | translate }}
-                              *</label>
-                              <select [(ngModel)]="billingCity" name="billing_city" id="billing_city"
-                                class="form-control" autocomplete="city"
-                                tabindex="-1" aria-hidden="true" required>
-                                <option *ngFor="let c of cities">{{ c }}</option>
-                              </select>
-                            </p>
-              
-                            <!-- Postcode -->
-                            <p class="col-6 address-field"
-                              id="billing_postcode_field">
-                              <label for="billing_postcode" class="form-label">{{ 'postcode' | translate }}</label>
-                              <input [(ngModel)]="billingZipCode" type="text" class="input-text form-control" name="billing_postcode"
-                                id="billing_postcode" value="" autocomplete="off">
-                            </p>
-              
-                            <!-- Contact Name -->
-                            <p class="col-6 address-field"
-                              id="billing_address_contactName_field">
-                              <label for="billing_contactName" class="form-label">{{ 'pickupPerson' | translate }}
-                              *</label>
-                              <input [(ngModel)]="billingContactName" type="text" class="input-text form-control"
-                                name="billing_address_contactName" id="billing_address_contactName" value="" autocomplete="off"
-                                required>
-                            </p>
-              
-                            <!-- Description -->
-                            <p class="col-12"
-                              id="billing_address_description_field">
-                              <label for="billing_description" class="form-label">{{ 'addressDetails' | translate }}
-                                <abbr class="required" title="required">*</abbr></label>
-                              <input [(ngModel)]="billingDescription" type="text" class="input-text form-control"
-                                name="billing_address_description" id="billing_address_description" value="" autocomplete="off"
-                                required>
-                            </p>
-                          </div>
-                          <div class="d-flex">
-                            <button type="submit" (click)="addBillingButton()"
-                              class="btn btn-dark width-150">
-                              {{ 'add' | translate }}
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-              
-                  <!-- Eğer shipping address varsa -->
-                  <div *ngIf="billingAddress">
-                    <div *ngIf="!isBillingAddress">
-                      <div class="mb-6 mb-md-0">
-                        <h6 class="edit mb-3 pt-4">{{ 'billingAddress' | translate }}</h6>
-                        <address class="d-flex flex-column mb-4">
-                          <span class="text">{{ billingContactName }}</span>
-                          <span class="text">{{ billingDescription }}</span>
-                          <span class="text">{{ billingCity }} {{ billingZipCode }}</span>
-                          <span class="text">{{ billingCountry }}</span>
-                        </address>
+            
+                <!-- Eğer shipping address varsa -->
+                <div *ngIf="shippingAddress">
+                  <div *ngIf="!isShippingAddress">
+                    <div class="mb-6 mb-md-0 pt-4">
+                      <h6 class="edit mb-3">{{ 'shippingAddress' | translate }}</h6>
+                      <address class="d-flex flex-column mb-4">
+                        <span class="text">{{ contactName }}</span>
+                        <span class="text">{{ description }}</span>
+                        <span class="text">{{ city }} {{ zipCode }}</span>
+                        <span class="text">{{ country }}</span>
+                      </address>
+                      <div class="d-flex">
                         <div class="d-flex">
-                          <button type="submit" (click)="editBillingAddress()" class="btn btn-dark width-150" style="margin-right: 10px;">
+                          <button type="submit" (click)="editShippingAddress()" class="btn btn-dark width-150" style="margin-right: 10px;">
                             {{ 'edit' | translate }}
                           </button>
-                          <button type="button" (click)="deleteBillingAddress(billingAddress.id)" class="btn btn-dark width-150">
+                          <button type="button" (click)="deleteAddress(shippingAddress.id)" class="btn btn-dark width-150">
                             {{ 'delete' | translate }}
                           </button>
                         </div>
-                        </div>
-                      </div>
+                       </div>
                     </div>
-                    <div *ngIf="isBillingAddress">
-                      <div class="mb-6">
-                        <form #billingAddressForm="ngForm" autocomplete="off">
-                          <h3 class="mb-4 edit pt-3">{{ 'billingAddress' | translate }}</h3>
-                          <div class="form-group row">
-                            <!-- Country -->
-                            <p class="col-6  address-field update_totals_on_change"
-                              id="billing_country_field">
-                              <label for="billing_country" class="form-label">{{ 'country' | translate }}
+                  </div>
+                  <div *ngIf="isShippingAddress">
+                    <div class="mb-6 mb-md-0">
+                      <form #shippingAddressForm="ngForm" autocomplete="off">
+                        <h3 class="mb-4 pt-3 edit">{{ 'shippingAddress' | translate }}</h3>
+                        <div class="form-group row">
+                          <!-- Country -->
+                          <p class="col-lg-6 address-field update_totals_on_change"
+                            id="shipping_country_field">
+                            <label for="shipping_country" class="form-label">{{ 'country' | translate }}
                               *</label>
-                              <select [(ngModel)]="billingCountry" name="billing_country" id="billing_country"
-                                class="form-control" autocomplete="country"
-                                tabindex="-1" aria-hidden="true" required>
-                                <option *ngFor="let c of countries">{{ c }}</option>
-                              </select>
-                            </p>
-              
-                            <!-- City -->
-                            <p class="col-6 address-field"
-                              id="billing_city_field">
-                              <label for="billing_city" class="form-label">{{ 'city' | translate }}
-                              *</label>
-                              <select [(ngModel)]="billingCity" name="billing_city" id="billing_city"
-                                class="form-control" autocomplete="city"
-                                tabindex="-1" aria-hidden="true" required>
-                                <option *ngFor="let c of cities">{{ c }}</option>
-                              </select>
-                            </p>
-              
-                            <!-- Postcode -->
-                            <p class="col-6 form-row-wide address-field"
-                              id="billing_postcode_field">
-                              <label for="billing_postcode" class="form-label">{{ 'postcode' | translate }}</label>
-                              <input [(ngModel)]="billingZipCode" type="text" class="input-text form-control" name="billing_postcode"
-                                id="billing_postcode" value="" autocomplete="off">
-                            </p>
-              
-                            <!-- Contact Name -->
-                            <p class="col-6 form-row address-field"
-                              id="billing_address_contactName_field">
-                              <label for="billing_contactName" class="form-label">{{ 'pickupPerson' | translate }}
-                              *</label>
-                              <input [(ngModel)]="billingContactName" type="text" class="input-text form-control"
-                                name="billing_address_contactName" id="billing_address_contactName" value="" autocomplete="off"
-                                required>
-                            </p>
-              
-                            <!-- Description -->
-                            <p class="col-12 address-field"
-                              id="billing_address_description_field">
-                              <label for="billing_description" class="form-label">{{ 'addressDetails' | translate }}
-                                <abbr class="required" title="required">*</abbr></label>
-                              <input [(ngModel)]="billingDescription" type="text" class="input-text form-control"
-                                name="billing_address_description" id="billing_address_description" value="" autocomplete="off"
-                                required>
-                            </p>
-                          </div>
-                          <div class="d-flex">
-                            <button type="submit" (click)="updateBillingButton()"
-                              class="btn btn-dark width-150">
-                              {{ 'edit' | translate }}
-                            </button>
-                          </div>
-                        </form>
-                      </div>
+                            <select [(ngModel)]="country" name="shipping_country" id="shipping_country"
+                              class="form-control" autocomplete="country"
+                              tabindex="-1" aria-hidden="true" required>
+                              <option *ngFor="let c of countries">{{ c }}</option>
+                            </select>
+                          </p>
+            
+                          <!-- City -->
+                          <p class="col-lg-6  form-row form-row-wide address-field"
+                            id="shipping_city_field">
+                            <label for="shipping_city" class="form-label">{{ 'city' | translate }}
+                            *</label>
+                            <select [(ngModel)]="city" name="shipping_city" id="shipping_city"
+                              class="form-control" autocomplete="city"
+                              tabindex="-1" aria-hidden="true" required>
+                              <option *ngFor="let c of cities">{{ c }}</option>
+                            </select>
+                          </p>
+            
+                          <!-- Postcode -->
+                          <p class="col-6 address-field"
+                            id="shipping_postcode_field">
+                            <label for="shipping_postcode" class="form-label">{{ 'postcode' | translate }}</label>
+                            <input [(ngModel)]="zipCode" type="text" class="input-text form-control" name="shipping_postcode"
+                              id="shipping_postcode" value="" autocomplete="off">
+                          </p>
+            
+                          <!-- Contact Name -->
+                          <p class="col-6 address-field"
+                            id="shipping_address_contactName_field">
+                            <label for="shipping_contactName" class="form-label">{{ 'pickupPerson' | translate }}
+                             *</label>
+                            <input [(ngModel)]="contactName" type="text" class="input-text form-control"
+                              name="shipping_address_contactName" id="shipping_address_contactName" value="" autocomplete="off"
+                              required>
+                          </p>
+            
+                          <!-- Description -->
+                          <p class="col-12 address-field "
+                            id="shipping_address_description_field">
+                            <label for="shipping_description" class="form-label">{{ 'addressDetails' | translate }}
+                              <abbr class="required" title="required">*</abbr></label>
+                            <input [(ngModel)]="description" type="text" class="input-text form-control"
+                              name="shipping_address_description" id="shipping_address_description" value="" autocomplete="off"
+                              required>
+                          </p>
+                        </div>
+                        <div class="d-flex">
+                          <button type="submit" (click)="updateButton()"
+                            class="btn btn-dark width-150">
+                            {{ 'edit' | translate }}
+                          </button>
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </div>
+              </div>
+              <!-- Billing Address -->
+              <div class="col-6">
+                <!-- Shipping address boş ise -->
+                <div *ngIf="!billingAddress">
+                  <div *ngIf="!isaddBillingAddress">
+                    <div class="mb-6 mb-md-0">
+                      <div class="d-flex pt-3">
+                        <button type="submit" (click)="addBillingAddress()"
+                          class="btn btn-dark width-250">
+                          {{ 'addBillingAddress' | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="isaddBillingAddress">
+                    <div class="mb-6">
+                      <form #billingAddressForm="ngForm" autocomplete="off">
+                        <h3 class="mb-4 edit">{{ 'addBillingAddress' | translate }}</h3>
+                        <div class="form-group row">
+                          <!-- Country -->
+                          <p class="col-6  address-field update_totals_on_change"
+                            id="billing_country_field" data-priority="40">
+                            <label for="billing_country" class="form-label">{{ 'country' | translate }}
+                            *</label>
+                            <select [(ngModel)]="billingCountry" name="billing_country" id="billing_country"
+                              class="form-control" autocomplete="country"
+                              tabindex="-1" aria-hidden="true" required>
+                              <option *ngFor="let c of countries">{{ c }}</option>
+                            </select>
+                          </p>
+            
+                          <!-- City -->
+                          <p class="col-6 address-field"
+                            id="billing_city_field">
+                            <label for="billing_city" class="form-label">{{ 'city' | translate }}
+                            *</label>
+                            <select [(ngModel)]="billingCity" name="billing_city" id="billing_city"
+                              class="form-control" autocomplete="city"
+                              tabindex="-1" aria-hidden="true" required>
+                              <option *ngFor="let c of cities">{{ c }}</option>
+                            </select>
+                          </p>
+            
+                          <!-- Postcode -->
+                          <p class="col-6 address-field"
+                            id="billing_postcode_field">
+                            <label for="billing_postcode" class="form-label">{{ 'postcode' | translate }}</label>
+                            <input [(ngModel)]="billingZipCode" type="text" class="input-text form-control" name="billing_postcode"
+                              id="billing_postcode" value="" autocomplete="off">
+                          </p>
+            
+                          <!-- Contact Name -->
+                          <p class="col-6 address-field"
+                            id="billing_address_contactName_field">
+                            <label for="billing_contactName" class="form-label">{{ 'pickupPerson' | translate }}
+                            *</label>
+                            <input [(ngModel)]="billingContactName" type="text" class="input-text form-control"
+                              name="billing_address_contactName" id="billing_address_contactName" value="" autocomplete="off"
+                              required>
+                          </p>
+            
+                          <!-- Description -->
+                          <p class="col-12"
+                            id="billing_address_description_field">
+                            <label for="billing_description" class="form-label">{{ 'addressDetails' | translate }}
+                              <abbr class="required" title="required">*</abbr></label>
+                            <input [(ngModel)]="billingDescription" type="text" class="input-text form-control"
+                              name="billing_address_description" id="billing_address_description" value="" autocomplete="off"
+                              required>
+                          </p>
+                        </div>
+                        <div class="d-flex">
+                          <button type="submit" (click)="addBillingButton()"
+                            class="btn btn-dark width-150">
+                            {{ 'add' | translate }}
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+            
+                <!-- Eğer shipping address varsa -->
+                <div *ngIf="billingAddress">
+                  <div *ngIf="!isBillingAddress">
+                    <div class="mb-6 mb-md-0">
+                      <h6 class="edit mb-3 pt-4">{{ 'billingAddress' | translate }}</h6>
+                      <address class="d-flex flex-column mb-4">
+                        <span class="text">{{ billingContactName }}</span>
+                        <span class="text">{{ billingDescription }}</span>
+                        <span class="text">{{ billingCity }} {{ billingZipCode }}</span>
+                        <span class="text">{{ billingCountry }}</span>
+                      </address>
+                      <div class="d-flex">
+                        <button type="submit" (click)="editBillingAddress()" class="btn btn-dark width-150" style="margin-right: 10px;">
+                          {{ 'edit' | translate }}
+                        </button>
+                        <button type="button" (click)="deleteBillingAddress(billingAddress.id)" class="btn btn-dark width-150">
+                          {{ 'delete' | translate }}
+                        </button>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="isBillingAddress">
+                    <div class="mb-6">
+                      <form #billingAddressForm="ngForm" autocomplete="off">
+                        <h3 class="mb-4 edit pt-3">{{ 'billingAddress' | translate }}</h3>
+                        <div class="form-group row">
+                          <!-- Country -->
+                          <p class="col-6  address-field update_totals_on_change"
+                            id="billing_country_field">
+                            <label for="billing_country" class="form-label">{{ 'country' | translate }}
+                            *</label>
+                            <select [(ngModel)]="billingCountry" name="billing_country" id="billing_country"
+                              class="form-control" autocomplete="country"
+                              tabindex="-1" aria-hidden="true" required>
+                              <option *ngFor="let c of countries">{{ c }}</option>
+                            </select>
+                          </p>
+            
+                          <!-- City -->
+                          <p class="col-6 address-field"
+                            id="billing_city_field">
+                            <label for="billing_city" class="form-label">{{ 'city' | translate }}
+                            *</label>
+                            <select [(ngModel)]="billingCity" name="billing_city" id="billing_city"
+                              class="form-control" autocomplete="city"
+                              tabindex="-1" aria-hidden="true" required>
+                              <option *ngFor="let c of cities">{{ c }}</option>
+                            </select>
+                          </p>
+            
+                          <!-- Postcode -->
+                          <p class="col-6 form-row-wide address-field"
+                            id="billing_postcode_field">
+                            <label for="billing_postcode" class="form-label">{{ 'postcode' | translate }}</label>
+                            <input [(ngModel)]="billingZipCode" type="text" class="input-text form-control" name="billing_postcode"
+                              id="billing_postcode" value="" autocomplete="off">
+                          </p>
+            
+                          <!-- Contact Name -->
+                          <p class="col-6 form-row address-field"
+                            id="billing_address_contactName_field">
+                            <label for="billing_contactName" class="form-label">{{ 'pickupPerson' | translate }}
+                            *</label>
+                            <input [(ngModel)]="billingContactName" type="text" class="input-text form-control"
+                              name="billing_address_contactName" id="billing_address_contactName" value="" autocomplete="off"
+                              required>
+                          </p>
+            
+                          <!-- Description -->
+                          <p class="col-12 address-field"
+                            id="billing_address_description_field">
+                            <label for="billing_description" class="form-label">{{ 'addressDetails' | translate }}
+                              <abbr class="required" title="required">*</abbr></label>
+                            <input [(ngModel)]="billingDescription" type="text" class="input-text form-control"
+                              name="billing_address_description" id="billing_address_description" value="" autocomplete="off"
+                              required>
+                          </p>
+                        </div>
+                        <div class="d-flex">
+                          <button type="submit" (click)="updateBillingButton()"
+                            class="btn btn-dark width-150">
+                            {{ 'edit' | translate }}
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-            </div>
-        </div>
-    </div>
+          </div>
+      </div>
+  </div>
 </div>

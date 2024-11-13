@@ -15,6 +15,7 @@ import { CategoryComponent } from './features/pages/category/category.component'
 import { ProductListByCategoryComponent } from './features/pages/product-list-by-category/product-list-by-category.component';
 import { SearchComponent } from './features/pages/search/search.component';
 import { CartComponent } from './features/pages/cart/cart.component';
+import { CheckoutComponent } from './features/pages/checkout/checkout.component';
 
 
 
@@ -38,6 +39,7 @@ export const routes: Routes = [
     {path: 'shop-list/:id',component: ProductListByCategoryComponent},
     {path: "search", component: SearchComponent},
     {path: "cart", component: CartComponent},
+    {path: "checkout", component: CheckoutComponent},
    
    
    

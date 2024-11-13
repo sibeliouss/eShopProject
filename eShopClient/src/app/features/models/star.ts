@@ -1,5 +1,5 @@
 export class Star {
-    [key: string]: number; // Herhangi bir string anahtara number değeri atamayı mümkün kılar.
+    [key: string]: number; 
     
     star1: number = 0;
     star2: number = 0;

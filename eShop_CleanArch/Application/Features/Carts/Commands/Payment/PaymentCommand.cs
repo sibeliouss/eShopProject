@@ -130,7 +130,7 @@ public class PaymentCommandHandler : IRequestHandler<PaymentCommand>
                 PaymentDate = DateTime.Now,
                 PaymentMethod = "Kredi Kartı",
                 PaymentNumber = payment.PaymentId,
-                Status = "Hazırlanıyor",
+                Status = "BeingPrepared",
                 PaymentCurrency = paymentRequest.Currency,
                 ProductQuantity = totalProductQuantity,
                 CreateAt = DateTime.Now,

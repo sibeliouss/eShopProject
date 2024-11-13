@@ -107,7 +107,7 @@ export class ShoppingCartService {
 
   changeProductQuantityInCart(productId: string, quantity: number) {
     if (localStorage.getItem('response')) {
-      const body = { productId, quantity }; // Prepare the body to send in the POST request
+      const body = { productId, quantity }; 
       this.http.post(`https://localhost:7120/api/Carts/ChangeProductQuantityInCart`, body).subscribe({
         next: (res: any) => {
           this.GetAllCarts();
