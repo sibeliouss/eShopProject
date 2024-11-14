@@ -25,7 +25,6 @@ export class ShoppingCartService {
   constructor(private translate: TranslateService,
               private http: HttpClient, 
               private swal: SwalService,
-              private router: Router, 
               private auth: AuthService) {
     this.GetAllCarts();
   }

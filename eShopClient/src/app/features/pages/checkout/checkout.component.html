@@ -1,0 +1,87 @@
+<div class="checkout-container">
+    <h2>{{ 'CHECKOUT.TITLE' | translate }}</h2>
+  
+    <!-- Shipping Address Section -->
+    <div class="address-section">
+      <h3>{{ 'SHIPPING_ADDRESS' | translate }}</h3>
+  
+      <div *ngIf="isShippingAddressAvailable">
+        <div class="address-info">
+          <p>{{ shippingAddress.contactName }}</p>
+          <p>{{ shippingAddress.city }}, {{ shippingAddress.country }}</p>
+          <p>{{ shippingAddress.zipCode }}</p>
+          <p>{{ shippingAddress.description }}</p>
+        </div>
+        <button (click)="selectAddNewShippingAdress()">
+          {{ 'ADD_NEW_ADDRESS' | translate }}
+        </button>
+        <button (click)="selectUseSaveShippingAdress()">
+          {{ 'CHECKOUT.USE_SAVED_ADDRESS' | translate }}
+        </button>
+      </div>
+  
+      <div *ngIf="!isShippingAddressAvailable">
+        <form (ngSubmit)="createShippingAddress()">
+          <label for="contactName">{{ 'CONTACT_NAME' | translate }}</label>
+          <input id="contactName" [(ngModel)]="newShippingAddress.contactName" name="contactName" required>
+  
+          <label for="country">{{ 'COUNTRY' | translate }}</label>
+          <input id="country" [(ngModel)]="newShippingAddress.country" name="country" required>
+  
+          <label for="city">{{ 'CITY' | translate }}</label>
+          <input id="city" [(ngModel)]="newShippingAddress.city" name="city" required>
+  
+          <label for="zipCode">{{ 'ZIP_CODE' | translate }}</label>
+          <input id="zipCode" [(ngModel)]="newShippingAddress.zipCode" name="zipCode" required>
+  
+          <label for="description">{{ 'DESCRIPTION' | translate }}</label>
+          <textarea id="description" [(ngModel)]="newShippingAddress.description" name="description" required></textarea>
+  
+          <button type="submit">{{ 'CREATE_ADDRESS' | translate }}</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Billing Address Section -->
+    <div class="address-section">
+      <h3>{{ 'CHECKOUT.BILLING_ADDRESS' | translate }}</h3>
+  
+      <div *ngIf="isBillingAddressAvailable">
+        <div class="address-info">
+          <p>{{ billingAddress.contactName }}</p>
+          <p>{{ billingAddress.city }}, {{ billingAddress.country }}</p>
+          <p>{{ billingAddress.zipCode }}</p>
+          <p>{{ billingAddress.description }}</p>
+        </div>
+        <button (click)="selectAddNewBillingAdress()">
+          {{ 'ADD_NEW_ADDRESS' | translate }}
+        </button>
+        <button (click)="selectUseSaveBillingAdress()">
+          {{ 'USE_SAVED_ADDRESS' | translate }}
+        </button>
+      </div>
+  
+      <div *ngIf="!isBillingAddressAvailable">
+        <form (ngSubmit)="createBillingAddress()">
+          <label for="billingContactName">{{ 'CONTACT_NAME' | translate }}</label>
+          <input id="billingContactName" [(ngModel)]="newBillingAddress.contactName" name="contactName" required>
+  
+          <label for="billingCountry">{{ 'COUNTRY' | translate }}</label>
+          <input id="billingCountry" [(ngModel)]="newBillingAddress.country" name="country" required>
+  
+          <label for="billingCity">{{ 'CITY' | translate }}</label>
+          <input id="billingCity" [(ngModel)]="newBillingAddress.city" name="city" required>
+  
+          <label for="billingZipCode">{{ 'ZIP_CODE' | translate }}</label>
+          <input id="billingZipCode" [(ngModel)]="newBillingAddress.zipCode" name="zipCode" required>
+  
+          <label for="billingDescription">{{ 'DESCRIPTION' | translate }}</label>
+          <textarea id="billingDescription" [(ngModel)]="newBillingAddress.description" name="description" required></textarea>
+  
+          <button type="submit">{{ 'CREATE_ADDRESS' | translate }}</button>
+        </form>
+      </div>
+    </div>
+  
+  </div>
+  
