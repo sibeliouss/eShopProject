@@ -2,10 +2,10 @@
     <div class="page-header border-bottom mb-5"></div>
     <div class="container my-5">
         <div class="row">
-           
+
             <main class="col-lg-9">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                 
+
                     <div>
                         <label for="sortOrder" class="form-label">Sort by</label>
                         <select id="sortOrder" class="form-select" [(ngModel)]="shopListProducts.request.orderBy" (change)="shopListProducts.changeSorting()">
@@ -25,10 +25,10 @@
                     </div>
 
                     <div class="btn-group">
-                        <button class="btn btn-outline-secondary active" data-bs-toggle="tab" href="#grid-view">
+                        <button class="btn btn-outline-secondary active" data-bs-toggle="tab" >
                             <i class="fa fa-th"></i>
                         </button>
-                        <button class="btn btn-outline-secondary" data-bs-toggle="tab" href="#list-view">
+                        <button class="btn btn-outline-secondary" data-bs-toggle="tab" >
                             <i class="fa fa-list"></i>
                         </button>
                     </div>
@@ -51,24 +51,24 @@
                                            class=" h-p-bg btn btn-outline-primary border-0"
                                            data-toggle="tooltip" data-placement="right" title=""
                                            data-original-title="ADD TO CART">
-                                       
+
                                            <span class="product__add-to-cart-icon font-size-4"><i class="fa fa-cart-plus"></i></span>
                                         </a>
                                         <a *ngIf="product.quantity !== 0" (click)="shopping.addShoppingCart(product)"
                                            class=" h-p-bg btn btn-outline-primary border-0"
                                            data-toggle="tooltip" data-placement="right" title=""
                                            data-original-title="ADD TO CART">
-                                         
+
                                            <span class="product__add-to-cart-icon font-size-4"><i class="fa fa-cart-plus"></i></span>
-                                        </a> 
+                                        </a>
 
                                         <a routerLink="/single-product/{{product.id}}" class="mr-1 h-p-bg btn btn-outline-primary border-0">
                                             <i class="fa fa-exchange-alt"></i>
                                         </a>
-                                       
+
                                         <a (click)="wishList.addToWishList(product)"class="h-p-bg btn btn-outline-primary border-0"><i class="fa fa-heart"></i></a>
-                                        
-                                        
+
+
                                      </div>
                                 </div>
                             </div>
@@ -96,18 +96,18 @@
                                            data-toggle="tooltip" data-placement="right" title=""
                                            data-original-title="ADD TO CART">
                                            <span class="product__add-to-cart-icon"><i class="fa fa-cart-plus"></i></span>
-                                        </a> 
+                                        </a>
 
                                         <a  routerLink="/single-product/{{product.id}}"  class="mr-1 h-p-bg btn btn-outline-primary border-0">
                                             <i class="fa fa-exchange-alt"></i>
                                         </a>
 
-                                        
+
                                         <a (click)="wishList.addToWishList(product)"class="h-p-bg btn btn-outline-primary border-0"><i class="fa fa-heart"></i></a>
-                                        
-                                        
-                                        
-                                        
+
+
+
+
                                     </div>
                                 </div>
                             </li>

@@ -91,16 +91,10 @@
     "doYouWantToDeleted": "Silmek istiyor musunuz?",
     "cancelButton": "Vazgeç",
     "confirmButton": "Sil"},
-    "view": "Görüntüle",
-    "noProducts": "Favorilerinizde herhangi bir ürün bulunmamaktadır.",
-    "detail":"Detay",
-    "login" : {
-     "title": "Giriş",
-     "Information": "Hesabınız yok mu?",
-     "loginBtn": "Giriş Yap",
-     "gotoRegisterBtn": "Kayıt Ol",
-     "rememberMe": "Beni Hatırla"
-      },
+   "view": "Görüntüle",
+   "noProducts": "Favorilerinizde herhangi bir ürün bulunmamaktadır.",
+   "detail":"Detay",
+    
      
   "quantity": "Adet",
   "total": "Toplam",
@@ -119,8 +113,61 @@
   "material": "Malzeme",
   "Your comment...": "Yorumunuzu yazın...",
   "productDetails": "Ürün Detayları",
+  "errorAddingProductToCart": "Ürün sepete eklenirken bir hata oluştu.",
+  "theProductIsOutOfStock": "Ürün stokta yok.",
+  "errorUpdatingQuantity": "Miktar güncellenirken bir hata oluştu.",
+  "paymentSuccessful": "Ödeme başarılı.",
+  "paymentError": "Ödeme işlemi sırasında bir hata oluştu.",
+  "proceedToCheckout": "Ödeme Sayfasına Geç",
+
+  "identityNumber": "Kimlik Numarası",
+  "enterAIdentityNumber": "Lütfen kimlik numaranızı girin",
+  "phoneNumber": "Telefon Numarası",
+  "enterAPhoneNumber": "Lütfen telefon numaranızı girin",
+  "emailAddress": "E-posta Adresi",
+  "enterAEmail": "Lütfen bir e-posta adresi girin",
+
+  "checkout": "Ödeme",
+  "buyerInformations": "Alıcı Bilgileri",
+  "enterAName": "Bir ad giriniz",
+  "enterALastname": "Bir soyad giriniz",
+
+  "neighborhoodApartmentSuiteUnitEtc": "Mahalle, Apartman, Daire, Birim, vb.",
+  "BillingAddress": "Fatura Adresi",
+  "chooseACountry": "Bir Ülke Seçiniz",
+  "town/City": "İl/İlçe",
+  "chooseACity": "Bir İl Seçiniz",
+  "enterAPostalCode": "Posta Kodu Giriniz",
+  "enterPick-UpPersonInformation": "Teslim Alacak Kişi Bilgilerini Giriniz",
+  "yourOrder": "Siparişiniz",
+  "subtotal": "Ara Toplam",
+  "payment": "Ödeme",
+  "creditCart": "Kredi Kartı",
+  "forSecurePaymentOnlyDebitOrCreditCardPaymentİsAccepted": "Güvenli ödeme için sadece banka kartı veya kredi kartı ödemeleri kabul edilmektedir.",
+  "cardInformation": "Kart Bilgileri",
+  "cardHolderName": "Kart Sahibi Adı",
+  "youCanUseYourOwnNameAndSurname": "Kendi adınızı ve soyadınızı kullanabilirsiniz.",
+  "cardNumber": "Kart Numarası",
+  "sampleCreditCardNumber": "Örnek Kredi Kartı Numarası",
+  "expireYear": "Son Kullanma Yılı",
+  "sampleExpirationYear": "Örnek Son Kullanma Yılı",
+  "expireMonth": "Son Kullanma Ayı",
+  "sampleExpirationMonth": "Örnek Son Kullanma Ayı",
+  "cvc": "CVC",
+  "sampleCvcNumber": "Örnek CVC Numarası",
+  "placeOrder": "Siparişi Ver",
  
-      "register":{
+
+   
+  "login" : {
+    "title": "Giriş",
+    "Information": "Hesabınız yok mu?",
+    "loginBtn": "Giriş Yap",
+    "gotoRegisterBtn": "Kayıt Ol",
+    "rememberMe": "Beni Hatırla"
+     },
+ 
+   "register":{
          "title": "Kayıt",
          "name":"Ad",
          "lastName":"Soyad",

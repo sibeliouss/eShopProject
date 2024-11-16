@@ -28,16 +28,16 @@ export class AccountDetailsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService, 
+    private userService: UserService,
     public auth: AuthService,
     private swal: SwalService,
     private router: Router,
-  
+
   ) {}
 
   ngOnInit(): void {
     this.initializeForms();
-   
+
   }
 
   private initializeForms() {
@@ -66,7 +66,7 @@ export class AccountDetailsComponent implements OnInit {
           this.swal.callToast(res.message, 'success');
           setTimeout(() => {
             this.router.navigate([`/account/${this.auth.token?.userId}`]).then(() => {
-              location.reload(); 
+              location.reload();
             });
           }, 3000);
         },
@@ -89,7 +89,7 @@ export class AccountDetailsComponent implements OnInit {
         this.swal.callToast(res.message, 'success');
         setTimeout(() => {
           this.router.navigate([`/account/${this.auth.token?.userId}`]).then(() => {
-            location.reload(); 
+            location.reload();
           });
         }, 3000);
       },
@@ -101,7 +101,6 @@ export class AccountDetailsComponent implements OnInit {
 
   logout() {
     localStorage.removeItem("response");
- 
-    location.href = "/login";
+    this.router.navigate(['/login']);
   }
 }
