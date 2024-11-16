@@ -26,5 +26,10 @@ public class UserService: IUserService
     {
         return await _userRepository.GetAllAsync();
     }
+    
+    public async Task<User?> FindAsync(Guid id)
+    {
+        return await _userRepository.FindAsync(id); 
+    }
 }
 

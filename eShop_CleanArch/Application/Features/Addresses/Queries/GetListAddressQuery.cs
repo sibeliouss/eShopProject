@@ -26,7 +26,7 @@ public class GetListAddressQuery : IRequest<GetListAddressQueryResponse>
 
         public async Task<GetListAddressQueryResponse> Handle(GetListAddressQuery request, CancellationToken cancellationToken)
         {
-            var address = await _addressRepository.Query().Where(a => a.UserId == request.UserId)
+            var address = await _addressRepository.Query().Where(a=>a.UserId==request.UserId)
                 .FirstOrDefaultAsync(cancellationToken);
 
             await _addressBusinessRules.AddressShouldExistWhenSelected(address);

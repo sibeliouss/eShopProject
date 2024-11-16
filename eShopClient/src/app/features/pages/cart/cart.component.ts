@@ -14,11 +14,15 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
   styleUrl: './cart.component.scss'
 })
 export class CartComponent {
-
+  currency: string = "";
 
   constructor( public shopping: ShoppingCartService
  
-) {}
+){}
+
+
+
+
 
 trackByFn(index: number, item: any): number {
   return item.id;  // ID'yi kullanarak her öğeyi benzersiz şekilde takip ediyoruz

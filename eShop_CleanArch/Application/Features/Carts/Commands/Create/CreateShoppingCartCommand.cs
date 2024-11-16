@@ -1,5 +1,4 @@
-using Application.Features.Baskets.Dtos;
-using Application.Features.Carts.Commands.Create;
+using Application.Features.Carts.Dtos;
 using Application.Services.Products;
 using Application.Services.Repositories;
 using Domain.Entities;
@@ -7,8 +6,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-
-namespace Application.Features.Baskets.Commands.Create;
+namespace Application.Features.Carts.Commands.Create;
 
 public class CreateShoppingCartCommand : IRequest<CreatedShoppingCartResponse>
 {
@@ -37,7 +35,7 @@ public class CreateShoppingCartCommand : IRequest<CreatedShoppingCartResponse>
                throw new ValidationException(validationResult.Errors);
            }
 
-           var product = await _productService.GetByIdAsync(shoppingCartDto.ProductId);
+           var product = await _productService.FindAsync(shoppingCartDto.ProductId);
            if (product is null) throw new Exception("Ürün bulunamadı!");
            if (product.Quantity == 0) throw new Exception("Ürün stokta kalmadı!");
            

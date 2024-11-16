@@ -17,7 +17,7 @@ public class DeleteCategoryCommand : IRequest
         }
         public async Task Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
-            var category = await _categoryRepository.GetByIdAsync(request.Id);
+            var category = await _categoryRepository.FindAsync(request.Id);
             if (category is null)
             {
                 throw new Exception("Böyle bir kategori mevcut değil.");

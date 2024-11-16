@@ -43,15 +43,16 @@ namespace Application.Features.Products.Commands.Create;
             {
                 throw new ValidationException(validationResult.Errors);
             }
-    
-            // Ürün adı tekrarını kontrol et
-            await _productBusinessRules.ProductNameAlreadyExists(productDto.Name);
+            
 
             // Transaction başlat
             await _productRepository.BeginTransactionAsync(cancellationToken);
 
             try
             {
+                // Ürün adı tekrarını kontrol et
+                await _productBusinessRules.ProductNameAlreadyExists(productDto.Name);
+                
                 // Ürünü oluştur ve veritabanına ekle
                 var product = _mapper.Map<Product>(productDto);
                 await _productRepository.AddAsync(product);

@@ -1,12 +1,8 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Application.Features.Baskets.Queries.Responses;
+using Application.Features.Carts.Queries.Responses;
 using Application.Services.Products;
 using MediatR;
-using Exception = System.Exception;
 
-namespace Application.Features.Baskets.Queries;
+namespace Application.Features.Carts.Queries;
 
 public class GetCheckProductQuantityIsAvailableQuery : IRequest<CheckProductQuantityIsAvailableResponse>
 {
@@ -24,7 +20,7 @@ public class GetCheckProductQuantityIsAvailableQuery : IRequest<CheckProductQuan
         public async Task<CheckProductQuantityIsAvailableResponse> Handle(GetCheckProductQuantityIsAvailableQuery request, CancellationToken cancellationToken)
         {
             //ürün stok kontrolü
-            var product = await _productService.GetByIdAsync(request.ProductId);
+            var product = await _productService.FindAsync(request.ProductId);
             if (product is null)
             {
                 return new CheckProductQuantityIsAvailableResponse

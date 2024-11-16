@@ -21,7 +21,7 @@ public class GetAllProductDetailQuery : IRequest<List<GetAllProductDetailRespons
 
         public async Task<List<GetAllProductDetailResponse>> Handle(GetAllProductDetailQuery request, CancellationToken cancellationToken)
         {
-            var productDetails = await _detailRepository.Query().AsNoTracking().ToListAsync(cancellationToken);
+            var productDetails = await _detailRepository.Query().ToListAsync(cancellationToken);
             var response = _mapper.Map<List<GetAllProductDetailResponse>>(productDetails);
             return response;
         }

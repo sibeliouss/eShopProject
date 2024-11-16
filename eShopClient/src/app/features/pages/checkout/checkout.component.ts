@@ -31,7 +31,7 @@ export class CheckoutComponent {
   newBillingAddress: AddAddressModel = { userId: '',contactName: '',country: '',city: '', zipCode: '', description: ''
   };
 
-   currency: string = "";
+   //currency: string = "";
    shippingAndCartTotal: string = "";
    paymentRequest: PaymentModel = new PaymentModel();
    countries = Countries;
@@ -47,7 +47,12 @@ export class CheckoutComponent {
     public shopping: ShoppingCartService,
     private addressService: AddressService,
     private auth: AuthService
-  ) { }
+  ) { 
+    this.paymentRequest.address = this.paymentRequest.address || {};
+    this.paymentRequest.billingAddress = this.paymentRequest.billingAddress || {};
+    
+ 
+  }
 
   ngOnInit(): void {
     this.checkAddresses();
@@ -113,9 +118,11 @@ export class CheckoutComponent {
   }
 
   payment() {
+
+    
     this.paymentRequest.products = this.shopping.shoppingCarts;
     this.paymentRequest.shippingAndCartTotal = Number(localStorage.getItem("shipping&CartTotal"));
-    this.paymentRequest.currency = this.currency;
+    //this.paymentRequest.currency = this.currency;
     const userId = this.auth.token!.userId;
     this.paymentRequest.userId = userId === null ? "null" : userId;
 

@@ -1,7 +1,7 @@
-using Application.Features.Baskets.Dtos;
+using Application.Features.Carts.Dtos;
 using FluentValidation;
 
-namespace Application.Features.Baskets.Commands.Create;
+namespace Application.Features.Carts.Commands.Create;
 
 public class CreateShoppingCartCommandValidator : AbstractValidator<ShoppingCartDto>
 {

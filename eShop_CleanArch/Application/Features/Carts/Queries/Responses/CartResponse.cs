@@ -1,7 +1,7 @@
 using Domain.Entities;
 using Domain.Entities.ValueObjects;
 
-namespace Application.Features.Baskets.Queries.Responses;
+namespace Application.Features.Carts.Queries.Responses;
 
 public class CartResponse
 {

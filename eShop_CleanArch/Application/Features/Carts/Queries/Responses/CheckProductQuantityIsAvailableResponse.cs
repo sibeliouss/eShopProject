@@ -1,4 +1,4 @@
-namespace Application.Features.Baskets.Queries.Responses;
+namespace Application.Features.Carts.Queries.Responses;
 
 public class CheckProductQuantityIsAvailableResponse
 {

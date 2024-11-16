@@ -1,7 +1,6 @@
-using System;
 using Domain.Entities.ValueObjects;
 
-namespace Application.Features.Baskets.Dtos;
+namespace Application.Features.Carts.Dtos;
 
 public record ShoppingCartDto(
     Guid ProductId,

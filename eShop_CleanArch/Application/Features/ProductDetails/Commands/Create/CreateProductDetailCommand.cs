@@ -5,6 +5,7 @@ using AutoMapper;
 using Domain.Entities;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.ProductDetails.Commands.Create;
 
@@ -36,8 +37,8 @@ public class CreateProductDetailCommandHandler : IRequestHandler<CreateProductDe
             throw new ValidationException(validationResult.Errors);
         }
 
-        var findProductDetail = await _productDetailRepository.AnyAsync(pd => pd.ProductId == detailDto.ProductId);
-        if (findProductDetail)
+        var findProductDetail = await _productDetailRepository.Query().Where(pd => pd.ProductId == detailDto.ProductId).FirstOrDefaultAsync(cancellationToken);
+        if (findProductDetail is not null)
         {
             throw new Exception(ProductDetailMessages.ProductDetailAlreadyExists);
         }

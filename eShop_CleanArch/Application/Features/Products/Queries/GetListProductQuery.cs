@@ -1,8 +1,12 @@
 
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Application.Features.Products.Dtos;
 using Application.Services.ProductCategories;
 using Application.Services.Repositories;
-
+using Domain.Entities.ValueObjects;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,7 +43,7 @@ public class GetListProductQuery : IRequest<ResponseDto<List<ProductDto>>>
             if (request.RequestDto.CategoryId != null) 
             {
                 query = query.Include(p => p.ProductCategories)
-                             .Where(p => p.ProductCategories!.Any(pc => pc.CategoryId == request.RequestDto.CategoryId));
+                             .Where(p => p.ProductCategories.Any(pc => pc.CategoryId == request.RequestDto.CategoryId));
             }
 
             if (!string.IsNullOrEmpty(request.RequestDto.OrderBy))
@@ -73,30 +77,32 @@ public class GetListProductQuery : IRequest<ResponseDto<List<ProductDto>>>
                     Id = product.Id,
                     Name = product.Name,
                     Brand = product.Brand,
-                    CreateAt = product.CreateAt,
                     Img = product.Img,
                     Price = product.Price,
                     Quantity = product.Quantity,
-                    ProductDetail = new ProductDetailDto()
-                    {
-                        Id = product.ProductDetail.Id,
-                        ProductId = product.Id,
-                        Barcode = product.ProductDetail.Barcode,
-                        Description = product.ProductDetail.Description,
-                        Material = product.ProductDetail.Material,
-                        Fit = product.ProductDetail.Fit,
-                        Size = product.ProductDetail.Size,
-                        Color = product.ProductDetail.Color
-                    },
+                    ProductDetail = product.ProductDetail != null
+                        ? new ProductDetailDto
+                        {
+                            Id = product.ProductDetail.Id,
+                            ProductId = product.Id,
+                            Barcode = product.ProductDetail.Barcode,
+                            Description = product.ProductDetail.Description,
+                            Material = product.ProductDetail.Material,
+                            Fit = product.ProductDetail.Fit,
+                            Size = product.ProductDetail.Size,
+                            Color = product.ProductDetail.Color
+                        }
+                        : null, // ProductDetail null ise null olarak işleyin
                     ProductCategories = _productCategoryService.Query()
-                                            .Where(p => p.ProductId == product.Id)
-                                            .Select(s => new ProductCategoryDto
-                                            {
-                                                CategoryId = s.CategoryId,
-                                                CategoryName = s.Category.Name
-                                            })
-                                            .ToList()
-                }).ToListAsync(cancellationToken); 
+                        .Where(p => p.ProductId == product.Id)
+                        .Select(s => new ProductCategoryDto
+                        {
+                            CategoryId = s.CategoryId,
+                            CategoryName = s.Category.Name
+                        })
+                        .ToList()
+                }).ToListAsync(cancellationToken);
+ 
 
             response.Data = productsDto;
             response.PageNumber = request.RequestDto.PageNumber;

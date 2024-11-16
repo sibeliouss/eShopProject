@@ -1,79 +1,99 @@
-.row {
-  padding-top: 20px;
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.container{
+
   
-  .content-area {
-    width: 80%;
-    box-shadow: 0 4px 10px 0.2rem rgba(93, 55, 102, 0.659);
-    border: 2px solid rgba(0, 0, 0, 0.136);
-    border-radius: 15px;
-    padding: 15px;
+
+  .baslik 
+    {
+        font-size: larger;
+        color: rgba(93, 55, 102, 0.915);
+        font-weight: 200;
+        border-left: 2px solid gray;
+        padding-left: 8px;
+    }
+     
+    //padding-top: 20px;
     
-    .entry-content {
-      .table-responsive {
-        background-color: rgb(251, 251, 251);
-        
-        .shop_table {
-          width: 100%;
-          margin-bottom: 20px;
-
-          .cart_item {
-            .product-name {
-              display: flex;
-              align-items: center;
-              .wishlist-img {
-                width: 70px;
-                height: auto;
-                border-radius: 4px;
-                margin-right: 10px;
-              }
-              }
-
-              a {
-                font-weight: bold;
-                color: #3333335f;
-                text-decoration: none;
-              }
-
-             
-            
-
-            .product-price {
-              font-weight:bold;
-              color: #333;
-              text-align: left; 
-            }
-              .buton{
-             
+    .content-area {
+      width: 80%;
+      box-shadow: 0 4px 10px 0.2rem rgba(93, 55, 102, 0.659);
+      border: 2px solid rgba(0, 0, 0, 0.136);
+      border-radius: 15px;
+      padding: 15px;
+      
+      .entry-content {
+        .table-responsive {
+          background-color: rgb(251, 251, 251);
+          
+          .shop_table {
+            width: 100%;
+            margin-bottom: 20px;
+  
+            .cart_item {
+              .product-name {
+                display: flex;
+                align-items: center;
+                .wishlist-img {
+                  width: 70px;
+                  height: auto;
+                  border-radius: 4px;
+                  margin-right: 10px;
+                }
+                }
+  
+                a {
+                  font-weight: bold;
+                  color: #3333335f;
+                  text-decoration: none;
+                }
+  
+               
               
-                .btn {
-                  background-color: rgba(0, 0, 0, 0.599);
-                  color: rgb(255, 255, 255);
-                  padding: 10px;
-                  border: 2px solid rgba(93, 55, 102, 0.435);
-                }
-
-                .btn:hover {
-                  box-shadow: 0 4px 10px 0.2rem rgba(93, 55, 102, 0.435);
-                }
+  
+              .product-price {
+                font-weight:bold;
+                color: #333;
+                text-align: left; 
               }
-
-              .product-remove {
-                text-align: center;
-              
-
-                .remove {
-                  
-                  color:#333;
-                  font-size: 1.2rem;
-                  transition: color 0.2s;
+                .buton{
+               
+                
+                  .btn {
+                    background-color: rgba(0, 0, 0, 0.599);
+                    color: rgb(255, 255, 255);
+                    padding: 10px;
+                    border: 2px solid rgba(93, 55, 102, 0.435);
+                  }
+  
+                  .btn:hover {
+                    box-shadow: 0 4px 10px 0.2rem rgba(93, 55, 102, 0.435);
+                  }
                 }
-                .remove:hover{
-                  color: #e3251ed1;
+  
+                .product-remove {
+                  text-align: center;
+                
+  
+                  .remove {
+                    
+                    color:#333;
+                    font-size: 1.2rem;
+                    transition: color 0.2s;
+                  }
+                  .remove:hover{
+                    color: #e3251ed1;
+                  }
                 }
-              }
+          }
         }
       }
     }
   }
+  
+
 }
-}
+

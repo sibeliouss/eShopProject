@@ -1,9 +1,9 @@
-using Application.Features.Baskets.Queries.Responses;
+using Application.Features.Carts.Queries.Responses;
 using Application.Services.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Features.Baskets.Queries;
+namespace Application.Features.Carts.Queries;
 
 public class GetAllCartQuery : IRequest<List<CartResponse>>
 {

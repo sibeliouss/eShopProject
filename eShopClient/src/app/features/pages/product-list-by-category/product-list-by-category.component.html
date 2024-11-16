@@ -54,8 +54,6 @@
                                        
                                            <span class="product__add-to-cart-icon font-size-4"><i class="fa fa-cart-plus"></i></span>
                                         </a>
-
-                                         Add to Cart (If quantity is not 0) 
                                         <a *ngIf="product.quantity !== 0" (click)="shopping.addShoppingCart(product)"
                                            class=" h-p-bg btn btn-outline-primary border-0"
                                            data-toggle="tooltip" data-placement="right" title=""

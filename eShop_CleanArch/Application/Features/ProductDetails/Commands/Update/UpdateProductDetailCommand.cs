@@ -35,7 +35,7 @@ public class UpdateProductDetailCommand :IRequest<UpdatedProductDetailResponse>
                 throw new ValidationException(validationResult.Errors);
             }
             
-            var productDetail = await _productDetailRepository.GetByIdAsync(productDetailDto.Id);
+            var productDetail = await _productDetailRepository.FindAsync(productDetailDto.Id);
             if (productDetail is null)
             {
                 throw new Exception(ProductDetailMessages.ProductDetailNotFound);

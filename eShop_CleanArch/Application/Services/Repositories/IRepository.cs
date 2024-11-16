@@ -1,4 +1,6 @@
+using System.Linq;
 using System.Linq.Expressions;
+using Domain.Entities;
 
 namespace Application.Services.Repositories;
 
@@ -13,5 +15,9 @@ public interface IRepository<T> where T : class
     IQueryable<T> Query();
     Task UpdateRangeAsync(IEnumerable<T> entities);
     Task DeleteRangeAsync(IEnumerable<T> entities);
+    Task<T?> FindAsync(Guid id);
+
+    
+   
 
 }

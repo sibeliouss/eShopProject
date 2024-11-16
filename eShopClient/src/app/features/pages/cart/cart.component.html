@@ -30,7 +30,11 @@
                   </div>
                 </div>
               </td>
-              <td>{{s.price.value}} <span class="currency-symbol">{{s.price.currency}}</span></td>
+              <td class="product-price" data-title="Price">
+                <span>
+                    {{s.price.value}}
+                    {{s.price.currency}}
+                </span>
               <td>
                 <div class="d-flex align-items-center quantity-control">
                   <button (click)="shopping.changeProductQuantityInCart(s.id, s.quantity - 1)" class="btn btn-outline-secondary btn-sm">

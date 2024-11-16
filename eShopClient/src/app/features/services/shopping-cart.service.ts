@@ -20,18 +20,19 @@ export class ShoppingCartService {
   cartTotal: number = 0;
   payBtnDisabled: boolean = false;
   flatRateTl: number = 50; //kargo ücreti
-  currency="";
+  //currency="";
 
   constructor(private translate: TranslateService,
               private http: HttpClient, 
               private swal: SwalService,
               private auth: AuthService) {
     this.GetAllCarts();
+    this.shippingAndCartTotal();
   }
 
   GetAllCarts() {
-    if (localStorage.getItem('shopCarts')) {
-      const carts: string | null = localStorage.getItem('shopCarts')
+    if (localStorage.getItem('shoppingCarts')) {
+      const carts: string | null = localStorage.getItem('shoppingCarts')
       if (carts !== null) {
         this.shoppingCarts = JSON.parse(carts);
       }
@@ -64,7 +65,7 @@ export class ShoppingCartService {
         next: (res: any) => {
           this.GetAllCarts();
           this.calcTotal();
-          localStorage.setItem("prodctPrices", JSON.stringify([{ currency: '₺', value: this.total }]));
+          localStorage.setItem("productPrices", JSON.stringify([{ currency: 'TRY', value: this.total }]));
           this.translate.get("productAddedtoCart").subscribe(
             res => {
               this.swal.callToast(res, 'success');
@@ -92,9 +93,9 @@ export class ShoppingCartService {
           this.shoppingCarts.push(newProduct);
         }
     
-        localStorage.setItem('shopCarts', JSON.stringify(this.shoppingCarts));
+        localStorage.setItem('shoppingCarts', JSON.stringify(this.shoppingCarts));
         this.calcTotal();
-        localStorage.setItem("prodctPrices", JSON.stringify([{ currency: '₺', value: this.total }]));
+        localStorage.setItem("productPrices", JSON.stringify([{ currency: 'TRY', value: this.total }]));
         product.quantity -= 1;
         this.translate.get("productAddedtoCart").subscribe(
           res => {
@@ -107,7 +108,7 @@ export class ShoppingCartService {
   changeProductQuantityInCart(productId: string, quantity: number) {
     if (localStorage.getItem('response')) {
       const body = { productId, quantity }; 
-      this.http.post(`https://localhost:7120/api/Carts/ChangeProductQuantityInCart`, body).subscribe({
+      this.http.get(`https://localhost:7120/api/Carts/ChangeProductQuantityInCart/${productId}/${quantity}`).subscribe({
         next: (res: any) => {
           this.GetAllCarts();
         },
@@ -131,7 +132,7 @@ export class ShoppingCartService {
           this.http.get(`https://localhost:7120/api/Carts/CheckProductQuantityIsAvailable/${productId}/${quantity}`).subscribe({
             next: (res: any) => {
               product.quantity = quantity;
-              localStorage.setItem('shopCarts', JSON.stringify(this.shoppingCarts));
+              localStorage.setItem('shoppingCarts', JSON.stringify(this.shoppingCarts));
             },
           });
         }
@@ -155,11 +156,11 @@ export class ShoppingCartService {
           });
         } else {
           this.shoppingCarts.splice(index, 1);
-          localStorage.setItem("shopCarts", JSON.stringify(this.shoppingCarts));
+          localStorage.setItem("shoppingCarts", JSON.stringify(this.shoppingCarts));
           this.count = this.shoppingCarts.length;
           this.calcTotal();
           this.shippingControl();
-          localStorage.setItem("prodctPrices", JSON.stringify([{ currency: '₺', value: this.total }]));
+          localStorage.setItem("productPrices", JSON.stringify([{ currency: 'TRY', value: this.total }]));
         }
       });
     })
@@ -201,7 +202,7 @@ export class ShoppingCartService {
       this.total += price;
     }
 
-    localStorage.setItem('prices', JSON.stringify([{ currency: '₺', value: this.total }]));
+    localStorage.setItem('prices', JSON.stringify([{ currency: 'TRY', value: this.total }]));
   }
 
   shippingControl() {

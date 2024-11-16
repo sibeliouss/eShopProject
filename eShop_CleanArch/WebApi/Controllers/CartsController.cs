@@ -1,10 +1,10 @@
-using Application.Features.Baskets.Commands.Create;
-using Application.Features.Baskets.Dtos;
-using Application.Features.Baskets.Queries;
-using Application.Features.Baskets.Queries.Responses;
+
+using Application.Features.Carts.Commands.Create;
 using Application.Features.Carts.Commands.Delete;
 using Application.Features.Carts.Commands.Payment;
-using Application.Features.Carts.Commands.Update;
+using Application.Features.Carts.Dtos;
+using Application.Features.Carts.Queries;
+using Application.Features.Carts.Queries.Responses;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -73,17 +73,22 @@ public class CartsController : ControllerBase
         }
     }
 
-    [HttpPost]
-    public async Task<IActionResult> ChangeProductQuantityInCart([FromBody] ChangeProductQuantityInCartCommand command)
+   
+    
+    [HttpGet("{productId:guid}/{quantity:int}")]
+    public async Task<IActionResult> ChangeProductQuantityInCart(Guid productId, int quantity)
     {
         try
         {
+            
+            var command = new ChangeProductQuantityInCart(productId, quantity);
             await _mediator.Send(command);
             return NoContent();
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message); 
+            // Hata mesajı döndürüyoruz
+            return StatusCode(422, new { message = ex.Message });
         }
     }
 

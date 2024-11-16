@@ -1,5 +1,6 @@
 using Application.Features.Products.Constants;
 using Application.Services.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Products.Rules;
 
@@ -19,8 +20,8 @@ public class ProductBusinessRules
     
     public async Task ProductNameAlreadyExists(string name)
     {
-        var productExists = await _productRepository.AnyAsync(p => p.Name == name);
-        if (productExists)
+        var productExists = await _productRepository.Query().Where(p => p.Name == name).FirstOrDefaultAsync();
+        if (productExists is not null)
         {
             ThrowBusinessException(ProductMessages.ProductAlreadyExists);
         }

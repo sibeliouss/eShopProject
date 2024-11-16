@@ -1,5 +1,6 @@
 using Application.Services.Repositories;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Products;
 
@@ -20,6 +21,13 @@ public class ProductService : IProductService
     {
         return await _productRepository.GetByIdAsync(id);
     }
+    
+    public async Task<Product?> FindAsync(Guid id)
+    {
+        return await _productRepository.FindAsync(id); 
+    }
+    
+  
 
     public async Task UpdateAsync(Product product)
     {
@@ -30,4 +38,5 @@ public class ProductService : IProductService
     {
         await _productRepository.UpdateRangeAsync(products);  // IProductRepository'deki metodu çağırıyoruz
     }
+
 }

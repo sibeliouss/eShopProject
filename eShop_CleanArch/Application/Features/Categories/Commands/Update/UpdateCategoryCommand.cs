@@ -41,7 +41,7 @@ public class UpdateCategoryCommand : IRequest<UpdatedCategoryResponse>
                 throw new ValidationException(validationResult.Errors);
             }
             
-            var category = await _categoryRepository.GetByIdAsync(request.Id);
+            var category = await _categoryRepository.FindAsync(request.Id);
             if (category == null)
             {
                 throw new Exception(CategoryMessages.CategoryNotFound);

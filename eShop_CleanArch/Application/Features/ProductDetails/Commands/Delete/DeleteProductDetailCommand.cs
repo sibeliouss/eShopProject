@@ -17,7 +17,7 @@ public class DeleteProductDetailCommand : IRequest
         }
         public async Task Handle(DeleteProductDetailCommand request, CancellationToken cancellationToken)
         {
-            var findProductDetailId = await _productDetailRepository.GetByIdAsync(request.Id);
+            var findProductDetailId = await _productDetailRepository.FindAsync(request.Id);
             if (findProductDetailId is null)
             {
                 throw new Exception("Ürün kaydı bulunamadı");

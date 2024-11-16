@@ -1,5 +1,5 @@
 using System.Globalization;
-using Application.Features.Baskets.Dtos;
+using Application.Features.Carts.Dtos;
 using Application.Services.Orders;
 using Application.Services.Products;
 using Application.Services.Repositories;
@@ -33,92 +33,90 @@ public class PaymentCommandHandler : IRequestHandler<PaymentCommand>
         _userService = userService;
         _orderService = orderService;
     }
-    
+
     public async Task Handle(PaymentCommand request, CancellationToken cancellationToken)
     {
         var paymentRequest = request.PaymentDto; 
-        var currency = ""; 
         double total = 0; 
-        var shippingAndCartTotal = Convert.ToDouble(paymentRequest.ShippingAndCartTotal); // Sepet ve kargo toplamı
-        
+        var shippingAndCartTotal = Convert.ToDouble(paymentRequest.ShippingAndCartTotal);
+
+        // Ürün stoğu kontrolü
         foreach (var item in paymentRequest.Products)
         {
-            var checkProduct = await _productService.GetByIdAsync(item.Id); 
-            if (checkProduct is not null)
+            var product = await _productService.Query()
+                .AsNoTracking()  // Takip etmeyin
+                .FirstOrDefaultAsync(p => p.Id == item.Id);
+
+            if (product == null || item.Quantity > product.Quantity)
             {
-                if (item.Quantity > checkProduct.Quantity) 
-                    throw new Exception("ürün stoğu yetersiz. lütfen daha az ürün ile tekrar deneyin");
+                throw new Exception("Ürün stoğu yetersiz. Lütfen daha az ürün ile tekrar deneyin.");
             }
         }
-        
+
+        // Toplam tutar hesaplaması
         foreach (var product in paymentRequest.Products)
         {
-            total += Convert.ToDouble(product.Price.Value); // Her ürünün fiyatı toplam fiyata ekleniyor
+            total += Convert.ToDouble(product.Price.Value);
         }
-        
-        if (paymentRequest.Currency == "TRY")
+
+        // Iyzipay ödeme işlemi
+        var options = new Options
         {
-            currency = "TRY";
-        }
+            ApiKey = "sandbox-eD7ko3qqCk1xnw4TXD7GGwZqaOXRFQ4m",
+            SecretKey = "sandbox-yjOKSl0aC3EeVmnN0XJCgHvGWM46Sx8W",
+            BaseUrl = "https://sandbox-api.iyzipay.com"
+        };
 
-        // Iyzipay
-        var options = new Options();
-        options.ApiKey = "sandbox-eD7ko3qqCk1xnw4TXD7GGwZqaOXRFQ4m";
-        options.SecretKey = "sandbox-yjOKSl0aC3EeVmnN0XJCgHvGWM46Sx8W"; 
-        options.BaseUrl = "https://sandbox-api.iyzipay.com"; 
-
-        // Ödeme talebi
         var requestPayment = new CreatePaymentRequest();
-        requestPayment.Locale = Locale.TR.ToString(); 
+        requestPayment.Locale = Locale.TR.ToString();
         requestPayment.ConversationId = Guid.NewGuid().ToString();
         requestPayment.Price = total.ToString("F2", CultureInfo.InvariantCulture); // Ürünlerin toplam fiyatı
         requestPayment.PaidPrice = shippingAndCartTotal.ToString("F2", CultureInfo.InvariantCulture); // Ödenen toplam tutar (ürünler + kargo)
-        requestPayment.Currency = currency; 
+        requestPayment.Currency = "TRY"; 
         requestPayment.Installment = 1; // Taksit sayısı (1: Tek çekim)
         requestPayment.BasketId = _orderService.GetNewOrderNumber(); 
         requestPayment.PaymentChannel = PaymentChannel.WEB.ToString(); 
         requestPayment.PaymentGroup = PaymentGroup.PRODUCT.ToString(); 
-        
-        requestPayment.PaymentCard = paymentRequest.PaymentCard; // Müşteri tarafından girilen ödeme kartı bilgileri
+
+        // Müşteri tarafından girilen ödeme kartı bilgileri
+        requestPayment.PaymentCard = paymentRequest.PaymentCard; 
 
         // Alıcı bilgileri
         Buyer buyer = paymentRequest.Buyer;
-        buyer.Id = Guid.NewGuid().ToString(); 
-        requestPayment.Buyer = paymentRequest.Buyer;
-        
+        buyer.Id = Guid.NewGuid().ToString(); // buyerId'yi burada ekliyoruz
+        requestPayment.Buyer = buyer; // Buyer bilgilerini ödeme talebine ekliyoruz
+
+
         requestPayment.ShippingAddress = paymentRequest.Address; 
         requestPayment.BillingAddress = paymentRequest.BillingAddress;
 
-        var basketItems = new List<BasketItem>();
-        foreach (var product in paymentRequest.Products)
+        // Sepet ürünleri
+        var basketItems = paymentRequest.Products.Select(product => new BasketItem
         {
-            var item = new BasketItem();
-            item.Category1 = "Giyim";
-            item.Category2 = "Ev & Dekorasyon";
-            item.Id = product.Id.ToString();
-            item.Name = product.Name;
-            item.ItemType = BasketItemType.PHYSICAL.ToString();
-            item.Price = product.Price.Value.ToString("F2", CultureInfo.InvariantCulture);
-            basketItems.Add(item);
-
-        }
+            Category1 = "Giyim",
+            Category2 = "Ev & Dekorasyon",
+            Id = product.Id.ToString(),
+            Name = product.Name,
+            ItemType = BasketItemType.PHYSICAL.ToString(),
+            Price = product.Price.Value.ToString("F2", CultureInfo.InvariantCulture)
+        }).ToList();
 
         requestPayment.BasketItems = basketItems;
 
         var payment = Iyzipay.Model.Payment.Create(requestPayment, options);
-        Console.WriteLine(payment);
 
         if (payment.Status == "success")
         {
             foreach (var item in paymentRequest.Products)
             {
-                var product = await _productService.GetByIdAsync(item.Id);
-                if (product is not null && item.Quantity <= product.Quantity)
+                var product = await _productService.FindAsync(item.Id);
+                if (product != null && product.Quantity >= item.Quantity)
                 {
                     product.Quantity -= item.Quantity;
                 }
+
+                if (product != null) await _productService.UpdateAsync(product);
             }
-            await _productService.UpdateRangeAsync(paymentRequest.Products);
 
             var orderNumber = _orderService.GetNewOrderNumber();
             var totalProductQuantity = paymentRequest.Products.Sum(p => p.Quantity);
@@ -131,7 +129,7 @@ public class PaymentCommandHandler : IRequestHandler<PaymentCommand>
                 PaymentMethod = "Kredi Kartı",
                 PaymentNumber = payment.PaymentId,
                 Status = "BeingPrepared",
-                PaymentCurrency = paymentRequest.Currency,
+                PaymentCurrency = "TRY",
                 ProductQuantity = totalProductQuantity,
                 CreateAt = DateTime.Now,
                 OrderDetails = paymentRequest.Products.Select(p => new OrderDetail
@@ -144,13 +142,14 @@ public class PaymentCommandHandler : IRequestHandler<PaymentCommand>
 
             await _orderService.AddAsync(order);
 
-            var user = await _userService.GetUserByIdAsync(paymentRequest.UserId);
+            var user = await _userService.FindAsync(paymentRequest.UserId);
             if (user is not null)
             {
-                var baskets = await _cartRepository.Query().Where(p => p.UserId == paymentRequest.UserId).ToListAsync(cancellationToken);
+                var baskets = await _cartRepository.Query()
+                    .Where(p => p.UserId == paymentRequest.UserId)
+                    .ToListAsync(cancellationToken);
                 await _cartRepository.DeleteRangeAsync(baskets);
             }
-            
         }
         else
         {

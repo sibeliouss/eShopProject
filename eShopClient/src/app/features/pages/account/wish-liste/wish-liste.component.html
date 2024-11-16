@@ -1,8 +1,13 @@
 
 
-<div class="container mt-5 mr-5">
+<div class="container">
     <div class="row">
-        <div class="content-area col-md-10" *ngIf="wishlist.wishListItems.length>0">
+      <div class="col-12">
+        <div class="pt-5">
+
+          <h6 class="baslik mb-5">{{'wishList' |
+            translate}}</h6>
+          <div class="content-area col-md-10" *ngIf="wishlist.wishListItems.length>0">
             <div class="entry-content">
               <div>
                 <div class="table-responsive" >
@@ -54,6 +59,9 @@
                   {{'noProducts' | translate}}</h6>
           </div>
         </div>
+        </div>
+      </div>
+      
         
       </div>
 </div>

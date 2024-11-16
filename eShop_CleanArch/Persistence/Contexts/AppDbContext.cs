@@ -34,5 +34,6 @@ public class AppDbContext : DbContext
         builder.Ignore<IdentityUserToken<Guid>>();
         
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        
     }
 }

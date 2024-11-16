@@ -13,8 +13,8 @@ export class BuyerModel {
     identityNumber: string = "11111111111";
     email: string = "sibelmozturk@hotmail.com";
     gsmNumber: string = "05555000000";
-    registrationDate: string = "2024-05-11 12:12:12";
-    lastLoginDate: string = "2024-10-21 18:18:18";
+    registrationDate: string = "2013-04-21 15:12:09";
+    lastLoginDate: string = "2015-10-05 12:43:35";
     registrationAddress: string = "test";
     city: string = "test";
     country: string = "test";
@@ -25,7 +25,7 @@ export class BuyerModel {
 
 export class PaymentCardModel {
     cardHolderName: string = "Sibel Öztürk ";
-    cardNumber: string = "5528790000000008";
+    cardNumber: string = "5400360000000003";
     expireYear: string = "2032";
     expireMonth: string = "11";
     cvc: string = "123";
