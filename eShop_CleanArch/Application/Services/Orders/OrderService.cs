@@ -2,6 +2,7 @@
 
 using Application.Services.Repositories;
 using Domain.Entities;
+using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Orders;
@@ -35,7 +36,7 @@ namespace Application.Services.Orders;
             }
             else
             {
-                newOrderNumber += "000000001";
+                newOrderNumber += "000000011";
             }
             
             return newOrderNumber;
@@ -69,6 +70,16 @@ namespace Application.Services.Orders;
 
 
         
+        
+        /*public async Task<List<Order>> GetOrdersByUserAndProductAsync(Guid userId, Guid productId)
+        {
+            return await _orderRepository.Query()
+                .Include(o => o.OrderDetails) 
+                .Where(o => o.UserId == userId && 
+                            (o.Status == OrderStatusEnum.Delivered) && 
+                            o.OrderDetails.Any(od => od.ProductId == productId))
+                .ToListAsync();
+        }*/
         
         public async Task<List<Order>> GetOrdersByUserAndProductAsync(Guid userId, Guid productId)
         {

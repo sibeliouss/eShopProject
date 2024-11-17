@@ -16,6 +16,8 @@ import { ProductListByCategoryComponent } from './features/pages/product-list-by
 import { SearchComponent } from './features/pages/search/search.component';
 import { CartComponent } from './features/pages/cart/cart.component';
 import { CheckoutComponent } from './features/pages/checkout/checkout.component';
+import { OrderDetailComponent } from './features/pages/account/orders/order-detail/order-detail.component';
+import { OrderReceivedComponent } from './features/pages/order-received/order-received.component';
 
 
 
@@ -40,6 +42,8 @@ export const routes: Routes = [
     {path: "search", component: SearchComponent},
     {path: "cart", component: CartComponent},
     {path: "checkout", component: CheckoutComponent},
+    {path: "detail-orders/:order-id",component: OrderDetailComponent},
+    {path: "order-received",component: OrderReceivedComponent },
    
    
    

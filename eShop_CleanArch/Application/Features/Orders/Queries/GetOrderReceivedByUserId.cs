@@ -1,4 +1,5 @@
 using Application.Features.Orders.Dtos;
+using Application.Features.Orders.Helpers;
 using Application.Features.Orders.Queries.Responses;
 using Application.Services.Repositories;
 using Domain.Entities.ValueObjects;
@@ -36,6 +37,7 @@ public class GetOrderReceivedByUserId : IRequest<GetOrderReceivedByUserIdRespons
                 PaymentMethod = order.PaymentMethod,
                 PaymentNumber = order.PaymentNumber,
                 Status = order.Status,
+                // Status = OrderStatusHelper.GetLocalizedStatus(order.Status, "tr"),
                 Products = order.OrderDetails.Select(orderDetail => new OrderDetailDto()
                 {
                     ProductId = orderDetail.ProductId,

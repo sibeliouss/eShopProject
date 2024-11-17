@@ -6,6 +6,7 @@ using Application.Services.Repositories;
 using Application.Services.Users;
 using Domain.Entities;
 using Domain.Entities.ValueObjects;
+using Domain.Enums;
 using Iyzipay;
 using Iyzipay.Model;
 using Iyzipay.Request;
@@ -128,7 +129,8 @@ public class PaymentCommandHandler : IRequestHandler<PaymentCommand>
                 PaymentDate = DateTime.Now,
                 PaymentMethod = "Kredi Kartı",
                 PaymentNumber = payment.PaymentId,
-                Status = "BeingPrepared",
+                Status = "Onay Bekliyor",
+                //Status = OrderStatusEnum.AwaitingApproval,
                 PaymentCurrency = "TRY",
                 ProductQuantity = totalProductQuantity,
                 CreateAt = DateTime.Now,

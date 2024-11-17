@@ -312,7 +312,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderStats");
+                    b.ToTable("OrderStats", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
@@ -693,7 +693,7 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Domain.Entities.ValueObjects.Money", "Price", b1 =>
+                    b.OwnsOne("Domain.Entities.Cart.Price#Domain.Entities.ValueObjects.Money", "Price", b1 =>
                         {
                             b1.Property<Guid>("CartId")
                                 .HasColumnType("uniqueidentifier");
@@ -708,7 +708,7 @@ namespace Persistence.Migrations
 
                             b1.HasKey("CartId");
 
-                            b1.ToTable("Carts");
+                            b1.ToTable("Carts", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("CartId");
@@ -747,7 +747,7 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Domain.Entities.ValueObjects.Money", "Price", b1 =>
+                    b.OwnsOne("Domain.Entities.OrderDetail.Price#Domain.Entities.ValueObjects.Money", "Price", b1 =>
                         {
                             b1.Property<Guid>("OrderDetailProductId")
                                 .HasColumnType("uniqueidentifier");
@@ -765,7 +765,7 @@ namespace Persistence.Migrations
 
                             b1.HasKey("OrderDetailProductId", "OrderDetailOrderId");
 
-                            b1.ToTable("OrderDetails");
+                            b1.ToTable("OrderDetails", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderDetailProductId", "OrderDetailOrderId");
@@ -781,7 +781,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
                 {
-                    b.OwnsOne("Domain.Entities.ValueObjects.Money", "Price", b1 =>
+                    b.OwnsOne("Domain.Entities.Product.Price#Domain.Entities.ValueObjects.Money", "Price", b1 =>
                         {
                             b1.Property<Guid>("ProductId")
                                 .HasColumnType("uniqueidentifier");
@@ -796,7 +796,7 @@ namespace Persistence.Migrations
 
                             b1.HasKey("ProductId");
 
-                            b1.ToTable("Products");
+                            b1.ToTable("Products", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ProductId");
@@ -880,7 +880,7 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Domain.Entities.ValueObjects.Money", "Price", b1 =>
+                    b.OwnsOne("Domain.Entities.WishList.Price#Domain.Entities.ValueObjects.Money", "Price", b1 =>
                         {
                             b1.Property<Guid>("WishListId")
                                 .HasColumnType("uniqueidentifier");
@@ -895,7 +895,7 @@ namespace Persistence.Migrations
 
                             b1.HasKey("WishListId");
 
-                            b1.ToTable("WishLists");
+                            b1.ToTable("WishLists", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("WishListId");

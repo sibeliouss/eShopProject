@@ -63,7 +63,7 @@
     "allCategories": "All Categories",
     "allProducts": "All Products",
     "productAddedtoCart": "Product added to cart!",
-    "addToCart": "Sepete ekle",
+    "addToCart": "Add to Cart",
     "cart": "Cart",
    "cartDetail": "Cart Detail",
    "yourCart": "Your cart",
@@ -93,9 +93,17 @@
       "cancelButton": "Cancel",
       "confirmButton": "Confirm"
     },
-    "view": "View",
+    
     "noProducts": "There are no products in the wishlist.",
     "detail":"Detay",
+    
+    "date": "Date",
+    "staus": "Status",
+    "actions": "Actions",
+    "item": "Item",
+    "view": "View",
+    "No order has ever been placed.": "No order has ever been placed.",
+
     
     "quantity": "Quantity",
     "total": "Total",
@@ -155,6 +163,9 @@
     "cvc": "CVC",
     "sampleCvcNumber": "Sample CVC Number",
     "placeOrder": "Place Order",
+    "noProductsFound": "No products found matching your criteria.",
+    "removeOrder": "Remove Order",
+  
  
 
    "login": {

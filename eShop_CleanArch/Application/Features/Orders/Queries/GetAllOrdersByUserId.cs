@@ -1,3 +1,4 @@
+using Application.Features.Orders.Helpers;
 using Application.Features.Orders.Queries.Responses;
 using Application.Services.Repositories;
 using MediatR;
@@ -36,6 +37,7 @@ public class GetAllOrdersByUserId : IRequest<List<GetAllOrdersByUserIdResponse>>
             CreateAt = o.CreateAt,
             ProductQuantity = o.ProductQuantity,
             Status = o.Status,
+            // Status = OrderStatusHelper.GetLocalizedStatus(o.Status, "tr"),
             PaymentCurrency = o.PaymentCurrency
          }).ToList();
 

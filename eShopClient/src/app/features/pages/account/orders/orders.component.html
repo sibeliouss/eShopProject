@@ -1,1 +1,45 @@
-<p>orders works!</p>
+<div class="container">
+  <div class="row">
+    <!-- Siparişler listesi -->
+    <div class="col-md-9" *ngIf="orders.length > 0">
+      <div class="pt-5 pl-md-5 pt-lg-8 pl-lg-9 space-bottom-lg-2 mb-lg-4">
+        <h6 class="font-weight-medium font-size-7 ml-lg-1 mb-lg-8 pb-xl-1">{{ 'orders' | translate }}</h6>
+        
+        <div class="list-group">
+          <div class="list-group-item list-group-item-action mb-3 shadow-sm" *ngFor="let o of orders">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="mb-1 text-primary">{{ 'Order Number' | translate }}: {{ o.orderNumber }}</h5>
+                <p class="mb-1 text-muted">{{ 'date' | translate }}: {{ o.createAt | date: 'dd.MM.yyyy HH:mm' }}</p>
+              </div>
+              
+              <span>
+                {{ o.status }}
+              </span>
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <p class="mb-0">{{ 'quantity' | translate }}: {{ o.productQuantity }} {{ 'item' | translate }}</p>
+              
+              <!-- Butonlar için yeni div -->
+              <div class="ml-5">
+                <a routerLink="/detail-orders/{{ o.id }}" class="btn btn-info">{{ 'view' | translate }}</a>
+                <button (click)="deleteOrder(o.id)" class="btn btn-danger  ml-5">{{ 'removeOrder' | translate }}</button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sipariş yoksa gösterilecek içerik -->
+    <div class="col-md-9" *ngIf="orders.length === 0">
+      <div class="pt-5 pl-md-5 pt-lg-8 pl-lg-9 space-bottom-lg-2 mb-lg-4">
+        <h6 class="font-weight-medium font-size-7 ml-lg-1 mb-lg-8 pb-xl-1">
+          {{ 'No order has ever been placed.' | translate }}
+        </h6>
+      </div>
+    </div>
+  </div>
+</div>

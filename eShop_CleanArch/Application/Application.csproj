@@ -25,7 +25,6 @@
     <ItemGroup>
       <Folder Include="Features\Carts\Commands\Update\" />
       <Folder Include="Features\Carts\Constants\" />
-      <Folder Include="Features\Orders\Commands\Delete\" />
       <Folder Include="Features\Orders\Commands\Update\" />
       <Folder Include="Features\Orders\Constants\" />
       <Folder Include="Features\Orders\Profiles\" />

@@ -1,3 +1,4 @@
+using Application.Features.Orders.Commands.Delete;
 using Application.Features.Orders.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -45,5 +46,13 @@ public class OrdersController : ControllerBase
 
         var result = await _mediator.Send(query);
         return Ok(result);
+    }
+    
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeleteOrder(Guid id)
+    {
+        var command = new DeleteOrderCommand { Id = id };
+        await _mediator.Send(command);
+        return NoContent();
     }
 }

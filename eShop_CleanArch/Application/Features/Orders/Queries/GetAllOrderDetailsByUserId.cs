@@ -1,7 +1,9 @@
 using Application.Features.Orders.Dtos;
+using Application.Features.Orders.Helpers;
 using Application.Features.Orders.Queries.Responses;
 using Application.Services.Repositories;
 using Domain.Entities;
+using Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,7 +44,9 @@ public class GetAllOrderDetailsByUserId : IRequest<GetAllOrderDetailsByUserIdRes
                 CreateAt = order.CreateAt,
                 PaymentMethod = order.PaymentMethod,
                 Status = order.Status,
+                //Status = OrderStatusHelper.GetLocalizedStatus(order.Status, "tr"),
                 PaymentCurrency = order.PaymentCurrency,
+                PaymentNumber = order.PaymentNumber,
                 Products = order.OrderDetails.Select(od => new OrderDetailDto
                 {
                     ProductId = od.ProductId,

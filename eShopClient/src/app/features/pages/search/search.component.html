@@ -1,26 +1,28 @@
 <div class="container mt-5">
-    <div *ngIf="filteredProducts.length === 0" class="text-center text-muted my-5">
-      <h4>Aradığınız kriterlere uygun ürün bulunamadı.</h4>
-    </div>
-    
-    <div *ngIf="filteredProducts.length > 0" class="row d-flex justify-content-center">
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let item of filteredProducts">
-        <div class="prd-main-wrapper shadow-sm rounded p-3">
-          <div class="prd-wrapper text-center">
-            <img [src]="item.img" alt="Product Image" class="img-fluid mb-3 rounded" width="100" height="120">
-          </div>
-          <div class="prd-content">
-            <div class="prd-card-wrapper">
-              <div class="prd-infos">
-                <h5 class="card-title mb-2 text-dark fw-bold">{{ item.name }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ item.brand }}</h6>
-                <span class="text-primary">{{ item.price.value }} {{ item.price.currency }}</span>
-              </div>
-              <button class="btn btn-primary btn-sm w-100 mt-3">Add to Cart</button>
+  <div *ngIf="filteredProducts.length === 0" class="text-center text-muted my-5">
+    <h4>{{ 'noProductsFound' | translate }}</h4>
+  </div>
+  
+  <div *ngIf="filteredProducts.length > 0" class="row d-flex justify-content-center">
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let item of filteredProducts">
+      <div class="prd-main-wrapper shadow-sm rounded p-3">
+        <div class="prd-wrapper text-center">
+          <img [src]="item.img" alt="Product Image" class="img-fluid mb-3 rounded" width="100" height="120">
+        </div>
+        <div class="prd-content">
+          <div class="prd-card-wrapper">
+            <div class="prd-infos">
+              <h5 class="card-title mb-2 text-dark fw-bold">{{ item.name }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ item.brand }}</h6>
+              <span class="text-primary">{{ item.price.value }} {{ item.price.currency }}</span>
             </div>
+            <button class="btn btn-sm w-100 mt-3" routerLink="/single-product/{{item.id}}">
+              {{ 'view' | translate }}
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+
+</div>

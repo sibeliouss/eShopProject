@@ -25,7 +25,7 @@ export class ShoppingCartService {
   constructor(private translate: TranslateService,
               private http: HttpClient, 
               private swal: SwalService,
-              private auth: AuthService) {
+              private auth: AuthService, private router: Router) {
     this.GetAllCarts();
     this.shippingAndCartTotal();
   }
@@ -175,6 +175,9 @@ export class ShoppingCartService {
             this.swal.callToast(res, 'success');
           }
         );
+        setTimeout(() => {
+          this.router.navigate(['/order-received']);
+        }, 2000);
       },
       error: (err) => {
         console.error("Error in payment:", err);

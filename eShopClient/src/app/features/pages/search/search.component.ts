@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProductListService } from '../../services/product-list.service';
 import { CommonModule } from '@angular/common';
 import { ProductModel } from '../../models/product';
+import { TranslateModule } from '@ngx-translate/core';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule, RouterModule],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
 
   
-
+  product: ProductModel|null=null;
   productList: ProductModel[] = [];
   filteredProducts: ProductModel[] = [];
   productFilter: string = '';
@@ -22,7 +24,8 @@ export class SearchComponent {
   constructor(
     private productService: ProductListService, 
     private router: Router, 
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private shopping: ShoppingCartService
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +52,9 @@ export class SearchComponent {
       product.productDetail.material.toLowerCase().includes(this.productFilter.toLowerCase())
     );
   }
+  
+  
+  
 
  
 }

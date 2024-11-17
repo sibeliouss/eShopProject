@@ -14,6 +14,7 @@ public class Order : Entity<Guid>
    
    public string PaymentNumber { get; set; } 
    public string Status { get; set; }
+  // public OrderStatusEnum Status { get; set; }
    public string PaymentCurrency { get; set; } 
    public ICollection<OrderDetail> OrderDetails { get; set; }
 }

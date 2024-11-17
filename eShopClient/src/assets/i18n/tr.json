@@ -91,9 +91,14 @@
     "doYouWantToDeleted": "Silmek istiyor musunuz?",
     "cancelButton": "Vazgeç",
     "confirmButton": "Sil"},
-   "view": "Görüntüle",
    "noProducts": "Favorilerinizde herhangi bir ürün bulunmamaktadır.",
    "detail":"Detay",
+   "date": "Tarih",
+   "staus": "Durum",
+   "actions": "İşlemler",
+   "item": "Ürün",
+   "view": "Görüntüle",
+   "No order has ever been placed.": "Hiç sipariş verilmedi.",
     
      
   "quantity": "Adet",
@@ -156,6 +161,9 @@
   "cvc": "CVC",
   "sampleCvcNumber": "Örnek CVC Numarası",
   "placeOrder": "Siparişi Ver",
+  "noProductsFound": "Aradığınız kriterlere uygun ürün bulunamadı.",
+  "removeOrder": "Siparişi Kaldır",
+
  
 
    
