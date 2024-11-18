@@ -2,6 +2,7 @@ using Application.Features.ProductDiscounts.Commands.Create;
 using Application.Features.ProductDiscounts.Commands.Delete;
 using Application.Features.ProductDiscounts.Commands.Update;
 using Application.Features.ProductDiscounts.Dtos;
+using Application.Features.ProductDiscounts.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,5 +46,23 @@ public class ProductDiscountsController : ControllerBase
         var command = new DeleteProductDiscountCommand() { Id = id };
         await _mediator.Send(command);
         return NoContent();
+    }
+    
+    [HttpGet("{productId:guid}")]
+    public async Task<IActionResult> GetProductDiscountById(Guid productId)
+    {
+        var query = new GetProductDiscountByIdQuery(productId);
+        var result = await _mediator.Send(query);
+        return Ok(result);  
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetAllProductDiscounts()
+    {
+        var query = new GetProductDiscountsQuery();
+        var result = await _mediator.Send(query);
+        
+
+        return Ok(result);  
     }
 }
