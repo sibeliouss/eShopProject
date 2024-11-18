@@ -1,1 +1,81 @@
-<p>order-detail works!</p>
+<section class="order-details-section">
+    <main class="content">
+        <!-- Başlık -->
+        <div class="order-header text-center">
+            <h2 class="title">{{ 'orderReceived' | translate }}!</h2>
+            <p class="subtitle">
+                <i class="icon flaticon-warranty"></i> {{ 'thankyouorder' | translate }}
+            </p>
+        </div>
+
+        <!-- Sipariş Bilgileri -->
+        <div class="order-info-card">
+            <div class="order-info-row">
+                <div>
+                    <strong>{{ 'orderNumber' | translate }}: </strong> 
+                    <span>{{ orders[0].orderNumber }}</span>
+                </div>
+                <div>
+                    <strong>{{ 'date' | translate }}: </strong> 
+                    <span>{{ orders[0].createAt | date: 'dd.MM.yyyy' }}</span>
+                </div>
+            </div>
+            <div class="order-info-row">
+                <div>
+                    <strong>{{ 'total' | translate }}: </strong> 
+                    <span *ngIf="calcTotal() < 500">{{ calcTotal() + 50 }} TL</span>
+                    <span *ngIf="calcTotal() >= 500">{{ calcTotal() }} TL</span>
+                </div>
+                <div>
+                    <strong>{{ 'paymentMethod' | translate }}: </strong> 
+                    <span>{{ orders[0].paymentMethod }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sipariş Detayları -->
+        <div class="order-details-card">
+            <h3 class="section-title">{{ 'orderDetails' | translate }}</h3>
+            <div class="product-list">
+                <div *ngFor="let product of orders[0]?.products" class="product-item">
+                    <div class="product-info">
+                        <h4>{{ product.name }}  <span class="quantity"> x {{ product.quantity }}</span></h4>
+                        <p class="brand">{{ product.brand }}</p>
+                       
+                    </div>
+                    <div class="product-price">
+                        {{ product.price.value }} {{ product.price.currency }}
+                    </div>
+
+                    <div class="add-comment" *ngIf="addComment">
+                        <a [routerLink]="'/single-product/' + product.productId">
+                            <button class="btn btn-primary">{{ 'addAComment' | translate }}</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+
+        <!-- Toplam Tutar -->
+        <div class="order-summary">
+            <h3 class="section-title">{{ 'orderSummary' | translate }}</h3>
+            <div class="summary-item">
+                <span>{{ 'subtotal' | translate }}: </span>
+                <span>{{ calcTotal() }} TL</span>
+            </div>
+            <div class="summary-item">
+                <span>{{ 'shipping' | translate }}: </span>
+                <span *ngIf="calcTotal() < 500">50 TL</span>
+                <span *ngIf="calcTotal() >= 500">0 TL</span>
+            </div>
+            <div class="summary-total">
+                <span>{{ 'total' | translate }}: </span>
+                <span>
+                    <span *ngIf="calcTotal() < 500">{{ calcTotal() + 50 }} TL</span>
+                    <span *ngIf="calcTotal() >= 500">{{ calcTotal() }} TL</span>
+                </span>
+            </div>
+        </div>
+    </main>
+</section>

@@ -1,0 +1,114 @@
+.order-details-section {
+    font-family: Arial, sans-serif;
+    color: #333;
+
+    .order-header {
+        padding: 20px 0;
+        background-color: #f8f9fa;
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .subtitle {
+            font-size: 16px;
+            color: #a261b5;
+        }
+    }
+
+    .order-info-card {
+        margin: 20px auto;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #ffffff;
+        max-width: 600px;
+
+        .order-info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+
+            div {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .order-details-card {
+        margin: 20px auto;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #ffffff;
+        max-width: 600px;
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-list {
+            .product-item {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 0;
+                border-bottom: 1px solid #f1f1f1;
+
+                .product-info {
+                    h4 {
+                        font-size: 16px;
+                        margin: 0;
+                    }
+                    .brand {
+                        font-size: 14px;
+                        color: #6c757d;
+                    }
+                }
+
+                .quantity {
+                    font-size: 14px;
+                    color: #007bff;
+                }
+
+                .product-price {
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+            }
+        }
+        .add-comment {
+            margin-top: 20px;
+            text-align: center;
+
+            .btn {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .order-summary {
+        margin: 20px auto;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #ffffff;
+        max-width: 600px;
+
+        .summary-item,
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        .summary-total {
+            font-size: 16px;
+            font-weight: bold;
+            border-top: 1px solid #f1f1f1;
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+    }
+}

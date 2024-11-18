@@ -165,6 +165,14 @@
     "placeOrder": "Place Order",
     "noProductsFound": "No products found matching your criteria.",
     "removeOrder": "Remove Order",
+    "orderReceived": "Order Received",
+    "thankyouorder": "Thank you! Your order has been received",
+    "orderNumber": "Order Number",
+    "paymentMethod": "Payment Method",
+    "orderDetails": "Order Details",
+    "addAComment": "Add a Comment",
+  
+    
   
  
 

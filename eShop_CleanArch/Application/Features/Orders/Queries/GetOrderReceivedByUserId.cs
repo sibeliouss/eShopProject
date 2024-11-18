@@ -41,7 +41,7 @@ public class GetOrderReceivedByUserId : IRequest<GetOrderReceivedByUserIdRespons
                 Products = order.OrderDetails.Select(orderDetail => new OrderDetailDto()
                 {
                     ProductId = orderDetail.ProductId,
-                    Name = orderDetail.Product!.Name,
+                    Name = orderDetail.Product.Name,
                     Brand = orderDetail.Product.Brand,
                     Quantity = orderDetail.Quantity,
                     Price = new Money(orderDetail.Price.Value, orderDetail.Price.Currency)

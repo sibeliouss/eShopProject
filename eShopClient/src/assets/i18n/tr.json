@@ -163,6 +163,13 @@
   "placeOrder": "Siparişi Ver",
   "noProductsFound": "Aradığınız kriterlere uygun ürün bulunamadı.",
   "removeOrder": "Siparişi Kaldır",
+  "orderReceived": "Sipariş Alındı",
+  "thankyouorder": "Teşekkürler! Siparişiniz alındı",
+  "orderNumber": "Sipariş Numarası",
+  "paymentMethod": "Ödeme Yöntemi",
+  "orderDetails": "Sipariş Detayları",
+  "addAComment": "Yorum Ekle",
+  
 
  
 

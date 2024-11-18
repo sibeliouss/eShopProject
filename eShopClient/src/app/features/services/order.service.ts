@@ -20,8 +20,14 @@ export class OrderService {
     this.auth.checkAuthentication();
     return this.http.get<OrderModel[]>(`${this.apiUrl}GetAllOrdersByUserId/${userId}`);
   }
+
   delete(orderId: string): Observable<any> {
     this.auth.checkAuthentication();
     return this.http.delete(`${this.apiUrl}DeleteOrder/${orderId}`);
+  }
+
+  
+  getOrderDetailsByUserId(userId: string, orderId: string): Observable<OrderModel[]> {
+    return this.http.get<OrderModel[]>(`${this.apiUrl}GetOrderDetailsByUserId/${userId}/${orderId}`);
   }
 }

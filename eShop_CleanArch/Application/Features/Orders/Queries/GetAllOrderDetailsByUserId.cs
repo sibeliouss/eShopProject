@@ -51,6 +51,8 @@ public class GetAllOrderDetailsByUserId : IRequest<GetAllOrderDetailsByUserIdRes
                 {
                     ProductId = od.ProductId,
                     Quantity = od.Quantity,
+                    Brand = od.Product.Brand,
+                    Name = od.Product.Name,
                     Price = od.Price
                 }).ToList()
             };
