@@ -87,5 +87,23 @@ public class ProductsController : ControllerBase
         await _mediator.Send(command);
         return NoContent();
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetNewArrivals()
+    {
+        var query = new GetNewArrivalProductQuery();
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetFeaturedProducts()
+    {
+        
+        var query = new GetFeaturedProductsQuery();
+        var result = await _mediator.Send(query);
+
+        return Ok(result);
+    }
 
 }
