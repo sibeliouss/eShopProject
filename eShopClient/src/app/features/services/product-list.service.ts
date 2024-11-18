@@ -51,7 +51,7 @@ export class ProductListService {
         },
         error: (error) => {
           console.error("Ürünleri alırken bir hata oluştu: ", error);
-          // Hatanın detaylarını kullanıcıya iletmek için bir metod ekleyebilirsiniz
+         
         }
       });
 }
@@ -62,7 +62,7 @@ getProducts(): Observable<ProductModel[]> {
   return this.http.get<ProductModel[]>('https://localhost:7120/api/Products/GetProducts');
 }
 
-  getAllCategories(): void {
+getAllCategories(): void {
     this.http.get<CategoryModel[]>('https://localhost:7120/api/Categories/GetAllCategories')
       .subscribe({
         next: (res) => {

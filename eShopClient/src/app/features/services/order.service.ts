@@ -30,4 +30,10 @@ export class OrderService {
   getOrderDetailsByUserId(userId: string, orderId: string): Observable<OrderModel[]> {
     return this.http.get<OrderModel[]>(`${this.apiUrl}GetOrderDetailsByUserId/${userId}/${orderId}`);
   }
+
+  getOrderReceivedByUserId(): Observable<OrderModel> {
+    this.auth.checkAuthentication();  
+    const userId = this.auth.token?.userId; 
+    return this.http.get<OrderModel>(`${this.apiUrl}GetOrderReceivedByUserrId/${userId}`);
+  }
 }

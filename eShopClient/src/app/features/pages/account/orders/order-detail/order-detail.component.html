@@ -23,8 +23,7 @@
             <div class="order-info-row">
                 <div>
                     <strong>{{ 'total' | translate }}: </strong> 
-                    <span *ngIf="calcTotal() < 500">{{ calcTotal() + 50 }} TL</span>
-                    <span *ngIf="calcTotal() >= 500">{{ calcTotal() }} TL</span>
+                    <span>{{ calcTotal() < 500 ? (calcTotal() + 50) : calcTotal() }} TL</span>
                 </div>
                 <div>
                     <strong>{{ 'paymentMethod' | translate }}: </strong> 
@@ -41,7 +40,6 @@
                     <div class="product-info">
                         <h4>{{ product.name }}  <span class="quantity"> x {{ product.quantity }}</span></h4>
                         <p class="brand">{{ product.brand }}</p>
-                       
                     </div>
                     <div class="product-price">
                         {{ product.price.value }} {{ product.price.currency }}
@@ -54,7 +52,6 @@
                     </div>
                 </div>
             </div>
-           
         </div>
 
         <!-- Toplam Tutar -->
@@ -66,15 +63,11 @@
             </div>
             <div class="summary-item">
                 <span>{{ 'shipping' | translate }}: </span>
-                <span *ngIf="calcTotal() < 500">50 TL</span>
-                <span *ngIf="calcTotal() >= 500">0 TL</span>
+                <span>{{ calcTotal() < 500 ? '50' : '0' }} TL</span>
             </div>
             <div class="summary-total">
                 <span>{{ 'total' | translate }}: </span>
-                <span>
-                    <span *ngIf="calcTotal() < 500">{{ calcTotal() + 50 }} TL</span>
-                    <span *ngIf="calcTotal() >= 500">{{ calcTotal() }} TL</span>
-                </span>
+                <span>{{ calcTotal() < 500 ? (calcTotal() + 50) : calcTotal() }} TL</span>
             </div>
         </div>
     </main>
