@@ -1,1 +1,108 @@
-
+<div class="container">
+    <div class="row">
+      <!-- Tüm Ürünler Bölümü -->
+      <div class="col-12">
+        <h2 class="my-4">{{ 'ALL_PRODUCTS' | translate }}</h2>
+        <div class="row">
+          <div *ngFor="let item of product" class="col-md-3 mb-4">
+            <div class="card">
+              <img [src]="item.img" class="card-img-top" alt="product image">
+              <div class="card-body">
+                <h5 class="card-title">{{ item.name }}</h5>
+                <p class="card-text">{{ item.productDetail.description }}</p>
+                <p class="card-text">
+                  <!-- İndirimli fiyat var mı kontrolü -->
+                  <strong>
+                    <span *ngIf="item.discountedPrice; else normalPrice">
+                      {{ item.discountedPrice }} TL
+                    </span>
+                    <ng-template #normalPrice>
+                      {{ item.price.value }} TL
+                    </ng-template>
+                  </strong>
+                </p>
+                <a href="#" class="btn btn-primary">Sepete Ekle</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- İndirimli Ürünler Bölümü -->
+      <div class="col-12">
+        <h2 class="my-4">{{ 'DISCOUNTED_PRODUCTS' | translate }}</h2>
+        <div class="row">
+          <div *ngFor="let discountItem of discountProducts" class="col-md-3 mb-4">
+            <div class="card">
+              <img [src]="discountItem.productImg" class="card-img-top" alt="product image">
+              <div class="card-body">
+                <h5 class="card-title">{{ discountItem.productName }}</h5>
+                <p class="card-text">{{ discountItem.productBrand }}</p>
+                <p class="card-text">
+                  <!-- İndirimli fiyatın gösterilmesi -->
+                  <strong><span class="text-danger">{{ discountItem.discountedPrice }} TL</span></strong>
+                  <small><del>{{ discountItem.productPrice }} TL</del></small>
+                </p>
+                <a href="#" class="btn btn-primary">Sepete Ekle</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Yeni Gelenler Bölümü -->
+      <div class="col-12">
+        <h2 class="my-4">{{ 'NEW_ARRIVALS' | translate }}</h2>
+        <div class="row">
+          <div *ngFor="let newItem of newArrivalProducts" class="col-md-3 mb-4">
+            <div class="card">
+              <img [src]="newItem.img" class="card-img-top" alt="product image">
+              <div class="card-body">
+                <h5 class="card-title">{{ newItem.name }}</h5>
+                <p class="card-text">
+                  <!-- Yeni ürünlerde de indirimli fiyat kontrolü -->
+                  <strong>
+                    <span *ngIf="newItem.discountedPrice; else normalPrice">
+                      {{ newItem.discountedPrice }} TL
+                    </span>
+                    <ng-template #normalPrice>
+                      {{ newItem.price.value }} TL
+                    </ng-template>
+                  </strong>
+                </p>
+                <a href="#" class="btn btn-primary">Sepete Ekle</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Öne Çıkanlar Bölümü -->
+      <div class="col-12">
+        <h2 class="my-4">{{ 'FEATURED_PRODUCTS' | translate }}</h2>
+        <div class="row">
+          <div *ngFor="let featuredItem of featuredProducts" class="col-md-3 mb-4">
+            <div class="card">
+              <img [src]="featuredItem.img" class="card-img-top" alt="product image">
+              <div class="card-body">
+                <h5 class="card-title">{{ featuredItem.name }}</h5>
+                <p class="card-text">
+                  <!-- Öne çıkan ürünlerde de indirimli fiyat kontrolü -->
+                  <strong>
+                    <span *ngIf="featuredItem.discountedPrice; else normalPrice">
+                      {{ featuredItem.discountedPrice }} TL
+                    </span>
+                    <ng-template #normalPrice>
+                      {{ featuredItem.price.value }} TL
+                    </ng-template>
+                  </strong>
+                </p>
+                <a href="#" class="btn btn-primary">Sepete Ekle</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

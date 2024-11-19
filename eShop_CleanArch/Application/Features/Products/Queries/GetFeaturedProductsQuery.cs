@@ -25,6 +25,7 @@ public class GetFeaturedProductsQuery: IRequest<List<ProductDto>>
                 Id= p.Id,
                 Name=p.Name,
                 Brand = p.Brand,
+                Img = p.Img,
                 Price = p.Price
             }).ToList();
 

@@ -48,13 +48,13 @@ public class ProductDiscountsController : ControllerBase
         return NoContent();
     }
     
-    [HttpGet("{productId:guid}")]
+    /*[HttpGet("{productId:guid}")]
     public async Task<IActionResult> GetProductDiscountById(Guid productId)
     {
         var query = new GetProductDiscountByIdQuery(productId);
         var result = await _mediator.Send(query);
         return Ok(result);  
-    }
+    }*/
     
     [HttpGet]
     public async Task<IActionResult> GetAllProductDiscounts()
