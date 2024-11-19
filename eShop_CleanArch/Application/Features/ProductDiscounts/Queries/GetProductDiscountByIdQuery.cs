@@ -1,3 +1,4 @@
+/*
 using Application.Features.ProductDiscounts.Dtos;
 using Application.Services.Repositories;
 using MediatR;
@@ -42,7 +43,13 @@ public class GetProductDiscountByIdQueryHandler : IRequestHandler<GetProductDisc
             productDiscount.DiscountPercentage,
             productDiscount.StartDate,
             productDiscount.EndDate,
-            productDiscount.DiscountedPrice
+            productDiscount.DiscountedPrice,
+            productDiscount.Product.Brand,
+            productDiscount.Product.Name,
+            productDiscount.Product.Price,
+            productDiscount.Product.Img,
+            
         );
     }
 }
+*/

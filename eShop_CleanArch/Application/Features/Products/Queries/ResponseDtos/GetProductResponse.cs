@@ -11,6 +11,7 @@ public class GetProductResponse
     public string Img { get; set; }
     public Money Price { get; set; } = new(0, "TRY");
     public ProductDetailDto? ProductDetail { get; set; }
+    public ProductDiscountDto? ProductDiscount { get; set; }
     public bool IsFeatured { get; set; }
     public DateTime CreateAt { get; set; } = DateTime.Now;
    

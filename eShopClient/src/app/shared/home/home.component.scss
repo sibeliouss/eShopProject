@@ -1,0 +1,113 @@
+/* Kart Resmi Boyutlandırma */
+.product-card {
+    position: relative;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .card-img-container {
+    position: relative;
+  }
+  
+  .product-img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  /* İndirim Badge'i */
+  .badge-discount {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  /* Kartın üzerine gelindiğinde yazı kısmı */
+  .product-card:hover .product-img {
+    transform: scale(1.1);
+  }
+  
+  .product-card:hover .card-body {
+    transform: translateY(-10px);
+  }
+  
+  .card-body {
+    transition: transform 0.3s ease;
+  }
+  
+  /* Kart Boyutunu Küçültme */
+  .card-body h5 {
+    font-size: 16px;
+  }
+  
+  .card-body p {
+    font-size: 14px;
+  }
+  
+  .card-body a {
+    font-size: 14px;
+    padding: 10px;
+  }
+  
+  /* Tüm kartlar için bir max width ve padding */
+  .product-card {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+ // Discount Section
+.discount-section {
+    background-color: #f3e2f4; // Arka plan rengi
+    padding: 20px 0;
+    border-radius: 8px;
+  
+    .carousel-item {
+      text-align: center;
+    }
+  
+    .product-card {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-10px); // Hover efekti
+      }
+    }
+  
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+  
+    .badge-discount {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: red;
+      color: white;
+      padding: 5px;
+      font-size: 12px;
+      border-radius: 5px;
+    }
+  
+    // Carousel Button Styling
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-color: rgba(0, 0, 0, 0.5); // Okların arka planı
+      border-radius: 50%;
+    }
+  
+    .carousel-control-prev, 
+    .carousel-control-next {
+      z-index: 1;
+    }
+  }
+  

@@ -11,6 +11,7 @@ public class Product : Entity<Guid>
     public Money Price { get; set; } = new(0, "TRY");
     public int Quantity { get; set; }
     public ProductDetail? ProductDetail { get; set; }
+    public ProductDiscount? ProductDiscount { get; set; }
     public bool IsActive { get; set; } = true;
     public bool IsFeatured { get; set; } = false;
     public bool IsDeleted { get; set; } = false;

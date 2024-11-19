@@ -171,6 +171,11 @@
     "paymentMethod": "Payment Method",
     "orderDetails": "Order Details",
     "addAComment": "Add a Comment",
+    "discountedProducts": "Discounted Products",
+    "newArrivals": "New Arrivals",
+    "featuredProducts": "Featured Products",
+    "discountEndsIn": "Discount Ends In",
+    "timeLeft": "{{days}} days, {{hours}} hours, {{minutes}} minutes left",
   
     
   

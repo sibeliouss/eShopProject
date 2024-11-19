@@ -19,7 +19,12 @@ public class ProductConfiguration :IEntityTypeConfiguration<Product>
         builder.HasOne(p => p.ProductDetail)
             .WithOne(pd => pd.Product)
             .HasForeignKey<ProductDetail>(pd => pd.ProductId)
-            .OnDelete(DeleteBehavior.Cascade); // Ürün silinince detayları da silinsin
+            .OnDelete(DeleteBehavior.Cascade); 
+        
+        //projemin ihtiyacına göre one-to-one ilişki belirledim.
+        builder.HasOne(p => p.ProductDiscount)
+            .WithOne(d => d.Product)
+            .HasForeignKey<ProductDiscount>(d => d.ProductId);
         
         //Value Object
         builder.OwnsOne(p => p.Price, price =>

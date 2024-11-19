@@ -2,26 +2,31 @@
     <div class="row">
       <!-- Tüm Ürünler Bölümü -->
       <div class="col-12">
-        <h2 class="my-4">{{ 'ALL_PRODUCTS' | translate }}</h2>
+        <h2 class="my-4 text-center">{{ 'allProducts' | translate }}</h2>
         <div class="row">
           <div *ngFor="let item of product" class="col-md-3 mb-4">
-            <div class="card">
-              <img [src]="item.img" class="card-img-top" alt="product image">
+            <div class="card product-card">
+              <div class="position-relative card-img-container">
+                <img [src]="item.img" class="card-img-top product-img" alt="product image">
+                <span *ngIf="item.productDiscount?.discountPercentage" class="badge badge-discount">
+                  -%{{ item.productDiscount.discountPercentage }}
+                </span>
+              </div>
               <div class="card-body">
                 <h5 class="card-title">{{ item.name }}</h5>
                 <p class="card-text">{{ item.productDetail.description }}</p>
                 <p class="card-text">
-                  <!-- İndirimli fiyat var mı kontrolü -->
                   <strong>
-                    <span *ngIf="item.discountedPrice; else normalPrice">
-                      {{ item.discountedPrice }} TL
+                    <span *ngIf="item.productDiscount?.discountedPrice; else normalPrice">
+                      <span class="text-danger">{{ item.productDiscount.discountedPrice }} {{ item.price.currency }}</span>
+                      <small><del>{{ item.price.value }} {{ item.price.currency }}</del></small>
                     </span>
                     <ng-template #normalPrice>
-                      {{ item.price.value }} TL
+                      {{ item.price.value }} {{ item.price.currency }}
                     </ng-template>
                   </strong>
                 </p>
-                <a href="#" class="btn btn-primary">Sepete Ekle</a>
+                <a href="#" class="btn btn-primary w-100">{{ 'addToCart' | translate }}</a>
               </div>
             </div>
           </div>
@@ -29,48 +34,110 @@
       </div>
   
       <!-- İndirimli Ürünler Bölümü -->
-      <div class="col-12">
-        <h2 class="my-4">{{ 'DISCOUNTED_PRODUCTS' | translate }}</h2>
-        <div class="row">
-          <div *ngFor="let discountItem of discountProducts" class="col-md-3 mb-4">
-            <div class="card">
-              <img [src]="discountItem.productImg" class="card-img-top" alt="product image">
-              <div class="card-body">
-                <h5 class="card-title">{{ discountItem.productName }}</h5>
-                <p class="card-text">{{ discountItem.productBrand }}</p>
-                <p class="card-text">
-                  <!-- İndirimli fiyatın gösterilmesi -->
-                  <strong><span class="text-danger">{{ discountItem.discountedPrice }} TL</span></strong>
-                  <small><del>{{ discountItem.productPrice }} TL</del></small>
-                </p>
-                <a href="#" class="btn btn-primary">Sepete Ekle</a>
+      <div class="col-12 discount-section">
+        <h2 class="my-4 text-center">{{ 'discountedProducts' | translate }}</h2>
+      
+        <div id="discountCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row">
+                  <div class="col-md-4 mb-4" *ngFor="let discountItem of discountProducts.slice(0, 3)">
+                    <div class="card product-card">
+                      <div class="position-relative">
+                        <img [src]="discountItem.img" class="card-img-top" alt="product image">
+                        <span class="badge badge-discount">-%{{ discountItem.discountPercentage }}</span>
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">{{ discountItem.name }}</h5>
+                        <p class="card-text">{{ discountItem.brand }}</p>
+                        <p class="card-text">
+                          <strong>
+                            <span class="text-danger">
+                              {{ discountItem.discountedPrice }} {{ discountItem.price.currency }}
+                            </span>
+                            <small><del>{{ discountItem.price.value }} {{ discountItem.price.currency }}</del></small>
+                          </strong>
+                        </p>
+                        <p *ngIf="calculateTimeLeft(discountItem.endDate) as timeLeft">
+                          <small class="text-warning">
+                            {{ 'discountEndsIn' | translate }} {{ timeLeft }}
+                          </small>
+                        </p>
+                        <a href="#" class="btn btn-primary w-100">{{ 'addToCart' | translate }}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+          
+              <div class="carousel-item">
+                <div class="row">
+                  <div class="col-md-4 mb-4" *ngFor="let discountItem of discountProducts.slice(3, 6)">
+                    <div class="card product-card">
+                      <div class="position-relative">
+                        <img [src]="discountItem.img" class="card-img-top" alt="product image">
+                        <span class="badge badge-discount">-%{{ discountItem.discountPercentage }}</span>
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">{{ discountItem.name }}</h5>
+                        <p class="card-text">{{ discountItem.brand }}</p>
+                        <p class="card-text">
+                          <strong>
+                            <span class="text-danger">
+                              {{ discountItem.discountedPrice }} {{ discountItem.price.currency }}
+                            </span>
+                            <small><del>{{ discountItem.price.value }} {{ discountItem.price.currency }}</del></small>
+                          </strong>
+                        </p>
+                        <p *ngIf="calculateTimeLeft(discountItem.endDate) as timeLeft">
+                          <small class="text-warning">
+                            {{ 'discountEndsIn' | translate }} {{ timeLeft }}
+                          </small>
+                        </p>
+                        <a href="#" class="btn btn-primary w-100">{{ 'addToCart' | translate }}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <!-- Diğer carousel item'larını buraya ekleyebilirsiniz -->
             </div>
+          
+            <!-- Oklar -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#discountCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#discountCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
-        </div>
       </div>
-  
+          
       <!-- Yeni Gelenler Bölümü -->
       <div class="col-12">
-        <h2 class="my-4">{{ 'NEW_ARRIVALS' | translate }}</h2>
+        <h2 class="my-4 text-center">{{ 'newArrivals' | translate }}</h2>
         <div class="row">
           <div *ngFor="let newItem of newArrivalProducts" class="col-md-3 mb-4">
-            <div class="card">
-              <img [src]="newItem.img" class="card-img-top" alt="product image">
+            <div class="card product-card">
+              <div class="position-relative">
+                <img [src]="newItem.img" class="card-img-top" alt="product image">
+              </div>
               <div class="card-body">
                 <h5 class="card-title">{{ newItem.name }}</h5>
                 <p class="card-text">
-                  <!-- Yeni ürünlerde de indirimli fiyat kontrolü -->
                   <strong>
-                    <span *ngIf="newItem.discountedPrice; else normalPrice">
-                      {{ newItem.discountedPrice }} TL
+                    <span *ngIf="newItem.productDiscount?.discountedPrice; else normalPrice">
+                      {{ newItem.productDiscount.discountedPrice }} {{ newItem.price.currency }}
                     </span>
                     <ng-template #normalPrice>
-                      {{ newItem.price.value }} TL
+                      {{ newItem.price.value }} {{ newItem.price.currency }}
                     </ng-template>
                   </strong>
                 </p>
-                <a href="#" class="btn btn-primary">Sepete Ekle</a>
+                <a href="#" class="btn btn-primary w-100">{{ 'addToCart' | translate }}</a>
               </div>
             </div>
           </div>
@@ -79,25 +146,26 @@
   
       <!-- Öne Çıkanlar Bölümü -->
       <div class="col-12">
-        <h2 class="my-4">{{ 'FEATURED_PRODUCTS' | translate }}</h2>
+        <h2 class="my-4 text-center">{{ 'featuredProducts' | translate }}</h2>
         <div class="row">
           <div *ngFor="let featuredItem of featuredProducts" class="col-md-3 mb-4">
-            <div class="card">
-              <img [src]="featuredItem.img" class="card-img-top" alt="product image">
+            <div class="card product-card">
+              <div class="position-relative">
+                <img [src]="featuredItem.img" class="card-img-top" alt="product image">
+              </div>
               <div class="card-body">
                 <h5 class="card-title">{{ featuredItem.name }}</h5>
                 <p class="card-text">
-                  <!-- Öne çıkan ürünlerde de indirimli fiyat kontrolü -->
                   <strong>
-                    <span *ngIf="featuredItem.discountedPrice; else normalPrice">
-                      {{ featuredItem.discountedPrice }} TL
+                    <span *ngIf="featuredItem.productDiscount?.discountedPrice; else normalPrice">
+                      {{ featuredItem.productDiscount.discountedPrice }} {{ featuredItem.price.currency }}
                     </span>
                     <ng-template #normalPrice>
-                      {{ featuredItem.price.value }} TL
+                      {{ featuredItem.price.value }} {{ featuredItem.price.currency }}
                     </ng-template>
                   </strong>
                 </p>
-                <a href="#" class="btn btn-primary">Sepete Ekle</a>
+                <a href="#" class="btn btn-primary w-100">{{ 'addToCart' | translate }}</a>
               </div>
             </div>
           </div>

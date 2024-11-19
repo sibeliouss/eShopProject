@@ -1,5 +1,6 @@
 using Application.Features.ProductDiscounts.Dtos;
 using Application.Services.Repositories;
+using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,20 +22,24 @@ public class GetProductDiscountsQuery : IRequest<List<ProductDiscountDto>>
         public async Task<List<ProductDiscountDto>> Handle(GetProductDiscountsQuery request,
             CancellationToken cancellationToken)
         {
-      
+
             var productDiscounts = await _productDiscountRepository.Query()
-                .Where(p => p.DiscountPercentage > 0 && p.EndDate > DateTime.Now &&
-                            p.StartDate <= DateTime.Now) 
+                .Include(pd => pd.Product) 
+                .Where(pd => pd.DiscountPercentage > 0 && pd.EndDate > DateTime.Now && pd.StartDate <= DateTime.Now)
                 .ToListAsync(cancellationToken);
 
             if (productDiscounts == null || !productDiscounts.Any())
-                return new List<ProductDiscountDto>(); 
+                return new List<ProductDiscountDto>();
 
-      
+            // DTO'ya gerekli bilgileri aktar
             return productDiscounts.Select(productDiscount => new ProductDiscountDto
             (
                 productDiscount.Id,
                 productDiscount.ProductId,
+                productDiscount.Product?.Name, 
+                productDiscount.Product?.Brand , 
+                productDiscount.Product?.Img, 
+                productDiscount.Product?.Price, 
                 productDiscount.DiscountPercentage,
                 productDiscount.StartDate,
                 productDiscount.EndDate,

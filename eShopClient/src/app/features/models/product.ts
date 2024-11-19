@@ -1,5 +1,6 @@
 import { Price } from "./money";
 import { ProductDetailModel } from "./productDetail";
+import { ProductDiscountModel } from "./productDiscount";
 
 
  export interface ProductModel {
@@ -17,6 +18,8 @@ import { ProductDetailModel } from "./productDetail";
 	cartId:string;
     wishListId: string;
 	isFavorite?: boolean;
+	productDiscount: ProductDiscountModel;
+	 
 
 }
 

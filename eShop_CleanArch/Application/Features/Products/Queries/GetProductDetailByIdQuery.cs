@@ -48,6 +48,15 @@ public class GetProductDetailByIdQuery:IRequest<ProductDto>
                     Size = product.ProductDetail.Size,
                     Color = product.ProductDetail.Color
                 },
+                ProductDiscount = product.ProductDiscount != null ?  new ProductDiscountDto()
+                {
+                   Id = product.ProductDiscount.Id,
+                   ProductId = product.Id,
+                   DiscountedPrice = product.ProductDiscount.DiscountedPrice,
+                   DiscountPercentage = product.ProductDiscount.DiscountPercentage,
+                   StartDate = product.ProductDiscount.StartDate,
+                   EndDate = product.ProductDiscount.EndDate
+                }: null,
                 Img = product.Img,
                 Price = product.Price,
                 CreateAt = product.CreateAt,

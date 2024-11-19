@@ -169,6 +169,13 @@
   "paymentMethod": "Ödeme Yöntemi",
   "orderDetails": "Sipariş Detayları",
   "addAComment": "Yorum Ekle",
+  "discountedProducts": "İndirimli Ürünler",
+  "newArrivals": "Yeni Gelenler",
+  "featuredProducts": "Öne Çıkanlar",
+  "discountEndsIn": "İndirimin Bitmesine son",
+  "timeLeft": "{{days}} gün, {{hours}} saat, {{minutes}} dakika kaldı",
+  
+  
   
 
  
