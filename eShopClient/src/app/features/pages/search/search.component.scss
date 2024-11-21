@@ -1,48 +1,63 @@
 .container {
-    max-width: 1200px;
+  max-width: 1200px;
 
-    .prd-main-wrapper {
-      background-color: #ffffff;
-      transition: transform 0.3s, box-shadow 0.3s;
-      border: 1px solid #e0e0e0;
+  .prd-main-wrapper {
+    background-color: #ffffff;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #e0e0e0;
+    position: relative;
+
+    .prd-wrapper {
+      position: relative;
+
+      img {
+        max-height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+
+      .stok {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -40%);
+        background-color: rgba(255, 0, 0, 0.7);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+      }
     }
-    
-    .prd-main-wrapper:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    .img-fluid {
-      max-height: 150px;
-      object-fit: cover;
-    }
-    
-    .prd-content {
-      padding: 10px;
-    }
-    
-    .prd-infos {
-      text-align: center;
-    }
-    
-    .card-title {
-      font-size: 1.1rem;
-    }
-    
-    .card-subtitle {
-      font-size: 0.9rem;
-    }
-    
-    .btn {
-      background-color: rgba(93, 55, 102, 0.915);
-      border: none;
-      color: white;
-    }
-    
-    .btn:hover {
-     background-color:  rgba(0, 0, 0, 0.599) ;;
-    }
-    
   }
-  
-  
+
+  .prd-main-wrapper:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .prd-content {
+    padding: 10px;
+  }
+
+  .prd-infos {
+    text-align: center;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .card-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    background-color: rgba(93, 55, 102, 0.915);
+    border: none;
+    color: white;
+  }
+
+  .btn:hover {
+    background-color: rgba(0, 0, 0, 0.599);
+  }
+}

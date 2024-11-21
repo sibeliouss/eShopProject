@@ -11,5 +11,6 @@ export interface ProductDiscountModel {
 	startDate: string;
 	endDate: string;
 	discountedPrice: number;
+	quantity:number
 }
 

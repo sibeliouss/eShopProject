@@ -36,14 +36,15 @@ public class GetProductDiscountsQuery : IRequest<List<ProductDiscountDto>>
             (
                 productDiscount.Id,
                 productDiscount.ProductId,
-                productDiscount.Product?.Name, 
-                productDiscount.Product?.Brand , 
-                productDiscount.Product?.Img, 
-                productDiscount.Product?.Price, 
+                productDiscount.Product.Name, 
+                productDiscount.Product.Brand , 
+                productDiscount.Product.Img, 
+                productDiscount.Product.Price, 
                 productDiscount.DiscountPercentage,
                 productDiscount.StartDate,
                 productDiscount.EndDate,
-                productDiscount.DiscountedPrice
+                productDiscount.DiscountedPrice,
+                productDiscount.Product.Quantity
             )).ToList();
         }
     }

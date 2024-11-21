@@ -7,6 +7,7 @@ public record ProductDiscountDto
 (
     Guid Id,
     Guid ProductId,
+   // Product Product,
     string Name,
     string Brand,
     string Img, 
@@ -14,5 +15,6 @@ public record ProductDiscountDto
     int DiscountPercentage,
     DateTime StartDate,
     DateTime EndDate,
-    decimal DiscountedPrice
+    decimal DiscountedPrice,
+    int Quantity
 );

@@ -35,7 +35,7 @@ public class GetListProductQuery : IRequest<ResponseDto<List<ProductDto>>>
 
         public async Task<ResponseDto<List<ProductDto>>> Handle(GetListProductQuery request, CancellationToken cancellationToken)
         {
-            var currentDate = DateTime.UtcNow; 
+            var currentDate = DateTime.Now; 
             ResponseDto<List<ProductDto>> response = new();
             var replaceSearch = request.RequestDto.Search?.ToLower() ?? "";
 

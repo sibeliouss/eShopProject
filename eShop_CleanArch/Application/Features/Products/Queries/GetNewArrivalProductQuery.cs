@@ -18,7 +18,7 @@ public class GetNewArrivalProductQuery : IRequest<List<ProductDto>>
 
         public async Task<List<ProductDto>> Handle(GetNewArrivalProductQuery request, CancellationToken cancellationToken)
         {
-            var currentDate = DateTime.UtcNow; 
+            var currentDate = DateTime.Now; 
             var response = await _productRepository.Query().Include(p=>p.ProductDiscount)
                 .OrderByDescending(p => p.CreateAt) 
                 .Take(10) 

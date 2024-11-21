@@ -15,6 +15,9 @@
                                         <span *ngIf="product?.productDiscount?.discountPercentage" class="badge badge-discount position-absolute top-0 start-0 p-2 bg-danger text-white">
                                             -{{ product?.productDiscount?.discountPercentage }}%
                                         </span>
+                                        <p *ngIf="product?.quantity === 0" class="stok">
+                                            {{ 'outOfStock' | translate }}
+                                         </p>
                                     </figure>
                                 </div>
 
@@ -50,7 +53,8 @@
                                       
                                         <!-- Sepete Ekle Butonu -->
                                         <form class="cart d-md-flex align-items-center">
-                                            <button type="button" class="btn btn-dark rounded-0 ml-md-4" (click)="addToCart(product!)">
+                                             
+                                            <button type="button"  *ngIf="product?.quantity!==0" class="btn btn-dark rounded-0 ml-md-4" (click)="addToCart(product!)">
                                                 {{ 'addToCart' | translate }}
                                             </button> 
                                         </form>

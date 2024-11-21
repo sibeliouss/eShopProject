@@ -41,11 +41,14 @@
                         <div class="row">
                             <div class="col-md-4" *ngFor="let product of shopListProducts.response.data let i = index">
                                 <div class="card mb-4">
-                                    <div>
+                                    <div class="card-img">
                                      <img [src]="product.img" class="card-img-top" alt="{{ product.name }}"> 
                                      <span *ngIf="product?.productDiscount?.discountPercentage" class="badge badge-discount position-absolute top-0 start-0 p-2 bg-danger text-white">
                                         -{{ product?.productDiscount?.discountPercentage }}%
-                                    </span>  
+                                    </span> 
+                                    <p *ngIf="product.quantity === 0" class="stok">
+                                        {{ 'outOfStock' | translate }}
+                                     </p> 
                                     </div>
                                     
                                     <div class="card-body">
@@ -66,13 +69,7 @@
                                            
                                         </p>
                                         <!-- Add to Cart (If quantity is 0) -->
-                                         <a *ngIf="product.quantity === 0" (click)="shopping.addShoppingCart(product)"
-                                           class=" h-p-bg btn btn-outline-primary border-0"
-                                           data-toggle="tooltip" data-placement="right" title=""
-                                           data-original-title="ADD TO CART">
-
-                                           <span class="product__add-to-cart-icon font-size-4"><i class="fa fa-cart-plus"></i></span>
-                                        </a>
+                                        
                                         <a *ngIf="product.quantity !== 0" (click)="shopping.addShoppingCart(product)"
                                            class=" h-p-bg btn btn-outline-primary border-0"
                                            data-toggle="tooltip" data-placement="right" title=""

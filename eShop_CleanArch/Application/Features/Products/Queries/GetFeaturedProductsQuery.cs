@@ -17,7 +17,7 @@ public class GetFeaturedProductsQuery: IRequest<List<ProductDto>>
         }
         public async Task<List<ProductDto>> Handle(GetFeaturedProductsQuery request, CancellationToken cancellationToken)
         {
-            var currentDate = DateTime.UtcNow;
+            var currentDate = DateTime.Now;
 
             var response = await _productRepository.Query().Include(p=>p.ProductDiscount)
                 .Where(p => p.IsActive == true && p.IsFeatured == true && p.IsDeleted == false)
@@ -30,6 +30,7 @@ public class GetFeaturedProductsQuery: IRequest<List<ProductDto>>
                 Brand = p.Brand,
                 Img = p.Img,
                 Price = p.Price,
+                Quantity = p.Quantity,
                 ProductDiscount = p.ProductDiscount != null && 
                                   p.ProductDiscount.StartDate <= currentDate &&
                                   p.ProductDiscount.EndDate >= currentDate 

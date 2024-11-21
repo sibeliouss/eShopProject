@@ -1,0 +1,62 @@
+/* Genel Ayarlar */
+body {
+    background-color: #f8f9fa;
+  }
+  
+  .container {
+    max-width: 1200px;
+  }
+  
+  /* Kart Tasarımı */
+  .product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Ürün Görseli */
+  .product-img {
+    height: 200px; /* Görselin yüksekliği */
+    width: 100%;   /* Görselin genişliği, tamamen kapsar */
+    object-fit: contain; /* Görselin tamamını göstermek için */
+    object-position: center; /* Görseli merkezle */
+  }
+  
+  /* İndirim Rozeti */
+  .badge-discount {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 12px;
+  }
+  
+  /* Fiyat Bilgisi */
+  .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .price del {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
+  /* Buton */
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    font-weight: bold;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  

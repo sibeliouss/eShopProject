@@ -1,0 +1,44 @@
+<div class="container py-5">
+    <div class="row">
+      <!-- Tüm Ürünler Başlığı -->
+      <div class="col-12 mb-4">
+        <h2 class="text-center text-uppercase">{{ 'allProducts' | translate }}</h2>
+        <p class="text-center text-muted">
+          {{ 'browseOurCollection' | translate }}
+        </p>
+      </div>
+  
+      <!-- Ürün Kartları -->
+      <div *ngFor="let item of product" class="col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div class="card product-card shadow-sm border-0">
+          <div class="position-relative">
+            <img [src]="item.img" class="card-img-top product-img rounded-top" alt="product image">
+            <span *ngIf="item.productDiscount?.discountPercentage" class="badge badge-discount">
+              -%{{ item.productDiscount.discountPercentage }}
+            </span>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title text-truncate">{{ item.name }}</h5>
+            <p class="card-text text-muted small text-truncate">
+              {{ item.productDetail.description }}
+            </p>
+            <div class="mt-auto">
+              <p class="price mb-2">
+                <strong>
+                  <span *ngIf="item.productDiscount?.discountedPrice; else normalPrice">
+                    <span class="text-danger">{{ item.productDiscount.discountedPrice }} {{ item.price.currency }}</span>
+                    <small><del>   {{ item.price.value }} {{ item.price.currency }}</del></small>
+                  </span>
+                  <ng-template #normalPrice>
+                    {{ item.price.value }} {{ item.price.currency }}
+                  </ng-template>
+                </strong>
+              </p>
+              <a href="#" class="btn btn-primary w-100">{{ 'addToCart' | translate }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

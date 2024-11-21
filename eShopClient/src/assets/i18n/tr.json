@@ -172,13 +172,15 @@
   "discountedProducts": "İndirimli Ürünler",
   "newArrivals": "Yeni Gelenler",
   "featuredProducts": "Öne Çıkanlar",
-  "discountEndsIn": "İndirimin Bitmesine son",
-  "timeLeft": "{{days}} gün, {{hours}} saat, {{minutes}} dakika kaldı",
+  "discountEndsIn": "İndirimin bitmesine",
+  "timeLeft": "{{days}} gün, {{hours}} saat, {{minutes}} dakika kaldı. Acele et!",
   "default": "Varsayılan",
   "price_low_to_high": "Fiyat: Düşükten Yükseğe",
   "price_high_to_low": "Fiyat: Yüksekten Düşüğe",
   "sortBy": "Sırala",
   "show": "Göster",
+  "outOfStock": "Ürün stokta kalmadı.",
+  "outStock":"Tükendi",
   
   "login" : {
     "title": "Giriş",

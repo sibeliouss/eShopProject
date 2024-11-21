@@ -108,7 +108,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getDiscountedProducts(): void {
+  /* getDiscountedProducts(): void {
     
     this.http.get<ProductDiscountModel[]>(`https://localhost:7120/api/ProductDiscounts/GetAllProductDiscounts`).subscribe({
         next: (res) => {
@@ -119,7 +119,23 @@ export class HomeComponent implements OnInit {
             console.error('Error loading discounted products', err);
         }
     });
+  } */
+  getDiscountedProducts(): void {
+    this.http.get<ProductDiscountModel[]>('https://localhost:7120/api/ProductDiscounts/GetAllProductDiscounts').subscribe({
+      next: (res) => {
+        const currentTime = new Date().getTime();
+        this.discountProducts = res.filter(discount => {
+          const endTime = new Date(discount.endDate).getTime();
+          return endTime > currentTime; // Sadece aktif indirimleri al
+        });
+        console.log(this.discountProducts);
+      },
+      error: (err) => {
+        console.error('Error loading discounted products', err);
+      }
+    });
   }
+  
 
   calculateTimeLeft(endDate: string): string {
     const currentTime = new Date().getTime();
@@ -141,6 +157,13 @@ export class HomeComponent implements OnInit {
       minutes: minutes
     });
   }
+
+  addToCart(product: ProductModel): void {
+    if (product) {
+        this.shopping.addShoppingCart(product);
+    }
+  }
+
   
   
 

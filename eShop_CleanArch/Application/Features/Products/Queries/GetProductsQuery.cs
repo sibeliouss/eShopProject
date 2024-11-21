@@ -26,7 +26,7 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, List<Ge
 
     public async Task<List<GetProductResponse>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
     {
-        var currentDate = DateTime.UtcNow; 
+        var currentDate = DateTime.Now; 
         var productsDto = await _productRepository.Query()
             .AsNoTracking()
             .Select(product => new GetProductResponse()
@@ -36,6 +36,7 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, List<Ge
                 Brand = product.Brand,
                 Img = product.Img,
                 Price = product.Price,
+                Quantity = product.Quantity,
                 ProductDetail = product.ProductDetail != null
                     ? new ProductDetailDto
                     {

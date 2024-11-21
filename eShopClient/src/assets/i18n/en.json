@@ -181,11 +181,8 @@
     "price_high_to_low": "Price: High to Low",
     "sortBy": "Sort by",
     "show": "Show",
-
-  
-    
-  
- 
+    "outOfStock": "Out of stock",
+    "outStock": "Out of Stock",
 
    "login": {
           "title": "Log In",

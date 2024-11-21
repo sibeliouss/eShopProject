@@ -24,7 +24,7 @@ public class GetProductDetailByIdQuery:IRequest<ProductDto>
         }
         public async Task<ProductDto> Handle(GetProductDetailByIdQuery request, CancellationToken cancellationToken)
         {
-            var currentDate = DateTime.UtcNow; 
+            var currentDate = DateTime.Now; 
             var product = await _productRepository.Query().Include(p => p.ProductDetail).Include(p=>p.ProductDiscount)
                 .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
             if (product is null)
