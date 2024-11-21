@@ -7,20 +7,22 @@
                 <div class="d-flex justify-content-between align-items-center mb-4">
 
                     <div>
-                        <label for="sortOrder" class="form-label">Sort by</label>
+                        <label for="sortOrder" class="form-label"> {{ 'sortBy' | translate }}</label>
                         <select id="sortOrder" class="form-select" [(ngModel)]="shopListProducts.request.orderBy" (change)="shopListProducts.changeSorting()">
-                            <option value="popularity">Popularity</option>
-                            <option value="default">Default</option>
-                            <option value="price">Price: Low to High</option>
-                            <option value="price-desc">Price: High to Low</option>
+                            <option value="default">{{ 'default' | translate }}</option>
+                            <option value="price">{{ 'price_low_to_high' | translate }}</option>
+                            <option value="price-desc">{{ 'price_high_to_low' | translate }}</option>
                         </select>
                     </div>
                     <div>
-                        <label for="pageSize" class="form-label">Show</label>
+                        <label for="pageSize" class="form-label">
+                            {{ 'show' | translate }} 
+                        </label>
                         <select id="pageSize" class="form-select" [(ngModel)]="shopListProducts.request.pageSize" (change)="shopListProducts.changePageSize()">
-                            <option value="3">3 items</option>
-                            <option value="6">6 items</option>
-                            <option value="9">9 items</option>
+                           
+                            <option value="3">3 {{ 'item' | translate }}</option>
+                            <option value="6">6 {{ 'item' | translate }}</option>
+                            <option value="9">9 {{ 'item' | translate }}</option>
                         </select>
                     </div>
 
@@ -39,13 +41,30 @@
                         <div class="row">
                             <div class="col-md-4" *ngFor="let product of shopListProducts.response.data let i = index">
                                 <div class="card mb-4">
-                                    <img [src]="product.img" class="card-img-top" alt="{{ product.name }}" style="height: 250px;">
+                                    <div>
+                                     <img [src]="product.img" class="card-img-top" alt="{{ product.name }}"> 
+                                     <span *ngIf="product?.productDiscount?.discountPercentage" class="badge badge-discount position-absolute top-0 start-0 p-2 bg-danger text-white">
+                                        -{{ product?.productDiscount?.discountPercentage }}%
+                                    </span>  
+                                    </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title">{{ product.name }}</h5>
                                         <p class="card-text">{{ product.brand }}</p>
                                         <p>{{ product.productDetail.size }}</p>
 
-                                        <p class="card-text">{{ product.price.value }} {{ product.price.currency }}</p>
+                                        <p>
+                                            <strong>
+                                                <span *ngIf="product?.productDiscount?.discountedPrice; else normalPrice">
+                                                    <small><del>{{ product.price.value }} {{ product.price.currency }}</del></small>
+                                                    <span class="text-danger">  {{ product.productDiscount.discountedPrice }} {{ product.price.currency }}</span>
+                                                </span>
+                                                <ng-template #normalPrice>
+                                                    {{ product.price.value }} {{ product.price.currency }}
+                                                </ng-template>
+                                            </strong>
+                                           
+                                        </p>
                                         <!-- Add to Cart (If quantity is 0) -->
                                          <a *ngIf="product.quantity === 0" (click)="shopping.addShoppingCart(product)"
                                            class=" h-p-bg btn btn-outline-primary border-0"

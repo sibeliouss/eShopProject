@@ -35,6 +35,7 @@ public class GetListProductQuery : IRequest<ResponseDto<List<ProductDto>>>
 
         public async Task<ResponseDto<List<ProductDto>>> Handle(GetListProductQuery request, CancellationToken cancellationToken)
         {
+            var currentDate = DateTime.UtcNow; 
             ResponseDto<List<ProductDto>> response = new();
             var replaceSearch = request.RequestDto.Search?.ToLower() ?? "";
 
@@ -93,6 +94,19 @@ public class GetListProductQuery : IRequest<ResponseDto<List<ProductDto>>>
                             Color = product.ProductDetail.Color
                         }
                         : null, // ProductDetail null ise null olarak işleyin
+                    ProductDiscount = product.ProductDiscount != null &&
+                                      product.ProductDiscount.StartDate <= currentDate &&
+                                      product.ProductDiscount.EndDate >= currentDate
+                        ? new ProductDiscountDto()
+                        {
+                            Id = product.ProductDiscount.Id,
+                            ProductId = product.Id,
+                            DiscountedPrice = product.ProductDiscount.DiscountedPrice,
+                            DiscountPercentage = product.ProductDiscount.DiscountPercentage,
+                            StartDate = product.ProductDiscount.StartDate,
+                            EndDate = product.ProductDiscount.EndDate
+                        }
+                        : null,
                     ProductCategories = _productCategoryService.Query()
                         .Where(p => p.ProductId == product.Id)
                         .Select(s => new ProductCategoryDto

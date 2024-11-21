@@ -22,7 +22,7 @@ export class LayoutsComponent {
     this.router.events.subscribe((event: any) => {
       if (event.url) {
         // Hem login hem de register sayfalarında gizlenmesi için kontrol
-        this.showBars = !(event.url.includes('/login') || event.url.includes('/register'));
+        this.showBars = !(event.url.includes('/login') || event.url.includes('/register') || event.url.includes('/order-received') );
       }
     });
   }

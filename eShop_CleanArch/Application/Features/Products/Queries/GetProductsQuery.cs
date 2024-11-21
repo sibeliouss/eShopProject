@@ -26,11 +26,10 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, List<Ge
 
     public async Task<List<GetProductResponse>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
     {
-        //var products = await _productRepository.Query().ToListAsync(cancellationToken);
-
-        //return _mapper.Map<List<GetProductResponse>>(products);
-        
-        var productsDto = await _productRepository.Query().AsNoTracking().Select(product => new GetProductResponse()
+        var currentDate = DateTime.UtcNow; 
+        var productsDto = await _productRepository.Query()
+            .AsNoTracking()
+            .Select(product => new GetProductResponse()
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -50,19 +49,22 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, List<Ge
                         Color = product.ProductDetail.Color
                     }
                     : null,
-                ProductDiscount = product.ProductDiscount != null ?  new ProductDiscountDto()
-                {
-                    Id = product.ProductDiscount.Id,
-                    ProductId = product.Id,
-                    DiscountedPrice = product.ProductDiscount.DiscountedPrice,
-                    DiscountPercentage = product.ProductDiscount.DiscountPercentage,
-                    StartDate = product.ProductDiscount.StartDate,
-                    EndDate = product.ProductDiscount.EndDate
-                }: null,
-            
+                ProductDiscount = product.ProductDiscount != null &&
+                                  product.ProductDiscount.StartDate <= currentDate && 
+                                  product.ProductDiscount.EndDate >= currentDate   
+                    ? new ProductDiscountDto()
+                    {
+                        Id = product.ProductDiscount.Id,
+                        ProductId = product.Id,
+                        DiscountedPrice = product.ProductDiscount.DiscountedPrice,
+                        DiscountPercentage = product.ProductDiscount.DiscountPercentage,
+                        StartDate = product.ProductDiscount.StartDate,
+                        EndDate = product.ProductDiscount.EndDate
+                    }
+                    : null,
             }).ToListAsync(cancellationToken);
 
         return productsDto;
-
     }
+
 }

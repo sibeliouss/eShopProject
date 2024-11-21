@@ -176,6 +176,12 @@
     "featuredProducts": "Featured Products",
     "discountEndsIn": "Discount Ends In",
     "timeLeft": "{{days}} days, {{hours}} hours, {{minutes}} minutes left",
+    "default": "Default",
+    "price_low_to_high": "Price: Low to High",
+    "price_high_to_low": "Price: High to Low",
+    "sortBy": "Sort by",
+    "show": "Show",
+
   
     
   

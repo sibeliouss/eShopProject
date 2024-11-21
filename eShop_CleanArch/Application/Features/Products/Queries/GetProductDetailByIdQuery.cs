@@ -24,7 +24,8 @@ public class GetProductDetailByIdQuery:IRequest<ProductDto>
         }
         public async Task<ProductDto> Handle(GetProductDetailByIdQuery request, CancellationToken cancellationToken)
         {
-            var product = await _productRepository.Query().Include(p => p.ProductDetail)
+            var currentDate = DateTime.UtcNow; 
+            var product = await _productRepository.Query().Include(p => p.ProductDetail).Include(p=>p.ProductDiscount)
                 .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
             if (product is null)
             {
@@ -48,15 +49,19 @@ public class GetProductDetailByIdQuery:IRequest<ProductDto>
                     Size = product.ProductDetail.Size,
                     Color = product.ProductDetail.Color
                 },
-                ProductDiscount = product.ProductDiscount != null ?  new ProductDiscountDto()
-                {
-                   Id = product.ProductDiscount.Id,
-                   ProductId = product.Id,
-                   DiscountedPrice = product.ProductDiscount.DiscountedPrice,
-                   DiscountPercentage = product.ProductDiscount.DiscountPercentage,
-                   StartDate = product.ProductDiscount.StartDate,
-                   EndDate = product.ProductDiscount.EndDate
-                }: null,
+                ProductDiscount = product.ProductDiscount != null &&
+                                  product.ProductDiscount.StartDate <= currentDate &&
+                                  product.ProductDiscount.EndDate >= currentDate
+                    ? new ProductDiscountDto()
+                    {
+                        Id = product.ProductDiscount.Id,
+                        ProductId = product.Id,
+                        DiscountedPrice = product.ProductDiscount.DiscountedPrice,
+                        DiscountPercentage = product.ProductDiscount.DiscountPercentage,
+                        StartDate = product.ProductDiscount.StartDate,
+                        EndDate = product.ProductDiscount.EndDate
+                    }
+                    : null,
                 Img = product.Img,
                 Price = product.Price,
                 CreateAt = product.CreateAt,

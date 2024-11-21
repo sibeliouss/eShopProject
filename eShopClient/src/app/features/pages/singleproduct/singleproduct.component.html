@@ -7,10 +7,14 @@
                         <div class="container py-4">
                             <div class="row">
                                 <!-- Ürün Görseli -->
-                                <div class="col-lg-5 text-center">
+                                <div class="col-lg-5 text-center position-relative">
                                     <figure class="mb-0">
                                         <img [src]="product?.img" alt="Image Description"
                                              class="img-fluid rounded" style="height: 500px;">
+                                             
+                                        <span *ngIf="product?.productDiscount?.discountPercentage" class="badge badge-discount position-absolute top-0 start-0 p-2 bg-danger text-white">
+                                            -{{ product?.productDiscount?.discountPercentage }}%
+                                        </span>
                                     </figure>
                                 </div>
 
@@ -21,8 +25,8 @@
                                         <p class="font-size-3 text-muted">{{ product?.brand }}</p>
                                        
                                         <!-- Yıldız Puanlama -->
-                                        <div class="mb-4">
-                                            <span class="text-warning">
+                                        <div class="star1 mb-4">
+                                            <span class="star2">
                                                 <ng-container *ngFor="let star of getStars(rating)">
                                                     <small [ngClass]="star.class"></small>
                                                 </ng-container>
@@ -31,14 +35,21 @@
                                         </div>
 
                                         <!-- Fiyat -->
-                                        <p class="price font-size-4 text-primary mb-4">
-                                            <span>{{ product?.price?.value }}</span>
-                                            {{ product?.price?.currency }}
+                                        <p>
+                                            <strong>
+                                                <span *ngIf="product?.productDiscount?.discountedPrice; else normalPrice">
+                                                    <small><del>{{ product?.price?.value }} {{ product?.price?.currency }}</del></small>
+                                                    <span class="text-danger">  {{ product?.productDiscount?.discountedPrice }} {{ product?.price?.currency }}</span>
+                                                </span>
+                                                <ng-template #normalPrice>
+                                                    {{ product?.price?.value }} {{ product?.price?.currency }}
+                                                </ng-template>
+                                            </strong>
+                                           
                                         </p>
-
+                                      
                                         <!-- Sepete Ekle Butonu -->
                                         <form class="cart d-md-flex align-items-center">
-                    
                                             <button type="button" class="btn btn-dark rounded-0 ml-md-4" (click)="addToCart(product!)">
                                                 {{ 'addToCart' | translate }}
                                             </button> 
@@ -75,12 +86,11 @@
                                 <ul class="list-unstyled">
                                     <ng-container *ngFor="let review of reviews">
                                         <li class="mb-4 border-bottom pb-3">
-                                            <h6>{{ review?.title }}   <span class="text-warning">
+                                            <h6>{{ review?.title }}   <span class="star1">
                                                 <ng-container *ngFor="let star of getStars(review.rating)">
                                                     <small [ngClass]="star.class"></small>
                                                 </ng-container>
                                             </span></h6>
-                                           
                                             <p class="text-muted">{{ review?.comment }}</p>
                                             <div class="text-muted">{{ review.user.firstName }} {{ review.user.lastName }} - {{ review.createAt | date: 'dd.MM.yyyy' }}</div>
                                         </li>
@@ -90,7 +100,7 @@
                                 <div *ngIf="isResponse && allowToComment" class mt-5>
                                     <h4 class="font-size-3 mb-4">{{ 'writeAReview' | translate }}</h4>
                                     <div class="d-flex align-items-center mb-6">
-                                        <div class="text-yellow-darker ml-3 font-size-4">
+                                        <div class="star1 ml-3 font-size-4">
                                             <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
                                                 <small [ngClass]="{'far': starRating < star, 'fas': starRating >= star}" 
                                                        class="fa-star" 

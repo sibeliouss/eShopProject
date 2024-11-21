@@ -18,11 +18,12 @@ public class GetNewArrivalProductQuery : IRequest<List<ProductDto>>
 
         public async Task<List<ProductDto>> Handle(GetNewArrivalProductQuery request, CancellationToken cancellationToken)
         {
-            var response = await _productRepository.Query()
+            var currentDate = DateTime.UtcNow; 
+            var response = await _productRepository.Query().Include(p=>p.ProductDiscount)
                 .OrderByDescending(p => p.CreateAt) 
                 .Take(10) 
                 .ToListAsync(cancellationToken);
-            
+
             var products = response.Select(p => new ProductDto
             {
                 Id = p.Id,
@@ -33,6 +34,19 @@ public class GetNewArrivalProductQuery : IRequest<List<ProductDto>>
                 Quantity = p.Quantity,
                 IsFeatured = p.IsFeatured,
                 CreateAt = p.CreateAt,
+                ProductDiscount = p.ProductDiscount != null &&
+                                  p.ProductDiscount.StartDate <= currentDate &&
+                                  p.ProductDiscount.EndDate >= currentDate
+                    ? new ProductDiscountDto()
+                    {
+                        Id = p.ProductDiscount.Id,
+                        ProductId = p.Id,
+                        DiscountedPrice = p.ProductDiscount.DiscountedPrice,
+                        DiscountPercentage = p.ProductDiscount.DiscountPercentage,
+                        StartDate = p.ProductDiscount.StartDate,
+                        EndDate = p.ProductDiscount.EndDate
+                    }
+                    : null,
             }).ToList();
 
             return products;

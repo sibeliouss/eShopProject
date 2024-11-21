@@ -124,6 +124,9 @@
             <div class="card product-card">
               <div class="position-relative">
                 <img [src]="newItem.img" class="card-img-top" alt="product image">
+                <span *ngIf="newItem.productDiscount?.discountPercentage" class="badge badge-discount">
+                  -%{{ newItem.productDiscount.discountPercentage }}
+                </span>
               </div>
               <div class="card-body">
                 <h5 class="card-title">{{ newItem.name }}</h5>
@@ -152,6 +155,9 @@
             <div class="card product-card">
               <div class="position-relative">
                 <img [src]="featuredItem.img" class="card-img-top" alt="product image">
+                <span *ngIf="featuredItem.productDiscount?.discountPercentage" class="badge badge-discount">
+                  -%{{ featuredItem.productDiscount.discountPercentage }}
+                </span>
               </div>
               <div class="card-body">
                 <h5 class="card-title">{{ featuredItem.name }}</h5>

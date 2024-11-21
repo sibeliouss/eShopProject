@@ -15,13 +15,7 @@
   padding: 10px 20px;
 }
 
-.rating-list .progress-bar {
-  background-color: #ffc107;
-}
 
-.rating-list span {
-  font-size: 0.9rem;
-}
 
 .form-control {
   border-radius: 0;
@@ -32,8 +26,38 @@
   margin-bottom: 0.5rem;
 }
 
+.star1{
+ color: rgba(93, 55, 102, 0.915);
+}
+
 .mt-4 {
   display: flex;
- 
   gap: 15px; /* Aralarındaki boşluk */
 }
+
+.product {
+  position: relative; /* Görselin üstünde konumlandırmak için */
+  
+  figure {
+    position: relative; /* Görseli konumlandırmak için */
+    margin-bottom: 0;
+    
+    .img-fluid {
+      height: 500px; /* Görsel boyutunu ayarladık */
+      width: 100%; /* Görselin tam genişlikte olmasını sağlamak için */
+      //object-fit: cover; /* Görselin düzgün kesilmesini sağlamak için */
+    }
+
+    /* İndirim yüzdesi etiketi */
+    .badge-discount {
+      position: absolute;
+      padding: 5px 10px;
+      background-color: #dc3545;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+  }
+}
+

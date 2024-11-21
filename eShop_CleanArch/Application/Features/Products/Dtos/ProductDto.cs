@@ -13,7 +13,7 @@ public class ProductDto
     public ProductDetailDto? ProductDetail { get; set; }
     public ProductDiscountDto? ProductDiscount { get; set; }
     public bool IsActive { get; set; } = true;
-    public bool IsFeatured { get; set; } = false;
+    public bool IsFeatured { get; set; } = true;
     public bool IsDeleted { get; set; } = false;
     public DateTime CreateAt { get; set; } = DateTime.Now;
     public ICollection<ProductCategoryDto> ProductCategories { get; set; } = new List<ProductCategoryDto>();
