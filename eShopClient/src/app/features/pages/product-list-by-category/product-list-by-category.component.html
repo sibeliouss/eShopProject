@@ -2,55 +2,33 @@
     <div class="page-header border-bottom mb-5"></div>
     <div class="container my-5">
         <div class="row">
-
-            <main class="col-lg-9">
+            <main class="col-lg-12">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-
-                    <div>
-                        <label for="sortOrder" class="form-label"> {{ 'sortBy' | translate }}</label>
+                    <div class="orderBy">
+                        <label for="sortOrder" class="form-label">{{ 'sortBy' | translate }}</label>
                         <select id="sortOrder" class="form-select" [(ngModel)]="shopListProducts.request.orderBy" (change)="shopListProducts.changeSorting()">
                             <option value="default">{{ 'default' | translate }}</option>
-                            <option value="price">{{ 'price_low_to_high' | translate }}</option>
-                            <option value="price-desc">{{ 'price_high_to_low' | translate }}</option>
+                            <option value="discounted-price">{{ 'price_low_to_high' | translate }}</option>
+                            <option value="discounted-price-desc">{{ 'price_high_to_low' | translate }}</option>
                         </select>
-                    </div>
-                    <div>
-                        <label for="pageSize" class="form-label">
-                            {{ 'show' | translate }} 
-                        </label>
-                        <select id="pageSize" class="form-select" [(ngModel)]="shopListProducts.request.pageSize" (change)="shopListProducts.changePageSize()">
-                           
-                            <option value="3">3 {{ 'item' | translate }}</option>
-                            <option value="6">6 {{ 'item' | translate }}</option>
-                            <option value="9">9 {{ 'item' | translate }}</option>
-                        </select>
-                    </div>
-
-                    <div class="btn-group">
-                        <button class="btn btn-outline-secondary active" data-bs-toggle="tab" >
-                            <i class="fa fa-th"></i>
-                        </button>
-                        <button class="btn btn-outline-secondary" data-bs-toggle="tab" >
-                            <i class="fa fa-list"></i>
-                        </button>
                     </div>
                 </div>
 
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="grid-view" *ngIf="shopListProducts.response && shopListProducts.response.data && shopListProducts.response.data.length">
+                     <div class="tab-pane fade show active" id="grid-view" *ngIf="shopListProducts.response && shopListProducts.response.data && shopListProducts.response.data.length">
                         <div class="row">
-                            <div class="col-md-4" *ngFor="let product of shopListProducts.response.data let i = index">
-                                <div class="card mb-4">
+                            <div class="col-md-4" *ngFor="let product of shopListProducts.response.data">
+                                <div class="card mb-4 product-card">
                                     <div class="card-img">
-                                     <img [src]="product.img" class="card-img-top" alt="{{ product.name }}"> 
-                                     <span *ngIf="product?.productDiscount?.discountPercentage" class="badge badge-discount position-absolute top-0 start-0 p-2 bg-danger text-white">
-                                        -{{ product?.productDiscount?.discountPercentage }}%
-                                    </span> 
-                                    <p *ngIf="product.quantity === 0" class="stok">
-                                        {{ 'outOfStock' | translate }}
-                                     </p> 
+                                        <img [src]="product.img" class="card-img-top" alt="{{ product.name }}">
+                                        <span *ngIf="product?.productDiscount?.discountPercentage" class="badge badge-discount position-absolute top-0 start-0 p-2">
+                                            -{{ product?.productDiscount?.discountPercentage }}%
+                                        </span>
+                                        <p *ngIf="product.quantity === 0" class="stok">
+                                            {{ 'outOfStock' | translate }}
+                                        </p>
                                     </div>
-                                    
+
                                     <div class="card-body">
                                         <h5 class="card-title">{{ product.name }}</h5>
                                         <p class="card-text">{{ product.brand }}</p>
@@ -66,85 +44,47 @@
                                                     {{ product.price.value }} {{ product.price.currency }}
                                                 </ng-template>
                                             </strong>
-                                           
                                         </p>
-                                        <!-- Add to Cart (If quantity is 0) -->
-                                        
-                                        <a *ngIf="product.quantity !== 0" (click)="shopping.addShoppingCart(product)"
-                                           class=" h-p-bg btn btn-outline-primary border-0"
-                                           data-toggle="tooltip" data-placement="right" title=""
-                                           data-original-title="ADD TO CART">
 
-                                           <span class="product__add-to-cart-icon font-size-4"><i class="fa fa-cart-plus"></i></span>
+                                        <a *ngIf="product.quantity !== 0" (click)="shopping.addShoppingCart(product)" class="btn add-to-cart-btn">
+                                            <i class="fa fa-cart-plus"></i>
                                         </a>
 
-                                        <a routerLink="/single-product/{{product.id}}" class="mr-1 h-p-bg btn btn-outline-primary border-0">
+                                        <a routerLink="/single-product/{{product.id}}" class="btn view-product-btn">
                                             <i class="fa fa-exchange-alt"></i>
                                         </a>
 
-                                        <a (click)="wishList.addToWishList(product)"class="h-p-bg btn btn-outline-primary border-0"><i class="fa fa-heart"></i></a>
-
-
-                                     </div>
+                                        <a (click)="wishList.addToWishList(product)" class="btn add-to-wishlist-btn">
+                                            <i class="fa fa-heart"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+ 
+                  
+                </div> 
 
-                    <div class="tab-pane fade" id="list-view" *ngIf="shopListProducts.response && shopListProducts.response.data.length">
-                        <ul class="list-unstyled">
-                            <li class="mb-4" *ngFor="let product of shopListProducts.response.data">
-                                <div class="d-flex align-items-center">
-                                    <img [src]="product.img" class="me-3" alt="{{ product.name }}" style="height: 150px;">
-                                    <div>
-                                        <h5>{{ product.name }}</h5>
-                                        <p>{{ product.brand }}</p>
-                                        <p>{{ product.price.value }} {{ product.price.currency }}</p>
-                                         <a *ngIf="product.quantity === 0" (click)="shopping.addShoppingCart(product)"
-                                           class="h-p-bg btn btn-outline-primary border-0"
-                                           data-toggle="tooltip" data-placement="right" title=""
-                                           data-original-title="ADD TO CART">
-                                           <span class="product__add-to-cart-icon font-size-4"><i class="fa fa-cart-plus"></i></span>
-                                        </a>
+               <!-- Pagination -->
+         <nav *ngIf="shopListProducts.response">
+    <ul class="pagination justify-content-center mt-4">
+        <li class="page-item" [ngClass]="{'disabled': shopListProducts.response.isFirstPage}">
+            <a class="page-link" (click)="shopListProducts.getAllProducts(shopListProducts.response.pageNumber - 1)">
+                <i class="fa fa-chevron-left"></i> <!-- Previous icon -->
+            </a>
+        </li>
+        <li class="page-item" *ngFor="let p of shopListProducts.pageNumbers" [ngClass]="{'active': shopListProducts.response.pageNumber === p}">
+            <a class="page-link" (click)="shopListProducts.getAllProducts(p)">{{ p }}</a>
+        </li>
+        <li class="page-item" [ngClass]="{'disabled': shopListProducts.response.isLastPage}">
+            <a class="page-link" (click)="shopListProducts.getAllProducts(shopListProducts.response.pageNumber + 1)">
+                <i class="fa fa-chevron-right"></i> <!-- Next icon -->
+            </a>
+        </li>
+    </ul>
+</nav>
 
-                                        <a *ngIf="product.quantity !== 0" (click)="shopping.addShoppingCart(product)"
-                                           class=" h-p-bg btn btn-outline-primary border-0"
-                                           data-toggle="tooltip" data-placement="right" title=""
-                                           data-original-title="ADD TO CART">
-                                           <span class="product__add-to-cart-icon"><i class="fa fa-cart-plus"></i></span>
-                                        </a>
-
-                                        <a  routerLink="/single-product/{{product.id}}"  class="mr-1 h-p-bg btn btn-outline-primary border-0">
-                                            <i class="fa fa-exchange-alt"></i>
-                                        </a>
-
-
-                                        <a (click)="wishList.addToWishList(product)"class="h-p-bg btn btn-outline-primary border-0"><i class="fa fa-heart"></i></a>
-
-
-
-
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Pagination -->
-                <nav *ngIf="shopListProducts.response">
-                    <ul class="pagination justify-content-center mt-4">
-                        <li class="page-item" [ngClass]="{'disabled': shopListProducts.response.isFirstPage}">
-                            <a class="page-link" (click)="shopListProducts.getAllProducts(shopListProducts.response.pageNumber - 1)">Previous</a>
-                        </li>
-                        <li class="page-item" *ngFor="let p of shopListProducts.pageNumbers" [ngClass]="{'active': shopListProducts.response.pageNumber === p}">
-                            <a class="page-link" (click)="shopListProducts.getAllProducts(p)">{{ p }}</a>
-                        </li>
-                        <li class="page-item" [ngClass]="{'disabled': shopListProducts.response.isLastPage}">
-                            <a class="page-link" (click)="shopListProducts.getAllProducts(shopListProducts.response.pageNumber + 1)">Next</a>
-                        </li>
-                    </ul>
-                </nav>
             </main>
         </div>
     </div>

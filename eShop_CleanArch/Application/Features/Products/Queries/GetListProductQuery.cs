@@ -60,6 +60,17 @@ public class GetListProductQuery : IRequest<ResponseDto<List<ProductDto>>>
                     case "price-desc":
                         query = query.OrderByDescending(p => p.Price.Value);
                         break;
+                    case "discounted-price":
+                        query = query.OrderBy(p =>
+                            p.ProductDiscount != null && p.ProductDiscount.StartDate <= currentDate && p.ProductDiscount.EndDate >= currentDate
+                                ? p.ProductDiscount.DiscountedPrice
+                                : p.Price.Value);
+                        break;
+                    case "discounted-price-desc":
+                        query = query.OrderByDescending(p => p.ProductDiscount != null && p.ProductDiscount.StartDate <= currentDate && p.ProductDiscount.EndDate >= currentDate
+                            ? p.ProductDiscount.DiscountedPrice
+                            : p.Price.Value);
+                        break;
                     default:
                         query = query.OrderBy(p => p.Id);
                         break;

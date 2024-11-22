@@ -1,11 +1,130 @@
-.card-img{
-    .stok{
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        background-color: rgba(255, 0, 0, 0.693);
-        color: white;
-        padding: 5px;
+.stok {
+    position: absolute;
+    top: 130px;
+    right: 5px;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: white;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 80%;
+    height: 80%;
+    margin: 0 auto; 
+    
+    &:hover{
+        box-shadow: 0 4px 10px 0.2rem rgba(93, 55, 102, 0.435);
+        transform: translateY(-10px);
+      }
+
+      .card-img {
+        position: relative;
+        overflow: hidden;
+        height: 250px; /* Adjust as needed */
+        background-color: #f4f4f4;
+        border-bottom: 1px solid #ddd;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Değişiklik burada */
+            transition: transform 0.3s ease;
+        }
+    }
+    .card-body {
+        padding: 20px;
+        flex-grow: 1;
+    }
+
+   .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    }
+
+  .card-text {
+    color: #555;
+    margin-bottom: 15px;
+    }
+
+    .price {
+        font-size: 16px;
+        color: #333;
+        font-weight: bold;
+
+        .old-price {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .new-price {
+            color: #e74c3c;
+            font-size: 18px;
+        }
+    }
+    
+     .btn{
+        color: rgba(93, 55, 102, 0.915);
+    }
+    .btn:hover{
+        box-shadow: 0 4px 10px 0.2rem rgba(93, 55, 102, 0.435);
+       // box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    
+  
+
+}
+
+.orderBy{
+
+    margin-left: 50px;
+    //padding: 10px;
+
+    .form-label{
+  
+        font-size: larger;
+        color: rgba(93, 55, 102, 0.915);
+        font-weight: 200;
+        border-left: 2px solid gray;
+        padding-left: 8px;
+    
+    }
+    
+    .form-select{
+        border: 1.5px solid rgba(0, 0, 0, 0.292);
+       
+        
         
     }
 }
+
+
+
+
+
+
+
+
+
+
+.card-img:hover img {
+    transform: scale(1.1);
+}
+
+
+
+
+
+
