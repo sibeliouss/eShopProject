@@ -1,0 +1,18 @@
+.footer {
+    background: linear-gradient(135deg, #6b11cb51 0%, #7725fc8f 100%);
+    color: white;
+ 
+}
+
+.footer a {
+    color: inherit;
+}
+
+.footer .social-icons a {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.footer .social-icons a:hover {
+    transform: scale(1.2);
+}

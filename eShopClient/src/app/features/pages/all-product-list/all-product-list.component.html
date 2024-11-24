@@ -1,15 +1,13 @@
 <div class="container py-5">
     <div class="row">
-      <!-- Tüm Ürünler Başlığı -->
-      <div class="col-12 mb-4">
-        <h2 class="text-center text-uppercase">{{ 'allProducts' | translate }}</h2>
-        <p class="text-center text-muted">
-          {{ 'browseOurCollection' | translate }}
-        </p>
+     
+      <div class="col-12 mb-4 baslik">
+        <h2 class="text-uppercase">{{ 'allProducts' | translate }}</h2>
+       
       </div>
   
       <!-- Ürün Kartları -->
-      <div *ngFor="let item of product" class="col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div *ngFor="let item of product" class="outout col-sm-6 col-md-4 col-lg-3 mb-4">
         <div class="card product-card shadow-sm border-0">
           <div class="position-relative">
             <img [src]="item.img" class="card-img-top product-img rounded-top" alt="product image">
@@ -34,7 +32,11 @@
                   </ng-template>
                 </strong>
               </p>
-              <a href="#" class="btn btn-primary w-100">{{ 'addToCart' | translate }}</a>
+              <button type="button"  *ngIf="item.quantity!==0" class="btn  w-100" (click)="addToCart(item)">
+                {{ 'addToCart' | translate }}
+            </button> 
+            <button type="button" *ngIf="item.quantity === 0" class="btn w-100 btn-disabled"  disabled> {{ 'outStock' | translate }} 
+            </button>
             </div>
           </div>
         </div>

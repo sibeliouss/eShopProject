@@ -17,7 +17,7 @@ import { ProductDiscountModel } from "./productDiscount";
 	productCategories: ProductCategory[];
 	cartId:string;
     wishListId: string;
-	isFavorite?: boolean;
+	isFavorite: boolean;
 	productDiscount: ProductDiscountModel;
 	 
 

@@ -1,3 +1,5 @@
+
+using Application.Features.Products.Dtos;
 using Domain.Entities;
 using Domain.Entities.ValueObjects;
 
@@ -6,8 +8,9 @@ namespace Application.Features.WishLists.Queries.Responses;
 public class WishListResponse
 {
     public Guid Id { get; set; }
-    public Guid DetailId { get; set; }
-    public ProductDetail? ProductDetail { get; set; }
+
+    public ProductDiscountDto? ProductDiscount { get; set; }
+    public ProductDetailDto? ProductDetail { get; set; }
     public string Name { get; set; } 
     public string Brand { get; set; }  
     public Money Price { get; set; } = new(0, "TRY");

@@ -9,13 +9,14 @@ import { ShoppingCartService } from '../../features/services/shopping-cart.servi
 import { WishListService } from '../../features/services/wish-list.service';
 import { ProductListService } from '../../features/services/product-list.service';
 import { ProductDiscountModel } from '../../features/models/productDiscount';
+import { WishListModel } from '../../features/models/wishList';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [RouterModule, FormsModule, CommonModule, TranslateModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
@@ -26,9 +27,8 @@ export class HomeComponent implements OnInit {
   loading: boolean = true; 
   apiUrl: string = 'https://localhost:7120/api/Products'; 
   currentMonth: string = "";
-  
-  
-
+  rating:number=0;
+  wish:WishListModel=new WishListModel();
 
   constructor(
       private http: HttpClient,
@@ -44,7 +44,15 @@ export class HomeComponent implements OnInit {
     this.getProducts();
     this.getDiscountedProducts();
     this.clearLocalStorage();
+   
   }
+  
+
+  isFavorite(item: ProductModel): boolean {
+    return this.wishList.wishListItems.some(w => w.id === item.id);
+  }
+ 
+  
 
   clearLocalStorage(): void {
     localStorage.removeItem("paymentDetails");
@@ -56,6 +64,7 @@ export class HomeComponent implements OnInit {
   getProducts(): void {
     this.http.get<ProductModel[]>(`${this.apiUrl}/GetProducts`).subscribe({
         next: (res: ProductModel[]) => {
+         
             this.product = res; // Tüm ürünler dizi olarak atanır
             console.log(this.product);
             this.loading = false;
@@ -166,5 +175,10 @@ export class HomeComponent implements OnInit {
 
   
   
+   
+  }
+  
+  
+  
 
-}
+

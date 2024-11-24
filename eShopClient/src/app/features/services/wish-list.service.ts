@@ -13,6 +13,7 @@ import { ProductModel } from '../models/product';
 export class WishListService {
 
   wishListItems: ProductModel[] = [];
+  data: WishListModel = new WishListModel();
   
   constructor(
     private translate: TranslateService,
@@ -44,18 +45,18 @@ export class WishListService {
 
   addToWishList(product: ProductModel) {
     if(localStorage.getItem('response')) {
-
-      const data: WishListModel = new WishListModel();
-      data.productId = product.id;
-      data.userId = this.auth.token?.userId ?? "";
-      data.price = product.price;
-
-      this.http.post("https://localhost:7120/api/WishLists/AddToWishList", data).subscribe({
+     // const data: WishListModel = new WishListModel();
+      this.data.productId = product.id;
+      this.data.userId = this.auth.token?.userId ?? "";
+      this.data.price = product.price;
+       
+      this.http.post("https://localhost:7120/api/WishLists/AddToWishList", this.data).subscribe({
         next: (res: any) => {
           this.wishListItems.push(product);
+         product.isFavorite = true; 
           localStorage.setItem('wishList', JSON.stringify(this.wishListItems));
           this.checkLocalStorageForWishList();
-
+          
           this.translate.get("productAddedToWishlist").subscribe(
             res => {
               this.swal.callToast(res, 'success');
@@ -66,37 +67,34 @@ export class WishListService {
           console.error('Error adding product to wish list:', err);
         }
       });
-    }
-    else {
+    } else {
       forkJoin({
         title: this.translate.get("pleaseLoginToAddTheProductToFavorites"),
         confirm: this.translate.get("confirmButton")
       }).subscribe(res => {
         this.swal.callSwal2(res.title, res.confirm, () => {})
-      })
+      });
     }
   }
-
+  
   DeleteWishList(index: number) {
-    forkJoin({
-      delete: this.translate.get("remove.doYouWantToDeleted"),
-      cancel: this.translate.get("remove.cancelButton"),
-      confirm: this.translate.get("remove.confirmButton")
-    }).subscribe(res => {
-      this.swal.callSwal(res.delete, res.cancel, res.confirm, () => {
-
-        if (localStorage.getItem("response")) {
+    
+    if (localStorage.getItem("response")) {
           this.http.delete("https://localhost:7120/api/WishLists/Delete/" + this.wishListItems[index]?.wishListId).subscribe({
             next: (res: any) => {
+              
               this.checkLocalStorageForWishList();
+              
             },
             error: (err) => {
               console.error('Error deleting product from wish list:', err);
            
             }
-          });
-        }
-      });
-    })
+         }); }
   }
+
+  
+
+
+ 
 }

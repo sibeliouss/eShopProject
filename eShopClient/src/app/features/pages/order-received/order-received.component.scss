@@ -1,0 +1,58 @@
+/* Modern tasarım için bazı stil iyileştirmeleri */
+.card {
+    border-radius: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto; /* Orta hizalamak için */
+    padding: 1.5rem;
+}
+
+.container-sm {
+    max-width: 900px; /* Daha dar container */
+}
+
+.table th, .table td {
+    vertical-align: middle;
+    padding: 0.75rem;
+}
+
+.table {
+    background-color: #f9f9f9;
+}
+
+.text-success {
+    color: #28a745 !important;
+}
+
+.font-weight-semibold {
+    font-weight: 600;
+}
+
+.font-weight-medium {
+    font-weight: 500;
+}
+
+/* Ana sayfa ikonunun konumlandırılması */
+.text-right {
+    text-align: right;
+}
+
+.fas.fa-home {
+    color: #7d28a7;
+}
+
+/* Daha kompakt içerik */
+ul.list-unstyled {
+    padding: 0;
+    margin: 0;
+}
+
+ul.list-unstyled li {
+    padding: 0.5rem 0;
+}
+
+/* Tabloyu sıkıştırma */
+.table td, .table th {
+    font-size: 14px;
+    padding: 0.5rem;
+}

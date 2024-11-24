@@ -1,6 +1,7 @@
 using Application.Features.Orders.Dtos;
 using Application.Features.Orders.Helpers;
 using Application.Features.Orders.Queries.Responses;
+using Application.Features.Products.Dtos;
 using Application.Services.Repositories;
 using Domain.Entities;
 using Domain.Enums;
@@ -25,10 +26,11 @@ public class GetAllOrderDetailsByUserId : IRequest<GetAllOrderDetailsByUserIdRes
 
         public async Task<GetAllOrderDetailsByUserIdResponse> Handle(GetAllOrderDetailsByUserId request, CancellationToken cancellationToken)
         {
+            var currentDate = DateTime.Now; 
             var order = await _orderRepository.Query()
                 .Where(o => o.UserId == request.UserId && o.Id == request.OrderId)
                 .Include(o => o.OrderDetails)
-                    .ThenInclude(od => od.Product)
+                    .ThenInclude(od => od.Product).ThenInclude(od=>od.ProductDiscount)
                 .FirstOrDefaultAsync(cancellationToken); 
 
             if (order == null)
@@ -53,6 +55,14 @@ public class GetAllOrderDetailsByUserId : IRequest<GetAllOrderDetailsByUserIdRes
                     Quantity = od.Quantity,
                     Brand = od.Product.Brand,
                     Name = od.Product.Name,
+                    ProductDiscount = od.Product.ProductDiscount != null
+                        ? new ProductDiscountDto()
+                        {
+                            Id = od.Product.ProductDiscount.Id,
+                            ProductId = od.Product.Id,
+                            DiscountedPrice = od.Product.ProductDiscount.DiscountedPrice,
+                        }
+                        : null,
                     Price = od.Price
                 }).ToList()
             };

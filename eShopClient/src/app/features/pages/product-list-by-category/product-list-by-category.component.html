@@ -22,7 +22,7 @@
                                     <div class="card-img">
                                         <img [src]="product.img" class="card-img-top" alt="{{ product.name }}">
                                         <span *ngIf="product?.productDiscount?.discountPercentage" class="badge badge-discount position-absolute top-0 start-0 p-2">
-                                            -{{ product?.productDiscount?.discountPercentage }}%
+                                            -{{ product.productDiscount.discountPercentage }}%
                                         </span>
                                         <p *ngIf="product.quantity === 0" class="stok">
                                             {{ 'outOfStock' | translate }}

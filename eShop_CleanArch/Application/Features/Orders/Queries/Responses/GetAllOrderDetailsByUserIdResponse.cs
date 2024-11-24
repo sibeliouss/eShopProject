@@ -1,4 +1,5 @@
 using Application.Features.Orders.Dtos;
+using Application.Features.Products.Dtos;
 
 namespace Application.Features.Orders.Queries.Responses;
 
@@ -12,5 +13,6 @@ public class GetAllOrderDetailsByUserIdResponse
     public string Status { get; set; }
     public string PaymentNumber { get; set; }
     public string PaymentCurrency { get; set; }
+   
     public IEnumerable<OrderDetailDto> Products { get; set; } = new List<OrderDetailDto>();
 }

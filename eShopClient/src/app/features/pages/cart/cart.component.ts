@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,15 +16,14 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 export class CartComponent {
   currency: string = "";
 
-  constructor( public shopping: ShoppingCartService
- 
+  constructor( public shopping: ShoppingCartService,private cdRef: ChangeDetectorRef
+   
+    
 ){}
 
-
-
-
-
-trackByFn(index: number, item: any): number {
-  return item.id;  // ID'yi kullanarak her öğeyi benzersiz şekilde takip ediyoruz
+trackByFn(index: number, item: any): any {
+  return item.id; // Her bir ürün için benzersiz bir ID döndürmelidir.
 }
+
+
 }

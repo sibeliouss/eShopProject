@@ -7,18 +7,25 @@ import { ProductModel } from '../models/product';
 import { CategoryModel } from '../models/category';
 import { ResponseDto } from '../models/response';
 import { Observable } from 'rxjs';
+import { Star } from '../models/star';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductListService {
   response: ResponseDto<ProductModel[]> | null = null;
+  product: ProductModel | null= null;
 
   pageNumbers: number[] = [];
   searchCategory: string = "";
   request: RequestModel = new RequestModel();
   products: ProductModel[] = [];
   category: CategoryModel[] = [];
+  starData: Star = new Star;
+
+  
+ // rating: number = 0;
+  
 
 
   constructor(
@@ -91,6 +98,7 @@ getAllCategories(): void {
     this.getAllProducts(1);
   }
 
+  
   
   
 } 

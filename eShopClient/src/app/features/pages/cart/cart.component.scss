@@ -1,55 +1,62 @@
 .container {
-    margin-top: 5rem;
-  }
-  
-  header.mb-4 {
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-  
-  .table th, .table td {
+  margin-top: 5rem;
+}
+
+header.mb-4 {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.table {
+  th, td {
     vertical-align: middle;
   }
-  
-  .d-flex.align-items-center {
-    gap: 0.5rem;
-  }
-  
-  .quantity-control {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .img-fluid {
-    max-width: 80px;
-    height: auto;
-  }
-  
-  .ml-3 {
-    margin-left: 1rem;
-  }
-  
-  .accordion .card {
+}
+
+.d-flex.align-items-center {
+  gap: 0.5rem;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.img-fluid {
+  max-width: 80px;
+  height: auto;
+}
+
+.ml-3 {
+  margin-left: 1rem;
+}
+
+.accordion {
+  .card {
     margin-bottom: 1.5rem;
   }
-  
-  .card-header h5 .btn-link {
-    font-weight: bold;
+
+  .card-header {
+    h5 {
+      .btn-link {
+        font-weight: bold;
+      }
+    }
   }
-  
+
   .card-body {
     padding: 1rem;
   }
-  
-  .wc-proceed-to-checkout {
-    margin-top: 2rem;
-    text-align: center;
-  }
-  
-  .checkout-button {
-    padding: 1rem;
-    font-size: 1.1rem;
-    width: 100%;
-  }
-  
+}
+
+.wc-proceed-to-checkout {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.checkout-button {
+  padding: 1rem;
+  font-size: 1.1rem;
+  width: 100%;
+}

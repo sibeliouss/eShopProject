@@ -33,8 +33,17 @@
                           </div>
                         </td>
                         <td class="product-price align-middle p-2 ">
-                          <span class="font-weight-bold">{{ w.price.value }}</span>
-                          <span class="text-dark">  {{ w.price.currency }}</span>
+                         <!--  <span class="font-weight-bold">{{ w.price.value }}</span>
+                          <span class="text-dark">  {{ w.price.currency }}</span> -->
+                          <strong>
+                            <span *ngIf="w?.productDiscount?.discountedPrice; else normalPrice">
+                                <small><del>{{ w.price.value }} {{ w.price.currency }}</del></small>
+                                <span class="text-danger">  {{ w.productDiscount.discountedPrice }} {{ w.price.currency }}</span>
+                            </span>
+                            <ng-template #normalPrice>
+                                {{ w.price.value }} {{ w.price.currency }}
+                            </ng-template>
+                        </strong>
                         </td>
                         <td class="align-middle p-2 ml-5">
                          

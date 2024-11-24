@@ -4,11 +4,12 @@ import { MiddlebarComponent } from "./middlebar/middlebar.component";
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BottombarComponent } from "./bottombar/bottombar.component";
+import { FooterComponent } from "./footer/footer.component";
 
 @Component({
   selector: 'app-layouts',
   standalone: true,
-  imports: [TopbarComponent, MiddlebarComponent, CommonModule, BottombarComponent],
+  imports: [TopbarComponent, MiddlebarComponent, CommonModule, BottombarComponent, FooterComponent],
   templateUrl: './layouts.component.html',
   styleUrl: './layouts.component.scss'
 })

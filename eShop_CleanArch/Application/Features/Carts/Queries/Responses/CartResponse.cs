@@ -1,3 +1,4 @@
+using Application.Features.Products.Dtos;
 using Domain.Entities;
 using Domain.Entities.ValueObjects;
 
@@ -6,7 +7,8 @@ namespace Application.Features.Carts.Queries.Responses;
 public class CartResponse
 {
     public Guid Id { get; set; }
-    public ProductDetail? ProductDetail { get; set; }
+    public ProductDetailDto? ProductDetail { get; set; }
+    public ProductDiscountDto? ProductDiscount { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Brand { get; set; } = string.Empty;
     public Money Price { get; set; } = new(0, "TRY");

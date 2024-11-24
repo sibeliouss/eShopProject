@@ -58,16 +58,21 @@ export class OrderDetailComponent {
 
   calcTotal(): number {
     this.total = 0;
+  
     if (this.orders.length > 0) {
-      const products = this.orders[0]?.products || [];
-      for (let product of products) {
-      
-          this.total += product.price.value * product.quantity;
-        
-      }
+      this.orders[0].products.forEach((product) => {
+        // İndirim kontrolü
+        const itemPrice = product.productDiscount?.discountedPrice ?? product.price.value;
+  
+        // Toplam hesaplama
+        this.total += itemPrice * product.quantity;
+      });
     }
+  
     return this.total;
   }
+  
+  
 
   commentBtnHideorShow() {
     if (this.orders.length > 0 && this.orders[0]?.status === 'Teslim Edildi') {

@@ -1,4 +1,5 @@
 using Application.Features.Carts.Queries.Responses;
+using Application.Features.Products.Dtos;
 using Application.Services.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ public class GetAllCartQuery : IRequest<List<CartResponse>>
     }
     public async Task<List<CartResponse>> Handle(GetAllCartQuery request, CancellationToken cancellationToken)
     {
+      var currentDate = DateTime.Now; 
       var cartResponse = await _cartRepository.Query().Where(b => b.UserId == request.UserId).AsNoTracking()
         .Include(b => b.Product).Select(b => new CartResponse()
         {
@@ -30,7 +32,32 @@ public class GetAllCartQuery : IRequest<List<CartResponse>>
           IsFeatured = b.Product.IsFeatured,
           Price = b.Price,
           Quantity = b.Quantity,
-          ProductDetail = b.Product.ProductDetail,
+          ProductDetail = b.Product.ProductDetail != null
+            ? new ProductDetailDto
+            {
+              Id = b.Product.ProductDetail.Id,
+              ProductId = b.Product.Id,
+              Barcode = b.Product.ProductDetail.Barcode,
+              Description = b.Product.ProductDetail.Description,
+              Material = b.Product.ProductDetail.Material,
+              Fit = b.Product.ProductDetail.Fit,
+              Size = b.Product.ProductDetail.Size,
+              Color = b.Product.ProductDetail.Color
+            }
+            : null,
+          ProductDiscount = b.Product.ProductDiscount != null &&
+                            b.Product.ProductDiscount.StartDate <= currentDate && 
+                            b.Product.ProductDiscount.EndDate >= currentDate   
+            ? new ProductDiscountDto()
+            {
+              Id = b.Product.ProductDiscount.Id,
+              ProductId = b.Product.Id,
+              DiscountedPrice = b.Product.ProductDiscount.DiscountedPrice,
+              DiscountPercentage = b.Product.ProductDiscount.DiscountPercentage,
+              StartDate = b.Product.ProductDiscount.StartDate,
+              EndDate = b.Product.ProductDiscount.EndDate
+            }
+            : null,
           Name = b.Product.Name,
           Brand = b.Product.Brand,
           ProductCategories = b.Product.ProductCategories

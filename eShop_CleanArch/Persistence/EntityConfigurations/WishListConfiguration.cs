@@ -16,5 +16,6 @@ public class WishListConfiguration : IEntityTypeConfiguration<WishList>
             price.Property(p => p.Value).HasColumnType("money");
             price.Property(p => p.Currency).HasMaxLength(5);
         });
+        builder.Property(p => p.CreateAt).HasDefaultValueSql("GETDATE()");
     }
 }

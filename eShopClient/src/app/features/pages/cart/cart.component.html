@@ -32,8 +32,15 @@
               </td>
               <td class="product-price" data-title="Price">
                 <span>
-                    {{s.price.value}}
-                    {{s.price.currency}}
+                  <strong>
+                    <span *ngIf="s.productDiscount?.discountedPrice; else normalPrice">
+                      <span class="text-danger">  {{ s.productDiscount.discountedPrice }} {{ s.price.currency }}</span>
+                      <small><del>{{ s.price.value }} {{ s.price.currency }}</del></small>
+                    </span>
+                    <ng-template #normalPrice>
+                      {{ s.price.value }} {{ s.price.currency }}
+                    </ng-template>
+                  </strong>
                 </span>
               <td>
                 <div class="d-flex align-items-center quantity-control">
@@ -46,7 +53,22 @@
                   </button>
                 </div>
               </td>
-              <td>{{s.price.value * s.quantity}} <span class="currency-symbol">{{s.price.currency}}</span></td>
+              <td>
+                <strong>
+                  <span>
+                    <span *ngIf="s.productDiscount?.discountedPrice; else noDiscount">
+                      {{ s.productDiscount.discountedPrice * s.quantity }} {{ s.price.currency }}
+                     
+                    </span>
+                    <ng-template #noDiscount>
+                      <span>
+                        {{ s.price.value * s.quantity }} {{ s.price.currency }}
+                      </span>
+                    </ng-template>
+                  </span>
+                </strong>
+                
+              </td>
               <td>
                 <button (click)="shopping.removeByIndex(i)" class="btn btn-danger btn-sm">
                   <i class="fas fa-trash-alt"></i>
@@ -76,7 +98,18 @@
                   <tbody>
                     <tr *ngFor="let s of shopping.shoppingCarts">
                       <td>{{s.brand}} x <strong> {{s.quantity}}</strong></td>
-                      <td>{{s.price.value * s.quantity}} {{s.price.currency}}</td>
+                      <td><span>
+                        <span *ngIf="s.productDiscount?.discountedPrice; else noDiscount">
+                         
+                            {{ s.productDiscount.discountedPrice * s.quantity }} {{ s.price.currency }}
+                          
+                        </span>
+                        <ng-template #noDiscount>
+                          <span>
+                            {{ s.price.value * s.quantity }} {{ s.price.currency }}
+                          </span>
+                        </ng-template>
+                      </span></td>
                     </tr>
                   </tbody>
                 </table>

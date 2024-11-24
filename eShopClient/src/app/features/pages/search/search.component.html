@@ -20,13 +20,17 @@
               <h5 class="card-title mb-2 text-dark fw-bold">{{ item.name }}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{ item.brand }}</h6>
               <div>
-                <span *ngIf="item.productDiscount.discountedPrice; else normalPrice">
-                        <small><del>{{ item.price.value }} {{ item.price.currency }}</del></small>
-                        <span class="text-danger">  {{ item.productDiscount.discountedPrice }} {{ item.price.currency }}</span>
-               </span>
-               <ng-template #normalPrice>
-                        {{ item.price.value }} {{ item.price.currency }}
-               </ng-template>
+                <span>
+                  <span *ngIf="item.productDiscount?.discountedPrice; else noDiscount">
+                    {{ item.productDiscount.discountedPrice }} {{ item.price.currency }}
+                   
+                  </span>
+                  <ng-template #noDiscount>
+                    <span>
+                      {{ item.price.value }} {{ item.price.currency }}
+                    </span>
+                  </ng-template>
+                </span>
               </div>  
             </div>
             <button class="btn btn-sm w-100 mt-3" routerLink="/single-product/{{item.id}}">

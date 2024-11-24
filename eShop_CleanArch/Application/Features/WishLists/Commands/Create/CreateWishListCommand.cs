@@ -11,6 +11,7 @@ public class CreateWishListCommand : IRequest
    public Guid ProductId { get; set; }
    public Guid UserId { get; set; }
    public Money Price { get; set; }
+ 
 
    public class CreateWishListCommandHandler : IRequestHandler<CreateWishListCommand>
    {
@@ -36,7 +37,8 @@ public class CreateWishListCommand : IRequest
          {
             ProductId  = request.ProductId,
             UserId = request.UserId,
-            Price = request.Price
+            Price = request.Price,
+        
          };
 
          await _wishListRepository.AddAsync(newWishList);

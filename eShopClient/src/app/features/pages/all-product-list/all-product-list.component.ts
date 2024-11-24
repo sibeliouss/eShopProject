@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductModel } from '../../models/product';
 import { ProductListService } from '../../services/product-list.service';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'app-all-product-list',
@@ -15,7 +16,7 @@ export class AllProductListComponent {
 
   product: ProductModel[]=[];
 
-  constructor(private shopping: ProductListService){}
+  constructor(private shopping: ProductListService,private cart: ShoppingCartService){}
 
   ngOnInit(): void {
     this.shopping.getProducts().subscribe({
@@ -30,6 +31,11 @@ export class AllProductListComponent {
   }
   
 
+  addToCart(product: ProductModel): void {
+    if (product) {
+        this.cart.addShoppingCart(product);
+    }
+  }
   
 
 }

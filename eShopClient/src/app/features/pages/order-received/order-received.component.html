@@ -1,17 +1,25 @@
 <section>
-    <main id="content">
-        <div class="bg-light py-5">
-            <div class="container">
-                <div class="text-center mb-4">
-                    <h2 class="text-primary font-weight-bold">{{'orderReceived' | translate}}</h2>
-                    <i class="flaticon-warranty text-success" style="font-size: 40px;"></i>
+    <main>
+        <div class="mt-4">
+            <div class="container-sm">
+                <!-- Ana Sayfa Dönüş İkonu -->
+                <div class="text-center">
+                    <a routerLink="/homepage">
+                        <i class="fas fa-home fa-lg"></i> 
+                    </a>
                 </div>
 
-                <div class="bg-white shadow-lg rounded-lg p-4 mb-5">
+                <div class="text-center mb-5">
+                    <h2 class="font-weight-bold text-success">{{'orderReceived' | translate}}</h2>
+                    <i class="fas fa-check-circle text-success" style="font-size: 60px;"></i>
+                </div>
+
+                <div class="card shadow-sm p-3 mb-5">
                     <div class="mb-4">
-                        <h3 class="font-weight-semibold text-center">{{'thankyouorder' | translate}}!</h3>
+                        <h3 class="font-weight-bold">{{'thankyouorder' | translate}}!</h3>
                     </div>
 
+                    <!-- Sipariş Bilgisi Tablosu -->
                     <div class="border-bottom pb-3 mb-4">
                         <table class="table table-borderless">
                             <thead>
@@ -25,7 +33,7 @@
                             <tbody>
                                 <tr *ngIf="order">
                                     <td class="font-weight-medium">{{order.orderNumber}}</td>
-                                    <td class="font-weight-medium">{{order.createAt | date: 'MM.dd.yyyy - HH:mm'}}</td>
+                                    <td class="font-weight-medium">{{order.createAt | date: 'dd.MM.yyyy - HH:mm'}}</td>
                                     <td class="font-weight-medium text-center">
                                         <strong>{{ calcTotal() < 500 ? (calcTotal() + 50) : calcTotal() }} TL</strong>
                                     </td>
@@ -35,7 +43,7 @@
                         </table>
                     </div>
 
-                    <!-- Order Details -->
+                    <!-- Sipariş Detayları -->
                     <div class="mb-4">
                         <h5 class="font-weight-semibold mb-3">{{'orderDetails' | translate}}</h5>
                         <div *ngFor="let product of order.products;">
@@ -43,13 +51,23 @@
                                 <div>
                                     <h6 class="font-size-2 font-weight-medium">{{product.name}} <span class="text-muted">({{product.brand}})</span></h6>
                                 </div>
-                                <span class="font-size-2 text-muted">x{{product.quantity}}</span>
-                                <span class="font-weight-semibold font-size-2">{{product.price.value}} {{product.price.currency}}</span>
+                                <span class="font-size-2 text-muted"> x {{product.quantity}}</span>
+                                <span class="font-weight-semibold font-size-2"> <span>
+                                    <span *ngIf="product.productDiscount?.discountedPrice; else noDiscount">
+                                      {{ product.productDiscount?.discountedPrice ?? 0 * product.quantity  }} {{ product.price.currency }}
+                                     
+                                    </span>
+                                    <ng-template #noDiscount>
+                                      <span>
+                                        {{ product.price.value * product.quantity }} {{ product.price.currency }}
+                                      </span>
+                                    </ng-template>
+                                  </span></span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Totals -->
+                    <!-- Toplamlar -->
                     <div class="mb-4">
                         <ul class="list-unstyled">
                             <li class="d-flex justify-content-between pt-2">
@@ -76,14 +94,16 @@
                         </span>
                     </div>
 
-                    <!-- Address Information -->
+                    <!-- Adres Bilgileri -->
                     <div class="mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="col-md-6">
                                 <h6 class="font-weight-semibold">{{'shippingAddress' | translate}}</h6>
                                 <address class="font-size-2 text-muted">
+                                    <span> {{payment.address.contactName}} </span><br>
                                     <span>{{payment.address.city}}, {{payment.address.zipCode}}</span><br>
-                                    <span>{{payment.address.country}}</span>
+                                    <span>{{payment.address.country}}</span><br>
+                                    <span>{{payment.address.description}}</span>
                                 </address>
                             </div>
                             <div class="col-md-6">

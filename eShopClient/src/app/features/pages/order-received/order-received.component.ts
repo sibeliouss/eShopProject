@@ -7,11 +7,12 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { SwalService } from '../../../core/services/swal.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { OrderService } from '../../services/order.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-order-received',
   standalone: true,
-  imports: [TranslateModule, CommonModule,],
+  imports: [TranslateModule, CommonModule,RouterModule],
   templateUrl: './order-received.component.html',
   styleUrl: './order-received.component.scss'
 })
@@ -60,17 +61,20 @@ export class OrderReceivedComponent {
   
 
     calcTotal(): number {
-        this.total = 0;
+      this.total = 0;
+  
+      if (this.order && this.order.products) {
+          for (let i = 0; i < this.order.products.length; i++) {
+              const product = this.order.products[i];
+  
+              const itemPrice = product.productDiscount?.discountedPrice ?? product.price.value;
+              this.total += itemPrice * product.quantity;
+          }
+      }
+  
+      return this.total;
+  }
+  
 
-        
-            for (let i = 0; i < this.order.products.length; i++) {
-               
-                    this.total += (this.order.products[i].price.value * this.order.products[i].quantity);
-                    console.log(this.total);
-                  
-            }
-        
-        return this.total;          
-    }
 
 }

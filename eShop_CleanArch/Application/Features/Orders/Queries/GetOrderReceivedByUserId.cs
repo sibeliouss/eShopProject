@@ -1,6 +1,7 @@
 using Application.Features.Orders.Dtos;
 using Application.Features.Orders.Helpers;
 using Application.Features.Orders.Queries.Responses;
+using Application.Features.Products.Dtos;
 using Application.Services.Repositories;
 using Domain.Entities.ValueObjects;
 using MediatR;
@@ -21,9 +22,9 @@ public class GetOrderReceivedByUserId : IRequest<GetOrderReceivedByUserIdRespons
             _orderRepository = orderRepository;
         }
         public async Task<GetOrderReceivedByUserIdResponse> Handle(GetOrderReceivedByUserId request, CancellationToken cancellationToken)
-        {
+        { var currentDate = DateTime.Now; 
             var order = await _orderRepository.Query().Where(o => o.UserId == request.UserId)
-                .OrderByDescending(o => o.CreateAt).Include(o => o.OrderDetails).ThenInclude(o => o.Product)
+                .OrderByDescending(o => o.CreateAt).Include(o => o.OrderDetails).ThenInclude(o => o.Product).ThenInclude(o=>o.ProductDiscount)
                 .FirstOrDefaultAsync(cancellationToken);
             if (order is null) throw new Exception("Müşteriye ait herhangi bir sipariş bulunamadı!");
 
@@ -44,6 +45,14 @@ public class GetOrderReceivedByUserId : IRequest<GetOrderReceivedByUserIdRespons
                     Name = orderDetail.Product.Name,
                     Brand = orderDetail.Product.Brand,
                     Quantity = orderDetail.Quantity,
+                    ProductDiscount = orderDetail.Product.ProductDiscount != null  
+                        ? new ProductDiscountDto()
+                        {
+                            Id = orderDetail.Product.ProductDiscount.Id,
+                            ProductId = orderDetail.Product.Id,
+                            DiscountedPrice = orderDetail.Product.ProductDiscount.DiscountedPrice
+                        }
+                        : null,
                     Price = new Money(orderDetail.Price.Value, orderDetail.Price.Currency)
                 }).ToList()
             };

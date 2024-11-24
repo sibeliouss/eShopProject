@@ -42,7 +42,14 @@
                         <p class="brand">{{ product.brand }}</p>
                     </div>
                     <div class="product-price">
-                        {{ product.price.value }} {{ product.price.currency }}
+                        <span *ngIf="product?.productDiscount?.discountedPrice; else normalPrice">
+                            <small><del>{{ product.price.value }} {{ product.price.currency }}</del></small>
+                            <span class="text-danger">  {{ product.productDiscount?.discountedPrice }} {{ product.price.currency }}</span>
+                        </span>
+                        <ng-template #normalPrice>
+                            {{ product.price.value }} {{ product.price.currency }}
+                        </ng-template>
+                  
                     </div>
 
                     <div class="add-comment" *ngIf="addComment">

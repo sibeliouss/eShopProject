@@ -144,6 +144,7 @@ export class ShoppingCartService {
             next: (res: any) => {
               product.quantity = quantity;
               localStorage.setItem('shoppingCarts', JSON.stringify(this.shoppingCarts));
+              this.shoppingCarts = [...this.shoppingCarts]; 
             },
           });
         }
@@ -151,7 +152,6 @@ export class ShoppingCartService {
     }
   }
   
-
   removeByIndex(index: number) {
     forkJoin({
       delete: this.translate.get("remove.doYouWantToDeleted"),
@@ -205,7 +205,7 @@ export class ShoppingCartService {
     });
   }
 
-  shippingAndCartTotal(): number {
+/*   shippingAndCartTotal(): number {
     this.cartTotal = this.getTotal();  
   
    
@@ -220,7 +220,26 @@ export class ShoppingCartService {
   
     localStorage.setItem('shipping&CartTotal', JSON.stringify(this.cartTotal));
     return this.cartTotal;
+  } */
+
+  shippingAndCartTotal(): number {
+    // Toplam tutarı sıfırla
+    this.cartTotal = 0;
+  
+   
+    this.shoppingCarts.forEach((product) => {
+      const itemPrice = product.productDiscount?.discountedPrice || product.price.value;
+      this.cartTotal += itemPrice * product.quantity;
+    });
+  
+    
+    if (this.cartTotal < 500) {
+      this.cartTotal += this.flatRateTl; // 50 TL sabit kargo ücreti
+    }
+    localStorage.setItem('shipping&CartTotal', JSON.stringify(this.cartTotal));
+    return this.cartTotal;
   }
+  
   
   
   calcTotal() {
@@ -256,16 +275,17 @@ export class ShoppingCartService {
   }
 
   getTotal() {
-    let total = 0;
-    this.shoppingCarts.forEach(item => {
-      total += item.price.value * item.quantity;
+    let total = 0; 
+    this.shoppingCarts.forEach((product) => {
+     
+      const itemPrice = product.productDiscount?.discountedPrice || product.price.value;
+      total += itemPrice * product.quantity;
     });
   
-    
     console.log('Total before returning:', total);
   
     return total; 
   }
   
-  
+
 }

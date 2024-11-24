@@ -1,5 +1,12 @@
 import { Price } from "./money";
-
+export interface ProductDiscount {
+	id: string;
+	productId: string;
+	discountedPrice: number;
+	discountPercentage: number;
+	startDate: Date;
+	endDate: Date;
+  }
 
 export interface OrderDetailModel {
 	productId: string;
@@ -7,6 +14,7 @@ export interface OrderDetailModel {
 	brand: string;
 	quantity: number;
 	price: Price;
+	productDiscount?: ProductDiscount | null; 
 }
 
 export interface OrderModel {
@@ -20,6 +28,4 @@ export interface OrderModel {
 	paymentCurrency: string;
 	products: OrderDetailModel[];
 }
-
-
 
