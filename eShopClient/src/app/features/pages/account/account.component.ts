@@ -5,7 +5,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-account',
+ 
   standalone: true,
   imports: [TranslateModule, RouterModule],
   templateUrl: './account.component.html',

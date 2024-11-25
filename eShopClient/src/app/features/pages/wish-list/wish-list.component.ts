@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  selector: 'app-wish-list',
   standalone: true,
   imports: [TranslateModule, CommonModule, RouterModule],
   templateUrl: './wish-list.component.html',

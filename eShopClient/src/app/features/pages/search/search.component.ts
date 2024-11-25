@@ -7,7 +7,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
-  selector: 'app-search',
   standalone: true,
   imports: [CommonModule, TranslateModule, RouterModule],
   templateUrl: './search.component.html',

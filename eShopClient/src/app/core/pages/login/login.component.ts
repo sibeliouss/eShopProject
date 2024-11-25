@@ -11,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 import { jwtDecode } from 'jwt-decode';
 
 @Component({
-  selector: 'app-login',
   standalone: true,
   imports: [ TranslateModule, FormsModule, ReactiveFormsModule, RouterModule, BaseInputErrorsComponent,CommonModule],
   templateUrl: './login.component.html',

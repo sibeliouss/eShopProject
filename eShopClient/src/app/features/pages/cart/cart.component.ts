@@ -7,7 +7,6 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 
 @Component({
-  selector: 'app-cart',
   standalone: true,
   imports: [FormsModule, TranslateModule, CommonModule,RouterModule],
   templateUrl: './cart.component.html',

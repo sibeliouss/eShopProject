@@ -1,71 +1,106 @@
-.right-sidebar {
-  background-color: #f8f9fa;
+.product-detail {
+  background-color: #f9f9f9;
+  padding: 3rem 0;
+  img {
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 10px;
+    
+  }
+}
+.container{
+  max-width: 1000px;
 }
 
-.product h1, .product h4 {
-  font-weight: bold;
+
+
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border-radius: 5px;
 }
 
-.price {
-  font-size: 1.5rem;
+.stock-out {
+  position: absolute;
+  bottom: 10px;
+  right: 50px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border-radius: 5px;
 }
-
 .btn {
+  margin-right: 10px;
   font-size: 1rem;
   padding: 10px 20px;
 }
 
-.stok{
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  background-color: rgba(255, 0, 0, 0.693);
-  color: white;
-  padding: 5px;
-  
+.product-title {
+  font-size: 2rem;
+  font-weight: bold;
 }
 
-.form-control {
-  border-radius: 0;
-  font-size: 0.9rem;
+.price-section {
+  font-size: 1.5rem;
 }
 
-.product-details ul li {
-  margin-bottom: 0.5rem;
+.price-section del {
+  font-size: 1rem;
+  color: #888;
 }
 
-.star1{
- color: rgba(93, 55, 102, 0.915);
+
+
+.reviews {
+  margin-top: 2rem;
 }
 
-.mt-4 {
-  display: flex;
-  gap: 15px; /* Aralarındaki boşluk */
-}
+.review {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1rem;
 
-.product {
-  position: relative; /* Görselin üstünde konumlandırmak için */
-  
-  figure {
-    position: relative; /* Görseli konumlandırmak için */
-    margin-bottom: 0;
-    
-    .img-fluid {
-      height: 500px; /* Görsel boyutunu ayarladık */
-      width: 100%; /* Görselin tam genişlikte olmasını sağlamak için */
-      //object-fit: cover; /* Görselin düzgün kesilmesini sağlamak için */
-    }
+  h6 {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 
-    /* İndirim yüzdesi etiketi */
-    .badge-discount {
-      position: absolute;
-      padding: 5px 10px;
-      background-color: #dc3545;
-      color: #fff;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 5px;
-    }
+  p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: #555;
   }
 }
 
+
+
+
+
+input:focus{
+  border-color: #8661f4;
+  box-shadow: 0 0 5px rgba(88, 35, 98, 0.5);
+}
+
+textarea {
+  resize: none;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+textarea:focus {
+  border-color: #8661f4;
+  box-shadow: 0 0 5px rgba(88, 35, 98, 0.5);
+}
+
+.star1 {
+  font-size: 1 rem;
+  color: #7022a0;
+  cursor: pointer;
+}
+
+.star1 small.far {
+  color: #ddd;
+}

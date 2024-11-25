@@ -11,7 +11,6 @@ import { ProductModel } from '../../models/product';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 
  @Component({
-  selector: 'app-product-list-by-category',
   standalone: true,
    imports: [TranslateModule,FormsModule, CommonModule, RouterModule],
    templateUrl: './product-list-by-category.component.html',

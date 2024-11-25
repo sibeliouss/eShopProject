@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../../core/services/auth.service';
 
 @Component({
-  selector: 'app-order-detail',
   standalone: true,
   imports: [TranslateModule, CommonModule, RouterModule],
   templateUrl: './order-detail.component.html',

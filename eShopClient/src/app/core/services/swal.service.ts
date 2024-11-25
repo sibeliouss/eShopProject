@@ -12,7 +12,7 @@ export class SwalService {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
-      timer: 3000,
+      timer: 2000,
       timerProgressBar: true,
       showConfirmButton: false
     })
@@ -50,7 +50,7 @@ export class SwalService {
     Swal.fire({
       title: title,
       icon: 'error',
-      timer: 3000,
+      timer: 2000,
       showConfirmButton: false
     });
   }
@@ -59,7 +59,7 @@ export class SwalService {
     Swal.fire({
       title: title,
       icon: 'error',
-      timer: 3000,
+      timer: 2000,
       showConfirmButton: false,
     
       confirmButtonText: confirmButtonName

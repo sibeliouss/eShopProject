@@ -1,134 +1,104 @@
-<section class="right-sidebar py-5 bg-light">
-    <div class="site-content" id="content">
-        <div class="container">
-            <div class="row">
-                <div id="primary" class="content-area col-lg-9 mx-auto">
-                    <div class="product card border-0 shadow-sm">
-                        <div class="container py-4">
-                            <div class="row">
-                                <!-- Ürün Görseli -->
-                                <div class="col-lg-5 text-center position-relative">
-                                    <figure class="mb-0">
-                                        <img [src]="product?.img" alt="Image Description"
-                                             class="img-fluid rounded" style="height: 500px;">
-                                             
-                                        <span *ngIf="product?.productDiscount?.discountPercentage" class="badge badge-discount position-absolute top-0 start-0 p-2 bg-danger text-white">
-                                            -{{ product?.productDiscount?.discountPercentage }}%
-                                        </span>
-                                        <p *ngIf="product?.quantity === 0" class="stok">
-                                            {{ 'outOfStock' | translate }}
-                                         </p>
-                                    </figure>
-                                </div>
+<section class="product-detail py-5">
+  <div class="container">
+    <!-- Üst Kısım: Ürün Görseli ve Detaylar -->
+    <div class="row">
+      <!-- Ürün Görseli -->
+      <div class="col-lg-5 text-center position-relative">
+        <figure class="mb-0">
+          <img [src]="product?.img" alt="Product Image" class="img-fluid rounded">
+          <span *ngIf="product?.productDiscount?.discountPercentage" class="badge discount-badge bg-danger text-white">
+            -{{ product?.productDiscount?.discountPercentage }}%
+          </span>
+          <p *ngIf="product?.quantity === 0" class="badge stock-out text-white bg-secondary">
+            {{ 'outOfStock' | translate }}
+          </p>
+        </figure>
+      </div>
 
-                                <!-- Ürün Detayları -->
-                                <div class="col-lg-7">
-                                    <div class="px-lg-4">
-                                        <h1 class="font-size-5 font-weight-bold">{{ product?.name }}</h1>
-                                        <p class="font-size-3 text-muted">{{ product?.brand }}</p>
-                                       
-                                        <!-- Yıldız Puanlama -->
-                                        <div class="star1 mb-4">
-                                            <span class="star2">
-                                                <ng-container *ngFor="let star of getStars(rating)">
-                                                    <small [ngClass]="star.class"></small>
-                                                </ng-container>
-                                            </span>
-                                            <span class="ml-2 text-muted">({{ rating | number:'1.2-2' }})</span>
-                                        </div>
-
-                                        <!-- Fiyat -->
-                                        <p>
-                                            <strong>
-                                                <span *ngIf="product?.productDiscount?.discountedPrice; else normalPrice">
-                                                    <small><del>{{ product?.price?.value }} {{ product?.price?.currency }}</del></small>
-                                                    <span class="text-danger">  {{ product?.productDiscount?.discountedPrice }} {{ product?.price?.currency }}</span>
-                                                </span>
-                                                <ng-template #normalPrice>
-                                                    {{ product?.price?.value }} {{ product?.price?.currency }}
-                                                </ng-template>
-                                            </strong>
-                                           
-                                        </p>
-                                      
-                                        <!-- Sepete Ekle Butonu -->
-                                        <form class="cart d-md-flex align-items-center">
-                                             
-                                            <button type="button"  *ngIf="product?.quantity!==0" class="btn btn-dark rounded-0 ml-md-4" (click)="addToCart(product!)">
-                                                {{ 'addToCart' | translate }}
-                                            </button> 
-                                        </form>
-
-                                        <!-- Wishlist ve Paylaş Butonları -->
-                                        <div class="mt-4">
-                                            <a (click)="wishList.addToWishList(product!)" class="text-muted mr-4">
-                                                <i class="bi bi-heart"></i> 
-                                            </a>
-                                            <a  class="text-muted">
-                                                <i class="bi bi-share"></i> 
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Ürün Detayları Listesi -->
-                                    <div class="my-4">
-                                        <h5>{{ 'productDetails' | translate }}</h5>
-                                        <ul class="list-unstyled text-muted">
-                                            <li>{{'color' | translate}}: {{ product?.productDetail?.color }}</li>
-                                            <li>{{ 'fit' | translate }}: {{ product?.productDetail?.fit }}</li>
-                                            <li>{{ 'size' | translate }}: {{ product?.productDetail?.size }}</li>
-                                            <li>{{ 'material' | translate }}: {{ product?.productDetail?.material }}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Müşteri Yorumları -->
-                            <div class="mt-5">
-                                <!-- Yorumlar -->
-                                <h4 class="mb-3">{{ 'reviews' | translate }}</h4>
-                                <ul class="list-unstyled">
-                                    <ng-container *ngFor="let review of reviews">
-                                        <li class="mb-4 border-bottom pb-3">
-                                            <h6>{{ review?.title }}   <span class="star1">
-                                                <ng-container *ngFor="let star of getStars(review.rating)">
-                                                    <small [ngClass]="star.class"></small>
-                                                </ng-container>
-                                            </span></h6>
-                                            <p class="text-muted">{{ review?.comment }}</p>
-                                            <div class="text-muted">{{ review.user.firstName }} {{ review.user.lastName }} - {{ review.createAt | date: 'dd.MM.yyyy' }}</div>
-                                        </li>
-                                    </ng-container>
-                                </ul>
-
-                                <div *ngIf="isResponse && allowToComment" class mt-5>
-                                    <h4 class="font-size-3 mb-4">{{ 'writeAReview' | translate }}</h4>
-                                    <div class="d-flex align-items-center mb-6">
-                                        <div class="star1 ml-3 font-size-4">
-                                            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-                                                <small [ngClass]="{'far': starRating < star, 'fas': starRating >= star}" 
-                                                       class="fa-star" 
-                                                       (click)="setRating(star)"></small>
-                                            </ng-container>
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-5">
-                                        <label for="inputCompanyName" class="form-label text-dark h6 mb-3">
-                                            {{ 'addATitle' | translate }}
-                                        </label>
-                                        <input [(ngModel)]="title" type="text" class="form-control rounded-0 px-4" name="title" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea [(ngModel)]="comment" class="form-control" rows="4" placeholder="{{ 'Your comment...' | translate }}"></textarea>
-                                    </div>
-
-                                    <button (click)="createReview()" class="btn btn-dark mt-2">{{ 'submit' | translate }}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- Ürün Detayları -->
+      <div class="col-lg-7">
+        <h1 class="product-title">{{ product?.name }}</h1>
+        <p class="product-brand text-muted">{{ product?.brand }}</p>
+        <div class="star1 mb-3">
+          <ng-container *ngFor="let star of getStars(rating)">
+            <i [ngClass]="star.class"></i>
+          </ng-container>
+          <span class="ml-2 text-muted">({{ rating | number: '1.1-1' }})</span>
         </div>
+        <div class="price-section mb-4">
+          <span *ngIf="product?.productDiscount?.discountedPrice; else normalPrice">
+            <small class="text-muted"><del>{{ product?.price?.value }} {{ product?.price?.currency }}</del></small>
+            <span class="text-danger font-weight-bold">
+              {{ product?.productDiscount?.discountedPrice }} {{ product?.price?.currency }}
+            </span>
+          </span>
+          <ng-template #normalPrice>
+            <span class="font-weight-bold">{{ product?.price?.value }} {{ product?.price?.currency }}</span>
+          </ng-template>
+        </div>
+        <div class="mt-4">
+          <button *ngIf="product?.quantity !== 0" class="btn btn-outline-secondary btn-lg" (click)="addToCart(product!)">
+            {{ 'addToCart' | translate }}
+          </button>
+          <button (click)="wishList.addToWishList(product!)" class="btn btn-outline-secondary">
+            <i class="bi bi-heart"></i> 
+          </button>
+          <button class="btn btn-outline-secondary ml-2">
+            <i class="bi bi-share"></i> 
+          </button>
+        </div>
+        <div class="product-details mt-3">
+      <!--     <h5>{{ 'productDetails' | translate }}</h5> -->
+          <ul class="list-unstyled">
+            <li><strong>{{ 'color' | translate }}:</strong> {{ product?.productDetail?.color }} </li>
+            <strong>{{ 'size' | translate }}:</strong>  {{ product?.productDetail?.size }} 
+            <li><strong>{{ 'material' | translate }}:</strong> {{ product?.productDetail?.material }}</li>
+           <hr>
+            <p class="font-size-4"> {{ product?.productDetail?.description }}</p>
+          </ul>
+        </div>
+      </div>
     </div>
+
+    <!-- Alt Kısım: Yorumlar -->
+    <div class="reviews mt-5">
+      <h4>{{ 'reviews' | translate }}</h4>
+      <div *ngFor="let review of reviews" class="review p-4 bg-light rounded mb-3 ">
+        <h6>{{ review?.title }}</h6>
+        <span class="star1">
+          <ng-container *ngFor="let star of getStars(review.rating)">
+              <small [ngClass]="star.class"></small>
+          </ng-container>
+        </span>
+        <p class="text-muted">{{ review?.comment }}</p>
+        <div class="text-muted">{{ review.user.firstName }} {{ review.user.lastName }} - {{ review.createAt | date: 'dd.MM.yyyy' }}</div>
+      </div>
+    </div>
+
+    <!-- Yorum Yazma Alanı -->
+    <div *ngIf="isResponse && allowToComment" class="mt-5">
+      <h4 class="font-size-3 mb-4">{{ 'writeAReview' | translate }}</h4>
+      <div class="d-flex align-items-center mb-6">
+        <div class="star1 ml-3 font-size-4">
+          <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+            <small [ngClass]="{'far': starRating < star, 'fas': starRating >= star}" 
+                   class="fa-star" 
+                   (click)="setRating(star)"></small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="form-group mb-5">
+        <label for="inputCompanyName" class="form-label text-dark h6 mb-3">
+          {{ 'addATitle' | translate }}
+        </label>
+        <input [(ngModel)]="title" type="text" class="form-control rounded-0 px-4" name="title">
+        <input-error fieldName="title"></input-error>
+      </div>
+      <div class="form-group">
+        <textarea [(ngModel)]="comment" class="form-control" rows="4" placeholder="{{ 'Your comment...' | translate }}"></textarea>
+      </div>
+      <button (click)="createReview()" class="btn btn-dark align-items-center mt-4">{{ 'submit' | translate }}</button>
+      <input-error fieldName="comment"></input-error>
+    </div>
+  </div>
 </section>

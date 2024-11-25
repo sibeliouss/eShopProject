@@ -9,12 +9,12 @@ import { UpdateUserPasswordModel } from '../../../models/UpdateCustomerPasswordM
 import { UserService } from '../../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { BaseInputErrorsComponent } from '../../../../core/components/base-input-errors/base-input-errors.component';
 
 
 @Component({
-  selector: 'app-account-details',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule, BaseInputErrorsComponent],
   templateUrl: './account-details.component.html',
   styleUrls: ['./account-details.component.scss']
 })

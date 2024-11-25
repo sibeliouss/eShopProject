@@ -5,11 +5,16 @@
         font-size:14px;
         font-weight: 600;
     }
-    .yazi{
-        font-style: oblique;
+    .free-shipping {
+        font-size: 16px; 
+        color: #23094df6;
+        margin-right: 20px; 
+        display: inline-block; 
     }
+    
     border-bottom: 1px solid rgba(128, 128, 128, 0.314);
-    background-color: #faef764a;
+    background: linear-gradient(135deg, #6b11cb51 0%, #7725fc8f 100%);
+    color: white;
 }
 
 .topbarright {

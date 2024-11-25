@@ -10,7 +10,7 @@ import { OrderService } from '../../services/order.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-order-received',
+ 
   standalone: true,
   imports: [TranslateModule, CommonModule,RouterModule],
   templateUrl: './order-received.component.html',

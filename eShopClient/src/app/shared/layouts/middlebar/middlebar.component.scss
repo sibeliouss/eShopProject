@@ -20,7 +20,7 @@
 
     .search-container {
         position: relative;
-        width: 650px;
+        width: 450px;
     }
 
     .search {
@@ -41,7 +41,7 @@
         top: 50%;
         transform: translateY(-50%);
         border: 1.5px solid black;
-        background-color: #faef764a;
+        background-color: #f8d4e34a;
         border-radius: 50%;
         cursor: pointer;
     }
@@ -51,7 +51,7 @@
     }
 
     .btn {
-        background-color: #faef764a;
+        background-color: #f8d4e34a;
         border: 1.5px solid black;
     }
     .search::-webkit-search-cancel-button {
@@ -62,7 +62,7 @@
     
       
        .counter {
-        top: 0;
+        top: 8px;
         right: 0;
         width: 20px;
         height: 20px;

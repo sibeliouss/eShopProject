@@ -9,7 +9,7 @@ import { FooterComponent } from "./footer/footer.component";
 @Component({
   selector: 'app-layouts',
   standalone: true,
-  imports: [TopbarComponent, MiddlebarComponent, CommonModule, BottombarComponent, FooterComponent],
+  imports: [TopbarComponent, MiddlebarComponent, CommonModule, BottombarComponent],
   templateUrl: './layouts.component.html',
   styleUrl: './layouts.component.scss'
 })

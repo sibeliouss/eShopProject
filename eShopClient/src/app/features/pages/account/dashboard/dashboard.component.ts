@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../../core/services/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { ShoppingCartService } from '../../../services/shopping-cart.service';
 
 @Component({
-  selector: 'app-dashboard',
+ 
   standalone: true,
   imports: [TranslateModule, RouterModule],
   templateUrl: './dashboard.component.html',
@@ -12,6 +13,11 @@ import { RouterModule } from '@angular/router';
 })
 export class DashboardComponent {
 
-  constructor( public auth: AuthService){}
+  constructor( public auth: AuthService,  private router: Router, private shopping: ShoppingCartService){}
+  logout(): void {
+    localStorage.removeItem('response');
+    this.shopping.GetAllCarts();
+    this.router.navigateByUrl('/login');
+  }
 
 }

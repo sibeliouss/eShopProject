@@ -164,7 +164,7 @@
   "noProductsFound": "Aradığınız kriterlere uygun ürün bulunamadı.",
   "removeOrder": "Siparişi Kaldır",
   "orderReceived": "Sipariş Alındı",
-  "thankyouorder": "Teşekkürler! Siparişiniz alındı",
+  "thankyouorder": "Teşekkürler!",
   "orderNumber": "Sipariş Numarası",
   "paymentMethod": "Ödeme Yöntemi",
   "orderDetails": "Sipariş Detayları",
@@ -181,6 +181,7 @@
   "show": "Göster",
   "outOfStock": "Ürün stokta kalmadı.",
   "outStock":"Tükendi",
+  "freeShippingMessage": "500 TL ve üzeri alışverişlerde ücretsiz kargo!",
   
   "login" : {
     "title": "Giriş",

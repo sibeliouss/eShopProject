@@ -6,7 +6,6 @@ import { ProductListService } from '../../services/product-list.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
-  selector: 'app-all-product-list',
   standalone: true,
   imports: [TranslateModule, CommonModule],
   templateUrl: './all-product-list.component.html',

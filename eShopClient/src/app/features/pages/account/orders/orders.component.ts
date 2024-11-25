@@ -10,7 +10,6 @@ import { forkJoin } from 'rxjs';
 import { SwalService } from '../../../../core/services/swal.service';
 
 @Component({
-  selector: 'app-orders',
   standalone: true,
   imports: [TranslateModule, CommonModule, RouterModule],
   templateUrl: './orders.component.html',

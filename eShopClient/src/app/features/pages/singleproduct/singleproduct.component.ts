@@ -12,12 +12,12 @@ import { AuthService } from '../../../core/services/auth.service';
 import { SwalService } from '../../../core/services/swal.service';
 import { WishListService } from '../../services/wish-list.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
+import { BaseInputErrorsComponent } from '../../../core/components/base-input-errors/base-input-errors.component';
 
 
 @Component({
-  selector: 'app-singleproduct',
   standalone: true,
-  imports: [TranslateModule, CommonModule, FormsModule],
+  imports: [TranslateModule, CommonModule, FormsModule, BaseInputErrorsComponent],
   templateUrl: './singleproduct.component.html',
   styleUrls: ['./singleproduct.component.scss']
 })

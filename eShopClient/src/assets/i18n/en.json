@@ -183,6 +183,7 @@
     "show": "Show",
     "outOfStock": "Out of stock",
     "outStock": "Out of Stock",
+    "freeShippingMessage": "Free shipping on orders over 500 TL!",
 
    "login": {
           "title": "Log In",

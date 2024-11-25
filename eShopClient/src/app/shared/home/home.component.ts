@@ -10,9 +10,9 @@ import { WishListService } from '../../features/services/wish-list.service';
 import { ProductListService } from '../../features/services/product-list.service';
 import { ProductDiscountModel } from '../../features/models/productDiscount';
 import { WishListModel } from '../../features/models/wishList';
+import { ProductService } from '../../features/services/product.service';
 
 @Component({
-  selector: 'app-home',
   standalone: true,
   imports: [RouterModule, FormsModule, CommonModule, TranslateModule],
   templateUrl: './home.component.html',
@@ -24,8 +24,7 @@ export class HomeComponent implements OnInit {
   discountProducts: ProductDiscountModel[] = [];
   newArrivalProducts: ProductModel[] = [];
   featuredProducts: ProductModel[] = [];
-  loading: boolean = true; 
-  apiUrl: string = 'https://localhost:7120/api/Products'; 
+  loading: boolean = true;  
   currentMonth: string = "";
   rating:number=0;
   wish:WishListModel=new WishListModel();
@@ -36,6 +35,8 @@ export class HomeComponent implements OnInit {
       public shopping: ShoppingCartService,
       public wishList: WishListService,
       public shopListProducts: ProductListService,
+      private productService: ProductService,
+
   ) {}
 
   ngOnInit(): void {
@@ -62,51 +63,46 @@ export class HomeComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.http.get<ProductModel[]>(`${this.apiUrl}/GetProducts`).subscribe({
-        next: (res: ProductModel[]) => {
-         
-            this.product = res; // Tüm ürünler dizi olarak atanır
-            console.log(this.product);
-            this.loading = false;
-        },
-        error: (err) => {
-            console.error('Error loading products', err);
-            this.loading = false;
-        }
+    this.productService.getProducts().subscribe({
+      next: (res) => {
+        this.product = res;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error loading products', err);
+        
+      }
     });
-}
-
+  }
 
   getNewProducts(): void {
-    this.http.get<ProductModel[]>(`${this.apiUrl}/GetNewArrivals`).subscribe({
-        next: (res) => {
-            this.newArrivalProducts = res;
-            console.log(this.newArrivalProducts);
-            this.loading = false;
-        },
-        error: (err) => {
-            console.error('Error loading new products', err);
-            this.loading = false;
-        }
+    this.productService.getNewArrivals().subscribe({
+      next: (res) => {
+        this.newArrivalProducts = res;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error loading new products', err);
+        this.loading = false;
+      }
     });
   }
 
   getFeaturedProducts(): void {
-      this.http.get<ProductModel[]>(`${this.apiUrl}/GetFeaturedProducts`).subscribe({
-          next: (res) => {
-              this.featuredProducts = res;
-              console.log(this.featuredProducts);
-              this.loading = false;
-          },
-          error: (err) => {
-              console.error('Error loading featured products', err);
-              this.loading = false;
-          }
-      });
+    this.productService.getFeaturedProducts().subscribe({
+      next: (res) => {
+        this.featuredProducts = res;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error loading featured products', err);
+        this.loading = false;
+      }
+    });
   }
 
   getDiscountedProductsById(id: string): void {
-    this.http.get<ProductDiscountModel[]>(`https://localhost:7120/api/ProductDiscounts/GetProductDiscountById/${id}`).subscribe({
+    this.productService.getDiscountedProductById(id).subscribe({
         next: (res) => {
             this.discountProducts = res;
             console.log(this.discountProducts);
@@ -117,20 +113,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  /* getDiscountedProducts(): void {
-    
-    this.http.get<ProductDiscountModel[]>(`https://localhost:7120/api/ProductDiscounts/GetAllProductDiscounts`).subscribe({
-        next: (res) => {
-            this.discountProducts = res;
-            console.log(this.discountProducts);
-        },
-        error: (err) => {
-            console.error('Error loading discounted products', err);
-        }
-    });
-  } */
   getDiscountedProducts(): void {
-    this.http.get<ProductDiscountModel[]>('https://localhost:7120/api/ProductDiscounts/GetAllProductDiscounts').subscribe({
+    this.productService.getDiscountedProducts().subscribe({
       next: (res) => {
         const currentTime = new Date().getTime();
         this.discountProducts = res.filter(discount => {

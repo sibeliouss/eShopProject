@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { ProductListService } from '../../services/product-list.service';
 
 @Component({
-  selector: 'app-category',
   standalone: true,
   imports: [CommonModule, TranslateModule, RouterModule],
   templateUrl: './category.component.html',

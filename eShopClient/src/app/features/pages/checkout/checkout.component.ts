@@ -16,7 +16,7 @@ import { UpdateAddressModel } from '../../models/updateAddress';
 
 
 @Component({
-  selector: 'app-checkout',
+  
   standalone: true,
   imports: [TranslateModule, CommonModule, FormsModule],
   templateUrl: './checkout.component.html',

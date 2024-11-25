@@ -205,22 +205,6 @@ export class ShoppingCartService {
     });
   }
 
-/*   shippingAndCartTotal(): number {
-    this.cartTotal = this.getTotal();  
-  
-   
-    console.log('Cart total before shipping fee:', this.cartTotal);
-  
-    if (this.getTotal() <= 500) {
-      this.cartTotal += this.flatRateTl; 
-    }
-  
-  
-    console.log('Cart total after shipping fee:', this.cartTotal);
-  
-    localStorage.setItem('shipping&CartTotal', JSON.stringify(this.cartTotal));
-    return this.cartTotal;
-  } */
 
   shippingAndCartTotal(): number {
     // Toplam tutarı sıfırla
