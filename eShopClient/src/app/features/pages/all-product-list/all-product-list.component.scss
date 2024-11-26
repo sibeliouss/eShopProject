@@ -5,6 +5,7 @@ body {
   
   .container {
     max-width: 1200px;
+  
   }
   .baslik 
     {
@@ -18,6 +19,21 @@ body {
   .product-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 8px;
+    border:none;
+    box-shadow: 0 2px 5px 0.1rem rgba(93, 55, 102, 0.435);
+
+    .product-img {
+      height: 200px; 
+      width: 100%;   
+      object-fit: contain; 
+      object-position: center; 
+
+    }
+
+    .card-body{
+      background-color: rgba(163, 90, 163, 0.08);
+    }
+ 
     
 
     
@@ -29,13 +45,7 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   }
   
-  /* Ürün Görseli */
-  .product-img {
-    height: 200px; 
-    width: 100%;   
-    object-fit: contain; 
-    object-position: center; 
-  }
+
   
   /* İndirim Rozeti */
   .badge-discount {

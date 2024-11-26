@@ -10,7 +10,7 @@
 .product-card {
   position: relative;
   overflow: hidden;
-  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.137);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   max-width: 270px;
@@ -22,9 +22,8 @@
   &:hover{
     box-shadow: 0 4px 10px 0.2rem rgba(93, 55, 102, 0.435);
   }
-}
 
-.baslik 
+  .baslik 
 {
     font-size: x-large;
     color: rgba(93, 55, 102, 0.915);
@@ -32,6 +31,26 @@
     //border-left: 2px solid gray;
    // padding-left: 8px;
 }
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background-color: rgba(163, 90, 163, 0.08);
+  h5 {
+    font-size: 16px;
+  }
+  p {
+    font-size: 14px;
+  }
+  a {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+}
+
+
 .btn {
   background-color: rgba(93, 55, 102, 0.915);
   border: none;
@@ -72,13 +91,6 @@
 
 
 
-
-
-/* .card-img-top {
-  height: 200px;
-  //object-fit: cover;
-}*/
-
 .card-img-container {
   position: relative;
 } 
@@ -89,9 +101,6 @@
   transition: transform 0.3s ease;
 } 
 
-
-
-/* Kartın üzerine gelindiğinde yazı kısmı */
 .product-card:hover .product-img {
   transform: scale(1.1);
 }
@@ -100,26 +109,6 @@
   transform: translateY(-10px);
 }
 
-.card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
-
- .card-body h5 {
-  font-size: 16px;
-}
-
-.card-body p {
-  font-size: 14px;
-}
-
-.card-body a {
-  font-size: 14px;
-  padding: 10px;
-}
 .badge-discount {
   position: absolute;
   top: 10px;
@@ -146,35 +135,16 @@
   .discount-time-left {
     position: absolute;
     bottom: 10px;
-    background-color: #6a0dad6f; /* Mor arka plan */
-    color: rgb(255, 255, 255); /* Yazı rengi beyaz */
-    padding: 5px 10px; /* İç boşluk */
-    //border-radius: 5px; /* Yuvarlatılmış köşeler */
-    font-weight: bold; /* Yazıyı kalın yap */
+    background-color: #6a0dad6f; 
+    color: rgb(255, 255, 255); 
+    padding: 5px 10px; 
+    
+    font-weight: bold;
   }
   
 
-  .card-body {
-    display: flex;
-    flex-direction: column;
-   // justify-content: space-between;
-    //height: 50%;
-  }
   
-  
-   .card-body h5 {
-    font-size: 16px;
-  }
-  
-  .card-body p {
-    font-size: 14px;
-  }
-  
-  .card-body a {
-    font-size: 14px;
-    padding: 10px;
-  }
-
+/* 
   .product-card {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
@@ -192,7 +162,7 @@
       transform: translateY(-10px); // Hover efekti
     }
   }
-
+ */
   
 
   .badge-discount {

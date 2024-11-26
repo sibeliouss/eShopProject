@@ -13,6 +13,7 @@ import { SwalService } from '../../../core/services/swal.service';
 import { WishListService } from '../../services/wish-list.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { BaseInputErrorsComponent } from '../../../core/components/base-input-errors/base-input-errors.component';
+import { ReviewService } from '../../services/review.service';
 
 
 @Component({
@@ -43,7 +44,8 @@ export class SingleproductComponent {
     private swal: SwalService,
     private translate: TranslateService,
     public wishList: WishListService,
-    public shopping: ShoppingCartService
+    public shopping: ShoppingCartService,
+    private reviewService: ReviewService,
     
   ) {
     if (localStorage.getItem('response')) {
@@ -83,7 +85,7 @@ export class SingleproductComponent {
       this.requestCreateReview.title = this.title;
       this.requestCreateReview.comment = this.comment;
   
-      this.http.post("https://localhost:7120/api/Reviews/CreateReview", this.requestCreateReview).subscribe({
+      this.http.post(this.reviewService.createReviewUrl(), this.requestCreateReview).subscribe({
         next: (res: any) => {
           this.getAllReview();
           this.clearReviews();
@@ -104,22 +106,21 @@ export class SingleproductComponent {
   
 
   
-  
-
   AllowToComment() {
-    this.http.get(`https://localhost:7120/api/Reviews/AllowToComment/${this.product?.id}/${this.auth.token?.userId}`).subscribe({
-      next: (res: any) => {
-        this.allowToComment = res;
-      },
-      error: (err) => {
-        console.error('Allow to comment error:', err);
-       
-      }
-    });
+    if (this.product && this.auth.token) {
+      this.http.get<boolean>(this.reviewService.allowToCommentUrl(this.product.id, this.auth.token.userId!)).subscribe({
+        next: (res) => {
+          this.allowToComment = res;
+        },
+        error: (err) => {
+          console.error('Allow to comment error:', err);
+        }
+      });
+    }
   }
 
   getAllReview() {
-    this.http.get("https://localhost:7120/api/Reviews/GetReviews/" + this.product?.id).subscribe({
+    this.http.get(this.reviewService.getReviewsUrl(this.product?.id!)).subscribe({
       next: (res: any) => {
         this.reviews = res;
       
@@ -132,7 +133,7 @@ export class SingleproductComponent {
   }
 
   calculateStar() {
-    this.http.get("https://localhost:7120/api/Reviews/CalculateStar/" + this.product?.id).subscribe({
+    this.http.get(this.reviewService.calculateStarUrl(this.product?.id!)).subscribe({
       next: (res: any) => {
         this.starData = res;
         console.log(this.starData);
@@ -145,7 +146,7 @@ export class SingleproductComponent {
   }
 
   calculateReviews() {
-    this.http.get("https://localhost:7120/api/Reviews/CalculateReviews/" + this.product?.id).subscribe({
+    this.http.get(this.reviewService.calculateReviewsUrl(this.product!.id)).subscribe({
       next: (res: any) => {
         this.rating = res;
       },

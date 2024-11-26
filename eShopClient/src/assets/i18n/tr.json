@@ -182,6 +182,13 @@
   "outOfStock": "Ürün stokta kalmadı.",
   "outStock":"Tükendi",
   "freeShippingMessage": "500 TL ve üzeri alışverişlerde ücretsiz kargo!",
+  "allowToCommentError": "Yorum yapma izniniz yok.",
+  "pleaseLoginToAddTheProductToFavorites": "Ürünü favorilere eklemek için giriş yapmalısınız.",
+  "confirmButton": "Tamam",
+  "errorAddingProductToWishlist": "Ürün favorilere eklenirken bir hata oluştu.",
+  "errorFetchingWishList": "Favoriler alınırken bir hata oluştu.",
+  "errorDeletingProductFromWishlist": "Ürün favorilerden silinirken bir hata oluştu.",
+
   
   "login" : {
     "title": "Giriş",

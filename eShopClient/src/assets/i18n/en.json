@@ -184,6 +184,15 @@
     "outOfStock": "Out of stock",
     "outStock": "Out of Stock",
     "freeShippingMessage": "Free shipping on orders over 500 TL!",
+    "allowToCommentError": "There was an error checking if you're allowed to comment.",
+   "pleaseLoginToAddTheProductToFavorites": "You must log in to add the product to favorites.",
+   "confirmButton": "Confirm",
+   "errorAddingProductToWishlist": "Error occurred while adding product to wishlist.",
+   "errorFetchingWishList": "Error occurred while fetching the wishlist.",
+   "errorDeletingProductFromWishlist": "Error occurred while deleting product from wishlist.",
+
+   
+  
 
    "login": {
           "title": "Log In",

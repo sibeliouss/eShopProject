@@ -1,15 +1,18 @@
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .order-page {
     padding: 20px 0;
   
     .baslik 
-    {
-        font-size: larger;
-        color: rgba(93, 55, 102, 0.915);
-        font-weight: 200;
-        border-left: 2px solid gray;
-        padding-left: 8px;
-    }
-   
+  {
+      font-size: larger;
+      color: rgba(93, 55, 102, 0.915);
+      font-weight: 200;
+      border-left: 2px solid gray;
+      padding-left: 8px;
+  }
   
     .order-item {
         border: 1.5px solid rgba(0, 0, 0, 0.292);
@@ -113,4 +116,5 @@
       }
     }
   }
+ 
   

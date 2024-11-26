@@ -9,6 +9,7 @@ import { ProductListService } from '../../services/product-list.service';
 import { RouterLink, RouterModule } from '@angular/router';
 import { ProductModel } from '../../models/product';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
+import { CategoryModel } from '../../models/category';
 
  @Component({
   standalone: true,
@@ -17,6 +18,8 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
   styleUrl: './product-list-by-category.component.scss'
  })
  export class ProductListByCategoryComponent {
+
+  categoy: CategoryModel|null= null;
 
    products: ProductModel[]=[];
    constructor(

@@ -12,12 +12,14 @@
                             <option value="discounted-price-desc">{{ 'price_high_to_low' | translate }}</option>
                         </select>
                     </div>
+                  
                 </div>
 
                 <div class="tab-content">
                      <div class="tab-pane fade show active" id="grid-view" *ngIf="shopListProducts.response && shopListProducts.response.data && shopListProducts.response.data.length">
                         <div class="row">
                             <div class="col-md-4" *ngFor="let product of shopListProducts.response.data">
+                            
                                 <div class="card mb-4 product-card">
                                     <div class="card-img">
                                         <img [src]="product.img" class="card-img-top" alt="{{ product.name }}">
