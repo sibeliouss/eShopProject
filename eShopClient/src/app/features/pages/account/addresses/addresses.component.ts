@@ -76,7 +76,7 @@ export class AddressesComponent
       contactName: [this.contactName, [Validators.required]],
       description: [this.description, [Validators.required]],
       city: [this.city, [Validators.required]],
-      zipCode: [this.zipCode, [Validators.required]],
+      zipCode: [this.zipCode, [Validators.required, Validators.pattern(/^\d{5}$/) ]],
       country: [this.country, [Validators.required]],
     });
   
@@ -84,7 +84,7 @@ export class AddressesComponent
       billingContactName: [this.billingContactName, [Validators.required]],
       billingDescription: [this.billingDescription, [Validators.required]],
       billingCity: [this.billingCity, [Validators.required]],
-      billingZipCode: [this.billingZipCode, [Validators.required]],
+      billingZipCode: [this.billingZipCode, [Validators.required, Validators.pattern(/^\d{5}$/) ]],
       billingCountry: [this.billingCountry, [Validators.required]],
     });
   }

@@ -148,9 +148,9 @@
   "subtotal": "Ara Toplam",
   "payment": "Ödeme",
   "creditCart": "Kredi Kartı",
-  "forSecurePaymentOnlyDebitOrCreditCardPaymentİsAccepted": "Güvenli ödeme için sadece banka kartı veya kredi kartı ödemeleri kabul edilmektedir.",
+  "forSecurePaymentOnlyDebitOrCreditCardPaymentİsAccepted": "Güvenli ödeme için sadece banka kartı veya kredi kartı ödemeleri kabul edilmektedir",
   "cardInformation": "Kart Bilgileri",
-  "cardHolderName": "Kart Sahibi Adı",
+  "cardHolderName": "Kart Sahibi",
   "youCanUseYourOwnNameAndSurname": "Kendi adınızı ve soyadınızı kullanabilirsiniz.",
   "cardNumber": "Kart Numarası",
   "sampleCreditCardNumber": "Örnek Kredi Kartı Numarası",
@@ -188,6 +188,9 @@
   "errorAddingProductToWishlist": "Ürün favorilere eklenirken bir hata oluştu.",
   "errorFetchingWishList": "Favoriler alınırken bir hata oluştu.",
   "errorDeletingProductFromWishlist": "Ürün favorilerden silinirken bir hata oluştu.",
+  "useSavedAddress": "Kayıtlı Adresi Kullan",
+  "creditCard": "Kredi Kartı",
+  
 
   
   "login" : {

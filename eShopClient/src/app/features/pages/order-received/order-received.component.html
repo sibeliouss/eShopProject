@@ -45,27 +45,32 @@
 
                     <!-- Sipariş Detayları -->
                     <div class="mb-4">
-                        <h5 class="font-weight-semibold mb-3">{{'orderDetails' | translate}}</h5>
-                        <div *ngFor="let product of order.products;">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <div>
-                                    <h6 class="font-size-2 font-weight-medium">{{product.name}} <span class="text-muted">({{product.brand}})</span></h6>
-                                </div>
-                                <span class="font-size-2 text-muted"> x {{product.quantity}}</span>
-                                <span class="font-weight-semibold font-size-2"> <span>
-                                    <span *ngIf="product.productDiscount?.discountedPrice; else noDiscount">
-                                      {{ product.productDiscount?.discountedPrice ?? 0 * product.quantity  }} {{ product.price.currency }}
-                                     
-                                    </span>
-                                    <ng-template #noDiscount>
-                                      <span>
-                                        {{ product.price.value * product.quantity }} {{ product.price.currency }}
-                                      </span>
-                                    </ng-template>
-                                  </span></span>
+                        <h5 class="font-weight-semibold mb-3">{{ 'orderDetails' | translate }}</h5>
+                        <div *ngFor="let product of order.products;" class="product-row">
+                          <div class="d-flex justify-content-between align-items-center mb-3">
+                            <!-- Ürün adı ve marka -->
+                            <div class="product-info">
+                              <h6 class="font-size-2 font-weight-medium">
+                                {{ product.name }} <span class="text-muted">({{ product.brand }}) </span>
+                              </h6>
                             </div>
+                            <!-- Adet -->
+                            <span class="font-size-2 text-muted product-quantity">x {{ product.quantity }}</span>
+                           
+                            <span class="font-weight-semibold font-size-2 product-price">
+                              <span>
+                                <span *ngIf="product.productDiscount?.discountedPrice; else noDiscount">
+                                  {{ (product.productDiscount?.discountedPrice ?? 0) * product.quantity }} {{ product.price.currency }}
+                                </span>
+                                <ng-template #noDiscount>
+                                  {{ product.price.value * product.quantity }} {{ product.price.currency }}
+                                </ng-template>
+                              </span>
+                            </span>
+                          </div>
                         </div>
-                    </div>
+                      </div>
+                      
 
                     <!-- Toplamlar -->
                     <div class="mb-4">

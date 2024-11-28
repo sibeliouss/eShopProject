@@ -12,7 +12,7 @@
             <li *ngFor="let c of categories.slice(0, 5); trackBy: trackById">
               <a class="dropdown-item d-flex align-items-center" (click)="shopListProducts.goToShopListByCategoryId(c.id)">
                 <img [src]="c.iconImgUrl" class="category-icon me-2">
-                <span>{{ c.name }}</span>
+                <span class="btn">{{ c.name }}</span>
               </a>
              
             </li>

@@ -92,13 +92,13 @@
           {{ 'addATitle' | translate }}
         </label>
         <input [(ngModel)]="title" type="text" class="form-control rounded-0 px-4" name="title">
-        <input-error fieldName="title"></input-error>
+       
       </div>
       <div class="form-group">
         <textarea [(ngModel)]="comment" class="form-control" rows="4" placeholder="{{ 'Your comment...' | translate }}"></textarea>
       </div>
       <button (click)="createReview()" class="btn btn-dark align-items-center mt-4">{{ 'submit' | translate }}</button>
-      <input-error fieldName="comment"></input-error>
+     
     </div>
   </div>
 </section>

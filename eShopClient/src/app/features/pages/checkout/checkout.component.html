@@ -1,87 +1,295 @@
-<div class="checkout-container">
-    <h2>{{ 'CHECKOUT.TITLE' | translate }}</h2>
-  
-    <!-- Shipping Address Section -->
-    <div class="address-section">
-      <h3>{{ 'SHIPPING_ADDRESS' | translate }}</h3>
-  
-      <div *ngIf="isShippingAddressAvailable">
-        <div class="address-info">
-          <p>{{ shippingAddress.contactName }}</p>
-          <p>{{ shippingAddress.city }}, {{ shippingAddress.country }}</p>
-          <p>{{ shippingAddress.zipCode }}</p>
-          <p>{{ shippingAddress.description }}</p>
+<section id="order_review" class="container py-4">
+    <header class="baslik">
+        <h4 class="mt-3">{{'checkout' | translate}}</h4>
+    </header>
+
+    <div class="row">
+        <!-- Kullanıcı ve Adres Bilgileri -->
+        <div class="col-md-12 col-lg-7 mb-4">
+            <div class="border p-4">
+                <div class="checkout-head d-flex justify-content-between">
+                    <h3 class="checkout-title mb-0 font-weight-medium">{{ 'buyerInformations' | translate }}</h3>
+                </div>
+
+                <!-- Kullanıcı Bilgileri Formu -->
+                <form [formGroup]="buyerForm">
+                    <div class="form-group mt-4">
+                       <!-- First Name -->
+                       <div class="form-group">
+                        <label for="buyer_first_name" class="form-label">{{ 'firstName' | translate }}:</label>
+                        <input
+                          type="text" id="buyer_first_name" formControlName="firstName"class="form-control"
+                        />
+                       <input-error fieldName="firstName"></input-error>
+                      </div>
+                     <!-- Last Name -->
+                      <div class="form-group">
+                        <label for="buyer_last_name" class="form-label">{{ 'lastName' | translate }}:</label>
+                        <input type="text" id="buyer_last_name" formControlName="lastName"class="form-control"/> 
+
+                        <input-error fieldName="lastName"></input-error>
+                      </div>
+                    <!-- Identity Number -->
+                      <div class="form-group">
+                        <label for="buyer_identity" class="form-label">{{ 'identityNumber' | translate }}:</label>
+                        <input type="text" id="buyer_identity"formControlName="identityNumber" class="form-control"
+                          maxlength="11"
+                        />
+                        <input-error fieldName="identityNumber"></input-error>
+                      </div>
+                     <!-- Phone Number -->
+                      <div class="form-group">
+                        <label for="buyer_phone" class="form-label">{{ 'phoneNumber' | translate }}:</label>
+                        <input type="text"id="buyer_phone" formControlName="phoneNumber"
+                          class="form-control"/>
+                      <input-error fieldName="phoneNumber"></input-error>
+                      </div>
+                     <!-- E-mail Address -->
+                      <div class="form-group">
+                        <label for="buyer_email" class="form-label">{{ 'emailAddress' | translate }}</label>
+                        <input type="email" id="buyer_email" formControlName="email" class="form-control"/>
+                        <input-error fieldName="email"></input-error>
+                      </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="border p-4">
+    
+<!-- Teslimat Adresi Butonu -->
+<button class="btn btn1" (click)="toggleAddressVisibility()"> {{"useSavedAddress" | translate}} </button>
+
+<!-- Teslimat Adresi Bilgileri -->
+<div *ngIf="isAddressVisible">
+ <!-- Shipping Address -->
+<div *ngIf="isShippingAddressAvailable" class="col-12">
+    <hr>
+    <form [formGroup]="shippingAddressForm" autocomplete="off">
+        <h3 class="mb-4 font-size-3">{{'shippingAddress' | translate}}</h3>
+      
+        <div class="row">
+             <!-- Contact Name -->
+            <div class="col-6 address-field">
+                <label for="shipping_contactName" class="form-label">{{ 'pickupPerson' | translate }} *</label>
+                <input formControlName="contactName" type="text" class="form-control" name="shipping_contactName">
+                <input-error fieldName="contactName"></input-error>
+            </div>
+            <div class="col-5 address-field">
+                <label for="shipping_postcode" class="form-label">{{ 'postcode' | translate }} *</label>
+                <input formControlName="zipCode" type="text" class="form-control" name="shipping_postcode">
+                <input-error fieldName="zipCode"></input-error>
+            </div>
         </div>
-        <button (click)="selectAddNewShippingAdress()">
-          {{ 'ADD_NEW_ADDRESS' | translate }}
-        </button>
-        <button (click)="selectUseSaveShippingAdress()">
-          {{ 'CHECKOUT.USE_SAVED_ADDRESS' | translate }}
-        </button>
-      </div>
-  
-      <div *ngIf="!isShippingAddressAvailable">
-        <form (ngSubmit)="createShippingAddress()">
-          <label for="contactName">{{ 'CONTACT_NAME' | translate }}</label>
-          <input id="contactName" [(ngModel)]="newShippingAddress.contactName" name="contactName" required>
-  
-          <label for="country">{{ 'COUNTRY' | translate }}</label>
-          <input id="country" [(ngModel)]="newShippingAddress.country" name="country" required>
-  
-          <label for="city">{{ 'CITY' | translate }}</label>
-          <input id="city" [(ngModel)]="newShippingAddress.city" name="city" required>
-  
-          <label for="zipCode">{{ 'ZIP_CODE' | translate }}</label>
-          <input id="zipCode" [(ngModel)]="newShippingAddress.zipCode" name="zipCode" required>
-  
-          <label for="description">{{ 'DESCRIPTION' | translate }}</label>
-          <textarea id="description" [(ngModel)]="newShippingAddress.description" name="description" required></textarea>
-  
-          <button type="submit">{{ 'CREATE_ADDRESS' | translate }}</button>
-        </form>
-      </div>
-    </div>
-  
-    <!-- Billing Address Section -->
-    <div class="address-section">
-      <h3>{{ 'CHECKOUT.BILLING_ADDRESS' | translate }}</h3>
-  
-      <div *ngIf="isBillingAddressAvailable">
-        <div class="address-info">
-          <p>{{ billingAddress.contactName }}</p>
-          <p>{{ billingAddress.city }}, {{ billingAddress.country }}</p>
-          <p>{{ billingAddress.zipCode }}</p>
-          <p>{{ billingAddress.description }}</p>
+         <!-- Description -->
+         <div class="col-11  mt-3 address-field">
+            <label for="shipping_description" class="form-label">{{ 'addressDetails' | translate }} <abbr class="required" title="required">*</abbr></label>
+            <input formControlName="description" type="text" class="form-control" name="shipping_description">
+            <input-error fieldName="description"></input-error>
         </div>
-        <button (click)="selectAddNewBillingAdress()">
-          {{ 'ADD_NEW_ADDRESS' | translate }}
-        </button>
-        <button (click)="selectUseSaveBillingAdress()">
-          {{ 'USE_SAVED_ADDRESS' | translate }}
-        </button>
-      </div>
-  
-      <div *ngIf="!isBillingAddressAvailable">
-        <form (ngSubmit)="createBillingAddress()">
-          <label for="billingContactName">{{ 'CONTACT_NAME' | translate }}</label>
-          <input id="billingContactName" [(ngModel)]="newBillingAddress.contactName" name="contactName" required>
-  
-          <label for="billingCountry">{{ 'COUNTRY' | translate }}</label>
-          <input id="billingCountry" [(ngModel)]="newBillingAddress.country" name="country" required>
-  
-          <label for="billingCity">{{ 'CITY' | translate }}</label>
-          <input id="billingCity" [(ngModel)]="newBillingAddress.city" name="city" required>
-  
-          <label for="billingZipCode">{{ 'ZIP_CODE' | translate }}</label>
-          <input id="billingZipCode" [(ngModel)]="newBillingAddress.zipCode" name="zipCode" required>
-  
-          <label for="billingDescription">{{ 'DESCRIPTION' | translate }}</label>
-          <textarea id="billingDescription" [(ngModel)]="newBillingAddress.description" name="description" required></textarea>
-  
-          <button type="submit">{{ 'CREATE_ADDRESS' | translate }}</button>
-        </form>
-      </div>
+        
+        <div class="row mt-3">
+
+             <!-- City -->
+            <div class="col-6 address-field">
+                <label for="shipping_city">{{ 'city' | translate }} *</label>
+                <select formControlName="city" name="shipping_city" class="form-control" autocomplete="city">
+                    <option value="" disabled selected>Şehir Seçiniz</option>
+                    <option *ngFor="let c of cities" [value]="c">{{ c }}</option>
+                </select>
+            </div>
+            <div class="col-5 address-field">
+                <label for="shipping_country">{{ 'country' | translate }} *</label>
+                <select formControlName="country" name="shipping_country" class="form-control" autocomplete="country">
+                    <option value="" disabled selected>Ülke Seçiniz</option>
+                    <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
+                </select>
+            </div>
+            
+           
+
+            
+
+        </div>
+       
+       
+    </form>
+</div>
+
+
+<!-- Billing Address -->
+<div *ngIf="isBillingAddressAvailable" class="col-12">
+    <div *ngIf="!isSameAddress">
+        <hr>
+        <h3 class="mb-4 font-size-3">{{'BillingAddress' | translate}}</h3>
+        <form [formGroup]="billingAddressForm">
+            <div class="row mt-3">
+
+               <!-- Contact Name -->
+            <div class="col-5 address-field">
+                <label for="billing_contactName" class="form-label">{{ 'pickupPerson' | translate }} *</label>
+                <input formControlName="billingContactName" type="text" class="form-control" name="billing_contactName">
+                <input-error fieldName="billingContactName"></input-error>
+            </div> 
+             <!-- Postcode -->
+            <div class="col-6 address-field">
+                <label for="billing_postcode" class="form-label">{{ 'postcode' | translate }}</label>
+                <input formControlName="billingZipCode" type="text" class="form-control" name="billing_postcode">
+                <input-error fieldName="billingZipCode"></input-error>
+            </div>
+           </div>
+
+             <!-- Description -->
+             <div class="col-11 mt-3 address-field">
+                <label for="billing_description" class="form-label">{{ 'addressDetails' | translate }} <abbr class="required" title="required">*</abbr></label>
+                <input formControlName="billingDescription" type="text" class="form-control" name="billing_description">
+                <input-error fieldName="billingDescription"></input-error>
+            </div>
+
+           <div class="row mt-3">
+            <!-- City -->
+            <div class="col-5 address-field">
+                <label for="billing_city" class="form-label">{{ 'city' | translate }} *</label>
+                <select formControlName="billingCity" name="billing_city" class="form-control" autocomplete="city" required>
+                    <option value="" disabled selected>Şehir Seçiniz</option>
+                    <option *ngFor="let c of cities" [value]="c">{{ c }}</option>
+                </select>
+            </div>
+             <!-- Country -->
+             <div class="col-6 address-field">
+                <label for="billing_country" class="form-label">{{ 'country' | translate }} *</label>
+                <select formControlName="billingCountry" name="billing_country" class="form-control" autocomplete="country" required>
+                    <option value="" disabled selected>Ülke Seçiniz</option>
+                    <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
+                </select>
+            </div>
+            
+           </div>
+         </form>
     </div>
+</div>
+
+
+</div>
+
+
   
-  </div>
-  
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Sipariş Bilgileri -->
+        <div class="col-md-12 col-lg-5">
+            <div class="border p-4">
+                <div class="checkout-head d-flex justify-content-between">
+                    <h3 class="checkout-title mb-0 font-weight-medium">{{ 'yourOrder' | translate }}</h3>
+                </div>
+
+                <!-- Sipariş Tablosu -->
+                <div class="mt-4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="product-name">{{ 'product' | translate }}</th>
+                                <th class="product-total">{{ 'total' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let s of shopping.shoppingCarts">
+                                <td class="product-name">
+                                    {{ s.name }} <strong class="product-quantity">× {{ s.quantity }}</strong>
+                                </td>
+                                <td class="product-total">
+                                    <span *ngIf="s.productDiscount?.discountedPrice; else noDiscount">
+                                        {{ s.productDiscount.discountedPrice * s.quantity }} {{ s.price.currency }}
+                                    </span>
+                                    <ng-template #noDiscount>
+                                        {{ s.price.value * s.quantity }} {{ s.price.currency }}
+                                    </ng-template>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mt-4">
+                        <table class="table">
+                            <tr>
+                                <th>{{ 'subtotal' | translate }}:</th>
+                                <td>{{ shopping.getTotal() }} {{ 'TL' }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'shipping' | translate }}:</th>
+                                <td>{{ shopping.getTotal() > 500 ? ('freeShipping' | translate) : (shopping.flatRateTl + ' TL') }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'total' | translate }}:</th>
+                                <td>{{ shopping.shippingAndCartTotal() }} {{ 'TL' }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ödeme Bilgileri -->
+            <div class="border p-4 mt-4">
+                <div class="checkout-head d-flex justify-content-between">
+                    <h3 class="checkout-title mb-0 font-weight-medium">{{ 'payment' | translate }}</h3>
+                </div>
+
+                <div class="mt-4">
+                    <form [formGroup]="creditCardForm">
+                        <!-- Payment Method Selection -->
+                        <div class="form-check">
+                            <input type="radio" id="payment_method_cod" formControlName="paymentMethod" class="form-check-input" value="cod" checked>
+                            <label class="form-check-label" for="payment_method_cod">{{ 'creditCard' | translate }}</label>
+                        </div>
+
+                        <!-- Card Information -->
+                        <div class="form-group row mt-4">
+                            <div class="col-lg-12">
+                                <label for="card_holder_name" class="form-label">{{ 'cardHolderName' | translate }}:</label>
+                                <input type="text" formControlName="cardHolderName" class="form-control" placeholder="{{ 'cardHolderName' | translate }}" required>
+                            </div>
+
+                            <div class="col-lg-12 mt-4">
+                                <label for="card_number" class="form-label">{{ 'cardNumber' | translate }}:</label>
+                                <input type="text" formControlName="cardNumber" class="form-control" placeholder="{{ 'cardNumber' | translate }}" maxlength="16" required>
+                            </div>
+
+                            <div class="col-lg-4 mt-4">
+                                <label for="expire_year" class="form-label">{{ 'expireYear' | translate }}:</label>
+                                <select formControlName="expireYear" class="form-control">
+                                    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-4 mt-4">
+                                <label for="expire_month" class="form-label">{{ 'expireMonth' | translate }}:</label>
+                                <select formControlName="expireMonth" class="form-control">
+                                    <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-4 mt-4">
+                                <label for="cvc" class="form-label">{{ 'cvc' | translate }}:</label>
+                                <input type="text" formControlName="cvc" class="form-control" placeholder="***" maxlength="3" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class=" mt-4">
+                <input type="submit" (click)="payment()" [disabled]="creditCardForm.invalid"
+                                                class="buton btn"
+                                            
+                                                value="{{'placeOrder' | translate}}" data-value="Place order">
+              
+            </div>
+        </div>
+    </div>
+
+    <!-- Place Order Button -->
+   
+</section>

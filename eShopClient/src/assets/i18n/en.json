@@ -150,7 +150,7 @@
     "subtotal": "Subtotal",
     "payment": "Payment",
     "creditCart": "Credit Card",
-    "forSecurePaymentOnlyDebitOrCreditCardPaymentİsAccepted": "For secure payment, only debit or credit card payments are accepted.",
+    "forSecurePaymentOnlyDebitOrCreditCardPaymentİsAccepted": "For secure payment, only debit or credit card payments are accepted",
     "cardInformation": "Card Information",
     "cardHolderName": "Card Holder Name",
     "youCanUseYourOwnNameAndSurname": "You can use your own name and surname.",
@@ -190,6 +190,8 @@
    "errorAddingProductToWishlist": "Error occurred while adding product to wishlist.",
    "errorFetchingWishList": "Error occurred while fetching the wishlist.",
    "errorDeletingProductFromWishlist": "Error occurred while deleting product from wishlist.",
+   "useSavedAddress": "Use Saved Address",
+   "creditCard": "Credit Card",
 
    
   
