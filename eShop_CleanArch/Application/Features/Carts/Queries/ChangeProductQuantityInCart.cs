@@ -30,7 +30,7 @@ public class ChangeProductQuantityInCart : IRequest
 
     public async Task Handle(ChangeProductQuantityInCart request, CancellationToken cancellationToken)
     {
-      // Sepetteki ürünü buluyoruz
+      
       var cart = await _cartRepository.Query().Where(p => p.ProductId == request.ProductId).FirstOrDefaultAsync(cancellationToken);
 
       if (cart == null)
@@ -38,14 +38,14 @@ public class ChangeProductQuantityInCart : IRequest
         throw new Exception("Ürün bulunamadı");
       }
 
-      // Eğer miktar 0 ise, sepetten ürünü siliyoruz
+      
       if (request.Quantity == 0)
       {
-        await _cartRepository.DeleteAsync(cart);  // Sepet öğesini siliyoruz
+        await _cartRepository.DeleteAsync(cart);  
       }
       else
       {
-        // Ürünün stoğunu kontrol ediyoruz
+       
         var product = await _productService.FindAsync(request.ProductId);
 
         if (product == null)
@@ -59,9 +59,9 @@ public class ChangeProductQuantityInCart : IRequest
         }
         else
         {
-          // Sepetteki ürünün miktarını güncelliyoruz
+         
           cart.Quantity = request.Quantity;
-          await _cartRepository.UpdateAsync(cart);  // Sepet öğesini güncelliyoruz
+          await _cartRepository.UpdateAsync(cart); 
         }
       }
 

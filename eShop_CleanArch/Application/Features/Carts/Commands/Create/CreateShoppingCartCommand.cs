@@ -1,6 +1,7 @@
 using Application.Features.Carts.Dtos;
 using Application.Services.Products;
 using Application.Services.Repositories;
+using AutoMapper;
 using Domain.Entities;
 using FluentValidation;
 using MediatR;
@@ -17,12 +18,14 @@ public class CreateShoppingCartCommand : IRequest<CreatedShoppingCartResponse>
        private readonly ICartRepository _cartRepository;
        private readonly IProductService _productService;
        private readonly IValidator<ShoppingCartDto> _validator;
+       private readonly IMapper _mapper;
 
-       public CreateShoppingCartCommandHandler(ICartRepository cartRepository, IProductService productService, IValidator<ShoppingCartDto> validator)
+       public CreateShoppingCartCommandHandler(ICartRepository cartRepository, IProductService productService, IValidator<ShoppingCartDto> validator, IMapper mapper)
        {
            _cartRepository = cartRepository;
            _productService = productService;
            _validator = validator;
+           _mapper = mapper;
        }
        
        public async Task<CreatedShoppingCartResponse> Handle(CreateShoppingCartCommand request, CancellationToken cancellationToken)
@@ -55,23 +58,14 @@ public class CreateShoppingCartCommand : IRequest<CreatedShoppingCartResponse>
            }
            else
            {
-               cart = new Cart()
-               {
-                 ProductId = shoppingCartDto.ProductId,
-                 Price = shoppingCartDto.Price,
-                 Quantity = 1,
-                 UserId = shoppingCartDto.UserId
-               };
+               cart = _mapper.Map<Cart>(shoppingCartDto);
                await _cartRepository.AddAsync(cart);
+
            }
 
-           return new CreatedShoppingCartResponse()
-           {
-               ProductId = cart.ProductId,
-               UserId = cart.UserId,
-               Price = cart.Price,
-               Quantity = cart.Quantity
-           };
+           var response = _mapper.Map<CreatedShoppingCartResponse>(cart);
+
+           return response;
        }
    }
 }

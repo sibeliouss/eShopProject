@@ -104,7 +104,7 @@ public class GetListProductQuery : IRequest<ResponseDto<List<ProductDto>>>
                             Size = product.ProductDetail.Size,
                             Color = product.ProductDetail.Color
                         }
-                        : null, // ProductDetail null ise null olarak işleyin
+                        : null,
                     ProductDiscount = product.ProductDiscount != null &&
                                       product.ProductDiscount.StartDate <= currentDate &&
                                       product.ProductDiscount.EndDate >= currentDate

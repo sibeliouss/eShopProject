@@ -33,7 +33,7 @@ public class GetAllowToReviewQuery : IRequest<GetAllowToReviewQueryResponse>
             return new GetAllowToReviewQueryResponse
             {
                 IsAllow = details.Count > 0,
-                Message = details.Count > 0 ? "Yorum yapabilirsiniz." : "Bu ürünü yorumlamak için sipariş vermelisiniz."
+                Message = details.Count > 0 ? "Yorum yapabilirsiniz." : "Bu ürüne yorum yapabilmek için sipariş vermelisiniz."
             };
 
         }

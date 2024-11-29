@@ -1,6 +1,7 @@
 using Application.Features.Carts.Queries.Responses;
 using Application.Features.Products.Dtos;
 using Application.Services.Repositories;
+using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,10 +13,13 @@ public class GetAllCartQuery : IRequest<List<CartResponse>>
   public class GetAllCartQueryHandler: IRequestHandler<GetAllCartQuery,List<CartResponse>>
   {
     private readonly ICartRepository _cartRepository;
+    private readonly IMapper _mapper;
 
-    public GetAllCartQueryHandler(ICartRepository cartRepository)
+
+    public GetAllCartQueryHandler(ICartRepository cartRepository, IMapper mapper)
     {
       _cartRepository = cartRepository;
+      _mapper = mapper;
     }
     public async Task<List<CartResponse>> Handle(GetAllCartQuery request, CancellationToken cancellationToken)
     {

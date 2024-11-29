@@ -20,7 +20,7 @@ public static class ExtensionsMiddleware
     {
         using (var scoped = app.Services.CreateScope())
         {
-            //userManager User ile alakalı CRUD işlemleri dahil birçok işlemi içinde barındıran identity kütüphanesinden gelen bir service
+          
             var userManager = scoped.ServiceProvider.GetRequiredService<UserManager<User>>();
             if (!userManager.Users.Any())
             {

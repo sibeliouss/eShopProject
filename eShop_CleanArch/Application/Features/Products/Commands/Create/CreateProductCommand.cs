@@ -50,10 +50,10 @@ namespace Application.Features.Products.Commands.Create;
 
             try
             {
-                // Ürün adı tekrarını kontrol et
+               
                 await _productBusinessRules.ProductNameAlreadyExists(productDto.Name);
                 
-                // Ürünü oluştur ve veritabanına ekle
+                
                 var product = _mapper.Map<Product>(productDto);
                 await _productRepository.AddAsync(product);
         

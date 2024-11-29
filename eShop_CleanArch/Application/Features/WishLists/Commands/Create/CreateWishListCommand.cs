@@ -1,6 +1,8 @@
 using Application.Services.Repositories;
+using AutoMapper;
 using Domain.Entities;
 using Domain.Entities.ValueObjects;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,23 +18,31 @@ public class CreateWishListCommand : IRequest
    public class CreateWishListCommandHandler : IRequestHandler<CreateWishListCommand>
    {
       private readonly IWishListRepository _wishListRepository;
+      private readonly IValidator<CreateWishListCommand> _validator;
 
-      public CreateWishListCommandHandler(IWishListRepository wishListRepository)
+
+      public CreateWishListCommandHandler(IWishListRepository wishListRepository,
+         IValidator<CreateWishListCommand> validator)
       {
          _wishListRepository = wishListRepository;
+         _validator = validator;
       }
 
       public async Task Handle(CreateWishListCommand request, CancellationToken cancellationToken)
       {
+         await _validator.ValidateAndThrowAsync(request, cancellationToken);
+
          var wishList = await _wishListRepository.Query()
             .Where(w => w.ProductId == request.ProductId && w.UserId == request.UserId)
             .FirstOrDefaultAsync(cancellationToken);
+         
 
          if (wishList is not null)
          {
             throw new Exception("bu ürün zaten favorilerde ekli");
          }
          
+     
          var newWishList = new WishList
          {
             ProductId  = request.ProductId,
@@ -42,6 +52,7 @@ public class CreateWishListCommand : IRequest
          };
 
          await _wishListRepository.AddAsync(newWishList);
+
       }
    }
 }

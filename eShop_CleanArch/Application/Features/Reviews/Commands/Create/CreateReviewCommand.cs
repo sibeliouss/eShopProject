@@ -1,5 +1,7 @@
 using Application.Services.Repositories;
+using AutoMapper;
 using Domain.Entities;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,14 +19,20 @@ public class CreateReviewCommand : IRequest
     public class CreateReviewCommandHandler : IRequestHandler<CreateReviewCommand>
     {
         private readonly IReviewRepository _reviewRepository;
+        private readonly IMapper _mapper;
+        private readonly IValidator<CreateReviewCommand> _validator;
 
-        public CreateReviewCommandHandler(IReviewRepository reviewRepository)
+
+        public CreateReviewCommandHandler(IReviewRepository reviewRepository, IMapper mapper, IValidator<CreateReviewCommand> validator)
         {
             _reviewRepository = reviewRepository;
+            _mapper = mapper;
+            _validator = validator;
         }
         
         public async Task Handle(CreateReviewCommand request, CancellationToken cancellationToken)
         {
+            await _validator.ValidateAndThrowAsync(request, cancellationToken);
             var existingReview = await _reviewRepository.Query()
                 .Where(r => r.UserId == request.UserId && r.ProductId == request.ProductId)
                 .FirstOrDefaultAsync(cancellationToken);
@@ -34,18 +42,8 @@ public class CreateReviewCommand : IRequest
                 throw new Exception("Bu ürün için zaten yorumunuz bulunmaktadır.");
             }
             
-            
-            var review = new Review
-            {
-                ProductId  = request.ProductId, 
-                UserId = request.UserId,
-                Comment = request.Comment,
-                Rating = request.Rating,
-                Title = request.Title,
-                CreateAt = request.CreateAt,
-            };
+            var review = _mapper.Map<Review>(request);
 
-            
             await _reviewRepository.AddAsync(review);
         }
     }

@@ -5,6 +5,7 @@ using Application.Services.ProductCategories;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,16 +21,26 @@ public class UpdateProductCommand :IRequest<UpdatedProductResponse>
         private readonly IProductCategoryService _productCategoryService;
         private readonly IMapper _mapper;
         private readonly ProductBusinessRules _productBusinessRules;
+        private readonly IValidator<UpdateProductDto> _validator;
 
-        public UpdateProductCommandHandler(IProductRepository productRepository, IProductCategoryService productCategoryService, IMapper mapper, ProductBusinessRules productBusinessRules)
+        public UpdateProductCommandHandler(IProductRepository productRepository, IProductCategoryService productCategoryService, IMapper mapper, ProductBusinessRules productBusinessRules, IValidator<UpdateProductDto> validator)
         {
             _productRepository = productRepository;
             _productCategoryService = productCategoryService;
             _mapper = mapper;
             _productBusinessRules = productBusinessRules;
+            _validator = validator;
         }
         public async Task<UpdatedProductResponse> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
+            // Validation işlemi
+            var validationResult = await _validator.ValidateAsync(request.UpdateProductDto, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
+
+            
             var updateProductDto = request.UpdateProductDto;
             var product = await _productRepository.Query().Include(p => p.ProductCategories)
                 .FirstOrDefaultAsync(p => p.Id == updateProductDto.Id, cancellationToken: cancellationToken);
