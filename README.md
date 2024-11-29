@@ -27,5 +27,14 @@ The project enhances the user experience with interactive alert systems such as 
 </details>
 
 ## Proje Görselleri | Project Images
+![eShop Project](projectImages/login.png)
+![eShop Project](projectImages/homepage.png)
+![eShop Project](projectImages/wishlist.png)
+![eShop Project](projectImages/cart.png)
+![eShop Project](projectImages/payment.png)
+![eShop Project](projectImages/orderEShop.png)
+![eShop Project](projectImages/getProductsByCategoryId.png)
+![eShop Project](projectImages/account.png)
+![eShop Project](projectImages/discount.png)
 
  
